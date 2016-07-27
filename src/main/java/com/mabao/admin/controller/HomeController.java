@@ -1,4 +1,4 @@
-package com.mabaoadmin.controller;
+package com.mabao.admin.controller;
 
 
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.mabaoadmin.repository;
+package com.mabao.admin.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

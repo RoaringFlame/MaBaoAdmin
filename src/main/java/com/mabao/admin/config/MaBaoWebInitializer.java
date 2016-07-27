@@ -1,6 +1,6 @@
-package com.mabaoadmin.config;
+package com.mabao.admin.config;
 
-import com.mabaoadmin.util.filter.MyCharacterEncodingFilter;
+import com.mabao.admin.util.filter.MyCharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;

@@ -1,6 +1,6 @@
-package com.mabaoadmin.config;
+package com.mabao.admin.config;
 
-import com.mabaoadmin.config.RootConfig.WebPackage;
+import com.mabao.admin.config.RootConfig.WebPackage;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 @Configuration
 @Import(SpringDataJpaConfig.class)
-@ComponentScan(basePackages={"com.mabaoadmin"},
+@ComponentScan(basePackages={"com.mabao.admin"},
     excludeFilters={
         @Filter(type=FilterType.CUSTOM, value=WebPackage.class)
     })

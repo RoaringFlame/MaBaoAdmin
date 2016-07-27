@@ -1,4 +1,4 @@
-package com.mabaoadmin.util.filter;
+package com.mabao.admin.util.filter;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 

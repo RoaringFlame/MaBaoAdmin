@@ -1,4 +1,4 @@
-package com.mabaoadmin.config;
+package com.mabao.admin.config;
 
 import net.sf.ehcache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

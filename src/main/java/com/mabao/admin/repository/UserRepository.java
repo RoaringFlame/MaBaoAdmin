@@ -1,6 +1,6 @@
-package com.mabaoadmin.repository;
+package com.mabao.admin.repository;
 
-import com.mabaoadmin.pojo.User;
+import com.mabao.admin.pojo.User;
 import org.springframework.stereotype.Repository;
 
 @Repository

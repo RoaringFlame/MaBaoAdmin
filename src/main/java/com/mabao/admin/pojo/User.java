@@ -1,30 +1,42 @@
-package com.mabaoadmin.util.security;
-
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-
-import java.util.Collection;
+package com.mabao.admin.pojo;
+import javax.persistence.*;
 import java.util.Date;
 
-public class UserInfo extends User {
-    private Long userId;                            //用户编号
+@Entity
+@Table(name = "t_user")
+public class User {
+    private Long id;                                //用户编号
+    private String name;                            //呢称
+    private String password;                        //密码
     private String phone;                           //手机号
     private String email;                           //邮箱
     private Date createTime;                        //创建时间
     private String picture;                         //头像
 
-    public UserInfo(String username, String password,Collection<GrantedAuthority> authorities)
-            throws IllegalArgumentException {
-        super(username,password,authorities);
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
+        return id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
@@ -43,6 +55,7 @@ public class UserInfo extends User {
         this.email = email;
     }
 
+    @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
     }

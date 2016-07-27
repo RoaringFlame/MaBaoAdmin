@@ -1,4 +1,4 @@
-package com.mabaoadmin.config;
+package com.mabao.admin.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 //通过JavaConfig使用Spring来为这些接口创建代理实例（configuration关于jap的使用）
 
 @Configuration
-@EnableJpaRepositories(basePackages= "com.mabaoadmin.repository")    //  创建代理实例
+@EnableJpaRepositories(basePackages= "com.mabao.admin.repository")    //  创建代理实例
   public class SpringDataJpaConfig {
 
   @Bean
@@ -45,8 +45,8 @@ import javax.sql.DataSource;
     emf.setJpaVendorAdapter(jpaVendorAdapter);
 
     //指定持久化单元名字,
-    emf.setPersistenceUnitName("mabaoadmin");
-    emf.setPackagesToScan("com.mabaoadmin.pojo");
+    emf.setPersistenceUnitName("mabao.admin");
+    emf.setPackagesToScan("com.mabao.admin.pojo");
     return emf;
   }
   

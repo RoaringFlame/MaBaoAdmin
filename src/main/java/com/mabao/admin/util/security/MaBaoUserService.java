@@ -1,7 +1,7 @@
-package com.mabaoadmin.util.security;
+package com.mabao.admin.util.security;
 
-import com.mabaoadmin.pojo.User;
-import com.mabaoadmin.repository.UserRepository;
+import com.mabao.admin.pojo.User;
+import com.mabao.admin.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

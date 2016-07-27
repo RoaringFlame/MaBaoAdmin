@@ -1,4 +1,4 @@
-package com.mabaoadmin.config;
+package com.mabao.admin.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
