@@ -1,6 +1,6 @@
 package com.mabao.admin.repository;
 
-import com.mabao.pojo.Order;
+import com.mabao.admin.pojo.Order;
 import org.springframework.stereotype.Repository;
 
 @Repository

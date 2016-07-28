@@ -1,7 +1,8 @@
 package com.mabao.admin.controller.vo;
 
-import com.mabao.pojo.Goods;
-import com.mabao.util.VoUtil;
+
+import com.mabao.admin.pojo.Goods;
+import com.mabao.admin.util.VoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,6 @@ public class GoodsVO {
     public static GoodsVO generateBy(Goods goods){
         GoodsVO vo = VoUtil.copyBasic(GoodsVO.class, goods);
         assert vo != null;
-        vo.setNewDegree(goods.getNewDegree().getText());
         vo.setSize(goods.getSize().getName());
         return vo;
     }

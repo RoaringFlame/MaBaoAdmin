@@ -1,6 +1,6 @@
 package com.mabao.admin.repository;
 
-import com.mabao.pojo.Banner;
+import com.mabao.admin.pojo.Banner;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

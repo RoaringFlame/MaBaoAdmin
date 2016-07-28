@@ -1,6 +1,7 @@
 package com.mabao.admin.service;
 
-import com.mabao.pojo.Banner;
+
+import com.mabao.admin.pojo.Banner;
 
 import java.util.List;
 

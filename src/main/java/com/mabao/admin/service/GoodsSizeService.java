@@ -1,19 +1,13 @@
 package com.mabao.admin.service;
 
-import com.mabao.pojo.GoodsSize;
-import com.mabao.util.Selector;
 
-import java.util.List;
+import com.mabao.admin.pojo.GoodsSize;
 
 /**
  * 宝物尺码
  * Created by jackie on 2016/07/09.
  */
 public interface GoodsSizeService {
-    /**
-     * 宝物尺码下拉菜单
-     */
-    List<Selector> findGoodsSizeForSelector();
 
     /**
      * ID获取商品

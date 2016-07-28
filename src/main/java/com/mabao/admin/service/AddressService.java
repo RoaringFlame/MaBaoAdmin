@@ -1,7 +1,8 @@
 package com.mabao.admin.service;
 
-import com.mabao.controller.vo.AddressVO;
-import com.mabao.pojo.Address;
+
+import com.mabao.admin.controller.vo.AddressVO;
+import com.mabao.admin.pojo.Address;
 
 import java.util.List;
 
@@ -10,18 +11,7 @@ import java.util.List;
  * Created by jackie on 2016/07/06.
  */
 public interface AddressService {
-    /**
-     * 查默认收货地址
-     * @param userId          用户ID
-     * @return                地址对象
-     */
-    Address getDefaultAddress(Long userId);
 
-    /**
-     * 显示当前用户的所有收货地址
-     * @return                地址对象List
-     */
-    List<Address> findUserAllAddress(Long userId);
     /**
      * 新增收货地址
      * @param address           地址对象
@@ -47,10 +37,4 @@ public interface AddressService {
      */
     Address get(Long addressId);
 
-    /**
-     * 修改收货地址默认状态
-     * @param addressId           地址对象
-     * @return                  用户地址页
-     */
-    Address updateAddressStatus(Long addressId);
 }

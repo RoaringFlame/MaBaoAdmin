@@ -1,6 +1,7 @@
 package com.mabao.admin.enums;
 
-import com.mabao.util.Selector;
+
+import com.mabao.admin.util.Selector;
 
 import java.util.ArrayList;
 import java.util.List;

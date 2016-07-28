@@ -1,8 +1,8 @@
 package com.mabao.admin.service;
 
-import com.mabao.controller.vo.AreaIdValue;
-import com.mabao.pojo.Area;
-import com.mabao.util.Selector;
+
+import com.mabao.admin.pojo.Area;
+import com.mabao.admin.util.Selector;
 
 import java.util.List;
 

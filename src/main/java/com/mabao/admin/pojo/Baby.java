@@ -1,6 +1,6 @@
 package com.mabao.admin.pojo;
 
-import com.mabao.enums.Gender;
+import com.mabao.admin.enums.Gender;
 
 import javax.persistence.*;
 import java.sql.Date;

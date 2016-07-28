@@ -1,11 +1,8 @@
 package com.mabao.admin.pojo;
 
-import com.mabao.enums.OrderStatus;
+import com.mabao.admin.enums.OrderStatus;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Date;
 
 @Entity

@@ -1,8 +1,8 @@
 package com.mabao.admin.controller.vo;
 
-import com.mabao.pojo.Address;
-import com.mabao.pojo.Cart;
-import com.mabao.util.VoUtil;
+
+import com.mabao.admin.pojo.Address;
+import com.mabao.admin.util.VoUtil;
 
 import java.util.ArrayList;
 import java.util.List;

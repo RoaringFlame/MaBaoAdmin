@@ -1,6 +1,6 @@
 package com.mabao.admin.repository;
 
-import com.mabao.pojo.GoodsSize;
+import com.mabao.admin.pojo.GoodsSize;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

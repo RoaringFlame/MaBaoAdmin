@@ -1,7 +1,7 @@
 package com.mabao.admin.repository;
 
-import com.mabao.pojo.Cart;
-import com.mabao.pojo.Goods;
+
+import com.mabao.admin.pojo.Cart;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

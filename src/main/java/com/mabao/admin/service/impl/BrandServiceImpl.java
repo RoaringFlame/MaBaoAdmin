@@ -1,9 +1,9 @@
 package com.mabao.admin.service.impl;
 
-import com.mabao.pojo.Brand;
-import com.mabao.repository.BrandRepository;
-import com.mabao.service.BrandService;
-import com.mabao.util.Selector;
+import com.mabao.admin.pojo.Brand;
+import com.mabao.admin.repository.BrandRepository;
+import com.mabao.admin.service.BrandService;
+import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

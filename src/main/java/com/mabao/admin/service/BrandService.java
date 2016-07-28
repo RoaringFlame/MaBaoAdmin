@@ -1,7 +1,8 @@
 package com.mabao.admin.service;
 
-import com.mabao.pojo.Brand;
-import com.mabao.util.Selector;
+
+import com.mabao.admin.pojo.Brand;
+import com.mabao.admin.util.Selector;
 
 import java.util.List;
 

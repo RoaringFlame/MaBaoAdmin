@@ -1,7 +1,7 @@
 package com.mabao.admin.pojo;
 
-import com.mabao.enums.BabyType;
-import com.mabao.enums.Quality;
+import com.mabao.admin.enums.BabyType;
+import com.mabao.admin.enums.Quality;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package com.mabao.admin.repository;
 
 
-import com.mabao.pojo.GoodsType;
+import com.mabao.admin.pojo.GoodsType;
 import org.springframework.stereotype.Repository;
 
 @Repository

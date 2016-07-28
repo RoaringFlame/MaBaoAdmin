@@ -1,6 +1,6 @@
 package com.mabao.admin.repository;
 
-import com.mabao.pojo.Area;
+import com.mabao.admin.pojo.Area;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 

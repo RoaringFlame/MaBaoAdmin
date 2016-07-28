@@ -1,9 +1,8 @@
 package com.mabao.admin.controller.vo;
 
-import com.mabao.enums.OrderStatus;
-import com.mabao.pojo.Goods;
-import com.mabao.pojo.OrderDetail;
-import com.mabao.util.VoUtil;
+import com.mabao.admin.enums.OrderStatus;
+import com.mabao.admin.pojo.OrderDetail;
+import com.mabao.admin.util.VoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ public class OrderVO {
         vo.setQuantity(o.getOrder().getQuantity());
         vo.setTotalSum(o.getOrder().getTotalSum());
         vo.setFreight(o.getOrder().getFreight());
-        vo.setState(o.getOrder().getState());
         return vo;
     }
     public static List<OrderVO> generateBy(List<OrderDetail> orderList){

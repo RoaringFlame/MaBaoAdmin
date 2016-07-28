@@ -1,9 +1,9 @@
 package com.mabao.admin.service.impl;
 
-import com.mabao.pojo.Area;
-import com.mabao.repository.AreaRepository;
-import com.mabao.service.AreaService;
-import com.mabao.util.Selector;
+import com.mabao.admin.pojo.Area;
+import com.mabao.admin.repository.AreaRepository;
+import com.mabao.admin.service.AreaService;
+import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

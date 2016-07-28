@@ -1,16 +1,9 @@
 package com.mabao.admin.service;
 
-import com.mabao.pojo.GoodsType;
-import com.mabao.util.Selector;
 
-import java.util.List;
+import com.mabao.admin.pojo.GoodsType;
 
 public interface GoodsTypeService {
-    /**
-     * 查询下拉框所用的商品类型列表
-     * @return  Selector集合
-     */
-    List<Selector> getAllGoodsTypeForSelector();
 
     /**
      * 获取商品类型

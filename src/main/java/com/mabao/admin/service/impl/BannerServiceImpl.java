@@ -1,8 +1,8 @@
 package com.mabao.admin.service.impl;
 
-import com.mabao.pojo.Banner;
-import com.mabao.repository.BannerRepository;
-import com.mabao.service.BannerService;
+import com.mabao.admin.pojo.Banner;
+import com.mabao.admin.repository.BannerRepository;
+import com.mabao.admin.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
