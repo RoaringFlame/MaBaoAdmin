@@ -1,7 +1,6 @@
 package com.mabao.admin.enums;
 
-
-import com.mabao.admin.util.security.Selector;
+import com.mabao.admin.util.Selector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public enum Gender {
      * @return 返回性别下拉列表中的值的集合
      */
     public static List<Selector> toList() {
-        List<Selector> list = new ArrayList<Selector>();
+        List<Selector>  list = new ArrayList<Selector>();
         for (Gender v: Gender.values()) {
             list.add(new Selector(v.name(), v.getText()));
         }

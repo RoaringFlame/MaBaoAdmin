@@ -1,7 +1,5 @@
 package com.mabao.admin.pojo;
 
-
-
 import com.mabao.admin.enums.OrderStatus;
 
 import javax.persistence.*;
