@@ -47,12 +47,15 @@ public interface GoodsRepository extends BaseRepository<Goods> {
 
  /**
      * 通过搜索条件查询商品
-     * @param goodsTypeId             商品类别id
+     * @param typeId             商品类别id
      * @param state                   是否上架
      * @param title                   商品名称
      * @param articleNumber           货号
      * @return
      */
-    List<Goods> findByTypeNameOrStateOrTitleOrArticleNumber(Long goodsTypeId, Boolean state,String title,String articleNumber);
+    List<Goods> findByTypeIdOrStateOrTitleOrArticleNumber(Long typeId, Boolean state,String title,String articleNumber);
+
+
+
 
 }

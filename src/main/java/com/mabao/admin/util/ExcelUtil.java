@@ -18,6 +18,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +44,7 @@ public class ExcelUtil<T> {
         // 生成一个表格
         HSSFSheet sheet = workbook.createSheet(title);
         // 设置表格默认列宽度为20个字节
-        sheet.setDefaultColumnWidth(15);
+        sheet.setDefaultColumnWidth(18);
         // 生成一个样式
         HSSFCellStyle style = workbook.createCellStyle();
         // 设置这些样式
@@ -157,7 +158,7 @@ public class ExcelUtil<T> {
                         byte[] bsValue = (byte[]) value;
                         HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0,
                                 1023, 255, (short) 6, index, (short) 6, index);
-                        anchor.setAnchorType(2);
+                        anchor.setAnchorType(ClientAnchor.DONT_MOVE_AND_RESIZE);
                         patriarch.createPicture(anchor, workbook.addPicture(
                                 bsValue, HSSFWorkbook.PICTURE_TYPE_JPEG));
                     } else{
