@@ -1,7 +1,6 @@
 package com.mabao.admin.config;
 
 import com.mabao.admin.util.security.MaBaoUserService;
-import com.mabao.admin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
