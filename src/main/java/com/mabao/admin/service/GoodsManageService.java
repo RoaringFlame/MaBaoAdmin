@@ -19,13 +19,13 @@ public interface GoodsManageService {
      * 商品批量导出
      * @param request
      * @param response
-     * @param typeId            商品类别id
+     * @param typeName               商品类别
      * @param state                  是否上架
      * @param title                  商品名称
      * @param articleNumber          货号
      * @return
      */
-    public JsonResultVO exportDataGoodsDetail(HttpServletRequest request, HttpServletResponse response,Long typeId, Boolean state,String title,String articleNumber);
+    public void exportDataGoodsDetail(HttpServletRequest request, HttpServletResponse response,String typeName, Boolean state,String title,String articleNumber);
 
 
 }
