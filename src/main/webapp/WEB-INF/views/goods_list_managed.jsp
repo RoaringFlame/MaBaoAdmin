@@ -134,7 +134,7 @@
             </ol>
 
             <div class="btn-toolbar ">
-                <div class="dropdown btn-group  pull-right ">
+                <div id="tool" class="dropdown btn-group  pull-right ">
                     <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="true">
                         工具
@@ -145,7 +145,7 @@
                         <li><a>导出 Excel</a></li>
                     </ul>
                 </div>
-                <div class="dropdown btn-group  pull-right ">
+                <div id="operate" class="dropdown btn-group  pull-right ">
                     <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="true">
                         操作
@@ -178,7 +178,7 @@
 
         <div class="panel-body">
             <!--条件查询表单-->
-            <form class="navbar-form navbar-left" role="search">
+            <form id="goodList" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <div class="form-group">
                         <label for="goodsType"></label>
@@ -249,7 +249,7 @@
 
                 <tbody>
 
-                <tr class="odd gradeX">
+                <tr id="backGoods" class="odd gradeX" style="display: none">
 
                     <td>
                         <label>
@@ -275,161 +275,161 @@
 
                 </tr>
 
-                <tr class="odd gradeX">
+                <%--<tr class="odd gradeX">--%>
 
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
+                    <%--<td>--%>
+                        <%--<label>--%>
+                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                        <%--</label>--%>
+                    <%--</td>--%>
 
-                    <td>2</td>
+                    <%--<td>2</td>--%>
 
-                    <td>2016/07/22 9：06</td>
+                    <%--<td>2016/07/22 9：06</td>--%>
 
-                    <td>婴儿车</td>
+                    <%--<td>婴儿车</td>--%>
 
-                    <td>高级扶手婴儿车</td>
+                    <%--<td>高级扶手婴儿车</td>--%>
 
-                    <td>SK0001</td>
+                    <%--<td>SK0001</td>--%>
 
-                    <td>90.00</td>
+                    <%--<td>90.00</td>--%>
 
-                    <td>等待</td>
+                    <%--<td>等待</td>--%>
 
-                    <td>78</td>
+                    <%--<td>78</td>--%>
 
-                </tr>
+                <%--</tr>--%>
 
-                <tr class="odd gradeX">
+                <%--<tr class="odd gradeX">--%>
 
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
+                    <%--<td>--%>
+                        <%--<label>--%>
+                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                        <%--</label>--%>
+                    <%--</td>--%>
 
-                    <td>3</td>
+                    <%--<td>3</td>--%>
 
-                    <td>2016/07/22 9：06</td>
+                    <%--<td>2016/07/22 9：06</td>--%>
 
-                    <td>婴儿车</td>
+                    <%--<td>婴儿车</td>--%>
 
-                    <td>高级扶手婴儿车</td>
+                    <%--<td>高级扶手婴儿车</td>--%>
 
-                    <td>SK0001</td>
+                    <%--<td>SK0001</td>--%>
 
-                    <td>90.00</td>
+                    <%--<td>90.00</td>--%>
 
-                    <td>等待</td>
+                    <%--<td>等待</td>--%>
 
-                    <td>78</td>
+                    <%--<td>78</td>--%>
 
-                </tr>
+                <%--</tr>--%>
 
-                <tr class="odd gradeX">
+                <%--<tr class="odd gradeX">--%>
 
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
+                    <%--<td>--%>
+                        <%--<label>--%>
+                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                        <%--</label>--%>
+                    <%--</td>--%>
 
-                    <td>4</td>
+                    <%--<td>4</td>--%>
 
-                    <td>2016/07/22 9：06</td>
+                    <%--<td>2016/07/22 9：06</td>--%>
 
-                    <td>婴儿车</td>
+                    <%--<td>婴儿车</td>--%>
 
-                    <td>高级扶手婴儿车</td>
+                    <%--<td>高级扶手婴儿车</td>--%>
 
-                    <td>SK0001</td>
+                    <%--<td>SK0001</td>--%>
 
-                    <td>90.00</td>
+                    <%--<td>90.00</td>--%>
 
-                    <td>等待</td>
+                    <%--<td>等待</td>--%>
 
-                    <td>78</td>
+                    <%--<td>78</td>--%>
 
-                </tr>
+                <%--</tr>--%>
 
-                <tr class="odd gradeX">
+                <%--<tr class="odd gradeX">--%>
 
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
+                    <%--<td>--%>
+                        <%--<label>--%>
+                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                        <%--</label>--%>
+                    <%--</td>--%>
 
-                    <td>5</td>
+                    <%--<td>5</td>--%>
 
-                    <td>2016/07/22 9：06</td>
+                    <%--<td>2016/07/22 9：06</td>--%>
 
-                    <td>婴儿车</td>
+                    <%--<td>婴儿车</td>--%>
 
-                    <td>高级扶手婴儿车</td>
+                    <%--<td>高级扶手婴儿车</td>--%>
 
-                    <td>SK0001</td>
+                    <%--<td>SK0001</td>--%>
 
-                    <td>90.00</td>
+                    <%--<td>90.00</td>--%>
 
-                    <td>等待</td>
+                    <%--<td>等待</td>--%>
 
-                    <td>78</td>
+                    <%--<td>78</td>--%>
 
-                </tr>
+                <%--</tr>--%>
 
-                <tr class="odd gradeX">
+                <%--<tr class="odd gradeX">--%>
 
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
+                    <%--<td>--%>
+                        <%--<label>--%>
+                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                        <%--</label>--%>
+                    <%--</td>--%>
 
-                    <td>6</td>
+                    <%--<td>6</td>--%>
 
-                    <td>2016/07/22 9：06</td>
+                    <%--<td>2016/07/22 9：06</td>--%>
 
-                    <td>婴儿车</td>
+                    <%--<td>婴儿车</td>--%>
 
-                    <td>高级扶手婴儿车</td>
+                    <%--<td>高级扶手婴儿车</td>--%>
 
-                    <td>SK0001</td>
+                    <%--<td>SK0001</td>--%>
 
-                    <td>90.00</td>
+                    <%--<td>90.00</td>--%>
 
-                    <td>等待</td>
+                    <%--<td>等待</td>--%>
 
-                    <td>78</td>
+                    <%--<td>78</td>--%>
 
-                </tr>
+                <%--</tr>--%>
 
-                <tr class="odd gradeX">
+                <%--<tr class="odd gradeX">--%>
 
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
+                    <%--<td>--%>
+                        <%--<label>--%>
+                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                        <%--</label>--%>
+                    <%--</td>--%>
 
-                    <td>7</td>
+                    <%--<td>7</td>--%>
 
-                    <td>2016/07/22 9：06</td>
+                    <%--<td>2016/07/22 9：06</td>--%>
 
-                    <td>婴儿车</td>
+                    <%--<td>婴儿车</td>--%>
 
-                    <td>高级扶手婴儿车</td>
+                    <%--<td>高级扶手婴儿车</td>--%>
 
-                    <td>SK0001</td>
+                    <%--<td>SK0001</td>--%>
 
-                    <td>90.00</td>
+                    <%--<td>90.00</td>--%>
 
-                    <td>等待</td>
+                    <%--<td>等待</td>--%>
 
-                    <td>78</td>
+                    <%--<td>78</td>--%>
 
-                </tr>
+                <%--</tr>--%>
 
             </table>
             <!--表格END-->
