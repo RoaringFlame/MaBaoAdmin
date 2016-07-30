@@ -3,30 +3,34 @@ package com.mabao.admin.service.impl;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.repository.UserRepository;
 import com.mabao.admin.service.UserService;
-import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by lies on 2016/7/28.
- */
-public class UserServiceImpl  implements UserService {
-
+@Service
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * 根据ID获取用户对象
+     * @param userId            用户ID
+     * @return                  用户对象
+     */
     @Override
-    public List<User> getAllUser() {
-        List<User> userList= this.userRepository.findAll();
-        return userList;
+    public User get(Long userId) {
+        return this.userRepository.findOne(userId);
     }
 
-    @Override
-    public void deleteUser(Long id) {
-        this.userRepository.delete(id);
-    }
 
+    /**
+     * 修改用户信息
+     * @param user                  用户
+     * @return                      修改的用户
+     */
+    @Override
+    public User updateUser(User user) {
+        return this.userRepository.saveAndFlush(user);
+    }
 
 }

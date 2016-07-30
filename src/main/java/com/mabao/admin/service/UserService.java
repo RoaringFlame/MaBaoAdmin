@@ -1,24 +1,22 @@
 package com.mabao.admin.service;
 
+
 import com.mabao.admin.pojo.User;
-import com.mabao.admin.util.Selector;
 
-import java.util.List;
-
-/**
- * Created by lies on 2016/7/28.
- */
 public interface UserService {
 
     /**
-     * 查询所有用户信息
-     * @return
+     * 根据ID获取用户对象
+     * @param userId            用户ID
+     * @return                  用户对象
      */
-    List<User> getAllUser();
+    User get(Long userId);
 
     /**
-     * 根据用户id删除某个用户
-     * @param id    用户id
+     * 修改用户信息
+     * @param user                  用户
+     * @return                      修改的用户
      */
-    void deleteUser(Long id);
+    User updateUser(User user);
+
 }
