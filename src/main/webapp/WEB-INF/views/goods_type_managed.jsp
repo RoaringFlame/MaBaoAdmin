@@ -1,6 +1,11 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<html lang="en">
 <head>
+    <base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,15 +13,12 @@
     <title>妈宝后台|商品分类</title>
 
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/master.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <!--<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
-    <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/master.css" rel="stylesheet">
     <![endif]-->
+
+    <script src="script/lib/jquery.1.10.2.js"></script>
+    <script src="script/goods_type_managed.js"></script>
 </head>
 <body>
 
@@ -73,12 +75,11 @@
 <!-- 顶部导航END -->
 
 
-
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
     <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-        <li class="first-level-menu" >
-            <a  href="index.html">首页</a>
+        <li class="first-level-menu">
+            <a href="index.html">首页</a>
         </li>
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
@@ -169,19 +170,19 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button id="searchByType" type="button" class="btn btn-default">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
 
 
             <!--表格-->
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="tableListForm">
                 <thead>
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input type="checkbox" class="group-checkable"
+                            <input type="checkbox" id="textSearch" class="group-checkable"
                                    data-set="#sample_2 .checkboxes"/>
                         </label>
                     </th>
@@ -204,7 +205,7 @@
 
                     <td>
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input name="allCheck" type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
 
@@ -222,66 +223,31 @@
 
                     <td>
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
 
                     <td>2</td>
 
-                    <td>婴儿车</td>
+                    <td>玩具</td>
 
                     <td>1</td>
 
                     <td>个</td>
+
                 </tr>
 
                 <tr class="odd gradeX">
 
                     <td>
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
 
                     <td>3</td>
 
-                    <td>安全座椅</td>
-
-                    <td>4</td>
-
-                    <td>个</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>4</td>
-
-                    <td>服饰鞋帽</td>
-
-                    <td>10</td>
-
-                    <td>个</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>5</td>
-
-                    <td>家具家电</td>
+                    <td>玩具</td>
 
                     <td>1</td>
 
@@ -289,41 +255,7 @@
 
                 </tr>
 
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>6</td>
-
-                    <td>图书绘本</td>
-
-                    <td>2</td>
-
-                    <td>个</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>7</td>
-
-                    <td>其他产品</td>
-
-                    <td>0</td>
-
-                    <td>个</td>
-
-                </tr>
+                </tbody>
 
             </table>
             <!--表格END-->
@@ -344,48 +276,41 @@
                 <h4 class="modal-title" id="exampleModalLabel">商品详情</h4>
             </div>
             <div class="modal-body">
-                <form class="col-md-offset-4 form-label">
+                <form id="createNewForm" class="col-md-offset-4 form-label" >
                     <div class="form-group  ">
                         <label for="assortmentForm" class="control-label text-left">分类名称:
-                            <input type="text" class="form-control" id="assortmentForm">
-                        </label>
-                        <span class="red ">*</span>
-                    </div>
-                    <div class="form-group ">
-                        <label for="categoryParent" class="control-label text-left ">上级分类:
-                            <input type="text" class="form-control" id="categoryParent">
+                            <input type="text" class="form-control" id="assortmentForm" name="assortmentForm">
                         </label>
                         <span class="red ">*</span>
                     </div>
                     <div class="form-group ">
                         <label for="assortmentNum" class="  control-label text-left ">数量单位:
-                            <input type="text" class="form-control" id="assortmentNum">
+                            <input type="text" class="form-control" id="assortmentNum" name="assortmentNum">
                         </label>
                         <span class="red ">*</span>
                     </div>
                     <div class="form-group ">
                         <label for="assortmentDetail" class="control-label text-left ">分类描述:
-                            <textarea class="form-control" id="assortmentDetail"></textarea>
+                            <textarea class="form-control" id="assortmentDetail" name="assortmentDetail"></textarea>
                         </label>
                         <span class="red ">*</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button id="dismiss-btn" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="submit-btn" type="button" class="btn btn-primary">提交</button>
             </div>
         </div>
     </div>
 </div>
 <!--商品类型表单END-->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../script/lib/jquery.1.10.2.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/lib/jquery.1.10.2.js"></script>
 
-<script src="../script/lib/bootstrap/collapse.js"></script>
+<script src="script/lib/bootstrap/bootstrap.min.js"></script>
+
+<script src="script/lib/bootstrap/collapse.js"></script>
 
 </body>
 </html>
