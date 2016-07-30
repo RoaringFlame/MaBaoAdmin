@@ -1,6 +1,7 @@
 package com.mabao.admin.service.impl;
 
 
+import com.mabao.admin.controller.vo.ExportGoodsVO;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.repository.GoodsRepository;
 import com.mabao.admin.service.GoodsManageService;
@@ -45,10 +46,11 @@ public class GoodsManageServiceImpl implements GoodsManageService {
         String fileName = "商品数据明细表" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".xls";           //导出Excel文件名
         String filePath = docsPath + FILE_SEPARATOR + fileName;
         //数据填充
-        ExcelUtil<Goods> ex = new ExcelUtil<>();
+        ExcelUtil<ExportGoodsVO> ex = new ExcelUtil<>();
         String[] headers = {"编号", "时间", "商品类别", "商品名称", "货号", "价格", "上架", "库存"};
         String[] columns = {"id", "upTime", "typeName", "title", "articleNumber", "price", "state", "stockNumber"};
-        List<Goods> dataSet = goodsRepository.findByTypeNameOrStateOrTitleOrArticleNumber(typeName, state, title, articleNumber);
+        List<Goods> data = goodsRepository.findByTypeNameOrStateOrTitleOrArticleNumber(typeName, state, title, articleNumber);
+        List<ExportGoodsVO> dataSet = ExportGoodsVO.generateBy(data);
         try {
             OutputStream out = new FileOutputStream(filePath);
             ex.exportExcel("商品数据明细表", headers, columns, dataSet, out, "yy-MM-dd HH:mm:ss");

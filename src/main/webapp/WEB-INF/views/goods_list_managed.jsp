@@ -153,7 +153,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                         <li>
-                            <a data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            <a data-toggle="modal" data-target="#updateGoodsModal" data-whatever="@mdo">
                                 修改
                             </a>
                         </li>
@@ -165,7 +165,7 @@
 
                 <div class="btn-toolbar ">
                     <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#newGoodsModal" data-whatever="@mdo">
                             新建
                         </a>
                     </div>
@@ -184,13 +184,13 @@
                         <label for="goodsType"></label>
                         <select name="goodsType" class="form-control" id="goodsType">
                             <option value="" selected="selected">所有类别</option>
-                            <option value="">婴儿车</option>
-                            <option value="">安全座椅</option>
-                            <option value="-" >玩具</option>
-                            <option value="-">家具家电</option>
-                            <option value="-">服饰鞋帽</option>
-                            <option value="-">图书回本</option>
-                            <option value="-">其他</option>
+                            <%--<option value="">婴儿车</option>--%>
+                            <%--<option value="">安全座椅</option>--%>
+                            <%--<option value="-" >玩具</option>--%>
+                            <%--<option value="-">家具家电</option>--%>
+                            <%--<option value="-">服饰鞋帽</option>--%>
+                            <%--<option value="-">图书回本</option>--%>
+                            <%--<option value="-">其他</option>--%>
                         </select>
 
                     </div>
@@ -198,8 +198,8 @@
                         <label for="goodsPublish"></label>
                         <select name="" class="form-control" id="goodsPublish">
                             <option selected="selected" value="">全部</option>
-                            <option value="">上架</option>
-                            <option value="">下架</option>
+                            <%--<option value="">上架</option>--%>
+                            <%--<option value="">下架</option>--%>
                         </select>
                     </div>
                     <div class="form-group">
@@ -223,7 +223,7 @@
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input type="checkbox" class="group-checkable"
+                            <input id="selectAll" type="checkbox" class="group-checkable"
                                    data-set="#sample_2 .checkboxes"/>
                         </label>
                     </th>
@@ -253,7 +253,7 @@
 
                     <td>
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input name="goodsCheckBox" type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
 
@@ -274,12 +274,12 @@
                     <td>100</td>
 
                 </tr>
-
+                <div id="newGoodsContainer"></div>
                 <%--<tr class="odd gradeX">--%>
 
                     <%--<td>--%>
                         <%--<label>--%>
-                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
                         <%--</label>--%>
                     <%--</td>--%>
 
@@ -305,7 +305,7 @@
 
                     <%--<td>--%>
                         <%--<label>--%>
-                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
                         <%--</label>--%>
                     <%--</td>--%>
 
@@ -331,7 +331,7 @@
 
                     <%--<td>--%>
                         <%--<label>--%>
-                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
                         <%--</label>--%>
                     <%--</td>--%>
 
@@ -357,7 +357,7 @@
 
                     <%--<td>--%>
                         <%--<label>--%>
-                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
                         <%--</label>--%>
                     <%--</td>--%>
 
@@ -383,7 +383,7 @@
 
                     <%--<td>--%>
                         <%--<label>--%>
-                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
                         <%--</label>--%>
                     <%--</td>--%>
 
@@ -409,7 +409,7 @@
 
                     <%--<td>--%>
                         <%--<label>--%>
-                            <%--<input type="checkbox" class="checkboxes" value="1"/>--%>
+                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
                         <%--</label>--%>
                     <%--</td>--%>
 
@@ -441,53 +441,118 @@
 <!--面板END-->
 
 <!--商品表单-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="newGoodsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">商品详情</h4>
+                <h4 class="modal-title">添加商品</h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group ">
-                        <label for="goodsNameForm" class="control-label  label-half ">商品名称:
-                            <input type="text" class="form-control" id="goodsNameForm">
+                        <label for="newGoodsName" class="control-label  label-half ">商品名称:
+                            <input type="text" class="form-control" id="newGoodsName">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsPriceForm" class="control-label  label-half">商品价格:
-                            <input type="text" class="form-control" id="goodsPriceForm">
+                        <label for="newGoodsPriceForm" class="control-label  label-half">商品价格:
+                            <input type="text" class="form-control" id="newGoodsPriceForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsAddForm" class="  control-label label-half ">所在地:
-                            <input type="text" class="form-control" id="goodsAddForm">
+                        <label for="newGoodsAddForm" class="  control-label label-half ">所在地:
+                            <input type="text" class="form-control" id="newGoodsAddForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsDateForm" class="control-label  label-half ">购买日期:
-                            <input type="date" class="form-control" id="goodsDateForm">
+                        <label for="newGoodsDateForm" class="control-label  label-half ">购买日期:
+                            <input type="date" class="form-control" id="newGoodsDateForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsEndDateForm" class="control-label  label-half">保质期至:
-                            <input type="date" class="form-control" id="goodsEndDateForm">
+                        <label for="newGoodsEndDateForm" class="control-label  label-half">保质期至:
+                            <input type="date" class="form-control" id="newGoodsEndDateForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsDegreeForm" class="control-label  label-half">新旧程度:
-                            <input type="text" class="form-control" id="goodsDegreeForm">
+                        <label for="newGoodsDegreeForm" class="control-label  label-half">新旧程度:
+                            <input type="text" class="form-control" id="newGoodsDegreeForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsInfoForm" class="control-label label-half ">商品介绍:
-                            <textarea class="form-control" id="goodsInfoForm"></textarea>
+                        <label for="newGoodsInfoForm" class="control-label label-half ">商品介绍:
+                            <textarea class="form-control" id="newGoodsInfoForm"></textarea>
                         </label>
                         <span class="red ">*</span>
-                        <label for="goodsDetailForm" class="control-label  label-half">妈咪说:
-                            <textarea class="form-control" id="goodsDetailForm"></textarea>
+                        <label for="newGoodsDetailForm" class="control-label  label-half">妈咪说:
+                            <textarea class="form-control" id="newGoodsDetailForm"></textarea>
+                        </label>
+
+                        <label class="label-half">
+                            <input type="file" accept="image/png,image/gif" id="newGoodsUploadPhoto">
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--商品表单END-->
+
+<!--商品表单-->
+<div class="modal fade" id="updateGoodsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改商品信息</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group ">
+                        <label for="updateGoodsNameForm" class="control-label  label-half ">商品名称:
+                            <input type="text" class="form-control" id="updateGoodsNameForm">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="updateGoodsPriceForm" class="control-label  label-half">商品价格:
+                            <input type="text" class="form-control" id="updateGoodsPriceForm">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="updateGoodsAddForm" class="  control-label label-half ">所在地:
+                            <input type="text" class="form-control" id="updateGoodsAddForm">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="updateGoodsDateForm" class="control-label  label-half ">购买日期:
+                            <input type="date" class="form-control" id="updateGoodsDateForm">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="updateGoodsEndDateForm" class="control-label  label-half">保质期至:
+                            <input type="date" class="form-control" id="updateGoodsEndDateForm">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="updateGoodsDegreeForm" class="control-label  label-half">新旧程度:
+                            <input type="text" class="form-control" id="updateGoodsDegreeForm">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="updateGoodsInfoForm" class="control-label label-half ">商品介绍:
+                            <textarea class="form-control" id="updateGoodsInfoForm"></textarea>
+                        </label>
+                        <span class="red ">*</span>
+                        <label for="updateGoodsDetailForm" class="control-label  label-half">妈咪说:
+                            <textarea class="form-control" id="updateGoodsDetailForm"></textarea>
                         </label>
 
                         <label class="label-half">
@@ -497,7 +562,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="reset" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary">提交</button>
             </div>
         </div>
