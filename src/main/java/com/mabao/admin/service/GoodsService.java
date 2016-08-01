@@ -41,7 +41,7 @@ public interface GoodsService {
      * 获取所有商品信息
      * @return
      */
-    List<Goods> getAllGoods();
+    Page<Goods> getAllGoods(int page, int pageSize);
 
     /**
      * 根据商品ID查商品list

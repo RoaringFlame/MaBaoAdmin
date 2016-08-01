@@ -6,19 +6,30 @@ import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.service.GoodsService;
+import com.mabao.admin.service.GoodsTypeService;
 import com.mabao.admin.util.PageVO;
+import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping(value = "/goods")
 public class GoodsRESTController {
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private GoodsTypeService goodsTypeService;
 
     /**
      * 根据需求查询商品
@@ -70,6 +81,35 @@ public class GoodsRESTController {
     @RequestMapping(value = "/updateGoods", method = RequestMethod.GET)
     public Goods updateGoods(Goods goods) {
         return this.goodsService.saveGoods(goods);
+    }
+
+
+    /**
+     * 获得所有商品信息
+     * @param   model         map
+     * @return
+     */
+    @RequestMapping(method = GET)
+    public JsonResultVO goodsList(int page, int pageSize,Model model) {
+        try{
+            Map<String,Object> map = new HashMap<>();
+            //获得所有商品的类别
+            List<Selector> goodsTypeList = this.goodsTypeService.getAllGoodsTypeForSelector();
+            map.put("goodsType",goodsTypeList);
+            //商品的状态
+            List<Selector> state = State.toList();
+            map.put("state",state);
+            //获得所有商品的信息
+            Page<Goods> goodsList = this.goodsService.getAllGoods(page,pageSize);
+            map.put("allGoods",goodsList);
+            model.addAllAttributes(map);
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"显示成功！");
+
+
+
     }
 
 }

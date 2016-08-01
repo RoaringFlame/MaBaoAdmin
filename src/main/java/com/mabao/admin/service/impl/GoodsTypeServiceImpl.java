@@ -39,8 +39,9 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
      * 获取商品的所有类别
      * @return                 商品类别的集合
      */
-    public List<GoodsType> getAllGoodsType() {
-        return this.goodsTypeRepository.findAll();
+    @Override
+    public Page<GoodsType> getAllGoodsType(int page, int pageSize) {
+        return this.goodsTypeRepository.findAll(new PageRequest(page, pageSize));
     }
 
     /**

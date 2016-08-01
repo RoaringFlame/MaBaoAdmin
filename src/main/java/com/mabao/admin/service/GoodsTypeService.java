@@ -22,7 +22,7 @@ public interface GoodsTypeService {
      * 获取商品的所有类别
      * @return                 商品类别的集合
      */
-    List<GoodsType> getAllGoodsType();
+    Page<GoodsType> getAllGoodsType(int page, int pageSize);
 
     /**
      *获取商品的集合

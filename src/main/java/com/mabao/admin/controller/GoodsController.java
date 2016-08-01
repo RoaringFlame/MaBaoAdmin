@@ -27,8 +27,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
-    @Autowired
-    private GoodsTypeService goodsTypeService;
+
 
     /**
      * 获得商品信息
@@ -40,26 +39,7 @@ public class GoodsController {
         return GoodsVO.generateBy(this.goodsService.get(goodsId));
     }
 
-    /**
-     * 获得所有商品信息
-     * @param   model         map
-     * @return
-     */
-    @RequestMapping(method = GET)
-    public String goodsList(Model model) {
-        Map<String,Object> map = new HashMap<>();
-        //获得所有商品的类别
-        List<Selector> goodsTypeList = this.goodsTypeService.getAllGoodsTypeForSelector();
-        map.put("goodsType",goodsTypeList);
-        //获得所有商品的信息
-        List<Goods> goodsList = this.goodsService.getAllGoods();
-        map.put("allGoods",goodsList);
-        //商品的状态
-        List<Selector> state = State.toList();
-        map.put("state",state);
-        model.addAllAttributes(map);
-        return "goods_list_managed";
-    }
+
 
     /**
      * 新建应该商品

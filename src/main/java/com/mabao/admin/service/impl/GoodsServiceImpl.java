@@ -54,8 +54,8 @@ public class GoodsServiceImpl implements GoodsService {
      * @return
      */
     @Override
-    public List<Goods> getAllGoods() {
-        return this.goodsRepository.findAll();
+    public Page<Goods> getAllGoods(int page, int pageSize) {
+        return this.goodsRepository.findAll(new PageRequest(page, pageSize));
     }
 
     /**
