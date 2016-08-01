@@ -58,22 +58,27 @@ $(function () {
         //获取到选中项的值并展示，取消时值不变原样返回，点击保存就提示是否修改，修改完成后显示
         //如果没有选中项提示没有选中不能修改
         //如果选中多项提示只能单项修改
-        
+        $($(".goods-del").text()).click(function () {
+            console.log("hello");
+        })
     }
 
     //删除相关
     function  initDelete(){
-        //var checkAll=$().checked();//选中所有
-
-
         //如果没有选中项提示没有选中不能删除
         $("#delBtn").click(function () {
-            var checkOne=$("#tableListForm").find("input[name='allCheck']").is(":checked");//选中一项
             //获取选中项
-            if(checkOne==true){
-                $("#delMsg").remove();
+            var checkedItems=$("input[name='allCheck']:checked");
+            var goodsIds = "";  //存储选中项的id值
+            if(checkedItems.val()){
+                $(checkedItems).each(function () {                     //遍历选中的checkbox
+                    var goodsId = $(this).parents("tr").find("td:eq(1)").text();           //获取checkbox所在行顺序
+                    goodsIds+=goodsId + ",";
+                    console.log(goodsIds);
+                    $(this).parents("tr").remove();
+                });
             }else{
-                alert("请至少选择一项才能删除！");
+                alert("请至少选择一项才能进行删除操作！");
             }
         })
 
@@ -144,6 +149,7 @@ $(function () {
         //initChangeBtn();
         //删除按钮
         initDelete();
+        initChangeMsg();
     }
 
     //调用初始化函数

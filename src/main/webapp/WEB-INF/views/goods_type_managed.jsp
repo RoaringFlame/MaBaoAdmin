@@ -207,7 +207,7 @@
 
                     <td>个</td>
 
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg">编辑</td>
 
 
                 </tr>
@@ -233,6 +233,48 @@
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
 
                 </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>3</td>
+
+                    <td>日用品</td>
+
+                    <td>12</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>3</td>
+
+                    <td>文具</td>
+
+                    <td>1</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
+
+                </tr>
+
+
 
                 </tbody>
 
