@@ -18,8 +18,9 @@ $(function () {
     var goodsName;                                                       //商品名称
     var goodsId;                                                         //商品货号
     var state;
-    var newGoodsForm = $("#newGoodsModal");                                //新增商品表单
-    var updateGoodsForm = $("#updateGoodsModal");                          //修改商品表单
+    var goodsForm = $("#exampleModal");                                  //商品表单
+    var goodsTable = $(".table.table-bordered.table-striped");             //商品列表
+
 
     //获取搜索条件
     function getSearchItem() {
@@ -105,24 +106,31 @@ $(function () {
 
     //新建商品按钮
 
-    //新建商品页面取消按钮
-    newGoodsForm.find("button.btn.btn-default").click(function () {
-        newGoodsForm.find("input").val("");
-        newGoodsForm.find("textarea").val("");
-    });
-    //新建商品页面提交按钮
+    //商品详情表单取消按钮
+    function cancelForm() {
+        goodsForm.find("input").val("");
+        goodsForm.find("textarea").val("");
+    }
 
-    //修改商品按钮
+    //商品详情页面提交按钮
 
-    //修改商品页面取消按钮
-    updateGoodsForm.find("button.btn.btn-default").click(function () {
-        updateGoodsForm.find("input").val("");
-        updateGoodsForm.find("textarea").val("");
-    });
+    //修改商品表单初始化
+    function initUpdateGoodsForm() {
+      
+    }
+
     //修改商品页面提交按钮
 
 
-    //删除商品按钮
+    //删除商品
+    function deleteGoods() {
+        $("input[name='checkBox']:checked").each(function () {                     //遍历选中的checkbox
+            var lines = $(this).parent("tr").index();                              //获取checkbox所在行顺序
+            if (lines !== 0) {
+                goodsTable.find("tr:eq(" + lines + ")").remove();                       //从商品列表中移除该行
+            }
+        });
+    }
 
     //商品上架按钮
 
@@ -140,9 +148,8 @@ $(function () {
     }
 
     //表单校验
-    function initForm(){
-       var goodsName=$("#newGoodsName").val();
-        var goodsPrice=$().val();
+    function initForm() {
+
     }
 
     function init() {
@@ -160,18 +167,21 @@ $(function () {
         $("#selectAll").click(function () {
             $("input[name='checkBox']").prop("checked", $(this).prop("checked"));
         });
-        //点击添加商品表单取消按钮
 
-        //点击添加商品表单提交按钮
+        //点击商品详情表单取消按钮
+        goodsForm.find("button.btn.btn-default").click(function () {
+            cancelForm();
+        });
+        //点击商品详情表单提交按钮
 
-        //点击修改商品表单取消按钮
 
+        //点击新建按钮
 
-        //点击修改商品表单提交按钮
+        //点击修改按钮
 
         //点击删除按钮
         deleteBtn.click(function () {
-            alert("删除");
+            deleteGoods();
         });
         //点击上架按钮
         onSellBtn.click(function () {

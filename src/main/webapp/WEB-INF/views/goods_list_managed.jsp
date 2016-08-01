@@ -153,7 +153,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                         <li>
-                            <a data-toggle="modal" data-target="#updateGoodsModal" data-whatever="@mdo">
+                            <a data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                                 修改
                             </a>
                         </li>
@@ -165,7 +165,7 @@
 
                 <div class="btn-toolbar ">
                     <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#newGoodsModal" data-whatever="@mdo">
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                             新建
                         </a>
                     </div>
@@ -275,161 +275,161 @@
 
                 </tr>
                 <div id="newGoodsContainer"></div>
-                <%--<tr class="odd gradeX">--%>
+                <tr class="odd gradeX">
 
-                    <%--<td>--%>
-                        <%--<label>--%>
-                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
-                        <%--</label>--%>
-                    <%--</td>--%>
+                    <td>
+                        <label>
+                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
 
-                    <%--<td>2</td>--%>
+                    <td>2</td>
 
-                    <%--<td>2016/07/22 9：06</td>--%>
+                    <td>2016/07/22 9：06</td>
 
-                    <%--<td>婴儿车</td>--%>
+                    <td>婴儿车</td>
 
-                    <%--<td>高级扶手婴儿车</td>--%>
+                    <td>高级扶手婴儿车</td>
 
-                    <%--<td>SK0001</td>--%>
+                    <td>SK0001</td>
 
-                    <%--<td>90.00</td>--%>
+                    <td>90.00</td>
 
-                    <%--<td>等待</td>--%>
+                    <td>等待</td>
 
-                    <%--<td>78</td>--%>
+                    <td>78</td>
 
-                <%--</tr>--%>
+                </tr>
 
-                <%--<tr class="odd gradeX">--%>
+                <tr class="odd gradeX">
 
-                    <%--<td>--%>
-                        <%--<label>--%>
-                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
-                        <%--</label>--%>
-                    <%--</td>--%>
+                    <td>
+                        <label>
+                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
 
-                    <%--<td>3</td>--%>
+                    <td>3</td>
 
-                    <%--<td>2016/07/22 9：06</td>--%>
+                    <td>2016/07/22 9：06</td>
 
-                    <%--<td>婴儿车</td>--%>
+                    <td>婴儿车</td>
 
-                    <%--<td>高级扶手婴儿车</td>--%>
+                    <td>高级扶手婴儿车</td>
 
-                    <%--<td>SK0001</td>--%>
+                    <td>SK0001</td>
 
-                    <%--<td>90.00</td>--%>
+                    <td>90.00</td>
 
-                    <%--<td>等待</td>--%>
+                    <td>等待</td>
 
-                    <%--<td>78</td>--%>
+                    <td>78</td>
 
-                <%--</tr>--%>
+                </tr>
 
-                <%--<tr class="odd gradeX">--%>
+                <tr class="odd gradeX">
 
-                    <%--<td>--%>
-                        <%--<label>--%>
-                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
-                        <%--</label>--%>
-                    <%--</td>--%>
+                    <td>
+                        <label>
+                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
 
-                    <%--<td>4</td>--%>
+                    <td>4</td>
 
-                    <%--<td>2016/07/22 9：06</td>--%>
+                    <td>2016/07/22 9：06</td>
 
-                    <%--<td>婴儿车</td>--%>
+                    <td>婴儿车</td>
 
-                    <%--<td>高级扶手婴儿车</td>--%>
+                    <td>高级扶手婴儿车</td>
 
-                    <%--<td>SK0001</td>--%>
+                    <td>SK0001</td>
 
-                    <%--<td>90.00</td>--%>
+                    <td>90.00</td>
 
-                    <%--<td>等待</td>--%>
+                    <td>等待</td>
 
-                    <%--<td>78</td>--%>
+                    <td>78</td>
 
-                <%--</tr>--%>
+                </tr>
 
-                <%--<tr class="odd gradeX">--%>
+                <tr class="odd gradeX">
 
-                    <%--<td>--%>
-                        <%--<label>--%>
-                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
-                        <%--</label>--%>
-                    <%--</td>--%>
+                    <td>
+                        <label>
+                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
 
-                    <%--<td>5</td>--%>
+                    <td>5</td>
 
-                    <%--<td>2016/07/22 9：06</td>--%>
+                    <td>2016/07/22 9：06</td>
 
-                    <%--<td>婴儿车</td>--%>
+                    <td>婴儿车</td>
 
-                    <%--<td>高级扶手婴儿车</td>--%>
+                    <td>高级扶手婴儿车</td>
 
-                    <%--<td>SK0001</td>--%>
+                    <td>SK0001</td>
 
-                    <%--<td>90.00</td>--%>
+                    <td>90.00</td>
 
-                    <%--<td>等待</td>--%>
+                    <td>等待</td>
 
-                    <%--<td>78</td>--%>
+                    <td>78</td>
 
-                <%--</tr>--%>
+                </tr>
 
-                <%--<tr class="odd gradeX">--%>
+                <tr class="odd gradeX">
 
-                    <%--<td>--%>
-                        <%--<label>--%>
-                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
-                        <%--</label>--%>
-                    <%--</td>--%>
+                    <td>
+                        <label>
+                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
 
-                    <%--<td>6</td>--%>
+                    <td>6</td>
 
-                    <%--<td>2016/07/22 9：06</td>--%>
+                    <td>2016/07/22 9：06</td>
 
-                    <%--<td>婴儿车</td>--%>
+                    <td>婴儿车</td>
 
-                    <%--<td>高级扶手婴儿车</td>--%>
+                    <td>高级扶手婴儿车</td>
 
-                    <%--<td>SK0001</td>--%>
+                    <td>SK0001</td>
 
-                    <%--<td>90.00</td>--%>
+                    <td>90.00</td>
 
-                    <%--<td>等待</td>--%>
+                    <td>等待</td>
 
-                    <%--<td>78</td>--%>
+                    <td>78</td>
 
-                <%--</tr>--%>
+                </tr>
 
-                <%--<tr class="odd gradeX">--%>
+                <tr class="odd gradeX">
 
-                    <%--<td>--%>
-                        <%--<label>--%>
-                            <%--<input name="checkBox" type="checkbox" class="checkboxes" value="1"/>--%>
-                        <%--</label>--%>
-                    <%--</td>--%>
+                    <td>
+                        <label>
+                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
 
-                    <%--<td>7</td>--%>
+                    <td>7</td>
 
-                    <%--<td>2016/07/22 9：06</td>--%>
+                    <td>2016/07/22 9：06</td>
 
-                    <%--<td>婴儿车</td>--%>
+                    <td>婴儿车</td>
 
-                    <%--<td>高级扶手婴儿车</td>--%>
+                    <td>高级扶手婴儿车</td>
 
-                    <%--<td>SK0001</td>--%>
+                    <td>SK0001</td>
 
-                    <%--<td>90.00</td>--%>
+                    <td>90.00</td>
 
-                    <%--<td>等待</td>--%>
+                    <td>等待</td>
 
-                    <%--<td>78</td>--%>
+                    <td>78</td>
 
-                <%--</tr>--%>
+                </tr>
 
             </table>
             <!--表格END-->
@@ -441,57 +441,57 @@
 <!--面板END-->
 
 <!--商品表单-->
-<div class="modal fade" id="newGoodsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加商品</h4>
+                <h4 class="modal-title" id="exampleModalLabel">商品详情</h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group ">
-                        <label for="newGoodsName" class="control-label  label-half ">商品名称:
-                            <input type="text" class="form-control" id="newGoodsName">
+                        <label for="goodsNameForm" class="control-label  label-half ">商品名称:
+                            <input type="text" class="form-control" id="goodsNameForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="newGoodsPriceForm" class="control-label  label-half">商品价格:
-                            <input type="text" class="form-control" id="newGoodsPriceForm">
+                        <label for="goodsPriceForm" class="control-label  label-half">商品价格:
+                            <input type="text" class="form-control" id="goodsPriceForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="newGoodsAddForm" class="  control-label label-half ">所在地:
-                            <input type="text" class="form-control" id="newGoodsAddForm">
+                        <label for="goodsAddForm" class="  control-label label-half ">所在地:
+                            <input type="text" class="form-control" id="goodsAddForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="newGoodsDateForm" class="control-label  label-half ">购买日期:
-                            <input type="date" class="form-control" id="newGoodsDateForm">
+                        <label for="goodsDateForm" class="control-label  label-half ">购买日期:
+                            <input type="date" class="form-control" id="goodsDateForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="newGoodsEndDateForm" class="control-label  label-half">保质期至:
-                            <input type="date" class="form-control" id="newGoodsEndDateForm">
+                        <label for="goodsEndDateForm" class="control-label  label-half">保质期至:
+                            <input type="date" class="form-control" id="goodsEndDateForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="newGoodsDegreeForm" class="control-label  label-half">新旧程度:
-                            <input type="text" class="form-control" id="newGoodsDegreeForm">
+                        <label for="goodsDegreeForm" class="control-label  label-half">新旧程度:
+                            <input type="text" class="form-control" id="goodsDegreeForm">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="newGoodsInfoForm" class="control-label label-half ">商品介绍:
-                            <textarea class="form-control" id="newGoodsInfoForm"></textarea>
+                        <label for="goodsInfoForm" class="control-label label-half ">商品介绍:
+                            <textarea class="form-control" id="goodsInfoForm"></textarea>
                         </label>
                         <span class="red ">*</span>
-                        <label for="newGoodsDetailForm" class="control-label  label-half">妈咪说:
-                            <textarea class="form-control" id="newGoodsDetailForm"></textarea>
+                        <label for="goodsDetailForm" class="control-label  label-half">妈咪说:
+                            <textarea class="form-control" id="goodsDetailForm"></textarea>
                         </label>
 
                         <label class="label-half">
-                            <input type="file" accept="image/png,image/gif" id="newGoodsUploadPhoto">
+                            <input type="file" accept="image/png,image/gif" id="uploadPhoto">
                         </label>
                     </div>
                 </form>
@@ -505,70 +505,6 @@
 </div>
 <!--商品表单END-->
 
-<!--商品表单-->
-<div class="modal fade" id="updateGoodsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">修改商品信息</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group ">
-                        <label for="updateGoodsNameForm" class="control-label  label-half ">商品名称:
-                            <input type="text" class="form-control" id="updateGoodsNameForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="updateGoodsPriceForm" class="control-label  label-half">商品价格:
-                            <input type="text" class="form-control" id="updateGoodsPriceForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="updateGoodsAddForm" class="  control-label label-half ">所在地:
-                            <input type="text" class="form-control" id="updateGoodsAddForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="updateGoodsDateForm" class="control-label  label-half ">购买日期:
-                            <input type="date" class="form-control" id="updateGoodsDateForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="updateGoodsEndDateForm" class="control-label  label-half">保质期至:
-                            <input type="date" class="form-control" id="updateGoodsEndDateForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="updateGoodsDegreeForm" class="control-label  label-half">新旧程度:
-                            <input type="text" class="form-control" id="updateGoodsDegreeForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="updateGoodsInfoForm" class="control-label label-half ">商品介绍:
-                            <textarea class="form-control" id="updateGoodsInfoForm"></textarea>
-                        </label>
-                        <span class="red ">*</span>
-                        <label for="updateGoodsDetailForm" class="control-label  label-half">妈咪说:
-                            <textarea class="form-control" id="updateGoodsDetailForm"></textarea>
-                        </label>
-
-                        <label class="label-half">
-                            <input type="file" accept="image/png,image/gif" id="uploadPhoto">
-                        </label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="reset" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--商品表单END-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../script/lib/jquery.1.10.2.js"></script>
