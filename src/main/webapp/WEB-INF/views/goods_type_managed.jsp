@@ -87,7 +87,7 @@
                aria-expanded="false">商品管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu " id="goodsManaged">
                 <li><a href="goods_list_managed.html">商品列表</a></li>
-                <li><a href="goods_type_managed.html">商品分类</a></li>
+                <li><a href="goods_type_managed.jsp">商品分类</a></li>
             </ul>
         </li>
 
@@ -145,7 +145,7 @@
                     </ul>
                 </div>
 
-                <div class="btn-toolbar ">
+                <div class="btn-toolbar " id="createNew">
                     <div class="btn-group navbar-nav pull-right ">
                         <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                             新建

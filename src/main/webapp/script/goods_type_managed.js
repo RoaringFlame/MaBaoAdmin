@@ -30,6 +30,11 @@ $(function () {
         //    num:num,
         //    title:title
         //}
+        $("#createNew").find("a").click(function(){
+            if("a.val()==新建"){
+                $("#exampleModal").find("input").val("");
+            }
+        });
 
         $("#dismiss-btn").click(function (){
             $("#exampleModal").find("input").val("");
@@ -45,6 +50,19 @@ $(function () {
         });
     }
 
+    //修改相关
+    function initChangeMsg(){
+        //获取到选中项的值并展示，取消时值不变原样返回，点击保存就提示是否修改，修改完成后显示
+        //如果没有选中项提示没有选中不能修改
+        //如果选中多项提示只能单项修改
+    }
+
+    //删除相关
+    function  initDelete(){
+        //如果没有选中项提示没有选中不能删除
+
+    }
+
 
     //商品类别名搜索
     function initSearchByType(){
@@ -56,7 +74,6 @@ $(function () {
     //选中所有的功能
     function initCheckBoxAll(){
         $("#textSearch").click(function () {
-            alert("fjhfbislfwofhwi");
             $("input[name='allCheck']").prop("checked",$(this).prop("checked"));
         });
     }
@@ -75,8 +92,8 @@ $(function () {
                 $("#textSearch").find("tr:eq(1)>th:eq(2)").text("商品类别展示");
                 //商品数量展示
                 $("#textSearch").find("tr:eq(1)>th:eq(3)").text("商品数量展示");
-                //数量单位
-                $("#textSearch").find("tr:eq(1)>th:eq(4)").text("编号数值展示");
+                //数量单位展示
+                $("#textSearch").find("tr:eq(1)>th:eq(4)").text("数量单位展示");
             })
         }
 
@@ -101,6 +118,7 @@ $(function () {
 
     //初始化函数
     function init(){
+        //页面初始化
         initTypePage();
         //选中所有和取消
         initCheckBoxAll();
