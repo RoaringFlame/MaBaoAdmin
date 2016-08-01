@@ -21,21 +21,22 @@ public class GoodsRESTController {
 
     /**
      * 根据需求查询商品
-     * @param goodsTypeId                   商品类别
-     * @param state                         商品状态
-     * @param title                         商品名称
-     * @param articleNumber                 商品货号
-     * @param page                          页数
-     * @param pageSize                      每页大小
+     *
+     * @param goodsTypeId   商品类别
+     * @param state         商品状态
+     * @param title         商品名称
+     * @param articleNumber 商品货号
+     * @param page          页数
+     * @param pageSize      每页大小
      * @return
      */
-    @RequestMapping(value = "/selectGoods",method = RequestMethod.GET)
-    public PageVO<GoodsVO> showSelectGoods(@RequestParam(required = false)Long goodsTypeId,
-                                           @RequestParam(required = false)Boolean state,
-                                           @RequestParam(required = false)String title,
+    @RequestMapping(value = "/selectGoods", method = RequestMethod.GET)
+    public PageVO<GoodsVO> showSelectGoods(@RequestParam(required = false) Long goodsTypeId,
+                                           @RequestParam(required = false) Boolean state,
+                                           @RequestParam(required = false) String title,
                                            @RequestParam(required = false) String articleNumber,
                                            int page, int pageSize) {
-        Page<Goods> goodsList =  this.goodsService.selectGoods(goodsTypeId,state,title,articleNumber,page,pageSize);
+        Page<Goods> goodsList = this.goodsService.selectGoods(goodsTypeId, state, title, articleNumber, page, pageSize);
         PageVO<GoodsVO> voPage = new PageVO<>();
         voPage.toPage(goodsList);
         voPage.setItems(GoodsVO.generateBy(goodsList.getContent()));
@@ -44,10 +45,30 @@ public class GoodsRESTController {
 
     /**
      * 通过传入商品id删除商品
-     * @param ids               删除商品集合的字符串
+     * @param ids 删除商品集合的字符串
      */
-    @RequestMapping(value = "/deleteSomeGoods",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteSomeGoods", method = RequestMethod.GET)
     public void deleteSomeGoods(String ids) {
         this.goodsService.deleteSomeGoods(ids);
     }
+
+    /**
+     * 改变选择商品状态
+     * @param ids   选择商品id
+     * @param state 需要改成的状态
+     */
+    @RequestMapping(value = "/changeSomeGoods", method = RequestMethod.GET)
+    public void changeSomeGoods(String ids, Boolean state) {
+        this.goodsService.changeGoodsState(ids, state);
+    }
+
+    /**
+     * 修改商品信息
+     * @param goods             传入商品
+     */
+    @RequestMapping(value = "/updateGoods", method = RequestMethod.GET)
+    public void updateGoods(Goods goods) {
+        this.goodsService.saveGoods(goods);
+    }
+
 }

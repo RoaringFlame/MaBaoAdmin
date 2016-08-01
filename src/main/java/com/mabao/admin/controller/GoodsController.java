@@ -58,7 +58,15 @@ public class GoodsController {
         List<Selector> state = State.toList();
         map.put("state",state);
         model.addAllAttributes(map);
-        return "goodsList";
+        return "goods_list_managed";
     }
 
+    /**
+     * 新建应该商品
+     * @param goods         传入的商品
+     */
+    @RequestMapping(value = "/newGoods", method = GET)
+    public void newGoods(Goods goods) {
+        this.goodsService.newGoods(goods);
+    }
 }

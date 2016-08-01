@@ -22,7 +22,7 @@ public interface UserService {
      *得到所有用户信息
      * @return
      */
-    List<User> getAll();
+    List<User> getAllUser();
 
     /**
      * 修改用户信息
