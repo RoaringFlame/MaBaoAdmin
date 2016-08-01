@@ -130,7 +130,7 @@
 
             <div class="btn-toolbar ">
                 <div class="dropdown btn-group navbar-nav pull-right ">
-                    <a class="btn btn-default">
+                    <a class="btn btn-default" id="delBtn">
                         删除
                     </a>
                 </div>
@@ -193,7 +193,7 @@
 
                 <tbody>
 
-                <tr class="odd gradeX">
+                <tr class="odd gradeX" id="delMsg">
 
                     <td>
                         <label>
@@ -248,6 +248,15 @@
 
     </div>
 
+    <!--分页-->
+    <div style="text-align:center">
+        <input type=button id="btn1" value="首页" >
+        <input type=button id="btn2" value="上一页">
+        <input type=button id="btn3" value="下一页" >
+        <input type=button id="btn4" value="尾页" >
+    </div>
+    <!--分页end-->
+
 </div>
 <!--面板END-->
 
@@ -290,6 +299,9 @@
     </div>
 </div>
 <!--商品类型表单END-->
+
+
+
 
 <script src="script/lib/jquery.1.10.2.js"></script>
 

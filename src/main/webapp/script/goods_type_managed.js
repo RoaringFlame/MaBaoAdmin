@@ -60,7 +60,19 @@ $(function () {
 
     //删除相关
     function  initDelete(){
+        //var checkAll=$().checked();//选中所有
+
+
         //如果没有选中项提示没有选中不能删除
+        $("#delBtn").click(function () {
+            var checkOne=$("#tableListForm").find("input[name='allCheck']").is(":checked");//选中一项
+            //获取选中项
+            if(checkOne==true){
+                $("#delMsg").remove();
+            }else{
+                alert("请至少选择一项才能删除！");
+            }
+        })
 
     }
 
@@ -125,8 +137,10 @@ $(function () {
         initCheckBoxAll();
         //初始化新建表單
         initCreateNew();
-        //按钮点击表单事件
-        initChangeBtn();
+        ////按钮点击表单事件
+        //initChangeBtn();
+        //删除按钮
+        initDelete();
     }
 
     //调用初始化函数
