@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.mabaoadmin.controller")
+@ComponentScan("com.mabao.admin.controller")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean

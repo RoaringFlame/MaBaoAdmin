@@ -1,0 +1,39 @@
+@charset "utf-8";
+.navbar-form {
+    padding: 0;
+    margin-top: 0;
+}
+
+/*布局*/
+.text-indent-1 {
+    text-indent: 10px;
+}
+.sidebar-box{
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.first-level-menu{
+    /*background-color: #f5f5f5;*/
+}
+.second-level-menu{
+    background-color: #fff;
+}
+.label-half {
+    width: 48%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
+.form-label label{
+    width: 210px;
+}
+/*颜色*/
+.red {
+    color: #d9534f;
+}
