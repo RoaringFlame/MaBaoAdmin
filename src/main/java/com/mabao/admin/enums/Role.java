@@ -21,7 +21,7 @@ public enum Role {
 
     public static List<Selector> toList() {
         List<Selector> list = new ArrayList<Selector>();
-        for (State v: State.values()) {
+        for (GoodsState v: GoodsState.values()) {
             list.add(new Selector(v.name(), v.getText()));
         }
         return list;
