@@ -27,4 +27,6 @@ public interface UserRepository extends BaseRepository<User> {
      * @return                  用户对象
      */
     User findByEmail(String email);
+
+
 }
