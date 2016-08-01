@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: maxu
@@ -80,19 +82,18 @@
 <!-- 顶部导航END -->
 
 
-
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
     <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-        <li class="first-level-menu" >
-            <a  href="index.html">首页</a>
+        <li class="first-level-menu">
+            <a href="index.html">首页</a>
         </li>
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
                aria-expanded="false">商品管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
-                <li><a href="goods_list_managed.html">商品列表</a></li>
+                <li><a href="goods">商品列表</a></li>
                 <li><a href="goods_type_managed.html">商品分类</a></li>
             </ul>
         </li>
@@ -152,11 +153,6 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li>
-                            <a data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                                修改
-                            </a>
-                        </li>
                         <li><a href="#">删除</a></li>
                         <li><a href="#">上架</a></li>
                         <li><a href="#">下架</a></li>
@@ -184,13 +180,9 @@
                         <label for="goodsType"></label>
                         <select name="goodsType" class="form-control" id="goodsType">
                             <option value="" selected="selected">所有类别</option>
-                            <%--<option value="">婴儿车</option>--%>
-                            <%--<option value="">安全座椅</option>--%>
-                            <%--<option value="-" >玩具</option>--%>
-                            <%--<option value="-">家具家电</option>--%>
-                            <%--<option value="-">服饰鞋帽</option>--%>
-                            <%--<option value="-">图书回本</option>--%>
-                            <%--<option value="-">其他</option>--%>
+                            <c:forEach items="${goodsType}" var="type">
+                                <option value="type.key">${type.value}</option>
+                            </c:forEach>
                         </select>
 
                     </div>
@@ -198,8 +190,9 @@
                         <label for="goodsPublish"></label>
                         <select name="" class="form-control" id="goodsPublish">
                             <option selected="selected" value="">全部</option>
-                            <%--<option value="">上架</option>--%>
-                            <%--<option value="">下架</option>--%>
+                            <c:forEach var="goodsState" items="${state}">
+                                <option value="state.key">${goodsState.value}</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
@@ -243,193 +236,44 @@
 
                     <th>库存</th>
 
+                    <th>编辑</th>
+
                 </tr>
 
                 </thead>
 
                 <tbody>
-
-                <tr id="backGoods" class="odd gradeX" style="display: none">
-
-                    <td>
-                        <label>
-                            <input name="goodsCheckBox" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <th>1</th>
-
-                    <td>2015-04-21 19：00</td>
-
-                    <td>玩具</td>
-
-                    <td>奥特曼</td>
-
-                    <td>AJ0001</td>
-
-                    <td>100.00</td>
-
-                    <td>等待</td>
-
-                    <td>100</td>
-
-                </tr>
-                <div id="newGoodsContainer"></div>
+                <c:forEach var="goods" items="${allGoods}">
                 <tr class="odd gradeX">
 
-                    <td>
+                    <td class="check">
                         <label>
                             <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
 
-                    <td>2</td>
+                    <th>${goods.id}</th>
 
-                    <td>2016/07/22 9：06</td>
+                    <td>${goods.upTime}</td>
 
-                    <td>婴儿车</td>
+                    <td>${goods.typeName}</td>
 
-                    <td>高级扶手婴儿车</td>
+                    <td>${goods.title}</td>
 
-                    <td>SK0001</td>
+                    <td>${goods.articleNumber}</td>
 
-                    <td>90.00</td>
+                    <td>${goods.price}</td>
 
-                    <td>等待</td>
+                    <td>${goods.state?'上架':'下架'}</td>
 
-                    <td>78</td>
+                    <td>${goods.stockNumber}</td>
 
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
+                    <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
                     </td>
 
-                    <td>3</td>
-
-                    <td>2016/07/22 9：06</td>
-
-                    <td>婴儿车</td>
-
-                    <td>高级扶手婴儿车</td>
-
-                    <td>SK0001</td>
-
-                    <td>90.00</td>
-
-                    <td>等待</td>
-
-                    <td>78</td>
-
                 </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>4</td>
-
-                    <td>2016/07/22 9：06</td>
-
-                    <td>婴儿车</td>
-
-                    <td>高级扶手婴儿车</td>
-
-                    <td>SK0001</td>
-
-                    <td>90.00</td>
-
-                    <td>等待</td>
-
-                    <td>78</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>5</td>
-
-                    <td>2016/07/22 9：06</td>
-
-                    <td>婴儿车</td>
-
-                    <td>高级扶手婴儿车</td>
-
-                    <td>SK0001</td>
-
-                    <td>90.00</td>
-
-                    <td>等待</td>
-
-                    <td>78</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>6</td>
-
-                    <td>2016/07/22 9：06</td>
-
-                    <td>婴儿车</td>
-
-                    <td>高级扶手婴儿车</td>
-
-                    <td>SK0001</td>
-
-                    <td>90.00</td>
-
-                    <td>等待</td>
-
-                    <td>78</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>7</td>
-
-                    <td>2016/07/22 9：06</td>
-
-                    <td>婴儿车</td>
-
-                    <td>高级扶手婴儿车</td>
-
-                    <td>SK0001</td>
-
-                    <td>90.00</td>
-
-                    <td>等待</td>
-
-                    <td>78</td>
-
-                </tr>
+                </c:forEach>
 
             </table>
             <!--表格END-->
@@ -450,7 +294,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">商品详情</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="frmGoods">
                     <div class="form-group ">
                         <label for="goodsNameForm" class="control-label  label-half ">商品名称:
                             <input type="text" class="form-control" id="goodsNameForm">
