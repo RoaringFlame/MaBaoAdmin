@@ -6,6 +6,8 @@ import com.mabao.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,6 +25,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public List<User> getAll() {
+        return this.userRepository.findAll();
+    }
+
     /**
      * 修改用户信息
      * @param user                  用户
@@ -31,6 +38,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user) {
         return this.userRepository.saveAndFlush(user);
+    }
+
+    /**
+     * 增加用户信息
+     * @param user              用户
+     * @return                  增加的用户
+     */
+    @Override
+    public User newUser(User user) {
+        return this.userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        this.userRepository.delete(userId);
+    }
+
+    @Override
+    public void deleteSomeUser(String userIds) {
+        String[] ids = userIds.split(",");
+        for(String id:ids) {
+            this.userRepository.delete(Long.valueOf(id));
+        }
     }
 
 }
