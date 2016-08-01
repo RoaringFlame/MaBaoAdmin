@@ -1,6 +1,7 @@
 package com.mabao.admin.service;
 
 import com.mabao.admin.controller.vo.GoodsVO;
+import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsType;
@@ -53,7 +54,7 @@ public interface GoodsService {
      * 删除商品
      * @param goodsId               删除商品的id
      */
-    void deleteGoods(Long goodsId);
+    JsonResultVO deleteGoods(Long goodsId);
 
 
     /**
@@ -74,12 +75,12 @@ public interface GoodsService {
      * 删除选中的商品
      * @param ids               多个商品id的字符串
      */
-    void deleteSomeGoods(String ids);
+    JsonResultVO deleteSomeGoods(String ids);
 
     /**
      * 根据穿额度状态改变一些商品的状态
      * @param ids               需要改变状态商品的id集合字符串
      * @param state             需要改成的状态值
      */
-    void changeGoodsState(String ids,Boolean state);
+    JsonResultVO changeGoodsState(String ids, Boolean state);
 }

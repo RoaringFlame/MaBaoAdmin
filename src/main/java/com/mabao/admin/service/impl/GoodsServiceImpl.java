@@ -1,6 +1,7 @@
 package com.mabao.admin.service.impl;
 
 import com.mabao.admin.controller.vo.GoodsVO;
+import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsType;
@@ -72,8 +73,13 @@ public class GoodsServiceImpl implements GoodsService {
      * @param goodsId               删除商品的id
      */
     @Override
-    public void deleteGoods(Long goodsId) {
-        this.goodsRepository.delete(goodsId);
+    public JsonResultVO deleteGoods(Long goodsId) {
+        try{
+            this.goodsRepository.delete(goodsId);
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"成功删除！");
     }
 
 
@@ -97,22 +103,32 @@ public class GoodsServiceImpl implements GoodsService {
      * @param ids               多个商品id的字符串
      */
     @Override
-    public void deleteSomeGoods(String ids) {
-        String[] strs = ids.split(",");
-        for(String goodsId:strs) {
-            this.goodsRepository.delete(Long.decode(goodsId));
+    public JsonResultVO deleteSomeGoods(String ids) {
+        try{
+            String[] strs = ids.split(",");
+            for(String goodsId:strs) {
+                this.goodsRepository.delete(Long.decode(goodsId));
+            }
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"成功删除！");
     }
 
     @Override
-    public void changeGoodsState(String ids, Boolean state) {
-        Goods goods;
-        String[] strs = ids.split(",");
-        for(String goodsId:strs) {
-            goods = this.goodsRepository.findOne(Long.valueOf(goodsId));
-            goods.setState(state);
-            this.goodsRepository.saveAndFlush(goods);
+    public JsonResultVO changeGoodsState(String ids, Boolean state) {
+        try{
+            Goods goods;
+            String[] strs = ids.split(",");
+            for(String goodsId:strs) {
+                goods = this.goodsRepository.findOne(Long.valueOf(goodsId));
+                goods.setState(state);
+                this.goodsRepository.saveAndFlush(goods);
+            }
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
+       return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
     }
 
 

@@ -1,6 +1,7 @@
 package com.mabao.admin.controller.rest;
 
 import com.mabao.admin.controller.vo.GoodsVO;
+import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsType;
@@ -48,8 +49,8 @@ public class GoodsRESTController {
      * @param ids 删除商品集合的字符串
      */
     @RequestMapping(value = "/deleteSomeGoods", method = RequestMethod.GET)
-    public void deleteSomeGoods(String ids) {
-        this.goodsService.deleteSomeGoods(ids);
+    public JsonResultVO deleteSomeGoods(String ids) {
+        return this.goodsService.deleteSomeGoods(ids);
     }
 
     /**
@@ -58,8 +59,8 @@ public class GoodsRESTController {
      * @param state 需要改成的状态
      */
     @RequestMapping(value = "/changeSomeGoods", method = RequestMethod.GET)
-    public void changeSomeGoods(String ids, Boolean state) {
-        this.goodsService.changeGoodsState(ids, state);
+    public JsonResultVO changeSomeGoods(String ids, Boolean state) {
+        return this.goodsService.changeGoodsState(ids, state);
     }
 
     /**
@@ -67,8 +68,8 @@ public class GoodsRESTController {
      * @param goods             传入商品
      */
     @RequestMapping(value = "/updateGoods", method = RequestMethod.GET)
-    public void updateGoods(Goods goods) {
-        this.goodsService.saveGoods(goods);
+    public Goods updateGoods(Goods goods) {
+        return this.goodsService.saveGoods(goods);
     }
 
 }
