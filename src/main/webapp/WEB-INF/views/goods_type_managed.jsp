@@ -137,9 +137,7 @@
 
                 <div class="btn-toolbar " id="createNew">
                     <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            新建
-                        </a>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新建</a>
                     </div>
                 </div>
             </div>
@@ -209,9 +207,7 @@
 
                     <td>个</td>
 
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
 
 
                 </tr>
@@ -234,9 +230,7 @@
 
                     <td>个</td>
 
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
 
                 </tr>
 

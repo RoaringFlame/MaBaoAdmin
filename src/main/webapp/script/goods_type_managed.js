@@ -34,21 +34,23 @@ $(function () {
             var info=$("#createNew").find("a").text();
             if(info=="新建"){
                 $("#exampleModal").find("input,textarea").val("");
+                //新建页面点击取消按钮的控制
+                $("#dismiss-btn").click(function (){
+                    $("#exampleModal").find("input,textarea").val("");
+                });
+                //新建页面点击提交按钮的控制
+                //$("#submit-btn").click(function (){
+                //    $.get("url",params,function(data){
+                //        if(createNewForm!=""&&num!=""&&title!=""){
+                //            initGoodsTypeList();
+                //        }else{
+                //            alert("请将信息填写完整！");
+                //        }
+                //    })
+                //});
             }
         });
 
-        $("#dismiss-btn").click(function (){
-            $("#exampleModal").find("input,textarea").val("");
-        });
-        $("#submit-btn").click(function (){
-            $.get("url",params,function(data){
-                if(createNewForm!=""&&num!=""&&title!=""){
-                    initGoodsTypeList();
-                }else{
-                    alert("请将信息填写完整！");
-                }
-            })
-        });
     }
 
     //修改相关
@@ -56,6 +58,7 @@ $(function () {
         //获取到选中项的值并展示，取消时值不变原样返回，点击保存就提示是否修改，修改完成后显示
         //如果没有选中项提示没有选中不能修改
         //如果选中多项提示只能单项修改
+        
     }
 
     //删除相关
