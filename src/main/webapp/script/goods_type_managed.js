@@ -31,13 +31,14 @@ $(function () {
         //    title:title
         //}
         $("#createNew").find("a").click(function(){
-            if("a.val()==新建"){
-                $("#exampleModal").find("input").val("");
+            var info=$("#createNew").find("a").text();
+            if(info=="新建"){
+                $("#exampleModal").find("input,textarea").val("");
             }
         });
 
         $("#dismiss-btn").click(function (){
-            $("#exampleModal").find("input").val("");
+            $("#exampleModal").find("input,textarea").val("");
         });
         $("#submit-btn").click(function (){
             $.get("url",params,function(data){

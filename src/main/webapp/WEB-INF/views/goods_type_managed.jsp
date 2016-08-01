@@ -130,19 +130,9 @@
 
             <div class="btn-toolbar ">
                 <div class="dropdown btn-group navbar-nav pull-right ">
-                    <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="true">
-                        编辑
-                        <span class="caret"></span>
+                    <a class="btn btn-default">
+                        删除
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li>
-                            <a data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                                修改
-                            </a>
-                        </li>
-                        <li><a href="#"><i class="icon-trash"></i>删除</a></li>
-                    </ul>
                 </div>
 
                 <div class="btn-toolbar " id="createNew">
@@ -195,6 +185,8 @@
 
                     <th>数量单位</th>
 
+                    <th>编辑</th>
+
                 </tr>
 
                 </thead>
@@ -217,25 +209,14 @@
 
                     <td>个</td>
 
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
-                        </label>
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
                     </td>
 
-                    <td>2</td>
-
-                    <td>玩具</td>
-
-                    <td>1</td>
-
-                    <td>个</td>
 
                 </tr>
+
+
 
                 <tr class="odd gradeX">
 
@@ -252,6 +233,10 @@
                     <td>1</td>
 
                     <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
 
                 </tr>
 
