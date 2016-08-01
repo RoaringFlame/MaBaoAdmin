@@ -1,6 +1,10 @@
 package com.mabao.admin.repository;
 
+import com.mabao.admin.controller.vo.GoodsVO;
+import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
+import com.mabao.admin.pojo.GoodsType;
+import com.mabao.admin.util.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -34,7 +38,7 @@ public interface GoodsRepository extends BaseRepository<Goods> {
      * @param goodsIdList       商品ID集合
      * @return                  商品List
      */
-    List<Goods> findByIdIn(List<Long> goodsIdList);
+    List<Goods> findByIdIn(String goodsIdList);
 
     /**
      * 商品查询，（商品类型，关键字）
@@ -44,4 +48,24 @@ public interface GoodsRepository extends BaseRepository<Goods> {
      * @return                      商品page
      */
     Page<Goods> findByTitleLikeAndTypeIdAndState(String title, Long goodsTypeId, Boolean state, Pageable pageable);
+
+
+
+    /**
+     * 根据需求查询商品
+     * @param TypeId                       商品类别
+     * @param state                         商品状态
+     * @param title                         商品名称
+     * @param articleNumber                 商品货号
+     * @param pageable                          页数
+     * @return
+     */
+    Page<Goods> findByTypeIdAndStateAndTitleAndArticleNumber(Long TypeId, Boolean state, String title, String articleNumber,Pageable pageable);
+
+    /**
+     * 分页查询所有商品
+     * @param pageable              分页
+     * @return
+     */
+    Page<Goods> findAll(Pageable pageable);
 }
