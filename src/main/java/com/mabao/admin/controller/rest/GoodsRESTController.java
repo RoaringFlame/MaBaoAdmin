@@ -2,26 +2,16 @@ package com.mabao.admin.controller.rest;
 
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
-import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
-import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.GoodsTypeService;
 import com.mabao.admin.util.PageVO;
-import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/goods")
@@ -75,41 +65,52 @@ public class GoodsRESTController {
     }
 
     /**
+     * 获得商品信息
+     * @param goodsId
+     * @return
+     */
+    @RequestMapping(value = "/getGoods", method = GET)
+    public GoodsInVO getGoods(@PathVariable Long goodsId) {
+        return GoodsInVO.generateBy(this.goodsService.get(goodsId));
+    }
+
+    /**
      * 修改商品信息
-     * @param goods             传入商品
+     * @param goodsInVO             传入商品
      */
     @RequestMapping(value = "/updateGoods", method = RequestMethod.GET)
-    public Goods updateGoods(Goods goods) {
-        return this.goodsService.saveGoods(goods);
+    public Goods updateGoods(GoodsInVO goodsInVO) {
+        return this.goodsService.saveGoods(goodsInVO);
     }
 
 
     /**
      * 获得所有商品信息
-     * @param   model         map
+     * @param page
+     * @param pageSize
      * @return
      */
-    @RequestMapping(method = GET)
-    public JsonResultVO goodsList(int page, int pageSize,Model model) {
+    @RequestMapping(value = "/GoodsList",method = GET)
+    public PageVO<GoodsVO> goodsList(int page, int pageSize) {
+        Page<Goods> pageGoods = this.goodsService.getAllGoods(page,pageSize);
+        PageVO<GoodsVO> voPage = new PageVO<>();
+        voPage.toPage(pageGoods);
+        voPage.setItems(GoodsVO.generateBy(pageGoods.getContent()));
+        return voPage;
+    }
+
+    /**
+     * 添加商品
+     * @param goodsVO
+     * @return
+     */
+    @RequestMapping(value = "/addGoods",method = POST)
+    public JsonResultVO addGoods(GoodsInVO goodsVO) {
         try{
-            Map<String,Object> map = new HashMap<>();
-            //获得所有商品的类别
-            List<Selector> goodsTypeList = this.goodsTypeService.getAllGoodsTypeForSelector();
-            map.put("goodsType",goodsTypeList);
-            //商品的状态
-            List<Selector> state = State.toList();
-            map.put("state",state);
-            //获得所有商品的信息
-            Page<Goods> goodsList = this.goodsService.getAllGoods(page,pageSize);
-            map.put("allGoods",goodsList);
-            model.addAllAttributes(map);
+           this.goodsService.newGoods(goodsVO);
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
-        return new JsonResultVO(JsonResultVO.SUCCESS,"显示成功！");
-
-
-
+        return new JsonResultVO(JsonResultVO.SUCCESS,"添加成功！");
     }
-
 }
