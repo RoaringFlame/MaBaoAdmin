@@ -30,7 +30,7 @@ public class GoodsVO {
         assert vo != null;
         vo.setState((goods.getState()==true)?"上架":"下架");
         vo.setTypeName(goods.getType().getTypeName());
-        vo.setArticleNumber(goods.getArticleNumber());
+        vo.setStockNumber(goods.getStockNumber());
         vo.setUptime(goods.getUpTime());
         return vo;
     }
