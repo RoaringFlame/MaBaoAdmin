@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <%--
   Created by IntelliJ IDEA.
   User: maxu
@@ -11,6 +15,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -290,41 +295,41 @@
                 <form id="frmGoods">
                     <div class="form-group ">
                         <label for="goodsNameForm" class="control-label  label-half ">商品名称:
-                            <input type="text" class="form-control" id="goodsNameForm">
+                            <input type="text" class="form-control" id="goodsNameForm" name="title">
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsPriceForm" class="control-label  label-half">商品价格:
-                            <input type="text" class="form-control" id="goodsPriceForm">
+                            <input type="text" class="form-control" id="goodsPriceForm" name="price">
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsAddForm" class="  control-label label-half ">所在地:
-                            <input type="text" class="form-control" id="goodsAddForm">
+                            <input type="text" class="form-control" id="goodsAddForm" name="">
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsDateForm" class="control-label  label-half ">购买日期:
-                            <input type="date" class="form-control" id="goodsDateForm">
+                            <input type="date" class="form-control" id="goodsDateForm" name="purchaseTime">
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsEndDateForm" class="control-label  label-half">保质期至:
-                            <input type="date" class="form-control" id="goodsEndDateForm">
+                            <input type="date" class="form-control" id="goodsEndDateForm" name="releaseTime">
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsDegreeForm" class="control-label  label-half">新旧程度:
-                            <input type="text" class="form-control" id="goodsDegreeForm">
+                            <input type="text" class="form-control" id="goodsDegreeForm" name="newDegree">
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsInfoForm" class="control-label label-half ">商品介绍:
-                            <textarea class="form-control" id="goodsInfoForm"></textarea>
+                            <textarea class="form-control" id="goodsInfoForm" name="goodsIntroduction"></textarea>
                         </label>
                         <span class="red ">*</span>
                         <label for="goodsDetailForm" class="control-label  label-half">妈咪说:
-                            <textarea class="form-control" id="goodsDetailForm"></textarea>
+                            <textarea class="form-control" id="goodsDetailForm" name="message"></textarea>
                         </label>
 
                         <label class="label-half">
