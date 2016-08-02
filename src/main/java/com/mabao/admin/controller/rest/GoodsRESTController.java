@@ -4,6 +4,7 @@ import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.GoodsInitVO;
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
+import com.mabao.admin.enums.GoodsState;
 import com.mabao.admin.enums.Quality;
 import com.mabao.admin.enums.Role;
 import com.mabao.admin.pojo.Goods;
@@ -134,9 +135,9 @@ public class GoodsRESTController {
         //新旧级别
          List<Selector>  newDegreeList = Quality.toList();
         goodsInitVO.setNewDegreeList(newDegreeList);
-        //用户角色
-        List<Selector>  roleList = Role.toList();
-        goodsInitVO.setRoleList(roleList);
+        //商品上下架状态
+        List<Selector>  stateList = GoodsState.toList();
+        goodsInitVO.setRoleList(stateList);
         return goodsInitVO;
     }
 }
