@@ -28,6 +28,7 @@ public class GoodsInVO {
     public static GoodsInVO generateBy(Goods goods){
         GoodsInVO vo = VoUtil.copyBasic(GoodsInVO.class, goods);
         assert vo != null;
+        vo.setNewDegree(goods.getNewDegree());
         vo.setUser_id(goods.getUser().getId());
         vo.setPurchaseTime(goods.getUpTime());
         vo.setReleaseTime(goods.getUpTime());
@@ -42,6 +43,13 @@ public class GoodsInVO {
         return list;
     }
 
+    public Quality getNewDegree() {
+        return newDegree;
+    }
+
+    public void setNewDegree(Quality newDegree) {
+        this.newDegree = newDegree;
+    }
 
     public Long getId() {
         return id;
@@ -66,15 +74,6 @@ public class GoodsInVO {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
-
-    public Quality getNewDegree() {
-        return newDegree;
-    }
-
-    public void setNewDegree(Quality newDegree) {
-        this.newDegree = newDegree;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -115,3 +114,4 @@ public class GoodsInVO {
         this.goodsIntroduction = goodsIntroduction;
     }
 }
+
