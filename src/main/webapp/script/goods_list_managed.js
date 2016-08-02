@@ -62,6 +62,18 @@ $(function () {
         });
     }
 
+    //表单中新旧程度下拉框初始化
+    function initGoodsDegreeDropdown() {
+        $.get("/goods", {}, function (data) {
+            $(data.newDegreeList).each(function (index,degree) {
+                $("#goodsDegreeForm").append($("<option></option>")
+                    .val(degree.key)
+                    .text(degree.value)
+                );
+            });
+        });
+    }
+
     //商品列表初始化
     function initGoodsList() {
         var params = {
@@ -96,7 +108,6 @@ $(function () {
                         .show();
                 });
             });
-
         }
     }
 
@@ -118,8 +129,8 @@ $(function () {
             $("#goodsDateForm").val(data.purchaseTime);
             $("#goodsEndDateForm").val(data.releaseTime);
             $("#goodsDegreeForm").val(data.newDegree);
-            $("#goodsIntroduction").val(data.goodsIntroduction);
-            $("#message").val(data.message);
+            $("#goodsInfoForm").text(data.goodsIntroduction);
+            $("#goodsDetailForm").text(data.message);
         });
     }
 
@@ -167,7 +178,6 @@ $(function () {
         $.get("/goods/changeSomeGoods", {ids: goodsIds, state: false}, function () {
 
         });
-        window.location.reload();
     }
 
 
@@ -189,6 +199,8 @@ $(function () {
         //商品类型下拉框初始化
         initGoodsTypeDropdown();
         //商品状态下拉框初始化
+        //商品新旧程度下拉框初始化
+        initGoodsDegreeDropdown();
         //商品列表初始化
         initGoodsList();
         //点击搜索按钮事件
@@ -202,15 +214,20 @@ $(function () {
         });
 
         //点击商品详情表单取消按钮
-        goodsForm.find("button.btn.btn-default").click(function () {
+        $(".modal-footer .btn.btn-default").click(function () {
             cancelForm();                                                 //点击取消按钮清空表单
+        });
+
+        //点击表单右上角叉按钮
+        $(".modal-header button").click(function () {
+            cancelForm();                                                 //点击右上角叉按钮清空表单
         });
 
         //新建商品列表
         $(".btn-toolbar a").click(function () {
-            $(".modal-footer button:eq(2)").attr("disable", "true")
+            $(".modal-footer button:eq(2)").attr("disable", "true")        //点击新建按钮表单内第二个按钮隐藏且不可用
                 .hide();
-            $(".modal-footer button:eq(1)").attr("disable", "false")
+            $(".modal-footer button:eq(1)").attr("disable", "false")       //点击新建按钮表单内第一个按钮显示且可用
                 .show();
         });
 
@@ -227,17 +244,17 @@ $(function () {
         });
         //点击删除按钮
         deleteBtn.click(function () {
-            deleteGoods();
+            deleteGoods();             //点击删除按钮删除商品
         });
 
         //点击上架按钮
         onSellBtn.click(function () {
-            onSell();
+            onSell();                   //点击上架按钮商品状态变成上架
         });
 
         //点击下架按钮
         offSellBtn.click(function () {
-            offSell();
+            offSell();                   //点击下架按钮商品状态变成下架
         });
 
         //点击打印按钮

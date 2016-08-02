@@ -48,7 +48,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <img alt="Brand" src="#">
             </a>
             <!-- 商标END  -->
@@ -74,7 +74,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">admin <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">注销</a></li>
+                        <li><a href="login.html">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -90,9 +90,6 @@
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
     <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-        <li class="first-level-menu">
-            <a href="index.html">首页</a>
-        </li>
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
@@ -242,34 +239,34 @@
                 </thead>
 
                 <tbody class="container">
-                    <tr class="odd gradeX"  id="goodsContainer" style="display: none;">
-                        <td class="check">
-                            <label>
-                                <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                            </label>
-                        </td>
+                <tr class="odd gradeX" id="goodsContainer" style="display: none;">
+                    <td class="check">
+                        <label>
+                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
 
-                        <td>7</td>
+                    <td>7</td>
 
-                        <td>2016/07/22 9：06</td>
+                    <td>2016/07/22 9：06</td>
 
-                        <td>婴儿车</td>
+                    <td>婴儿车</td>
 
-                        <td>高级扶手婴儿车</td>
+                    <td>高级扶手婴儿车</td>
 
-                        <td>SK0001</td>
+                    <td>SK0001</td>
 
-                        <td>90.00</td>
+                    <td>90.00</td>
 
-                        <td>等待</td>
+                    <td>等待</td>
 
-                        <td>78</td>
+                    <td>78</td>
 
-                        <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            编辑
-                        </td>
+                    <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
 
-                    </tr>
+                </tr>
 
 
                 </tbody>
@@ -320,7 +317,8 @@
                         <span class="red">*</span>
 
                         <label for="goodsDegreeForm" class="control-label  label-half">新旧程度:
-                            <input type="text" class="form-control" id="goodsDegreeForm" name="newDegree">
+                            <select class="form-control" id="goodsDegreeForm"  name="newDegree" >
+                            </select>
                         </label>
                         <span class="red">*</span>
 
