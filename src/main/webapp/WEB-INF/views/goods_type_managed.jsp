@@ -147,7 +147,7 @@
 
         <!--功能操作END-->
 
-        <div class="panel-body">
+        <div class="panel-body" id="searchInput">
             <!--条件查询表单-->
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -155,13 +155,39 @@
                     <div class="form-group">
                         <label for="goodsType"></label>
                         <input type="text" class="form-control" id="goodsType" placeholder="商品类别"
-                               aria-describedby="basic-addon1">
+                               aria-describedby="basic-addon1" name="goodsTypeName">
                     </div>
 
                     <button id="searchByType" type="button" class="btn btn-default">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
+
+                <!--表格-->
+                <table class="table table-bordered table-striped" id="hideGoods" style="display: none">
+
+                    <tr class="odd gradeX">
+
+                        <td>
+                            <label>
+                                <input name="allCheck" type="checkbox" class="checkboxes" value="1"/>
+                            </label>
+                        </td>
+
+                        <td></td>
+
+                        <td></td>
+
+                        <td></td>
+
+                        <td></td>
+
+                        <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg">编辑</td>
+
+                    </tr>
+
+                </table>
+                <!--表格END-->
 
 
             <!--表格-->
@@ -190,91 +216,6 @@
                 </thead>
 
                 <tbody>
-
-                <tr class="odd gradeX" id="delMsg">
-
-                    <td>
-                        <label>
-                            <input name="allCheck" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>1</td>
-
-                    <td>玩具</td>
-
-                    <td>1</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg">编辑</td>
-
-
-                </tr>
-
-
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>3</td>
-
-                    <td>玩具</td>
-
-                    <td>1</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>3</td>
-
-                    <td>日用品</td>
-
-                    <td>12</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input name="allCheck"  type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>3</td>
-
-                    <td>文具</td>
-
-                    <td>1</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">编辑</td>
-
-                </tr>
-
-
 
                 </tbody>
 
@@ -309,13 +250,13 @@
                 <form id="createNewForm" class="col-md-offset-4 form-label" >
                     <div class="form-group  ">
                         <label for="assortmentForm" class="control-label text-left">分类名称:
-                            <input type="text" class="form-control" id="assortmentForm" name="assortmentForm">
+                            <input type="text" class="form-control" id="assortmentForm" name="typeName">
                         </label>
                         <span class="red ">*</span>
                     </div>
                     <div class="form-group ">
                         <label for="assortmentNum" class="  control-label text-left ">数量单位:
-                            <input type="text" class="form-control" id="assortmentNum" name="assortmentNum">
+                            <input type="text" class="form-control" id="assortmentNum" name="goodsTypeIntroduction">
                         </label>
                         <span class="red ">*</span>
                     </div>
