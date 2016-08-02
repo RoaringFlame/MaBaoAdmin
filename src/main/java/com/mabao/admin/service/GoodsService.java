@@ -1,6 +1,5 @@
 package com.mabao.admin.service;
 
-import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.Goods;
 import org.springframework.data.domain.Page;

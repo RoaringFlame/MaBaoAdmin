@@ -17,18 +17,18 @@ public class GoodsInVO {
     private Long id;                                //商品编号，自增
     private String title;                           //标题
     private Long user_id;                           //商品归属者编号，后台用户编号为0
-    private String newDegree;                      //新旧程度，0表示全新，95，80分别表示95成8成新
+    private Quality newDegree;                      //新旧程度，0表示全新，95，80分别表示95成8成新
     private String message;                         //卖家分享
     private Double price;                           //现价
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//存日期时使用
     private Date purchaseTime;                      //购买时间
     private Date releaseTime;                       //保质期时间
     private String  goodsIntroduction;              //商品介绍
-    
+
     public static GoodsInVO generateBy(Goods goods){
         GoodsInVO vo = VoUtil.copyBasic(GoodsInVO.class, goods);
         assert vo != null;
-        vo.setNewDegree(goods.getNewDegree().getText());
+        vo.setNewDegree(goods.getNewDegree());
         vo.setUser_id(goods.getUser().getId());
         vo.setPurchaseTime(goods.getUpTime());
         vo.setReleaseTime(goods.getUpTime());
@@ -43,11 +43,11 @@ public class GoodsInVO {
         return list;
     }
 
-    public String getNewDegree() {
+    public Quality getNewDegree() {
         return newDegree;
     }
 
-    public void setNewDegree(String newDegree) {
+    public void setNewDegree(Quality newDegree) {
         this.newDegree = newDegree;
     }
 
@@ -74,8 +74,6 @@ public class GoodsInVO {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
-
-
     public String getMessage() {
         return message;
     }
@@ -116,3 +114,4 @@ public class GoodsInVO {
         this.goodsIntroduction = goodsIntroduction;
     }
 }
+
