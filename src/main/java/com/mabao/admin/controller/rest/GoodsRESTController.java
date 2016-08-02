@@ -1,9 +1,6 @@
 package com.mabao.admin.controller.rest;
 
-import com.mabao.admin.controller.vo.GoodsInVO;
-import com.mabao.admin.controller.vo.GoodsInitVO;
-import com.mabao.admin.controller.vo.GoodsVO;
-import com.mabao.admin.controller.vo.JsonResultVO;
+import com.mabao.admin.controller.vo.*;
 import com.mabao.admin.enums.GoodsState;
 import com.mabao.admin.enums.Quality;
 import com.mabao.admin.enums.Role;
@@ -16,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -115,6 +114,10 @@ public class GoodsRESTController {
     @RequestMapping(value = "/addGoods",method = POST)
     public JsonResultVO addGoods(GoodsInVO goodsInVO) {
         try{
+
+          
+
+
            this.goodsService.newGoods(goodsInVO);
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
@@ -137,7 +140,7 @@ public class GoodsRESTController {
         goodsInitVO.setNewDegreeList(newDegreeList);
         //商品上下架状态
         List<Selector>  stateList = GoodsState.toList();
-        goodsInitVO.setRoleList(stateList);
+        goodsInitVO.setStateList(stateList);
         return goodsInitVO;
     }
 }
