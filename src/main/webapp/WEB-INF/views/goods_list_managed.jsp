@@ -243,38 +243,69 @@
                 </thead>
 
                 <tbody>
-                <c:forEach var="goods" items="${allGoods}">
-                <tr class="odd gradeX">
+<div>
+                    <tr class="odd gradeX"  id="goodsContainer" style="display: none;">
 
-                    <td class="check">
-                        <label>
-                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
+                        <td class="check">
+                            <label>
+                                <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                            </label>
+                        </td>
 
-                    <th>${goods.id}</th>
+                        <td>7</td>
 
-                    <td>${goods.upTime}</td>
+                        <td>2016/07/22 9：06</td>
 
-                    <td>${goods.typeName}</td>
+                        <td>婴儿车</td>
 
-                    <td>${goods.title}</td>
+                        <td>高级扶手婴儿车</td>
 
-                    <td>${goods.articleNumber}</td>
+                        <td>SK0001</td>
 
-                    <td>${goods.price}</td>
+                        <td>90.00</td>
 
-                    <td>${goods.state?'上架':'下架'}</td>
+                        <td>等待</td>
 
-                    <td>${goods.stockNumber}</td>
+                        <td>78</td>
 
-                    <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
+                        <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            编辑
+                        </td>
 
-                </tr>
-                </c:forEach>
+                    </tr>
+</div>
 
+                <div id="container">
+                    <tr class="odd gradeX">
+
+                        <td class="check">
+                            <label>
+                                <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                            </label>
+                        </td>
+
+                        <td>7</td>
+
+                        <td>2016/07/22 9：06</td>
+
+                        <td>婴儿车</td>
+
+                        <td>高级扶手婴儿车</td>
+
+                        <td>SK0001</td>
+
+                        <td>90.00</td>
+
+                        <td>等待</td>
+
+                        <td>78</td>
+
+                        <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            编辑
+                        </td>
+
+                    </tr>
+                </div>
             </table>
             <!--表格END-->
         </div>
@@ -342,7 +373,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-primary" >提交</button>
+                <button type="button" class="btn btn-primary" style="display: none">提交</button>
             </div>
         </div>
     </div>

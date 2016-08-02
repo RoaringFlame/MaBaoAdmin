@@ -10,9 +10,8 @@ $(function () {
     var printBtn = $("#tool li:eq(0)");                                   //获取打印按钮
     var exportExcelBtn = $("#tool li:eq(1)");                             //获取导出商品按钮
     var currentPage = 0;
-    var totalPage;
+    var totalPage = 10;
     var pageSize = 7;
-    var backGoods;
     var typeName;                                                        //商品类别
     var goodsPublish;                                                    //商品状态（是否上架）
     var goodsName;                                                       //商品名称
@@ -46,26 +45,23 @@ $(function () {
         var params = {
             page: currentPage,
             pageSize: pageSize,
-            typeName: typeName,
-            state: state,
-            title: goodsName,
-            articleNumber: goodsId
         };
         if (currentPage < totalPage) {
-            $.get("", params, function (data) {
-                var goodsList = data.items;
-                totalPage = data.totalPage;
+            $.get("/goods", params, function (data) {
+                var goodsList = data.allGoods.content();
+                console.log(goodsList);
                 $(goodsList).each(function (index, goods) {
-                    var goods = backGoods.clone();
-                    goods.find("th").text(goods.id);
-                    goods.find("td:eq(1)").text(goods.upTime);
-                    goods.find("td:eq(2)").text(goods.typeName);
-                    goods.find("td:eq(3)").text(goods.title);
-                    goods.find("td:eq(4)").text(goods.articleNumber);
-                    goods.find("td:eq(5)").text(goods.price);
-                    goods.find("td:eq(6)").text(goods.state == 1 ? "上架" : "下架");
-                    goods.find("td:eq(7)").text(goods.stockNumber);
-                    $("#newGoodsContainer").append(goods);
+                    var goodsInfo = $(".goodsContainer").clone();
+                    goodsInfo.find("tr").remove("display");
+                    goodsInfo.find("th").text(goods.id);
+                    goodsInfo.find("td:eq(1)").text(goods.upTime);
+                    goodsInfo.find("td:eq(2)").text(goods.typeName);
+                    goodsInfo.find("td:eq(3)").text(goods.title);
+                    goodsInfo.find("td:eq(4)").text(goods.articleNumber);
+                    goodsInfo.find("td:eq(5)").text(goods.price);
+                    goodsInfo.find("td:eq(6)").text(goods.state ? "上架" : "下架");
+                    goodsInfo.find("td:eq(7)").text(goods.stockNumber);
+                    $("#container").append(goodsInfo);
                 });
             });
 
@@ -74,12 +70,9 @@ $(function () {
 
     //根据条件搜索商品
     function searchGoods() {
-        $("#newGoodsContainer").empty();
-        currentPage = 0;
+        $("#container").empty();
         initGoodsList();
     }
-
-    //新建商品按钮
 
     //商品详情表单取消按钮
     function cancelForm() {
@@ -87,11 +80,15 @@ $(function () {
         goodsForm.find("textarea").val("");
     }
 
-    //商品详情页面提交按钮
+    //新增商品页面提交按钮
+    function newGoodsSubmit() {
+        goodsForm.attr({action:"",method:"post"});
+        goodsForm.submit();
+    }
 
     //修改商品表单初始化
     function initUpdateGoodsForm(goodsId) {
-        $.get("goods/getGoods", {goodsId:goodsId}, function (data) {
+        $.get("goods/getGoods", {goodsId: goodsId}, function (data) {
             console.log(data);
             $("#goodsNameForm").val(data.title);
             $("#goodsPriceForm").val(data.price);
@@ -100,6 +97,8 @@ $(function () {
         });
     }
 
+
+
     //删除商品
     function deleteGoods() {
         var goodsIds = "";
@@ -107,7 +106,7 @@ $(function () {
             var goodsId = $(this).parents("td.check").next("th:eq(0)").text();                              //获取checkbox所在行顺序
             goodsIds += goodsId + ",";
         });
-        $.get("/goods/deleteSomeGoods", {ids: goodsIds}, function () {
+        $.get("/goods/deleteSomeGoods", {ids: goodsIds},function () {
 
         });
 
@@ -137,11 +136,7 @@ $(function () {
         });
     }
 
-    //修改商品按钮
-    $("td.edit").click(function(){
-        var goodsId=$(this).prevAll("th").text();
-        initUpdateGoodsForm(goodsId);
-    });
+
     //打印按钮
 
     //导出Excel按钮
@@ -150,9 +145,6 @@ $(function () {
         window.location = "/goodsManager/export/dataGoods?typeName=" + typeName + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsId;
 
     }
-
-    //初始化编辑列表
-
 
     //表单校验
     function initForm() {
@@ -175,35 +167,57 @@ $(function () {
         goodsForm.find("button.btn.btn-default").click(function () {
             cancelForm();
         });
+        //新建商品列表
+        $(".btn-toolbar a").click(function(){
+            $(".modal-footer button:eq(2)").attr("disable","true")
+                .hide();
+            $(".modal-footer button:eq(1)").attr("disable","false")
+                .show();
+        });
 
         //点击商品详情表单提交按钮
+        $(".modal-footer button:eq(1)").click(function(){
+              alert("11");
+        });
 
 
-        //点击新建按钮
+        //修改商品按钮
+        $("td.edit").click(function () {
+            var goodsId = $(this).prevAll("th").text();
+            initUpdateGoodsForm(goodsId);
+            $(".modal-footer button:eq(1)").attr("disable","true")
+                .hide();
+            $(".modal-footer button:eq(2)").attr("disable","false")
+                .show();
+        });
 
-        //点击修改按钮
-
+        $(".modal-footer button:eq(2)").click(function(){
+            alert("22");
+        });
         //点击删除按钮
         deleteBtn.click(function () {
             deleteGoods();
         });
+
         //点击上架按钮
         onSellBtn.click(function () {
             onSell();
         });
+
         //点击下架按钮
         offSellBtn.click(function () {
             offSell();
         });
+
         //点击打印按钮
         printBtn.click(function () {
             alert("打印");
         });
+
         //点击导出按钮事件
         exportExcelBtn.click(function () {
             exportExcel();
         });
-
 
     }
 
