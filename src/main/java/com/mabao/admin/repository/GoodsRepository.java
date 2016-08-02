@@ -1,10 +1,6 @@
 package com.mabao.admin.repository;
 
-import com.mabao.admin.controller.vo.GoodsVO;
-import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
-import com.mabao.admin.pojo.GoodsType;
-import com.mabao.admin.util.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;

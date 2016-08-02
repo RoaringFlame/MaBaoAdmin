@@ -1,11 +1,8 @@
 package com.mabao.admin.service;
 
-import com.mabao.admin.controller.vo.GoodsVO;
+import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
-import com.mabao.admin.enums.State;
 import com.mabao.admin.pojo.Goods;
-import com.mabao.admin.pojo.GoodsType;
-import com.mabao.admin.util.PageVO;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -25,17 +22,17 @@ public interface GoodsService {
 
     /**
      * 保存商品
-     * @param goods        商品对象，需包含用户ID
+     * @param goodsInVO        商品对象，需包含用户ID
      * @return                保存的商品对象
      */
-    Goods saveGoods(Goods goods);
+    Goods saveGoods(GoodsInVO goodsInVO);
 
     /**
      * 新建商品
-     * @param goods         商品对象，需包含用户ID
+     * @param goodsInVO         商品对象，需包含用户ID
      * @return              保存的商品对象
      */
-    Goods newGoods(Goods goods);
+    Goods newGoods(GoodsInVO goodsInVO);
 
     /**
      * 获取所有商品信息

@@ -1,13 +1,8 @@
 package com.mabao.admin.service;
 
 
-import com.mabao.admin.controller.vo.GoodsVO;
-import com.mabao.admin.enums.State;
-import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.pojo.User;
-import com.mabao.admin.util.PageVO;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface UserService {
 
@@ -22,7 +17,7 @@ public interface UserService {
      *得到所有用户信息
      * @return
      */
-    List<User> getAllUser();
+    Page<User> getAllUser(int page,int pageSize);
 
     /**
      * 修改用户信息

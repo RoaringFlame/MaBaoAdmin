@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * Created by lies on 2016/7/27.
  */
-public enum State {
+public enum GoodsState {
     SHELVES("上架"),OFFSHELVE("下架");
     private String text;
-    State(String text){
+    GoodsState(String text){
         this.text=text;
     }
 
@@ -21,7 +21,7 @@ public enum State {
 
     public static List<Selector> toList() {
         List<Selector> list = new ArrayList<Selector>();
-        for (State v: State.values()) {
+        for (GoodsState v: GoodsState.values()) {
             list.add(new Selector(v.name(), v.getText()));
         }
         return list;
