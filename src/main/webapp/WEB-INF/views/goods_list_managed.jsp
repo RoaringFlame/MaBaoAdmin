@@ -153,9 +153,9 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="#">删除</a></li>
-                        <li><a href="#">上架</a></li>
-                        <li><a href="#">下架</a></li>
+                        <li><a>删除</a></li>
+                        <li><a>上架</a></li>
+                        <li><a>下架</a></li>
                     </ul>
                 </div>
 
@@ -180,9 +180,6 @@
                         <label for="goodsType"></label>
                         <select name="goodsType" class="form-control" id="goodsType">
                             <option value="" selected="selected">所有类别</option>
-                            <c:forEach items="${goodsType}" var="type">
-                                <option value="type.key">${type.value}</option>
-                            </c:forEach>
                         </select>
 
                     </div>
@@ -190,9 +187,6 @@
                         <label for="goodsPublish"></label>
                         <select name="" class="form-control" id="goodsPublish">
                             <option selected="selected" value="">全部</option>
-                            <c:forEach var="goodsState" items="${state}">
-                                <option value="state.key">${goodsState.value}</option>
-                            </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">

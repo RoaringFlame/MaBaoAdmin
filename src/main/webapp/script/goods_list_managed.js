@@ -38,9 +38,33 @@ $(function () {
         }
     }
 
+    //商品类别下拉框初始化
+    function initGoodsTypeDropdown() {
+        $.get("/goods/", {}, function (data) {
+            $(data).each(function (index,type) {
+                $("#goodsType").append($("<option></option>")
+                    .val(type.key)
+                    .text(type.value)
+                );
+            });
+        });
+    }
+
+    //商品状态下拉框初始化
+    function initGoodsStateDropdown() {
+        $.get("/goods/", {}, function (data) {
+            $(data).each(function (index,state) {
+                $("#goodsType").append($("<option></option>")
+                    .val(state.key)
+                    .text(state.value)
+                );
+            });
+        });
+    }
 
     //商品列表初始化
     function initGoodsList() {
+        //$(".container").empty();
         var params = {
             page: currentPage,
             pageSize: pageSize,
@@ -54,11 +78,11 @@ $(function () {
                     goodsInfo.show();
                     goodsInfo.find("td:eq(1)").text(goods.id);
                     goodsInfo.find("td:eq(2)").text(goods.upTime);
-                    goodsInfo.find("td:eq(3)").text(goods.typeId);
+                    goodsInfo.find("td:eq(3)").text(goods.typeName);
                     goodsInfo.find("td:eq(4)").text(goods.title);
                     goodsInfo.find("td:eq(5)").text(goods.articleNumber);
                     goodsInfo.find("td:eq(6)").text(goods.price);
-                    goodsInfo.find("td:eq(7)").text(goods.state ? "上架" : "下架");
+                    goodsInfo.find("td:eq(7)").text(goods.state);
                     goodsInfo.find("td:eq(8)").text(goods.stockNumber);
                     $(".container").append(goodsInfo);
                 });
@@ -67,11 +91,6 @@ $(function () {
         }
     }
 
-    //根据条件搜索商品
-    function searchGoods() {
-        $("#container").empty();
-        initGoodsList();
-    }
 
     //商品详情表单取消按钮
     function cancelForm() {
@@ -81,7 +100,7 @@ $(function () {
 
     //新增商品页面提交按钮
     function newGoodsSubmit() {
-        goodsForm.attr({action:"",method:"post"});
+        goodsForm.attr({action: "", method: "post"});
         goodsForm.submit();
     }
 
@@ -97,12 +116,12 @@ $(function () {
     }
 
 
-
     //删除商品
     function deleteGoods() {
         var goodsIds = "";
         $("input[name='checkBox']:checked").each(function () {                     //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("th:eq(0)").text();                              //获取checkbox所在行顺序
+            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();                              //获取checkbox所在行顺序
+            $(this).parents("tr").remove();
             goodsIds += goodsId + ",";
         });
         $.get("/goods/deleteSomeGoods", {ids: goodsIds},function () {
@@ -115,7 +134,10 @@ $(function () {
     function onSell() {
         var goodsIds = "";
         $("input[name='checkBox']:checked").each(function () {                     //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("th:eq(0)").text();                              //获取checkbox所在行顺序
+            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();
+            $(this).parents("td.check").nextAll("td:eq(6)").text("上架");
+            $(this).removeAttr("checked");
+            $("#selectAll").removeAttr("checked");
             goodsIds += goodsId + ",";
         });
         $.get("/goods/changeSomeGoods", {ids: goodsIds, state: true}, function () {
@@ -127,7 +149,10 @@ $(function () {
     function offSell() {
         var goodsIds = "";
         $("input[name='checkBox']:checked").each(function () {                     //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("th:eq(0)").text();                              //获取checkbox所在行顺序
+            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();
+            $(this).parents("td.check").nextAll("td:eq(6)").text("下架");
+            $(this).removeAttr("checked");
+            $("#selectAll").removeAttr("checked");
             goodsIds += goodsId + ",";
         });
         $.get("/goods/changeSomeGoods", {ids: goodsIds, state: false}, function () {
@@ -151,6 +176,9 @@ $(function () {
     }
 
     function init() {
+        //商品
+        //商品类型下拉框初始化
+        initGoodsTypeDropdown();
         //商品列表初始化
         initGoodsList();
         //点击搜索按钮事件
@@ -167,16 +195,16 @@ $(function () {
             cancelForm();
         });
         //新建商品列表
-        $(".btn-toolbar a").click(function(){
-            $(".modal-footer button:eq(2)").attr("disable","true")
+        $(".btn-toolbar a").click(function () {
+            $(".modal-footer button:eq(2)").attr("disable", "true")
                 .hide();
-            $(".modal-footer button:eq(1)").attr("disable","false")
+            $(".modal-footer button:eq(1)").attr("disable", "false")
                 .show();
         });
 
         //点击商品详情表单提交按钮
-        $(".modal-footer button:eq(1)").click(function(){
-              alert("11");
+        $(".modal-footer button:eq(1)").click(function () {
+            alert("11");
         });
 
 
@@ -184,13 +212,13 @@ $(function () {
         $("td.edit").click(function () {
             var goodsId = $(this).prevAll("th").text();
             initUpdateGoodsForm(goodsId);
-            $(".modal-footer button:eq(1)").attr("disable","true")
+            $(".modal-footer button:eq(1)").attr("disable", "true")
                 .hide();
-            $(".modal-footer button:eq(2)").attr("disable","false")
+            $(".modal-footer button:eq(2)").attr("disable", "false")
                 .show();
         });
 
-        $(".modal-footer button:eq(2)").click(function(){
+        $(".modal-footer button:eq(2)").click(function () {
             alert("22");
         });
         //点击删除按钮
