@@ -54,6 +54,21 @@ public class GoodsTypeRESTController {
     }
 
     /**
+     * 模糊查询商品类别
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/selectGoodsType",method = RequestMethod.GET)
+    public PageVO<GoodsTypeVO> selectGoodsType(String goodsTypeName,int page, int pageSize) {
+        Page<GoodsType> pageGoodsType =this.goodsTypeService.selectGoodsType(goodsTypeName,page,pageSize);
+        PageVO<GoodsTypeVO> voPage = new PageVO<>();
+        voPage.toPage(pageGoodsType);
+        voPage.setItems(GoodsTypeVO.generateBy(pageGoodsType.getContent()));
+        return  voPage;
+    }
+
+    /**
      * 新增商品类别
      * @param goodsTypeVO
      * @return               结果VO
@@ -68,7 +83,7 @@ public class GoodsTypeRESTController {
      * @return              结果VO
      */
     @RequestMapping(value = "/deleteGoodsType",method = RequestMethod.GET)
-    public JsonResultVO AddGoodsType(@RequestParam Long goodsTypeId) {
+    public JsonResultVO deleteGoodsType(@RequestParam Long goodsTypeId) {
         return this.goodsTypeService.deleteGoodsType(goodsTypeId);
     }
 

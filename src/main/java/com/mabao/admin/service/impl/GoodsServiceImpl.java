@@ -1,5 +1,6 @@
 package com.mabao.admin.service.impl;
 
+import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.enums.BabyType;
 import com.mabao.admin.enums.Quality;

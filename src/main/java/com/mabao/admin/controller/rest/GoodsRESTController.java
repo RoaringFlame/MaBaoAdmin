@@ -1,5 +1,6 @@
 package com.mabao.admin.controller.rest;
 
+import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.Goods;
@@ -50,7 +51,7 @@ public class GoodsRESTController {
      * @param ids 删除商品集合的字符串
      */
     @RequestMapping(value = "/deleteSomeGoods", method = RequestMethod.GET)
-    public JsonResultVO deleteSomeGoods(String ids) {
+    public JsonResultVO deleteSomeGoods(@RequestParam String ids) {
         return this.goodsService.deleteSomeGoods(ids);
     }
 
@@ -70,7 +71,7 @@ public class GoodsRESTController {
      * @return
      */
     @RequestMapping(value = "/getGoods", method = GET)
-    public GoodsInVO getGoods(@PathVariable Long goodsId) {
+    public GoodsInVO getGoods(@RequestParam Long goodsId) {
         return GoodsInVO.generateBy(this.goodsService.get(goodsId));
     }
 
