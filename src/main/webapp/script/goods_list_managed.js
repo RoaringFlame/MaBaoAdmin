@@ -50,16 +50,17 @@ $(function () {
                 var goodsList = data.items;
                 console.log(goodsList);
                 $(goodsList).each(function (index, goods) {
-                    var goodsInfo = $("#goodsContainer tr").clone();
-                    goodsInfo.find("th label").val(goods.id);
-                    goodsInfo.find("td:eq(1)").text(goods.upTime);
-                    goodsInfo.find("td:eq(2)").text(goods.typeId);
-                    goodsInfo.find("td:eq(3)").text(goods.title);
-                    goodsInfo.find("td:eq(4)").text(goods.articleNumber);
-                    goodsInfo.find("td:eq(5)").text(goods.price);
-                    goodsInfo.find("td:eq(6)").text(goods.state ? "上架" : "下架");
-                    goodsInfo.find("td:eq(7)").text(goods.stockNumber);
-                    $("#container").append(goodsInfo);
+                    var goodsInfo = $("#goodsContainer").clone();
+                    goodsInfo.show();
+                    goodsInfo.find("td:eq(1)").text(goods.id);
+                    goodsInfo.find("td:eq(2)").text(goods.upTime);
+                    goodsInfo.find("td:eq(3)").text(goods.typeId);
+                    goodsInfo.find("td:eq(4)").text(goods.title);
+                    goodsInfo.find("td:eq(5)").text(goods.articleNumber);
+                    goodsInfo.find("td:eq(6)").text(goods.price);
+                    goodsInfo.find("td:eq(7)").text(goods.state ? "上架" : "下架");
+                    goodsInfo.find("td:eq(8)").text(goods.stockNumber);
+                    $(".container").append(goodsInfo);
                 });
             });
 

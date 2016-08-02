@@ -242,9 +242,8 @@
 
                 </thead>
 
-                <tbody>
-                <div id="goodsContainer" style="display: none;">
-                    <tr class="odd gradeX">
+                <tbody class="container">
+                    <tr class="odd gradeX"  id="goodsContainer" style="display: none;">
                         <td class="check">
                             <label>
                                 <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
@@ -272,9 +271,8 @@
                         </td>
 
                     </tr>
-                </div>
 
-                <div id="container"></div>
+
                 </tbody>
             </table>
             <!--表格END-->

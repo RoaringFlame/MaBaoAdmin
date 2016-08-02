@@ -44,7 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setTitle(goodsInVO.getTitle());                                   //商品名称
         goods.setPrice(goodsInVO.getPrice());                                   //价格
-        goods.setNewDegree(Quality.valueOf(goodsInVO.getNewDegree()));                           //新旧级别
+        goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
 
         goods.setUser(this.userService.get(goodsInVO.getUser_id()));            //userId
@@ -72,7 +72,7 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setTitle(goodsInVO.getTitle());                                   //商品名称
         goods.setPrice(goodsInVO.getPrice());                                   //价格
-        goods.setNewDegree(Quality.valueOf(goodsInVO.getNewDegree()));          //新旧级别
+        goods.setNewDegree(goodsInVO.getNewDegree());          //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
 
         goods.setUser(this.userService.get(goodsInVO.getUser_id()));            //userId
