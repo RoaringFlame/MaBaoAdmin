@@ -4,24 +4,38 @@
     margin-top: 0;
 }
 
+.clear {
+    clear: both;
+}
+
 /*布局*/
 .text-indent-1 {
     text-indent: 10px;
 }
-.sidebar-box{
+
+.sidebar-box {
     margin-bottom: 20px;
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
-.first-level-menu{
+
+.first-level-menu {
     /*background-color: #f5f5f5;*/
 }
-.second-level-menu{
+.login{
+    width:400px;
+    margin: 200px auto;
+    height: auto;
+    padding:40px 40px 40px 15px ;
+    border: 1px solid #ddd;
+}
+.second-level-menu {
     background-color: #fff;
 }
+.login h4{padding-left: 30px; margin: 45px auto }
 .label-half {
     width: 48%;
     position: relative;
@@ -30,9 +44,30 @@
     padding-left: 10px;
     padding-bottom: 15px;
 }
-.form-label label{
+
+.select-right {
+    width: 30%;
+    float: left;
+    margin-right: 5px;
+}
+
+.form-label label {
     width: 210px;
 }
+
+.transfer-time label {
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    float: left;
+}
+
+.transfer-time input {
+    width: 30%;
+    float: left;
+}
+
 /*颜色*/
 .red {
     color: #d9534f;
