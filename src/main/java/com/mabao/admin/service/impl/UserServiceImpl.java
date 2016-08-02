@@ -4,7 +4,11 @@ import com.mabao.admin.pojo.User;
 import com.mabao.admin.repository.UserRepository;
 import com.mabao.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -23,6 +27,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public Page<User> getAllUser(int page, int pageSize) {
+        return this.userRepository.findAll(new PageRequest(page, pageSize));
+    }
+
     /**
      * 修改用户信息
      * @param user                  用户
@@ -31,6 +40,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user) {
         return this.userRepository.saveAndFlush(user);
+    }
+
+    /**
+     * 增加用户信息
+     * @param user              用户
+     * @return                  增加的用户
+     */
+    @Override
+    public User newUser(User user) {
+        return this.userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        this.userRepository.delete(userId);
+    }
+
+    @Override
+    public void deleteSomeUser(String userIds) {
+        String[] ids = userIds.split(",");
+        for(String id:ids) {
+            this.userRepository.delete(Long.valueOf(id));
+        }
     }
 
 }
