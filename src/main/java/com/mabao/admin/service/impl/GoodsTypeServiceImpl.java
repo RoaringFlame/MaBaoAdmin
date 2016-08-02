@@ -96,6 +96,13 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
         }
     }
 
+    /**
+     * 通过商品类别模糊查询
+     * @param goodsTypeName             类型名称
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @Override
     public Page<GoodsType> selectGoodsType(String goodsTypeName,int page, int pageSize) {
         return this.goodsTypeRepository.findByTypeNameLike(goodsTypeName,new PageRequest(page, pageSize));
