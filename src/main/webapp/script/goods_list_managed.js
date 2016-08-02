@@ -41,21 +41,19 @@ $(function () {
 
     //商品列表初始化
     function initGoodsList() {
-        getSearchItem();
         var params = {
             page: currentPage,
             pageSize: pageSize,
         };
         if (currentPage < totalPage) {
-            $.get("/goods", params, function (data) {
-                var goodsList = data.allGoods.content();
+            $.get("/goods/GoodsList", params, function (data) {
+                var goodsList = data.items;
                 console.log(goodsList);
                 $(goodsList).each(function (index, goods) {
-                    var goodsInfo = $(".goodsContainer").clone();
-                    goodsInfo.find("tr").remove("display");
-                    goodsInfo.find("th").text(goods.id);
+                    var goodsInfo = $("#goodsContainer tr").clone();
+                    goodsInfo.find("th label").val(goods.id);
                     goodsInfo.find("td:eq(1)").text(goods.upTime);
-                    goodsInfo.find("td:eq(2)").text(goods.typeName);
+                    goodsInfo.find("td:eq(2)").text(goods.typeId);
                     goodsInfo.find("td:eq(3)").text(goods.title);
                     goodsInfo.find("td:eq(4)").text(goods.articleNumber);
                     goodsInfo.find("td:eq(5)").text(goods.price);

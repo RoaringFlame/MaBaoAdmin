@@ -243,41 +243,8 @@
                 </thead>
 
                 <tbody>
-<div>
-                    <tr class="odd gradeX"  id="goodsContainer" style="display: none;">
-
-                        <td class="check">
-                            <label>
-                                <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
-                            </label>
-                        </td>
-
-                        <td>7</td>
-
-                        <td>2016/07/22 9：06</td>
-
-                        <td>婴儿车</td>
-
-                        <td>高级扶手婴儿车</td>
-
-                        <td>SK0001</td>
-
-                        <td>90.00</td>
-
-                        <td>等待</td>
-
-                        <td>78</td>
-
-                        <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            编辑
-                        </td>
-
-                    </tr>
-</div>
-
-                <div id="container">
+                <div id="goodsContainer" style="display: none;">
                     <tr class="odd gradeX">
-
                         <td class="check">
                             <label>
                                 <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
@@ -306,6 +273,9 @@
 
                     </tr>
                 </div>
+
+                <div id="container"></div>
+                </tbody>
             </table>
             <!--表格END-->
         </div>
@@ -373,7 +343,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" >提交</button>
+                <button type="button" class="btn btn-primary">提交</button>
                 <button type="button" class="btn btn-primary" style="display: none">提交</button>
             </div>
         </div>

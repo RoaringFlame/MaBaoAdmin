@@ -3,6 +3,7 @@ package com.mabao.admin.service.impl;
 import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.enums.BabyType;
+import com.mabao.admin.enums.Quality;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsBrand;
 import com.mabao.admin.repository.GoodsRepository;
@@ -43,7 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setTitle(goodsInVO.getTitle());                                   //商品名称
         goods.setPrice(goodsInVO.getPrice());                                   //价格
-        goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
+        goods.setNewDegree(Quality.valueOf(goodsInVO.getNewDegree()));                           //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
 
         goods.setUser(this.userService.get(goodsInVO.getUser_id()));            //userId
@@ -71,7 +72,7 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setTitle(goodsInVO.getTitle());                                   //商品名称
         goods.setPrice(goodsInVO.getPrice());                                   //价格
-        goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
+        goods.setNewDegree(Quality.valueOf(goodsInVO.getNewDegree()));          //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
 
         goods.setUser(this.userService.get(goodsInVO.getUser_id()));            //userId
