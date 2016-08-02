@@ -11,7 +11,7 @@ $(function () {
     //当前页面
     var page = 0;
     //每页展示的信息数目
-    var pageSize = 30;
+    var pageSize = 7;
     //总页数
     var totalPage = 1;
     //列表格式隐藏
@@ -24,29 +24,29 @@ $(function () {
     var unitOfQuantity;//数量单位
     var goodsTypeIntroduction;          //商品类型描述
     var goodsNumber;//商品数量
-    var checkedItems ;
+    var checkedItems;
     var goodsIds = "";  //存储选中项的id值
 
     //1,初始化新建商品类型
     function initCreateType() {
         var params = {
-            id:id,
+            id: id,
             typeName: type,
             unitOfQuantity: unitOfQuantity,
             goodsTypeIntroduction: goodsTypeIntroduction,
-            goodsNumber:goodsNumber
+            goodsNumber: goodsNumber
         };
 
         //判断点击按钮为新建
         $("#createNew").find("a").click(function () {
             //分类名称的获取
-            var typeNameList= createNewForm.find("input[name='typeName']").val();
+            var typeNameList = createNewForm.find("input[name='typeName']").val();
             //数量单位的获取
             var num = createNewForm.find("input[name='goodsTypeIntroduction']").val();
             //分类描述的获取
             var title = createNewForm.find("textarea[name='assortmentDetail']").val();
             var info = $("#createNew").find("a").text();
-            if (info =="新建") {
+            if (info == "新建") {
                 //新建页面点击取消按钮的控制
                 $("#dismiss-btn").click(function () {
                     //取消事件清除输入的内容
@@ -55,7 +55,7 @@ $(function () {
                 //新建页面点击提交按钮的控制
                 $("#submit-btn").click(function () {
                     $.get("/goodsType/addGoodsType", params, function (data) {
-                        if (typeNameList!=""&&num!=""&&title!="") {
+                        if (typeNameList != "" && num != "" && title != "") {
                             //提交按钮跳转到商品类型页面，页面重新加载
                         } else {
                             alert("请将信息填写完整！");
@@ -97,18 +97,18 @@ $(function () {
     }
 
     //3，初始化商品类型搜索
-    function initSearchKey(){
-        var params={
-            goodsTypeName:$("#goodsType").val(),
-            page:page,
-            pageSize:pageSize
+    function initSearchKey() {
+        var params = {
+            goodsTypeName: $("#goodsType").val(),
+            page: page,
+            pageSize: pageSize
         };
         //输入关键字，点击搜索按钮实现搜索，页面重新加载为搜索页面
         $("#searchByType").click(function () {
             console.log("搜索开始");
             console.log($("#goodsType").val());
             console.log(params);
-            $.get("/goodsType/",params, function (data) {
+            $.get("/goodsType/", params, function (data) {
                 console.log(data);
                 initGoodsTypeList(data);
             })
@@ -141,9 +141,75 @@ $(function () {
     }
 
     //6,分页功能的实现
-    function initPage() {
+    function initPage(pageMsg) {
+        var totalPage = pageMsg.totalPage;
+        if (page >= 0 && page <= totalPage - 1) {
+            console.log(pageMsg);
+            $("#btn1").click(function () {
+                if (page != 0) {
+                    var pages = {
+                        page: 0,
+                        pageSize: pageSize
+                    };
+                    $.get("/goodsType", pages, function (data) {
+                        console.log(btn1);
+                        console.log(data);
+                        $(tableListForm).empty();
+                        initGoodsTypeList(data);
+                    });
+                }
+            });
+            $("#btn2").click(function () {
+                console.log(btn2);
+                if (page > 0) {
+                    page = page - 1;
+                    console.log(1);
+                    var pages = {
+                        page: page,
+                        pageSize: pageSize
+                    };
+                    console.log(2);
+                    $.get("/goodsType", pages, function (data) {
+                        console.log(3);
+                        console.log(data);
+                        $(tableListForm).empty();
+                        initGoodsTypeList(data);
+                    });
+                }
+            });
+            $("#btn3").click(function () {
+                if (page < totalPage - 1) {
+                    page = page + 1;
+                    var pages = {
+                        page: page,
+                        pageSize: pageSize
+                    };
+                    $.get("/goodsType", pages, function (data) {
+                        console.log(btn3);
+                        console.log(data);
+                        $(tableListForm).empty();
+                        initGoodsTypeList(data);
+                    });
+                }
+            });
+            $("#btn4").click(function () {
+                if (page != totalPage - 1) {
+                    var pages = {
+                        page: totalPage - 1,
+                        pageSize: pageSize
+                    };
+                    $.get("/goodsType", pages, function (data) {
+                        console.log(btn4);
+                        console.log(data);
+                        $(tableListForm).empty();
+                        initGoodsTypeList(data);
+                    });
+                }
 
+            });
+        }
     }
+
 
     //7,页面初始化
     function initGoodsTypePage() {
@@ -168,7 +234,7 @@ $(function () {
             //5,商品类型列表初始化
             initGoodsTypeList(data);
             //6,分页功能的实现
-            initPage();
+            initPage(data);
         });
     }
 
@@ -218,11 +284,5 @@ $(function () {
     //    $($(".goods-del").text()).click(function () {
     //        console.log("hello");
     //    })
-    //}
-    ////商品类别名搜索
-    //function initSearchByType(){
-    //    $("#searchByType").click(function () {
-    //        initGoodsTypeList();
-    //    });
     //}
 });
