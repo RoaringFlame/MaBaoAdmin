@@ -23,13 +23,15 @@ public class GoodsVO {
     private Double price;                       //宝物价格
     private int stockNumber;                    //宝物库存
     private String state;                       //宝物状态
-    private Long typeId;                     //一级类型编号
+    private String typeName;                     //一级类型编号
 
     public static GoodsVO generateBy(Goods goods){
         GoodsVO vo = VoUtil.copyBasic(GoodsVO.class, goods);
         assert vo != null;
         vo.setState((goods.getState()==true)?"上架":"下架");
-        vo.setTypeId(goods.getType().getId());
+        vo.setTypeName(goods.getType().getTypeName());
+        vo.setStockNumber(goods.getStockNumber());
+        vo.setUptime(goods.getUpTime());
         return vo;
     }
     public static List<GoodsVO> generateBy(List<Goods> goodsList){
@@ -38,6 +40,14 @@ public class GoodsVO {
             list.add(generateBy(g));
         }
         return list;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     public Long getId() {
@@ -96,11 +106,4 @@ public class GoodsVO {
         this.state = state;
     }
 
-    public Long getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
-    }
 }

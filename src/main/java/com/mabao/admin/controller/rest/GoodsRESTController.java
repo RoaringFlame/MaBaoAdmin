@@ -1,15 +1,21 @@
 package com.mabao.admin.controller.rest;
 
 import com.mabao.admin.controller.vo.GoodsInVO;
+import com.mabao.admin.controller.vo.GoodsInitVO;
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
+import com.mabao.admin.enums.Quality;
+import com.mabao.admin.enums.Role;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.GoodsTypeService;
 import com.mabao.admin.util.PageVO;
+import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -91,7 +97,7 @@ public class GoodsRESTController {
      * @param pageSize
      * @return
      */
-    @RequestMapping(value = "/GoodsList",method = GET)
+    @RequestMapping(value = "/goodsList",method = GET)
     public PageVO<GoodsVO> goodsList(int page, int pageSize) {
         Page<Goods> pageGoods = this.goodsService.getAllGoods(page,pageSize);
         PageVO<GoodsVO> voPage = new PageVO<>();
@@ -102,16 +108,35 @@ public class GoodsRESTController {
 
     /**
      * 添加商品
-     * @param goodsVO
+     * @param goodsInVO
      * @return
      */
     @RequestMapping(value = "/addGoods",method = POST)
-    public JsonResultVO addGoods(GoodsInVO goodsVO) {
+    public JsonResultVO addGoods(GoodsInVO goodsInVO) {
         try{
-           this.goodsService.newGoods(goodsVO);
+           this.goodsService.newGoods(goodsInVO);
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
         return new JsonResultVO(JsonResultVO.SUCCESS,"添加成功！");
+    }
+
+    /**
+     * goods页面初始化下拉框
+     * @return
+     */
+    @RequestMapping(method = GET)
+    public GoodsInitVO GoodsInit() {
+        GoodsInitVO goodsInitVO = new GoodsInitVO();
+        //商品类别
+        List<Selector> goodsTypeList =  this.goodsTypeService.getAllGoodsTypeForSelector();
+        goodsInitVO.setGoodsTypeList(goodsTypeList);
+        //新旧级别
+         List<Selector>  newDegreeList = Quality.toList();
+        goodsInitVO.setNewDegreeList(newDegreeList);
+        //用户角色
+        List<Selector>  roleList = Role.toList();
+        goodsInitVO.setRoleList(roleList);
+        return goodsInitVO;
     }
 }

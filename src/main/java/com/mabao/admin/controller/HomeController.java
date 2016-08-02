@@ -24,14 +24,4 @@ public class HomeController {
         return jspPage;
     }
 
-    /**
-     * 首页
-     *（查询商品类别，轮播图片，新品列表）
-     * @return              index首页
-     */
-    @RequestMapping(method = GET)
-    public String home() {
-        return "index";
-    }
-
 }
