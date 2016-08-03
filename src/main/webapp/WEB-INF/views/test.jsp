@@ -6,8 +6,9 @@
     <script>
         function test() {
             var myData ={
+                id:5,
                 typeName:"HN",
-                "units": "个",
+                units: "个",
                 "description": "中国",
                 "goodsNumber":"5"
             };
@@ -23,7 +24,7 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
-                url: 'http://localhost:8080/goodsType/addGoodsType',
+                url: 'http://localhost:8080/goodsType/changeGoodsType',
                 processData: false,
                 dataType: 'json',
                 data: JSON.stringify(myData),
