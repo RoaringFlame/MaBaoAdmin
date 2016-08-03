@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userInVO.getPassword());
         user.setCreateTime(new Date());
         user.setEmail("110xg@qq.com");
-        return this.userRepository.save(user);
+        return this.userRepository.saveAndFlush(user);
     }
 
     /**
