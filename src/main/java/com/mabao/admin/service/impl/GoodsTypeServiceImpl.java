@@ -5,7 +5,6 @@ import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.repository.GoodsTypeRepository;
 import com.mabao.admin.service.GoodsTypeService;
-import com.mabao.admin.util.Copys;
 import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by liuming on 2016/6/28.
  * 商品类别业务接口
  */
 @Service
@@ -45,7 +43,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
      */
     @Override
     public Page<GoodsType> getAllGoodsType(int page, int pageSize) {
-        return this.goodsTypeRepository.findAll(new PageRequest(page, pageSize));
+        return this.goodsTypeRepository.findAll(new PageRequest(page-1, pageSize));
     }
 
     /**
@@ -70,14 +68,13 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     @Override
     public JsonResultVO deleteGoodsType(String ids) {
         try{
-            String[] strs = ids.split(",");
-            for(String id:strs) {
+            for(String id: ids.trim().split(",")) {
                 this.goodsTypeRepository.delete(Long.valueOf(id));
             }
+            return new JsonResultVO(JsonResultVO.SUCCESS,"成功删除！");
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
-        return new JsonResultVO(JsonResultVO.SUCCESS,"成功删除！");
     }
 
     /**
@@ -89,7 +86,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
         GoodsType goodsType = new GoodsType();
         goodsType.setTypeName(goodsTypeVO.getTypeName());
         goodsType.setUnits(goodsTypeVO.getUnits());
-        goodsType.setDescribe(goodsTypeVO.getDescribe());
+        goodsType.setDescription(goodsTypeVO.getDescription());
         GoodsType result = this.goodsTypeRepository.save(goodsType);
         if(result != null) {
             return new JsonResultVO(JsonResultVO.SUCCESS, "添加成功");
@@ -99,14 +96,15 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     }
 
     /**
-     * 通过商品类别模糊查询
-     * @param goodsTypeName             类型名称
-     * @param page
-     * @param pageSize
-     * @return
+     * 模糊查询商品类别
+     * @param searchKey                 搜索关键字
+     * @param page                      页码
+     * @param pageSize                  每页数量
+     * @return                          分页GoodsTypeVO
      */
     @Override
-    public Page<GoodsType> selectGoodsType(String goodsTypeName,int page, int pageSize) {
-        return this.goodsTypeRepository.findByTypeNameLike(goodsTypeName,new PageRequest(page, pageSize));
+    public Page<GoodsType> searchGoodsType(String searchKey,int page, int pageSize) {
+        searchKey = "%"+searchKey+"%";
+        return this.goodsTypeRepository.findByTypeNameLike(searchKey,new PageRequest(page-1, pageSize));
     }
 }

@@ -5,25 +5,28 @@
     <title>test</title>
     <script>
         function test() {
-            //var mydata ={"typeName": "HN","unitOfQuantity": "个","goodsTypeIntroduction": "中国","goodsNumber":"5"};
-            var mydata ={
-                typeName:"HN","units": "个","describe": "中国","goodsNumber":"5"
+            var myData ={
+                typeName:"HN",
+                "units": "个",
+                "description": "中国",
+                "goodsNumber":"5"
             };
-            //alert(mydata.goodsNumber);
+            //alert(myData.goodsNumber);
             /*$.ajaxSetup({
                 contentType : 'application/json'
             });
-            $.post('http://localhost:8080/goodsType/addGoodsType', mydata,
+            $.post('http://localhost:8080/goodsType/addGoodsType', myData,
                     function(data) {
                         alert("id");
-                    }, 'json');*/
+                    }, 'json');
+                    */
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
                 url: 'http://localhost:8080/goodsType/addGoodsType',
                 processData: false,
                 dataType: 'json',
-                data: JSON.stringify(mydata),
+                data: JSON.stringify(myData),
                 success: function (data) {
                     alert("id: ");
                 },

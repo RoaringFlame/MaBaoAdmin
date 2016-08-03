@@ -23,7 +23,7 @@ public class GoodsTypeRESTController {
      * @param ids                   传入的商品类型id的集合字符串
      */
     @RequestMapping(value = "/deleteSomeGoodsType",method = RequestMethod.GET)
-    public JsonResultVO deleteSomeGoods(String ids) {
+    public JsonResultVO deleteSomeGoods(@RequestParam String ids) {
         return this.goodsTypeService.deleteGoodsType(ids);
     }
 
@@ -32,7 +32,8 @@ public class GoodsTypeRESTController {
      * @return              goodsType页面显示
      */
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public PageVO<GoodsTypeVO> showGoodsType(int page, int pageSize) {
+    public PageVO<GoodsTypeVO> showGoodsType(@RequestParam(required = false ,defaultValue = "1") int page,
+                                             @RequestParam(required = false ,defaultValue = "10") int pageSize) {
             Page<GoodsType> pageGoodsType =this.goodsTypeService.getAllGoodsType(page,pageSize);
             PageVO<GoodsTypeVO> voPage = new PageVO<>();
             voPage.toPage(pageGoodsType);
@@ -42,17 +43,20 @@ public class GoodsTypeRESTController {
 
     /**
      * 模糊查询商品类别
-     * @param page
-     * @param pageSize
-     * @return
+     * @param searchKey                 搜索关键字
+     * @param page                      页码
+     * @param pageSize                  每页数量
+     * @return                          分页GoodsTypeVO
      */
     @RequestMapping(value = "/searchGoodsType",method = RequestMethod.GET)
-    public PageVO<GoodsTypeVO> selectGoodsType(String goodsTypeName,int page, int pageSize) {
-        Page<GoodsType> pageGoodsType =this.goodsTypeService.selectGoodsType(goodsTypeName,page,pageSize);
+    public PageVO<GoodsTypeVO> searchGoodsType(@RequestParam String searchKey,
+                                               @RequestParam(required = false ,defaultValue = "1") int page,
+                                               @RequestParam(required = false ,defaultValue = "10") int pageSize) {
+        Page<GoodsType> pageGoodsType =this.goodsTypeService.searchGoodsType(searchKey,page,pageSize);
         PageVO<GoodsTypeVO> voPage = new PageVO<>();
         voPage.toPage(pageGoodsType);
         voPage.setItems(GoodsTypeVO.generateBy(pageGoodsType.getContent()));
-        return  voPage;
+        return voPage;
     }
 
     /**
