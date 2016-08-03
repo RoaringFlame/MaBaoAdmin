@@ -37,4 +37,12 @@ public interface UserRepository extends BaseRepository<User> {
      * @return
      */
     Page<User> findAll(Pageable pageable);
+
+    /**
+     * 依据标题模糊查询
+     * @param title             标题key
+     * @param pageable          分页参数
+     * @return                  分页goods
+     */
+    Page<User> findByNameLike(String title, Pageable pageable);
 }

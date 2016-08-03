@@ -1,6 +1,7 @@
 package com.mabao.admin.service.impl;
 
 import com.mabao.admin.controller.vo.UserInVO;
+import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.repository.UserRepository;
 import com.mabao.admin.service.UserService;
@@ -83,6 +84,18 @@ public class UserServiceImpl implements UserService {
         for(String id:ids) {
             this.userRepository.delete(Long.valueOf(id));
         }
+    }
+
+    /**
+     * 模糊查找用户
+     * @param searchKey                 搜索关键字
+     * @param page                      页码
+     * @param pageSize                  每页数量
+     * @return
+     */
+    @Override
+    public Page<User> searchUserName(String searchKey, int page, int pageSize) {
+        return this.userRepository.findByNameLike("%"+searchKey+"%",new PageRequest(page-1, pageSize));
     }
 
 }
