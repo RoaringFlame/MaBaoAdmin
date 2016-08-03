@@ -1,7 +1,8 @@
 package com.mabao.admin.repository.impl;
 
-import com.is.controller.vo.PageVO;
-import com.is.repository.BaseDao;
+
+import com.mabao.admin.repository.BaseDao;
+import com.mabao.admin.util.PageVO;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Component
 @SuppressWarnings("unchecked")
-public class BaseDaoImpl implements BaseDao{
+public class BaseDaoImpl implements BaseDao {
     @PersistenceContext
     private EntityManager em;
 
@@ -59,7 +60,7 @@ public class BaseDaoImpl implements BaseDao{
      * @param <T>   实体
      * @return      分页对象
      */
-    public<T> PageVO<T> findAll(String jpql,String jpqlCount,Object[] args,int page,int size){
+    public<T> PageVO<T> findAll(String jpql, String jpqlCount, Object[] args, int page, int size){
         Query queryCount=em.createQuery(jpqlCount);
         if(args!=null&&args.length>0) {
             for (int i = 0; i < args.length; i++) {

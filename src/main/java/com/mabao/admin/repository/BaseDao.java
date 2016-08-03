@@ -1,6 +1,6 @@
 package com.mabao.admin.repository;
 
-import com.is.controller.vo.PageVO;
+import com.mabao.admin.util.PageVO;
 
 import java.util.List;
 
@@ -35,21 +35,4 @@ public interface BaseDao {
      */
     public<T> PageVO<T> findAll(String jpql, String jpqlCount, Object[] args, int page, int size);
 
-    /**
-     * 通过SQL语句进行查询，结果超过一条会报错
-     * @param sql   SQL语句
-     * @param args  参数
-     * @param <T>   接收对象，只认基础列，建议使用VO对象
-     * @return      单个POJO对象
-     */
-    public<T> T findOneNative(String sql, Object... args);
-
-    /**
-     * 通过SQL语句进行查询
-     * @param sql   SQL语句
-     * @param args  参数
-     * @param <T>   接收对象，只认基础列，建议使用VO对象
-     * @return      对象集合
-     */
-    public<T> List<T> findAllNative(String sql, Object... args);
 }
