@@ -1,9 +1,6 @@
 package com.mabao.admin.controller.rest;
 
-import com.mabao.admin.controller.vo.GoodsInVO;
-import com.mabao.admin.controller.vo.GoodsInitVO;
-import com.mabao.admin.controller.vo.GoodsVO;
-import com.mabao.admin.controller.vo.JsonResultVO;
+import com.mabao.admin.controller.vo.*;
 import com.mabao.admin.enums.GoodsState;
 import com.mabao.admin.enums.Quality;
 import com.mabao.admin.enums.Role;
@@ -16,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -86,11 +85,30 @@ public class GoodsRESTController {
      * 修改商品信息
      * @param goodsInVO             传入商品
      */
-    @RequestMapping(value = "/updateGoods", method = RequestMethod.GET)
-    public Goods updateGoods(GoodsInVO goodsInVO) {
-        return this.goodsService.saveGoods(goodsInVO);
+    @RequestMapping(value = "/updateGoods", method = RequestMethod.POST)
+    public JsonResultVO updateGoods(@RequestBody GoodsInVO goodsInVO) {
+        try{
+            this.goodsService.saveGoods(goodsInVO);
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
     }
 
+    /**
+     * 添加商品
+     * @param goodsInVO
+     * @return
+     */
+    @RequestMapping(value = "/addGoods",method = POST)
+    public JsonResultVO addGoods(@RequestBody GoodsInVO goodsInVO) {
+        try{
+            this.goodsService.newGoods(goodsInVO);
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"添加成功！");
+    }
 
     /**
      * 获得所有商品信息
@@ -107,20 +125,7 @@ public class GoodsRESTController {
         return voPage;
     }
 
-    /**
-     * 添加商品
-     * @param goodsInVO
-     * @return
-     */
-    @RequestMapping(value = "/addGoods",method = POST)
-    public JsonResultVO addGoods(GoodsInVO goodsInVO) {
-        try{
-           this.goodsService.newGoods(goodsInVO);
-        }catch (Exception e){
-            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
-        }
-        return new JsonResultVO(JsonResultVO.SUCCESS,"添加成功！");
-    }
+
 
     /**
      * goods页面初始化下拉框
@@ -137,7 +142,7 @@ public class GoodsRESTController {
         goodsInitVO.setNewDegreeList(newDegreeList);
         //商品上下架状态
         List<Selector>  stateList = GoodsState.toList();
-        goodsInitVO.setRoleList(stateList);
+        goodsInitVO.setStateList(stateList);
         return goodsInitVO;
     }
 }

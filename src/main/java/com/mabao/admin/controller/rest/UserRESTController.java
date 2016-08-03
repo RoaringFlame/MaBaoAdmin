@@ -1,10 +1,13 @@
 package com.mabao.admin.controller.rest;
 
+import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.controller.vo.UserVO;
 import com.mabao.admin.enums.Role;
+import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.service.UserService;
+import com.mabao.admin.util.PageVO;
 import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,25 +32,27 @@ public class UserRESTController {
     private UserService userService;
 
     /**
-     *显示所有用户信息
-     * @param model         map
-     * @return              账户管理
+     * 分页显示所有信息
+     * @param page              分页参数
+     * @param pageSize
+     * @return
      */
     @RequestMapping(value = "/list", method = GET)
-    public JsonResultVO list(int page, int pageSize,Model model) {
-        try{
-            Map<String,Object> map = new HashMap<>();
-            //页面显示的用户
-            Page<User> userList = this.userService.getAllUser(page,pageSize);
-            map.put("goodsType",userList);
-            //用户角色
-            List<Selector> role = Role.toList();
-            map.put("role",role);
-            model.addAllAttributes(map);
-        }catch (Exception e){
-            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
-        }
-        return new JsonResultVO(JsonResultVO.SUCCESS,"显示成功！");
+    public PageVO<UserVO> list(int page, int pageSize) {
+        Page<User> goodsList = this.userService.getAllUser(page,pageSize);
+        PageVO<UserVO> voPage = new PageVO<>();
+        voPage.toPage(goodsList);
+//        voPage.setItems(UserVO.generateBy(goodsList.getContent()));
+        return voPage;
+    }
+
+    /**
+     * 显示用户信息
+     * @return              用户角色信息列表
+     */
+    @RequestMapping( method = GET)
+    public List<Selector> initUser() {
+        return Role.toList();
     }
 
     /**
@@ -71,10 +76,15 @@ public class UserRESTController {
         return new JsonResultVO(JsonResultVO.SUCCESS,"成功！");
     }
 
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/addUser", method = GET)
-    public JsonResultVO addUser(UserVO userVO) {
+    public JsonResultVO addUser(User user) {
         try{
-
+            this.userService.newUser(user);
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,8 +25,6 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsRepository goodsRepository;
     @Autowired
     private UserService userService;
-    @Autowired
-    private BrandService brandService;
     /**
      * 查询商品信息
      */
@@ -42,22 +41,20 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Goods saveGoods(GoodsInVO goodsInVO) {
         Goods goods = new Goods();
-        goods.setTitle(goodsInVO.getTitle());                                   //商品名称
+        goods.setTitle(goodsInVO.getTitle());                                      //商品名称
         goods.setPrice(goodsInVO.getPrice());                                   //价格
         goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
+        goods.setUpTime(new Date());                           //上传时间呗设定为购买时间
+        goods.setId(goodsInVO.getId());
 
-        goods.setUser(this.userService.get(goodsInVO.getUser_id()));            //userId
+        goods.setUser(this.userService.get(1L));            //userId
         goods.setOldPrice(new Double(20));                                      //旧的价格
-        goods.setUpTime(goodsInVO.getPurchaseTime());                           //上传时间呗设定为购买时间
         goods.setState(true);                                                   //设置状态为true
-
         GoodsBrand brand = new GoodsBrand();                                    //设置假数据
-        brand.setId(new Long(1));
-        brand.setBrandName("hhh3");
+        brand.setBrandName("hhhh3");
         goods.setBrand(brand);                                                  //设置商品品牌
-        goods.setBrandName(brand.getBrandName());                               //设置品牌名称
-
+        goods.setBrandName(brand.getBrandName());                             //设置品牌名称
         goods.setBabyType(BabyType.MEN);                                        //设置适合宝宝为男
         return this.goodsRepository.save(goods);
     }
@@ -74,10 +71,10 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setPrice(goodsInVO.getPrice());                                   //价格
         goods.setNewDegree(goodsInVO.getNewDegree());          //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
+        goods.setUpTime(new Date());                           //上传时间呗设定为购买时间
 
-        goods.setUser(this.userService.get(goodsInVO.getUser_id()));            //userId
+        goods.setUser(this.userService.get(1L));            //userId
         goods.setOldPrice(new Double(20));                                      //旧的价格
-        goods.setUpTime(goodsInVO.getPurchaseTime());                           //上传时间呗设定为购买时间
         goods.setState(true);                                                   //设置状态为true
         GoodsBrand brand = new GoodsBrand();                                    //设置假数据
         brand.setId(new Long(1));
