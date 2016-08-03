@@ -104,7 +104,25 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
      */
     @Override
     public Page<GoodsType> searchGoodsType(String searchKey,int page, int pageSize) {
-        searchKey = "%"+searchKey+"%";
-        return this.goodsTypeRepository.findByTypeNameLike(searchKey,new PageRequest(page-1, pageSize));
+        return this.goodsTypeRepository.findByTypeNameLike("%"+searchKey+"%",new PageRequest(page-1, pageSize));
+    }
+
+    /**
+     * 修改商品类别
+     * @param goodsTypeVO       商品类型信息
+     * @return                  结果VO
+     */
+    @Override
+    public JsonResultVO changeGoodsType(GoodsTypeVO goodsTypeVO) {
+        try{
+            GoodsType goodsType = this.goodsTypeRepository.findOne(goodsTypeVO.getId());
+            goodsType.setTypeName(goodsTypeVO.getTypeName());
+            goodsType.setUnits(goodsTypeVO.getUnits());
+            goodsType.setDescription(goodsTypeVO.getDescription());
+            this.goodsTypeRepository.saveAndFlush(goodsType);
+            return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
     }
 }

@@ -28,20 +28,6 @@ public class GoodsTypeRESTController {
     }
 
     /**
-     * 显示所有商品类别
-     * @return              goodsType页面显示
-     */
-    @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public PageVO<GoodsTypeVO> showGoodsType(@RequestParam(required = false ,defaultValue = "1") int page,
-                                             @RequestParam(required = false ,defaultValue = "10") int pageSize) {
-            Page<GoodsType> pageGoodsType =this.goodsTypeService.getAllGoodsType(page,pageSize);
-            PageVO<GoodsTypeVO> voPage = new PageVO<>();
-            voPage.toPage(pageGoodsType);
-            voPage.setItems(GoodsTypeVO.generateBy(pageGoodsType.getContent()));
-            return voPage;
-    }
-
-    /**
      * 模糊查询商品类别
      * @param searchKey                 搜索关键字
      * @param page                      页码
@@ -49,9 +35,9 @@ public class GoodsTypeRESTController {
      * @return                          分页GoodsTypeVO
      */
     @RequestMapping(value = "/searchGoodsType",method = RequestMethod.GET)
-    public PageVO<GoodsTypeVO> searchGoodsType(@RequestParam String searchKey,
+    public PageVO<GoodsTypeVO> searchGoodsType(@RequestParam(required = false ,defaultValue = "") String searchKey,
                                                @RequestParam(required = false ,defaultValue = "1") int page,
-                                               @RequestParam(required = false ,defaultValue = "10") int pageSize) {
+                                               @RequestParam(required = false ,defaultValue = "8") int pageSize) {
         Page<GoodsType> pageGoodsType =this.goodsTypeService.searchGoodsType(searchKey,page,pageSize);
         PageVO<GoodsTypeVO> voPage = new PageVO<>();
         voPage.toPage(pageGoodsType);
@@ -67,5 +53,15 @@ public class GoodsTypeRESTController {
     @RequestMapping(value = "/addGoodsType",method = RequestMethod.POST)
     public JsonResultVO createGoodsType(@RequestBody GoodsTypeVO goodsTypeVO){
         return this.goodsTypeService.createGoodsType(goodsTypeVO);
+    }
+
+    /**
+     * 修改商品类别
+     * @param goodsTypeVO       商品类型信息
+     * @return                  结果VO
+     */
+    @RequestMapping(value = "/changeGoodsType",method = RequestMethod.POST)
+    public JsonResultVO changeGoodsType(@RequestBody GoodsTypeVO goodsTypeVO){
+        return this.goodsTypeService.changeGoodsType(goodsTypeVO);
     }
 }

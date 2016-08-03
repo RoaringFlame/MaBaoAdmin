@@ -51,5 +51,10 @@ public interface GoodsTypeService {
      */
     Page<GoodsType> searchGoodsType(String searchKey,int page, int pageSize);
 
-
+    /**
+     * 修改商品类别
+     * @param goodsTypeVO       商品类型信息
+     * @return                  结果VO
+     */
+    JsonResultVO changeGoodsType(GoodsTypeVO goodsTypeVO);
 }
