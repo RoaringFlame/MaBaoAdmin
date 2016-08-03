@@ -5,18 +5,29 @@
     <title>test</title>
     <script>
         function test() {
-            var mydata ={
-                id:61,title:"sabi a1",user_id:7,newDegree:"NINE",message: "中国",
-                price:5,purchaseTime:2016-06-20,releaseTime:2016-06-21,goodsIntroduction:"hhhhhh3"
+            var myData ={
+                id:5,
+                typeName:"HN",
+                units: "个",
+                "description": "中国",
+                "goodsNumber":"5"
             };
-
+            //alert(myData.goodsNumber);
+            /*$.ajaxSetup({
+                contentType : 'application/json'
+            });
+            $.post('http://localhost:8080/goodsType/addGoodsType', myData,
+                    function(data) {
+                        alert("id");
+                    }, 'json');
+                    */
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
-                url: 'http://localhost:8080/goods/updateGoods',
+                url: 'http://localhost:8080/goodsType/changeGoodsType',
                 processData: false,
                 dataType: 'json',
-                data: JSON.stringify(mydata),
+                data: JSON.stringify(myData),
                 success: function (data) {
                     alert("id: ");
                 },
