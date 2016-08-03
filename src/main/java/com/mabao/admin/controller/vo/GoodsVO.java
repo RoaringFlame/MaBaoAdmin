@@ -1,10 +1,13 @@
 package com.mabao.admin.controller.vo;
 
 
+import com.mabao.admin.enums.GoodsState;
 import com.mabao.admin.pojo.Goods;
+import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.util.VoUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,18 +16,22 @@ import java.util.List;
  */
 public class GoodsVO {
 
-    private Long id;                        //宝物的id
-    private String title;                   //宝物的描述
-    private String picture;                 //宝物图片
-    private Double price;                   //宝物价格
-    private String newDegree;               //宝物新旧程度
-    private String brandName;               //宝物品牌
-    private String size;                    //宝物尺寸
+    private Long id;                           //宝物的id
+    private Date uptime;                         //宝物的描述
+    private String title;                      //宝物新旧程度
+    private String articleNumber;               //宝物货号
+    private Double price;                       //宝物价格
+    private int stockNumber;                    //宝物库存
+    private String state;                       //宝物状态
+    private String typeName;                     //一级类型编号
 
     public static GoodsVO generateBy(Goods goods){
         GoodsVO vo = VoUtil.copyBasic(GoodsVO.class, goods);
         assert vo != null;
-        vo.setSize(goods.getSize().getName());
+        vo.setState((goods.getState()==true)?"上架":"下架");
+        vo.setTypeName(goods.getType().getTypeName());
+        vo.setStockNumber(goods.getStockNumber());
+        vo.setUptime(goods.getUpTime());
         return vo;
     }
     public static List<GoodsVO> generateBy(List<Goods> goodsList){
@@ -35,12 +42,28 @@ public class GoodsVO {
         return list;
     }
 
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Date getUptime() {
+        return uptime;
+    }
+
+    public void setUptime(Date uptime) {
+        this.uptime = uptime;
     }
 
     public String getTitle() {
@@ -51,12 +74,12 @@ public class GoodsVO {
         this.title = title;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getArticleNumber() {
+        return articleNumber;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setArticleNumber(String articleNumber) {
+        this.articleNumber = articleNumber;
     }
 
     public Double getPrice() {
@@ -67,27 +90,20 @@ public class GoodsVO {
         this.price = price;
     }
 
-    public String getNewDegree() {
-        return newDegree;
+    public int getStockNumber() {
+        return stockNumber;
     }
 
-    public void setNewDegree(String newDegree) {
-        this.newDegree = newDegree;
+    public void setStockNumber(int stockNumber) {
+        this.stockNumber = stockNumber;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getState() {
+        return state;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
 }

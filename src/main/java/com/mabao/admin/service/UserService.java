@@ -2,6 +2,7 @@ package com.mabao.admin.service;
 
 
 import com.mabao.admin.pojo.User;
+import org.springframework.data.domain.Page;
 
 public interface UserService {
 
@@ -13,10 +14,37 @@ public interface UserService {
     User get(Long userId);
 
     /**
+     *得到所有用户信息
+     * @return
+     */
+    Page<User> getAllUser(int page,int pageSize);
+
+    /**
      * 修改用户信息
      * @param user                  用户
      * @return                      修改的用户
      */
     User updateUser(User user);
+
+    /**
+     * 增加用户信息
+     * @param user              用户
+     * @return                  增加的用户
+     */
+    User newUser(User user);
+    /**
+     * 删除用户信息
+     * @param userId            用户id
+     * @return                  删除用户
+     */
+    void deleteUser(Long userId);
+
+    /**
+     * 删除多个用户信息
+     * @param userIds               多个用户id的字符串
+     * @return                      删除多个用户
+     */
+    void deleteSomeUser(String userIds);
+
 
 }
