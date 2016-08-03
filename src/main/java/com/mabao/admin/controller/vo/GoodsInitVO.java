@@ -25,7 +25,7 @@ public class GoodsInitVO {
         return stateList;
     }
 
-    public void setRoleList(List<Selector> stateList) {
+    public void setStateList(List<Selector> stateList) {
         this.stateList = stateList;
     }
 
