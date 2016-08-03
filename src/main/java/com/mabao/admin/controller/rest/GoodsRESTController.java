@@ -30,26 +30,22 @@ public class GoodsRESTController {
 
     /**
      * 根据需求查询商品
-     *
      * @param goodsTypeId   商品类别
      * @param state         商品状态
      * @param title         商品名称
      * @param articleNumber 商品货号
      * @param page          页数
      * @param pageSize      每页大小
-     * @return
+     * @return              PageVO<GoodsVO>
      */
-    @RequestMapping(value = "/selectGoods", method = RequestMethod.GET)
+    @RequestMapping(value = "/searchGoods", method = RequestMethod.GET)
     public PageVO<GoodsVO> showSelectGoods(@RequestParam(required = false) Long goodsTypeId,
                                            @RequestParam(required = false) Boolean state,
                                            @RequestParam(required = false) String title,
                                            @RequestParam(required = false) String articleNumber,
-                                           int page, int pageSize) {
-        Page<Goods> goodsList = this.goodsService.selectGoods(goodsTypeId, state, title, articleNumber, page, pageSize);
-        PageVO<GoodsVO> voPage = new PageVO<>();
-        voPage.toPage(goodsList);
-        voPage.setItems(GoodsVO.generateBy(goodsList.getContent()));
-        return voPage;
+                                           @RequestParam(required = false,defaultValue = "1") int page,
+                                           @RequestParam(required = false,defaultValue = "8") int pageSize) {
+        return this.goodsService.selectGoods(goodsTypeId, state, title, articleNumber, page, pageSize);
     }
 
     /**

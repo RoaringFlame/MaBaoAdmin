@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 用户角色
  * Created by lies on 2016/7/28.
  */
 public enum Role {
