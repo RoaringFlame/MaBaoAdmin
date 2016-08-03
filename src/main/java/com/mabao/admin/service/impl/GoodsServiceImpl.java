@@ -1,20 +1,22 @@
 package com.mabao.admin.service.impl;
 
 import com.mabao.admin.controller.vo.GoodsInVO;
+import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.enums.BabyType;
-import com.mabao.admin.enums.Quality;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsBrand;
+import com.mabao.admin.repository.BaseDao;
 import com.mabao.admin.repository.GoodsRepository;
-import com.mabao.admin.service.BrandService;
 import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.UserService;
+import com.mabao.admin.util.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsRepository goodsRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private BaseDao baseDao;
     /**
      * 查询商品信息
      */
@@ -130,8 +134,44 @@ public class GoodsServiceImpl implements GoodsService {
      * @return
      */
     @Override
-    public Page<Goods> selectGoods(Long goodsTypeId, Boolean state, String title, String articleNumber, int page, int pageSize) {
-        return this.goodsRepository.findByTypeIdAndStateAndTitleAndArticleNumber(goodsTypeId,state,title,articleNumber,new PageRequest(page, pageSize));
+    public PageVO<GoodsVO> selectGoods(Long goodsTypeId, Boolean state, String title, String articleNumber, int page, int pageSize) {
+        String JPQL = "select g from Goods g "+
+                "inner join fetch g.type gt " ;
+        String JPQLCount = "select count(g) from Goods g ";
+        StringBuilder str = new StringBuilder("where 1 = 1 ");
+        List<Object> args = new ArrayList<>();
+
+        if (goodsTypeId !=null) {
+            args.add(goodsTypeId);
+            str.append(" and g.type.id = ?");
+            str.append(args.size());
+        }
+        if (state != null ) {
+            args.add(state);
+            str.append(" and g.state = ?");
+            str.append(args.size());
+        }
+        if (title != null && !"".equals(title)) {
+            args.add("%"+title+"%");
+            str.append(" and g.title like ?");
+            str.append(args.size());
+        }
+        if (articleNumber != null && !"".equals(articleNumber)) {
+            args.add("%"+articleNumber+"%");
+            str.append(" and g.articleNumber like ?");
+            str.append(args.size());
+        }
+
+        String jpqlAll = JPQL + str.toString();
+        String count = JPQLCount + str.toString();
+        //分页时从第0页算起
+        PageVO<Goods> pages = this.baseDao.findAll(jpqlAll,count,args.toArray(),page-1,pageSize);
+        PageVO<GoodsVO> pageVO = new PageVO<>();
+        pageVO.setItems(GoodsVO.generateBy(pages.getItems()));
+        pageVO.setCurrentPage(pages.getCurrentPage()+1);
+        pageVO.setTotalRow(pages.getTotalRow());
+        pageVO.setPageSize(pages.getPageSize());
+        return pageVO;
     }
 
     /**

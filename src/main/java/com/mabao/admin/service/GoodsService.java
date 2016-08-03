@@ -1,8 +1,10 @@
 package com.mabao.admin.service;
 
 import com.mabao.admin.controller.vo.GoodsInVO;
+import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.Goods;
+import com.mabao.admin.util.PageVO;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -64,9 +66,9 @@ public interface GoodsService {
      * @param pageSize                      每页大小
      * @return
      */
-    Page<Goods> selectGoods(Long goodsTypeId, Boolean state,
-                            String title, String articleNumber,
-                            int page, int pageSize);
+    PageVO<GoodsVO> selectGoods(Long goodsTypeId, Boolean state,
+                                String title, String articleNumber,
+                                int page, int pageSize);
 
     /**
      * 删除选中的商品
