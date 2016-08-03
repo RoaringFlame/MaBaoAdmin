@@ -86,7 +86,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setBrand(brand);                                                  //设置商品品牌
         goods.setBrandName(brand.getBrandName());                             //设置品牌名称
         goods.setBabyType(BabyType.MEN);                                        //设置适合宝宝为男
-        return this.goodsRepository.save(goods);
+        return this.goodsRepository.saveAndFlush(goods);
     }
 
     /**

@@ -32,20 +32,6 @@ public class UserRESTController {
     @Autowired
     private UserService userService;
 
-    /**
-     * 分页显示所有信息
-     * @param page              分页参数
-     * @param pageSize
-     * @return
-     */
-    @RequestMapping(value = "/list", method = GET)
-    public PageVO<UserVO> list(int page, int pageSize) {
-        Page<User> userList = this.userService.getAllUser(page,pageSize);
-        PageVO<UserVO> voPage = new PageVO<>();
-        voPage.toPage(userList);
-        voPage.setItems(UserVO.generateBy(userList.getContent()));
-        return voPage;
-    }
 
     /**
      * 模糊查询用户
@@ -76,11 +62,11 @@ public class UserRESTController {
 
     /**
      * 选择用户并删除
-     * @param userIds 选择的商品ids
+     * @param userIds 选择的用户ids
      * @return
      */
     @RequestMapping(value = "/deleteSomeUser", method = GET)
-    public JsonResultVO deleteUser(@RequestParam String userIds) {
+    public JsonResultVO deleteUser(String userIds) {
         try{
             this.userService.deleteSomeUser(userIds);
         }catch (Exception e){
@@ -98,6 +84,21 @@ public class UserRESTController {
     public JsonResultVO addUser(UserInVO userInVO) {
         try{
             this.userService.newUser(userInVO);
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"添加成功！");
+    }
+
+    /**
+     * 修改用户
+     * @param userInVO
+     * @return
+     */
+    @RequestMapping(value = "/updateUser", method = POST)
+    public JsonResultVO updateUser(UserInVO userInVO) {
+        try{
+            this.userService.updateUser(userInVO);
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }

@@ -23,10 +23,10 @@ public interface UserService {
 
     /**
      * 修改用户信息
-     * @param user                  用户
+     * @param userInVO                  用户
      * @return                      修改的用户
      */
-    User updateUser(User user);
+    User updateUser(UserInVO userInVO);
 
     /**
      * 增加用户信息
