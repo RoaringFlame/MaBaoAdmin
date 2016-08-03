@@ -1,28 +1,22 @@
 package com.mabao.admin.controller.vo;
 
-import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.util.VoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lies on 2016/8/1.
- */
 public class GoodsTypeVO {
     private Long id;                                //一级分类Id
     private String typeName;                        //一级分类名称
-    private String unitOfQuantity;                   //数量单位
-    private String goodsTypeIntroduction;          //商品类型描述
+    private String units;                           //数量单位
+    private String description;                        //商品类型描述
     private int goodsNumber;                        //商品数量
 
     public static GoodsTypeVO generateBy(GoodsType goodsType){
         GoodsTypeVO vo = VoUtil.copyBasic(GoodsTypeVO.class, goodsType);
         assert vo != null;
-       vo.setGoodsTypeIntroduction("hhh3");
         vo.setGoodsNumber(100);
-        vo.setUnitOfQuantity("匹");
         return vo;
     }
     public static List<GoodsTypeVO> generateBy(List<GoodsType> goodsList){
@@ -51,19 +45,19 @@ public class GoodsTypeVO {
         this.typeName = typeName;
     }
 
-    public String getUnitOfQuantity() {
-        return unitOfQuantity;
+    public String getUnits() {
+        return units;
     }
 
-    public void setUnitOfQuantity(String unitOfQuantity) {
-        this.unitOfQuantity = unitOfQuantity;
+    public void setUnits(String units) {
+        this.units = units;
     }
 
-    public String getGoodsTypeIntroduction() {
-        return goodsTypeIntroduction;
+    public String getDescription() {
+        return description;
     }
 
-    public void setGoodsTypeIntroduction(String goodsTypeIntroduction) {
-        this.goodsTypeIntroduction = goodsTypeIntroduction;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
