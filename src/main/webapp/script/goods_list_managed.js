@@ -123,12 +123,13 @@ $(function () {
             console.log(data);
             $("#goodsNameForm").val(data.title);                      //在表单上显示当前商品的标题
             $("#goodsPriceForm").val(data.price);                     //在表单上显示当前商品的价格
-            $("#goodsAddForm").val(data.address);                     //在表单上显示当前商品的地址
+            //n$("#goodsAddForm").val(data.address);                     //在表单上显示当前商品的地址
             $("#goodsDateForm").val(data.purchaseTime);              //在表单上显示当前商品的购买日期
             $("#goodsEndDateForm").val(data.releaseTime);            //在表单上显示当前商品的保质期
             $("#goodsDegreeForm").val(data.newDegree);               //在表单上显示当前商品的新旧程度
             $("#goodsInfoForm").val(data.goodsIntroduction);        //在表单上显示当前商品的商品介绍
             $("#goodsDetailForm").val(data.message);                //在表单上显示当前商品的商品信息
+            $("#goodsIdForm").val(data.id);
         });
     }
 
@@ -152,16 +153,17 @@ $(function () {
             var purchaseTime=$("#goodsDateForm").val();
             var releaseTime=$("#goodsEndDateForm").val();
             var newDegree=$("#goodsDegreeForm").val();
-            var goodsIntroduction=$("#goodsInfoForm").text();
-            var message=$("#goodsDetailForm").text();
-            var params={title:title,
-                        price:price,
-                        address:address,
-                        purchaseTime:purchaseTime,
-                        releaseTime:releaseTime,
-                        newDegree:newDegree,
-                        goodsIntroduction:goodsIntroduction,
-                        message:message,
+            var goodsIntroduction=$("#goodsInfoForm").val();
+            var message=$("#goodsDetailForm").val();
+            var params={
+                title:title,
+                price:price,
+                //address:address,
+                purchaseTime:purchaseTime,
+                releaseTime:releaseTime,
+                newDegree:newDegree,
+                goodsIntroduction:goodsIntroduction,
+                message:message
             };
             $.ajax({
                 type: 'POST',
@@ -171,6 +173,7 @@ $(function () {
                 dataType: 'json',
                 data: JSON.stringify(params),
                 success: function () {
+                    cancelForm();
                     initGoodsList(totalPage-1,pageSize);
                 },
                 error: function () {
@@ -182,8 +185,41 @@ $(function () {
 
         //点击修改商品详情表单页面提交按钮
         $(".modal-footer button:eq(2)").click(function () {
-            goodsForm.attr({action: "", method: "post"});
-            goodsForm.submit();
+            alert("11");
+            var id=$("#goodsIdForm").val();
+            var title=$("#goodsNameForm").val();
+            var price=$("#goodsPriceForm").val();
+            //var address=$("#goodsAddForm").val();
+            var purchaseTime=$("#goodsDateForm").val();
+            var releaseTime=$("#goodsEndDateForm").val();
+            var newDegree=$("#goodsDegreeForm").val();
+            var goodsIntroduction=$("#goodsInfoForm").val();
+            var message=$("#goodsDetailForm").val();
+            var params={
+                id:id,
+                title:title,
+                price:price,
+                //address:address,
+                purchaseTime:purchaseTime,
+                releaseTime:releaseTime,
+                newDegree:newDegree,
+                goodsIntroduction:goodsIntroduction,
+                message:message
+            };
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                url: '/goods/updateGoods',
+                processData: false,
+                dataType: 'json',
+                data: JSON.stringify(params),
+                success: function () {
+                    initGoodsList(currentPage,pageSize);
+                },
+                error: function () {
+                    alert('Err...');
+                }
+            });
         });
 
         //表单中新旧程度下拉框初始化
@@ -345,7 +381,6 @@ $(function () {
             $(".modal-footer button:eq(1)").attr("disable", "false")       //点击新建按钮表单内第一个按钮显示且可用
                 .show();
         });
-
 
         //点击删除按钮
         deleteBtn.click(function () {

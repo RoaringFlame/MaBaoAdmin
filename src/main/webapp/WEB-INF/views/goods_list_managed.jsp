@@ -338,13 +338,14 @@
                         <label class="label-half">
                             <input type="file" accept="image/png,image/gif" id="uploadPhoto">
                         </label>
+                        <input type="text" id="goodsIdForm" style="display: none">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
-                <button type="button" class="btn btn-primary" style="display: none">提交</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                <button type="button" class="btn btn-primary" style="display: none" data-dismiss="modal">提交</button>
             </div>
         </div>
     </div>
