@@ -40,7 +40,7 @@ $(function () {
             });
             //新建页面点击提交按钮的控制
             $("#submit-btn").click(function () {
-
+                $("#submit-btn").attr('data-toggle', 'modal');
                 var typeNameList = createNewForm.find("input[name='typeName']").val();
                 //数量单位的获取
                 var num = createNewForm.find("input[name='goodsTypeIntroduction']").val();
@@ -62,7 +62,6 @@ $(function () {
                         success: function (data) {
                             $(tableListForm).empty();//表格内容清空
                             initGoodsTypeList();
-                            alert(data.message);
                         },
                         error: function () {
                             alert('新建失败！');
@@ -71,7 +70,16 @@ $(function () {
                 } else {
                     alert('数据不完整！');
                 }
+                console.log("取消事件");
+                $("#submit-btn").attr('data-dismiss', 'modal');
+                alert(data.message);
+                typeNameList = createNewForm.find("input[name='typeName']").val();
+                //数量单位的获取
+                num = createNewForm.find("input[name='goodsTypeIntroduction']").val();
+                //分类描述的获取
+                title = createNewForm.find("textarea[name='assortmentDetail']").val();
             });
+
         });
     }
 
@@ -116,44 +124,59 @@ $(function () {
         });
     }
 
+
     //4，初始化编辑商品类型
     function initChangeType() {
-        var textMsg = $(".changeMsg");
-        console.log(1);
-        $(textMsg).click(function () {
-            console.log(2);
-            var tId = $(this).prevAll(".typeId").text();//id
-            //var tName = $(this).prevAll(".tName").text();//类型名称
-            //var tNum = $(this).prevAll(".tNum").text();//数量
-            //var tQua = $(this).prevAll(".tQua").text();//单位
-            //if (tId = data.id) {
-            //    var title = data.description;
-            //}
-            console.log(tId);
+        //编辑是表单初始化
+        $(".changeMsg1").click(function () {
+
+            $("#submit-btn").attr('data-toggle', 'modal');
+
+            var tId = $(this).prevAll(".typeId").text();
+            var tName1 = $(this).prevAll(".tName").text();
+            var tNum1 = $(this).prevAll(".tNum").text();
+            var tQua1 = $(this).prevAll(".tQua").text();
+
             //商品类别名称
-            createNewForm.find("input[name='typeName']").val(tName);
+            $("#assortmentForm").val(tName1);
             //数量单位的获取
-            createNewForm.find("input[name='goodsTypeIntroduction']").val(tNum);
+            $("#assortmentNum").val(tNum1);
             //分类描述的获取
-            createNewForm.find("textarea[name='assortmentDetail']").val(title);
-            //$("#submit-btn").click(function () {
-            //    //商品类型名称
-            //    var typeNameList = createNewForm.find("input[name='typeName']").val();
-            //    //数量单位的获取
-            //    var num = createNewForm.find("input[name='goodsTypeIntroduction']").val();
-            //    //分类描述的获取
-            //    var title = createNewForm.find("textarea[name='assortmentDetail']").val();
-            //    var params = {
-            //        id: tId,
-            //        typeName: typeNameList,
-            //        units: num,
-            //        description: title
-            //    };
-            //    $.post("/goodsType/changeGoodsType", params, function (data) {
-            //        $(tableListForm).empty();//表格内容清空
-            //        initGoodsTypeList();
-            //    })
-            //});
+            $("#assortmentDetail").val(tQua1);
+
+
+            $("#submit-btn").click(function () {
+                //商品类型的获取
+                var typeNameList = createNewForm.find("input[name='typeName']").val();
+                //数量单位的获取
+                var num = createNewForm.find("input[name='goodsTypeIntroduction']").val();
+                //分类描述的获取
+                var title = createNewForm.find("textarea[name='assortmentDetail']").val();
+                var params = {
+                    id:tId,
+                    typeName: typeNameList,
+                    units: num,
+                    description: title
+                };
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: '/goodsType/changeGoodsType',
+                    processData: false,
+                    dataType: 'json',
+                    data: JSON.stringify(params),
+                    success: function (data) {
+                        $(tableListForm).empty();//表格内容清空
+                        initGoodsTypeList();
+                        console.log('修改成功！');
+                    },
+                    error: function () {
+                        console.log('修改失败！');
+                    }
+                });
+                console.log("取消事件");
+                $("#submit-btn").attr('data-dismiss', 'modal');
+            });
         });
     }
 
@@ -169,7 +192,7 @@ $(function () {
             $(data.items).each(function (index, goodsType) {
                 //克隆隐藏列表中的信息
                 var typeList = hideGoods.clone();
-                typeList.find("input[name='allCheck']").attr('type','checkbox');
+                typeList.find("input[name='allCheck']").attr('type', 'checkbox');
                 //编号数值展示
                 typeList.find("td:eq(1)").text(goodsType.id);
                 //商品类别展示
@@ -180,6 +203,7 @@ $(function () {
                 typeList.find("td:eq(4)").text(goodsType.units);
                 tableListForm.append(typeList);
             });
+            initChangeType();
         });
     }
 

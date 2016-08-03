@@ -180,7 +180,7 @@
 
                         <td class="tQua"></td>
 
-                        <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg">编辑</td>
+                        <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg1">编辑</td>
 
                     </tr>
 
