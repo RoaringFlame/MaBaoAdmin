@@ -53,7 +53,7 @@ $(function () {
     function initGoodsStateDropdown() {
         $.get("/goods", {}, function (data) {                                   //为商品状态下拉框遍历赋值
             $(data.stateList).each(function (index, state) {                    //为商品状态下拉框增加option节点
-                $("#goodsType").append($("<option></option>")
+                $("#goodsPublish").append($("<option></option>")
                     .val(state.key)
                     .text(state.value)
                 );
@@ -117,7 +117,7 @@ $(function () {
         goodsForm.find("textarea").val("");
     }
 
-    //修改商品表单初始化
+    //修改商品表单初始化，表单显示商品信息
     function initUpdateGoodsForm(goodsId) {
         $.get("goods/getGoods", {goodsId: goodsId}, function (data) {
             console.log(data);
@@ -127,8 +127,8 @@ $(function () {
             $("#goodsDateForm").val(data.purchaseTime);              //在表单上显示当前商品的购买日期
             $("#goodsEndDateForm").val(data.releaseTime);            //在表单上显示当前商品的保质期
             $("#goodsDegreeForm").val(data.newDegree);               //在表单上显示当前商品的新旧程度
-            $("#goodsInfoForm").text(data.goodsIntroduction);        //在表单上显示当前商品的商品介绍
-            $("#goodsDetailForm").text(data.message);                //在表单上显示当前商品的商品信息
+            $("#goodsInfoForm").val(data.goodsIntroduction);        //在表单上显示当前商品的商品介绍
+            $("#goodsDetailForm").val(data.message);                //在表单上显示当前商品的商品信息
         });
     }
 
@@ -146,12 +146,39 @@ $(function () {
 
         //点击新增商品表单页面提交按钮
         $(".modal-footer button:eq(1)").click(function () {
-            goodsForm.attr({action: "/goods/addGoods", method: "post"});    //给表单绑定事件
-            goodsForm.submit();                                             //提交表单
-        });
+            var title=$("#goodsNameForm").val();
+            var price=$("#goodsPriceForm").val();
+            var address=$("#goodsAddForm").val();
+            var purchaseTime=$("#goodsDateForm").val();
+            var releaseTime=$("#goodsEndDateForm").val();
+            var newDegree=$("#goodsDegreeForm").val();
+            var goodsIntroduction=$("#goodsInfoForm").text();
+            var message=$("#goodsDetailForm").text();
+            var params={title:title,
+                        price:price,
+                        address:address,
+                        purchaseTime:purchaseTime,
+                        releaseTime:releaseTime,
+                        newDegree:newDegree,
+                        goodsIntroduction:goodsIntroduction,
+                        message:message,
+            };
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                url: '/goods/addGoods',
+                processData: false,
+                dataType: 'json',
+                data: JSON.stringify(params),
+                success: function () {
+                    initGoodsList(totalPage-1,pageSize);
+                },
+                error: function () {
+                    alert('Err...');
+                }
+            });
 
-        //修改商品表单初始化
-        initUpdateGoodsForm();
+        });
 
         //点击修改商品详情表单页面提交按钮
         $(".modal-footer button:eq(2)").click(function () {
@@ -311,13 +338,14 @@ $(function () {
             $("input[name='checkBox']").prop("checked", $(this).prop("checked"));                 //所有的付款框的状态和第一行复选框状态一致
         });
 
-        //新建商品列表
+        //新建商品按钮
         $(".btn-toolbar a").click(function () {
             $(".modal-footer button:eq(2)").attr("disable", "true")        //点击新建按钮表单内第二个按钮隐藏且不可用
                 .hide();
             $(".modal-footer button:eq(1)").attr("disable", "false")       //点击新建按钮表单内第一个按钮显示且可用
                 .show();
         });
+
 
         //点击删除按钮
         deleteBtn.click(function () {
