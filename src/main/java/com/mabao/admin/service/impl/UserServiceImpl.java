@@ -42,11 +42,17 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 修改用户信息
-     * @param user                  用户
+     * @param userInVO                  用户
      * @return                      修改的用户
      */
     @Override
-    public User updateUser(User user) {
+    public User updateUser(UserInVO userInVO) {
+        User user = new User();
+        user.setId(userInVO.getId());
+        user.setName(userInVO.getName());
+        user.setPassword(userInVO.getPassword());
+        user.setCreateTime(new Date());
+        user.setEmail("110xg@qq.com");
         return this.userRepository.save(user);
     }
 
@@ -61,7 +67,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userInVO.getName());
         user.setPassword(userInVO.getPassword());
         user.setCreateTime(new Date());
-        user.setEmail("110@qq.com");
+        user.setEmail("110xz@qq.com");
         return this.userRepository.save(user);
     }
 
@@ -81,6 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteSomeUser(String userIds) {
         String[] ids = userIds.split(",");
+        System.out.print(ids[0]);
         for(String id:ids) {
             this.userRepository.delete(Long.valueOf(id));
         }
