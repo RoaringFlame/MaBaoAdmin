@@ -171,7 +171,7 @@
                             </label>
                         </td>
 
-                        <td></td>
+                        <td class="typeId"></td>
 
                         <td></td>
 
