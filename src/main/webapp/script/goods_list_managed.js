@@ -9,16 +9,15 @@ $(function () {
     var offSellBtn = $("#operate li:eq(2)");                              //获取下架按钮
     var printBtn = $("#tool li:eq(0)");                                   //获取打印按钮
     var exportExcelBtn = $("#tool li:eq(1)");                             //获取导出商品按钮
-    var currentPage = 0;
-    var totalPage = 10;
-    var pageSize = 7;
-    var typeName;                                                        //商品类别
-    var goodsPublish;                                                    //商品状态（是否上架）
-    var goodsName;                                                       //商品名称
-    var goodsId;                                                         //商品货号
-    var state;
-    var goodsForm = $("#frmGoods");                                  //商品表单
-    var goodsTable = $(".table.table-bordered.table-striped");             //商品列表
+    var currentPage = 0;                                                  //当前页数
+    var totalPage = 1;                                                    //总页数
+    var pageSize = 7;                                                     //页面记录个数
+    var typeName;                                                         //商品类别
+    var goodsPublish;                                                     //商品状态（是否上架）
+    var goodsName;                                                        //商品名称
+    var goodsId;                                                          //商品货号
+    var state;                                                            //商品状态
+    var goodsForm = $("#frmGoods");                                       //商品表单
 
     //获取搜索条件
     function getSearchItem() {
@@ -27,22 +26,22 @@ $(function () {
         goodsName = $("#goodsName").val();                                      //获取商品名称
         goodsId = $("#goodsId").val();                                          //获取商品货号
         if (typeName == "所有类别") {
-            typeName = "";                                                      //如果类型是所有类别商品类别的值设为空
+            typeName = "";                                                       //如果类型是所有类别商品类别的值设为空
         }
         if (goodsPublish == "上架") {
-            state = true;
+            state = true;                                                       //如果状态为上架，传给接口参数state值为true
         } else if (goodsPublish == "下架") {
-            state = false;
+            state = false;                                                      //如果状态为下架，传给接口参数state值为false
         } else {
-            state = "";
+            state = "";                                                         //如果状态为上架，传给接口参数state值为“”
         }
     }
 
     //商品类别下拉框初始化
     function initGoodsTypeDropdown() {
         $.get("/goods", {}, function (data) {
-            $(data.goodsTypeList).each(function (index,type) {
-                $("#goodsType").append($("<option></option>")
+            $(data.goodsTypeList).each(function (index, type) {                //为商品类别下拉框遍历赋值
+                $("#goodsType").append($("<option></option>")                   //为商品类别下拉框增加option节点
                     .val(type.key)
                     .text(type.value)
                 );
@@ -52,8 +51,8 @@ $(function () {
 
     //商品状态下拉框初始化
     function initGoodsStateDropdown() {
-        $.get("/goods", {}, function (data) {
-            $(data).each(function (index,state) {
+        $.get("/goods", {}, function (data) {                                   //为商品状态下拉框遍历赋值
+            $(data.stateList).each(function (index, state) {                    //为商品状态下拉框增加option节点
                 $("#goodsType").append($("<option></option>")
                     .val(state.key)
                     .text(state.value)
@@ -64,8 +63,8 @@ $(function () {
 
     //表单中新旧程度下拉框初始化
     function initGoodsDegreeDropdown() {
-        $.get("/goods", {}, function (data) {
-            $(data.newDegreeList).each(function (index,degree) {
+        $.get("/goods", {}, function (data) {                                   //为新旧程度下拉框遍历赋值
+            $(data.newDegreeList).each(function (index, degree) {                   //为新旧程度下拉框增加option节点
                 $("#goodsDegreeForm").append($("<option></option>")
                     .val(degree.key)
                     .text(degree.value)
@@ -75,19 +74,19 @@ $(function () {
     }
 
     //商品列表初始化
-    function initGoodsList() {
+    function initGoodsList(currentPage, pageSize) {
         var params = {
             page: currentPage,                        //当前页数
             pageSize: pageSize,                       //每页记录条数
         };
         if (currentPage < totalPage) {
-
             $.get("/goods/goodsList", params, function (data) {
                 var goodsList = data.items;                                     //获取所有商品信息
-                console.log(goodsList);
+                totalPage = data.totalPage;                                     //获取总页数
                 $(goodsList).each(function (index, goods) {
                     var goodsInfo = $("#goodsContainer").clone();               //克隆一条商品记录
                     goodsInfo.show();
+                    goodsInfo.find("input[type='checkbox']").attr("name", "checkBox");
                     goodsInfo.find("td:eq(1)").text(goods.id);                   //给该条商品信息赋值商品id
                     goodsInfo.find("td:eq(2)").text(goods.upTime);               //给该条商品信息赋值商品时间
                     goodsInfo.find("td:eq(3)").text(goods.typeName);             //给该条商品信息赋值商品类别
@@ -100,9 +99,9 @@ $(function () {
                 });
                 //编辑商品按钮
                 $(".edit").click(function () {
-                    var goodsId = $(this).prevAll("td:eq(7)").text();           //获取当前商品的id
-                    initUpdateGoodsForm(goodsId);
-                    $(".modal-footer button:eq(1)").attr("disable", "true")
+                    var goodsId = $(this).prevAll("td:eq(7)").text();            //获取当前商品的id
+                    initUpdateGoodsForm(goodsId);                                 //初始化表单
+                    $(".modal-footer button:eq(1)").attr("disable", "true")       //
                         .hide();
                     $(".modal-footer button:eq(2)").attr("disable", "false")
                         .show();
@@ -118,50 +117,94 @@ $(function () {
         goodsForm.find("textarea").val("");
     }
 
-
     //修改商品表单初始化
     function initUpdateGoodsForm(goodsId) {
         $.get("goods/getGoods", {goodsId: goodsId}, function (data) {
             console.log(data);
-            $("#goodsNameForm").val(data.title);
-            $("#goodsPriceForm").val(data.price);
-            $("#goodsAddForm").val(data.address);
-            $("#goodsDateForm").val(data.purchaseTime);
-            $("#goodsEndDateForm").val(data.releaseTime);
-            $("#goodsDegreeForm").val(data.newDegree);
-            $("#goodsInfoForm").text(data.goodsIntroduction);
-            $("#goodsDetailForm").text(data.message);
+            $("#goodsNameForm").val(data.title);                      //在表单上显示当前商品的标题
+            $("#goodsPriceForm").val(data.price);                     //在表单上显示当前商品的价格
+            $("#goodsAddForm").val(data.address);                     //在表单上显示当前商品的地址
+            $("#goodsDateForm").val(data.purchaseTime);              //在表单上显示当前商品的购买日期
+            $("#goodsEndDateForm").val(data.releaseTime);            //在表单上显示当前商品的保质期
+            $("#goodsDegreeForm").val(data.newDegree);               //在表单上显示当前商品的新旧程度
+            $("#goodsInfoForm").text(data.goodsIntroduction);        //在表单上显示当前商品的商品介绍
+            $("#goodsDetailForm").text(data.message);                //在表单上显示当前商品的商品信息
         });
     }
 
+    //商品表单初始化
+    function initGoodsForm() {
+        //点击商品详情表单取消按钮
+        $(".modal-footer .btn.btn-default").click(function () {
+            cancelForm();                                                 //点击取消按钮清空表单
+        });
+
+        //点击表单右上角叉按钮
+        $(".modal-header button").click(function () {
+            cancelForm();                                                  //点击右上角叉按钮清空表单
+        });
+
+        //点击新增商品表单页面提交按钮
+        $(".modal-footer button:eq(1)").click(function () {
+            goodsForm.attr({action: "/goods/addGoods", method: "post"});    //给表单绑定事件
+            goodsForm.submit();                                             //提交表单
+        });
+
+        //修改商品表单初始化
+        initUpdateGoodsForm();
+
+        //点击修改商品详情表单页面提交按钮
+        $(".modal-footer button:eq(2)").click(function () {
+            goodsForm.attr({action: "", method: "post"});
+            goodsForm.submit();
+        });
+
+        //表单中新旧程度下拉框初始化
+        initGoodsDegreeDropdown();
+    }
 
     //删除商品
     function deleteGoods() {
         var goodsIds = "";
         $("input[name='checkBox']:checked").each(function () {                     //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();                              //获取checkbox所在行顺序
-            goodsIds += goodsId + ",";
+            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();     //获取checkbox所在行的goodsId
+            goodsIds += goodsId + ",";                                              //给string类型的goodsIds赋值
         });
-        $.get("/goods/deleteSomeGoods", {ids: goodsIds},function () {
-
-        });
-
-
+        if (goodsIds !== "") {
+            $.get("/goods/deleteSomeGoods", {ids: goodsIds}, function (data) {             //调用删除商品接口
+                if (data.status == "success") {
+                    $("#selectAll").removeAttr("checked");
+                    $(".container").empty();                                                //清空商品列表
+                    initGoodsList(currentPage, pageSize);                                   //重新加载页面
+                }else if(data.status == "failure"){
+                   alert("删除失败!");
+                }
+            });
+        } else {
+            alert("您还未选择商品！");
+        }
     }
 
     //商品上架
     function onSell() {
         var goodsIds = "";
-        $("input[name='checkBox']:checked").each(function () {                     //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();
-            $(this).parents("td.check").nextAll("td:eq(6)").text("上架");
-            $(this).removeAttr("checked");
-            $("#selectAll").removeAttr("checked");
+        $("input[name='checkBox']:checked").each(function () {                       //遍历选中的checkbox
+            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();       //获取checkbox所在行的goodsId
             goodsIds += goodsId + ",";
         });
-        $.get("/goods/changeSomeGoods", {ids: goodsIds, state: true}, function () {
-
-        });
+        if (goodsIds !== "") {
+            $.get("/goods/changeSomeGoods", {ids: goodsIds, state: true}, function (data) {
+                if (data.status == "success") {
+                    $("#selectAll").removeAttr("checked");
+                    $(".container").empty();                                                //清空商品列表
+                    initGoodsList(currentPage, pageSize);                                   //重新加载页面
+                }else if(data.status == "failure"){
+                    alert("更改商品状态失败!");
+                }
+            });
+        } else {
+            alert("您还未选择商品！");
+        }
 
     }
 
@@ -175,9 +218,19 @@ $(function () {
             $("#selectAll").removeAttr("checked");
             goodsIds += goodsId + ",";
         });
-        $.get("/goods/changeSomeGoods", {ids: goodsIds, state: false}, function () {
-
-        });
+        if (goodsIds !== "") {
+            $.get("/goods/changeSomeGoods", {ids: goodsIds, state: false}, function (data) {
+                if (data.status == "success") {
+                    $("#selectAll").removeAttr("checked");
+                    $(".container").empty();                                                //清空商品列表
+                    initGoodsList(currentPage, pageSize);                                   //重新加载页面
+                }else if(data.status == "failure"){
+                    alert("更改商品状态失败!");
+                }
+            });
+        } else {
+            alert("您还未选择商品！")
+        }
     }
 
 
@@ -195,14 +248,59 @@ $(function () {
 
     }
 
+    //初始化分页按钮
+    function initPageBtn() {
+        //点击首页
+        $("#btn1").click(function () {
+            currentPage = 0;                               //点击首页时参数currentPage为0
+            $(".container").empty();                       //清空表单数据
+            initGoodsList(currentPage, pageSize);          //传参并调用初始化表单方法
+        });
+
+        //点击上一页
+        $("#btn2").click(function () {
+            if (currentPage == 0) {
+                alert("当前已经是首页了!");                 //如果当前页面是首页，点击上一页弹出提示框
+            }
+            else {
+                $(".container").empty();                    //如果不是首页，点击上一页时清空表单
+                currentPage--;                              //当前页数减1
+                initGoodsList(currentPage, pageSize);        //传参并调用初始化表单方法
+            }
+        });
+
+        //点击下一页
+        $("#btn3").click(function () {
+            if ((currentPage == totalPage - 1) ||(totalPage==0)) {                //如果当前页面是最后一页时，点击下一页弹出提示框
+                alert("当前已经是最后一页了!");
+            }
+            else {
+                $(".container").empty();                      //如果不是最后一页，点击下一页时清空表单
+                currentPage++;                                //当前页数加1
+                initGoodsList(currentPage, pageSize);          //传参并调用初始化表单方法
+            }
+        });
+
+        //点击尾页
+        $("#btn4").click(function () {
+            currentPage = totalPage - 1;                            //点击尾页时参数currentPage为0
+            $(".container").empty();                            //清空表单数据
+            initGoodsList(currentPage, pageSize);                //传参并调用初始化表单方法
+        });
+    }
+
     function init() {
         //商品类型下拉框初始化
         initGoodsTypeDropdown();
         //商品状态下拉框初始化
-        //商品新旧程度下拉框初始化
-        initGoodsDegreeDropdown();
+        initGoodsStateDropdown();
         //商品列表初始化
-        initGoodsList();
+        initGoodsList(currentPage, pageSize);
+        //商品表单初始化
+        initGoodsForm();
+        //分页按钮初始化
+        initPageBtn();
+
         //点击搜索按钮事件
         searchBtn.click(function () {
             searchGoods();
@@ -210,17 +308,7 @@ $(function () {
 
         //点击第一行的复选框控制全选和全不选
         $("#selectAll").click(function () {
-            $("input[name='checkBox']").prop("checked", $(this).prop("checked"));
-        });
-
-        //点击商品详情表单取消按钮
-        $(".modal-footer .btn.btn-default").click(function () {
-            cancelForm();                                                 //点击取消按钮清空表单
-        });
-
-        //点击表单右上角叉按钮
-        $(".modal-header button").click(function () {
-            cancelForm();                                                 //点击右上角叉按钮清空表单
+            $("input[name='checkBox']").prop("checked", $(this).prop("checked"));                 //所有的付款框的状态和第一行复选框状态一致
         });
 
         //新建商品列表
@@ -231,17 +319,6 @@ $(function () {
                 .show();
         });
 
-        //点击新增商品表单页面提交按钮
-        $(".modal-footer button:eq(1)").click(function () {
-            goodsForm.attr({action: "/goods/addGoods", method: "post"});
-            goodsForm.submit();
-        });
-
-         //点击修改商品详情表单页面提交按钮
-        $(".modal-footer button:eq(2)").click(function () {
-            goodsForm.attr({action: "", method: "post"});
-            goodsForm.submit();
-        });
         //点击删除按钮
         deleteBtn.click(function () {
             deleteGoods();             //点击删除按钮删除商品
@@ -264,7 +341,7 @@ $(function () {
 
         //点击导出按钮事件
         exportExcelBtn.click(function () {
-            exportExcel();
+            exportExcel();                //点击导出按钮商品状态变成下架
         });
 
     }

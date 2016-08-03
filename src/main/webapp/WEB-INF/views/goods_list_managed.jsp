@@ -237,12 +237,10 @@
                 </tr>
 
                 </thead>
-
-                <tbody class="container">
                 <tr class="odd gradeX" id="goodsContainer" style="display: none;">
                     <td class="check">
                         <label>
-                            <input name="checkBox" type="checkbox" class="checkboxes" value="1"/>
+                            <input type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
 
@@ -268,12 +266,20 @@
 
                 </tr>
 
+                <tbody class="container">
 
                 </tbody>
             </table>
             <!--表格END-->
         </div>
-
+        <!--分页-->
+        <div style="text-align:center">
+            <input type=button id="btn1" value="首页">
+            <input type=button id="btn2" value="上一页">
+            <input type=button id="btn3" value="下一页">
+            <input type=button id="btn4" value="尾页">
+        </div>
+        <!--分页end-->
     </div>
 
 </div>
@@ -317,7 +323,7 @@
                         <span class="red">*</span>
 
                         <label for="goodsDegreeForm" class="control-label  label-half">新旧程度:
-                            <select class="form-control" id="goodsDegreeForm"  name="newDegree" >
+                            <select class="form-control" id="goodsDegreeForm" name="newDegree">
                             </select>
                         </label>
                         <span class="red">*</span>
