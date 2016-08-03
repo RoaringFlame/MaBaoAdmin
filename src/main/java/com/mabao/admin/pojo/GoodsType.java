@@ -9,7 +9,7 @@ public class GoodsType {
     private String typeName;                         //一级分类名称
     private String typeList;                         //二级分类列表
     private String units;                            //数量单位
-    private String describe;                         //商品类型描述
+    private String description;                         //商品类型描述
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,12 +50,12 @@ public class GoodsType {
         this.units = units;
     }
 
-    @Column(name = "describe")
-    public String getDescribe() {
-        return describe;
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

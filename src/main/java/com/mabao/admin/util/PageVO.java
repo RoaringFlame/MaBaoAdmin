@@ -20,10 +20,20 @@ public class PageVO<T> {
     }
 
     public PageVO<T> toPage(Page page){
-        this.setCurrentPage(page.getNumber());
+        this.setCurrentPage(page.getNumber()+1);
         this.setPageSize(page.getSize());
         this.setTotalRow(page.getTotalElements());
         return this;
+    }
+
+    //计算总页数
+    public Integer getTotalPage() {
+        if(this.totalRow%this.pageSize==0){
+            return Long.valueOf(totalRow/pageSize).intValue();
+        }
+        else{
+            return Long.valueOf(totalRow/pageSize).intValue()+1;
+        }
     }
 
     public int getCurrentPage() {
@@ -48,15 +58,6 @@ public class PageVO<T> {
 
     public void setTotalRow(Long totalRow) {
         this.totalRow = totalRow;
-    }
-    //计算总页数
-    public Integer getTotalPage() {
-        if(this.totalRow%this.pageSize==0){
-            return Long.valueOf(totalRow/pageSize).intValue();
-        }
-        else{
-            return Long.valueOf(totalRow/pageSize).intValue()+1;
-        }
     }
 
     public List<T> getItems() {

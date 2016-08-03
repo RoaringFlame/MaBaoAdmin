@@ -6,7 +6,6 @@ import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.util.Selector;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -44,11 +43,13 @@ public interface GoodsTypeService {
     JsonResultVO createGoodsType(GoodsTypeVO goodsTypeVO);
 
     /**
-     * 模糊查找类型名称
-     * @param goodsTypeName             类型名称
-     * @return
+     * 模糊查询商品类别
+     * @param searchKey                 搜索关键字
+     * @param page                      页码
+     * @param pageSize                  每页数量
+     * @return                          分页GoodsTypeVO
      */
-    Page<GoodsType> selectGoodsType(String goodsTypeName,int page, int pageSize);
+    Page<GoodsType> searchGoodsType(String searchKey,int page, int pageSize);
 
 
 }

@@ -10,7 +10,7 @@ public class GoodsTypeVO {
     private Long id;                                //一级分类Id
     private String typeName;                        //一级分类名称
     private String units;                           //数量单位
-    private String describe;                        //商品类型描述
+    private String description;                        //商品类型描述
     private int goodsNumber;                        //商品数量
 
     public static GoodsTypeVO generateBy(GoodsType goodsType){
@@ -53,11 +53,11 @@ public class GoodsTypeVO {
         this.units = units;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

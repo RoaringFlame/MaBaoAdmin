@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-08-02 18:27:50
+Date: 2016-08-03 09:03:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,9 +24,9 @@ CREATE TABLE `t_goods_type` (
   `type_name` varchar(45) NOT NULL COMMENT '一级分类名称',
   `type_list` varchar(1000) DEFAULT NULL COMMENT '二级分类列表',
   `units` varchar(255) DEFAULT NULL,
-  `describe` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='商品类别表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='商品类别表';
 
 -- ----------------------------
 -- Records of t_goods_type
