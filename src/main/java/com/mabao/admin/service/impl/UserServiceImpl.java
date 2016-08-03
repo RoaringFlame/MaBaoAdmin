@@ -1,5 +1,6 @@
 package com.mabao.admin.service.impl;
 
+import com.mabao.admin.controller.vo.UserInVO;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.repository.UserRepository;
 import com.mabao.admin.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,7 +28,12 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findOne(userId);
     }
 
-
+    /**
+     * 获得所有用户信息
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @Override
     public Page<User> getAllUser(int page, int pageSize) {
         return this.userRepository.findAll(new PageRequest(page, pageSize));
@@ -39,24 +46,37 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User updateUser(User user) {
-        return this.userRepository.saveAndFlush(user);
+        return this.userRepository.save(user);
     }
 
     /**
      * 增加用户信息
-     * @param user              用户
+     * @param userInVO              用户
      * @return                  增加的用户
      */
     @Override
-    public User newUser(User user) {
+    public User newUser(UserInVO userInVO) {
+        User user = new User();
+        user.setName(userInVO.getName());
+        user.setPassword(userInVO.getPassword());
+        user.setCreateTime(new Date());
+        user.setEmail("110@qq.com");
         return this.userRepository.save(user);
     }
 
+    /**
+     * 删除单个用户（需求更改预留）
+     * @param userId            用户id
+     */
     @Override
     public void deleteUser(Long userId) {
         this.userRepository.delete(userId);
     }
 
+    /**
+     * 删除选择用户信息
+     * @param userIds               多个用户id的字符串
+     */
     @Override
     public void deleteSomeUser(String userIds) {
         String[] ids = userIds.split(",");

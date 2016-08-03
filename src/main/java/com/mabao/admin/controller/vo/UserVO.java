@@ -1,18 +1,43 @@
 package com.mabao.admin.controller.vo;
 
+import com.mabao.admin.enums.Role;
+import com.mabao.admin.pojo.Goods;
+import com.mabao.admin.pojo.User;
+import com.mabao.admin.util.VoUtil;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lies on 2016/7/29.
  */
 public class UserVO {
-    private long id;
-    private String name;
-    private String role;
-    private Date createTime;
-    private int loginTime;
-    private Date lastOptTime;
-    private String optContent;
+    private long id;                                //用户编号
+    private String name;                            //昵称
+    private Role role;                              //用户角色
+    private int loginTime;                          //登陆次数
+    private Date createTime;                        //创建时间
+    private Date lastOptTime;                       //最后一次操作时间
+    private String optContent;                      //操作内容
+
+    public static UserVO generateBy(User user){
+        UserVO vo = VoUtil.copyBasic(UserVO.class, user);
+        assert vo != null;
+        vo.setRole(Role.USER);
+        vo.setCreateTime(user.getCreateTime());
+        vo.setLastOptTime(new Date());
+        vo.setOptContent("查询用户信息");
+        vo.setLoginTime(23);
+        return vo;
+    }
+    public static List<UserVO> generateBy(List<User> userList){
+        List<UserVO> list=new ArrayList<>();
+        for (User u : userList){
+            list.add(generateBy(u));
+        }
+        return list;
+    }
 
     public long getId() {
         return id;
@@ -28,14 +53,6 @@ public class UserVO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public Date getCreateTime() {
@@ -69,4 +86,8 @@ public class UserVO {
     public void setOptContent(String optContent) {
         this.optContent = optContent;
     }
+
+    public Role getRole() {return role;}
+
+    public void setRole(Role role) {this.role = role;}
 }

@@ -1,6 +1,7 @@
 package com.mabao.admin.service;
 
 
+import com.mabao.admin.controller.vo.UserInVO;
 import com.mabao.admin.pojo.User;
 import org.springframework.data.domain.Page;
 
@@ -28,10 +29,10 @@ public interface UserService {
 
     /**
      * 增加用户信息
-     * @param user              用户
+     * @param userInVO              用户
      * @return                  增加的用户
      */
-    User newUser(User user);
+    User newUser(UserInVO userInVO);
     /**
      * 删除用户信息
      * @param userId            用户id
