@@ -167,17 +167,18 @@
 
                         <td>
                             <label>
-                                <input name="allCheck" type="checkbox" class="checkboxes" value="1"/>
+                                <%--<input name="allCheck" type="checkbox" class="checkboxes" value="1"/>--%>
+                                <input name="allCheck" class="checkboxes" value="1"/>
                             </label>
                         </td>
 
                         <td class="typeId"></td>
 
-                        <td></td>
+                        <td class="tName"></td>
 
-                        <td></td>
+                        <td class="tNum"></td>
 
-                        <td></td>
+                        <td class="tQua"></td>
 
                         <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg">编辑</td>
 
