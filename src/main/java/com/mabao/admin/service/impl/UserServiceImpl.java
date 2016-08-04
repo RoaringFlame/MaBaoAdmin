@@ -30,29 +30,17 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 获得所有用户信息
-     * @param page
-     * @param pageSize
-     * @return
-     */
-    @Override
-    public Page<User> getAllUser(int page, int pageSize) {
-        return this.userRepository.findAll(new PageRequest(page, pageSize));
-    }
-
-    /**
      * 修改用户信息
      * @param userInVO                  用户
      * @return                      修改的用户
      */
     @Override
     public User updateUser(UserInVO userInVO) {
-        User user = new User();
-        user.setId(userInVO.getId());
+        User user = this.userRepository.findOne(userInVO.getId());
         user.setName(userInVO.getName());
         user.setPassword(userInVO.getPassword());
-        user.setCreateTime(new Date());
-        user.setEmail("110xg@qq.com");
+        user.setEmail(userInVO.getEmail());
+        user.setPhone(userInVO.getPhone());
         return this.userRepository.saveAndFlush(user);
     }
 
@@ -66,8 +54,9 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(userInVO.getName());
         user.setPassword(userInVO.getPassword());
+        user.setEmail(userInVO.getEmail());
+        user.setPhone(userInVO.getPhone());
         user.setCreateTime(new Date());
-        user.setEmail("110xz@qq.com");
         return this.userRepository.save(user);
     }
 

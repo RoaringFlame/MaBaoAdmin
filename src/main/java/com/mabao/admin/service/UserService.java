@@ -16,12 +16,6 @@ public interface UserService {
     User get(Long userId);
 
     /**
-     *得到所有用户信息
-     * @return
-     */
-    Page<User> getAllUser(int page,int pageSize);
-
-    /**
      * 修改用户信息
      * @param userInVO                  用户
      * @return                      修改的用户
@@ -56,6 +50,5 @@ public interface UserService {
      * @return                         分页Page<User>
      */
     Page<User> searchUserName(String searchKey, int page, int pageSize);
-
 
 }
