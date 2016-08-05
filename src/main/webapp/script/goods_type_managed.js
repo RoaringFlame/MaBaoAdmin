@@ -127,22 +127,38 @@ $(function () {
 
     //4，初始化编辑商品类型
     function initChangeType() {
+
+        params = {
+            searchKey: $("#goodsType").val(),
+            page: page,
+            pageSize: pageSize
+        };
+        $.get("/goodsType/searchGoodsType", params, function (data) {
+
         //编辑是表单初始化
         $(".changeMsg1").click(function () {
 
             $("#submit-btn").attr('data-toggle', 'modal');
 
             var tId = $(this).prevAll(".typeId").text();
+            console.log(tId);
             var tName1 = $(this).prevAll(".tName").text();
-            var tNum1 = $(this).prevAll(".tNum").text();
-            var tQua1 = $(this).prevAll(".tQua").text();
+            var tNum1 = $(this).prevAll(".tNum").text();//商品数量
+            var tQua1 = $(this).prevAll(".tQua").text();//数量单位
+            console.log(data);
+            console.log("bianijxinxi");
+            //有问题
+            if(tId==data.id){
+                var tDes=data.description;
+                console.log(tDes);
+            }
 
             //商品类别名称
             $("#assortmentForm").val(tName1);
             //数量单位的获取
-            $("#assortmentNum").val(tNum1);
+            $("#assortmentNum").val(tQua1);
             //分类描述的获取
-            $("#assortmentDetail").val(tQua1);
+            $("#assortmentDetail").val(tDes);
 
 
             $("#submit-btn").click(function () {
@@ -154,9 +170,9 @@ $(function () {
                 var title = createNewForm.find("textarea[name='assortmentDetail']").val();
                 var params = {
                     id:tId,
-                    typeName: typeNameList,
-                    units: num,
-                    description: title
+                    typeName: typeNameList,//分类名称
+                    units: num,//数量单位
+                    description: title//分类描述
                 };
                 $.ajax({
                     type: 'POST',
@@ -169,6 +185,7 @@ $(function () {
                         $(tableListForm).empty();//表格内容清空
                         initGoodsTypeList();
                         console.log('修改成功！');
+                        console.log(data);
                     },
                     error: function () {
                         console.log('修改失败！');
@@ -177,6 +194,7 @@ $(function () {
                 console.log("取消事件");
                 $("#submit-btn").attr('data-dismiss', 'modal');
             });
+        });
         });
     }
 
