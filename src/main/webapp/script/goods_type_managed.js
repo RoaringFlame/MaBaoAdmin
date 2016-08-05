@@ -133,32 +133,29 @@ $(function () {
             page: page,
             pageSize: pageSize
         };
-        $.get("/goodsType/searchGoodsType", params, function (data) {
 
         //编辑是表单初始化
         $(".changeMsg1").click(function () {
 
+            var tDes;
             $("#submit-btn").attr('data-toggle', 'modal');
 
             var tId = $(this).prevAll(".typeId").text();
-            console.log(tId);
-            var tName1 = $(this).prevAll(".tName").text();
-            var tNum1 = $(this).prevAll(".tNum").text();//商品数量
-            var tQua1 = $(this).prevAll(".tQua").text();//数量单位
-            console.log(data);
-            console.log("bianijxinxi");
-            //有问题
-            if(tId==data.id){
-                var tDes=data.description;
-                console.log(tDes);
-            }
+            //console.log(tId);
+            //var tName1 = $(this).prevAll(".tName").text();
+            //var tNum1 = $(this).prevAll(".tNum").text();//商品数量
+            //var tQua1 = $(this).prevAll(".tQua").text();//数量单位
 
-            //商品类别名称
-            $("#assortmentForm").val(tName1);
-            //数量单位的获取
-            $("#assortmentNum").val(tQua1);
-            //分类描述的获取
-            $("#assortmentDetail").val(tDes);
+            $.get("/goodsType/"+tId,function (data) {
+                //商品类别名称
+                $("#assortmentForm").val(data.typeName);
+                //数量单位的获取
+                $("#assortmentNum").val(data.units);
+                //分类描述的获取
+                $("#assortmentDetail").val(data.description);
+            });
+
+
 
 
             $("#submit-btn").click(function () {
@@ -194,7 +191,6 @@ $(function () {
                 console.log("取消事件");
                 $("#submit-btn").attr('data-dismiss', 'modal');
             });
-        });
         });
     }
 
