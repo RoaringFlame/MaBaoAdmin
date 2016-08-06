@@ -268,7 +268,7 @@
             </div>
             <div class="modal-footer">
                 <button id="dismiss-btn" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button id="submit-btn" type="button" class="btn btn-primary">提交</button>
+                <button id="submit-btn" data-dismiss="modal" type="button" class="btn btn-primary">提交</button>
             </div>
         </div>
     </div>
