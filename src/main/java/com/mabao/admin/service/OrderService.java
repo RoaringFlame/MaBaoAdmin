@@ -37,5 +37,12 @@ public interface OrderService {
      * @param ids               相关订单id的集合
      * @return
      */
-    JsonResultVO deliverSomeGoods(String ids);
+    JsonResultVO changeOrderState(String ids,OrderStatus orderStatus);
+
+    /**
+     * 删除相关订单
+     * @param ids               相关订单id的集合
+     * @return
+     */
+     JsonResultVO deleteSomeOrder(String ids);
 }

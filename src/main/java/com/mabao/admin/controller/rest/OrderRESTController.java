@@ -37,14 +37,14 @@ public class OrderRESTController {
     /**
      * 根据需求查询订单
      * @param orderId               订单号
-     * @param state           订单状态
+     * @param state                 订单状态
      * @param page                  页数
      * @param pageSize              每页大小
      * @return                      GoodsVO的PageVO
      */
     @RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
     public PageVO<OrderOutVO> showSelectGoods(@RequestParam(required = false) Long orderId,
-                                              @RequestParam(required = false) OrderStatus state,
+                                              @RequestParam(required = false) OrderStatus state,        
                                               @RequestParam(required = false,defaultValue = "1") int page,
                                               @RequestParam(required = false,defaultValue = "8") int pageSize) {
         return this.orderService.selectOrder(orderId,state,page,pageSize);
@@ -55,8 +55,20 @@ public class OrderRESTController {
      * @param ids               相关订单id的集合
      * @return
      */
-    @RequestMapping(value = "/deliverSomeGoods", method = RequestMethod.GET)
-    public JsonResultVO deliverSomeGoods(String ids) {
-        return this.orderService.deliverSomeGoods(ids);
+    @RequestMapping(value = "/changeSomeOrder", method = RequestMethod.POST)
+    public JsonResultVO changeSomeGoods(String ids,OrderStatus orderStatus) {
+        return this.orderService.changeOrderState(ids,orderStatus);
     }
+
+    /**
+     * 删除部分订单
+     * @param ids
+     * @return
+     */
+     @RequestMapping(value = "/deleteSomeOrder", method = RequestMethod.POST)
+     public JsonResultVO deleteSomeGoods(String ids) {
+         return this.orderService.deleteSomeOrder(ids);
+     }
+
+
 }

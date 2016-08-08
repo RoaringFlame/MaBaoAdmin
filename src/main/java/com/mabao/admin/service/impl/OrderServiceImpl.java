@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public JsonResultVO deliverSomeGoods(String ids) {
+    public JsonResultVO changeOrderState(String ids,OrderStatus orderStatus) {
         try{
             String[] strs = ids.split(",");
             Long orderId;
@@ -76,12 +76,28 @@ public class OrderServiceImpl implements OrderService {
             for(String id:strs) {
                 orderId = Long.valueOf(id);
                 order = this.orderRepository.findOne(orderId);
-                order.setState(OrderStatus.ToBeReceipt);
+                order.setState(orderStatus);
                 this.orderRepository.saveAndFlush(order);
             }
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
         return new JsonResultVO(JsonResultVO.SUCCESS,"成功修改！");
+    }
+
+    @Override
+    public JsonResultVO deleteSomeOrder(String ids) {
+        try{
+            String[] strs = ids.split(",");
+            Long orderId;
+            Order order;
+            for(String id:strs) {
+                orderId = Long.valueOf(id);
+               this.orderRepository.delete(orderId);
+            }
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"删除修改！");
     }
 }
