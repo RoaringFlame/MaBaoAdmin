@@ -31,8 +31,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public PageVO<OrderOutVO> selectOrder(Long orderId, OrderStatus orderStatus, int page, int pageSize) {
         String JPQL = "select o from Order o ";
-        /*  +"inner join fetch g.type gt "*/
-        String JPQLCount = "select count(g) from Goods g ";
+        String JPQLCount = "select count(o) from Order o ";
         StringBuilder str = new StringBuilder("where 1 = 1 ");
         List<Object> args = new ArrayList<>();
         if (orderId != null ) {
@@ -52,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
         PageVO<OrderOutVO> pageVO = new PageVO<>();
         List<OrderOutVO> list = new ArrayList<>();
         for(Order order:pages.getItems()) {
-           String recipients = this.addressRepository.findOne(order.getId()).getRecipients();
+           String recipients = this.addressRepository.findOne(order.getAddress().getId()).getRecipients();
             OrderOutVO orderOutVO = OrderOutVO.generateBy(order,recipients);
             list.add(orderOutVO);
         }
@@ -78,10 +77,11 @@ public class OrderServiceImpl implements OrderService {
                 orderId = Long.valueOf(id);
                 order = this.orderRepository.findOne(orderId);
                 order.setState(OrderStatus.ToBeReceipt);
+                this.orderRepository.saveAndFlush(order);
             }
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
-        return new JsonResultVO(JsonResultVO.SUCCESS,"成功删除！");
+        return new JsonResultVO(JsonResultVO.SUCCESS,"成功修改！");
     }
 }

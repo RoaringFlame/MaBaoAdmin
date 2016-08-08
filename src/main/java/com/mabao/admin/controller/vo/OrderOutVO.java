@@ -23,6 +23,7 @@ public class OrderOutVO {
         OrderOutVO vo = VoUtil.copyBasic(OrderOutVO.class, order);
         assert vo != null;
         vo.setConsignee(Consignee);
+        vo.setState(order.getState());
         return vo;
     }
 
