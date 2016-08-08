@@ -62,7 +62,7 @@ public class UserRESTController {
 
     /**
      * 选择用户并删除
-     * @param userIds 选择的用户ids
+     * @param userIds           选择的用户ids
      * @return
      */
     @RequestMapping(value = "/deleteSomeUser", method = GET)
@@ -102,7 +102,7 @@ public class UserRESTController {
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
-        return new JsonResultVO(JsonResultVO.SUCCESS,"添加成功！");
+        return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
     }
 
 }

@@ -32,8 +32,11 @@ public class GoodsServiceImpl implements GoodsService {
     private UserService userService;
     @Autowired
     private BaseDao baseDao;
+
     /**
      * 查询商品信息
+     * @param goodsId           商品ID
+     * @return
      */
     @Override
     public Goods get(Long goodsId) {
@@ -41,7 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /**
-     * 保存商品
+     * 修改商品
      * @param goodsInVO        商品对象，需包含用户ID
      * @return                保存的商品对象
      */
@@ -68,7 +71,7 @@ public class GoodsServiceImpl implements GoodsService {
     /**
      * 新建商品
      * @param goodsInVO         商品对象，需包含用户ID
-     * @return              保存的商品对象
+     * @return                  保存的商品对象
      */
     @Override
     public Goods newGoods(GoodsInVO goodsInVO) {
@@ -92,21 +95,13 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      * 获取所有商品信息
+     * @param page                  页数
+     * @param pageSize              每页大小
      * @return
      */
     @Override
     public Page<Goods> getAllGoods(int page, int pageSize) {
         return this.goodsRepository.findAll(new PageRequest(page, pageSize));
-    }
-
-    /**
-     * 根据商品ID查商品list
-     * @param goodsIdList           商品ID集合
-     * @return                      商品list
-     */
-    @Override
-    public List<Goods> findGoodsByIdIn(String goodsIdList) {
-        return this.goodsRepository.findByIdIn(goodsIdList);
     }
 
     /**

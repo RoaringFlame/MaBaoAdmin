@@ -29,7 +29,7 @@ public interface UserService {
      */
     User newUser(UserInVO userInVO);
     /**
-     * 删除用户信息
+     * 删除用户信息（需求更改预留接口）
      * @param userId            用户id
      * @return                  删除用户
      */

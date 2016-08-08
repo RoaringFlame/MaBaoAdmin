@@ -51,7 +51,7 @@ public class OrderRESTController {
     }
 
     /**
-     * 根据id给相关订单发货
+     * 根据给定ids相关相关订单状态
      * @param ids               相关订单id的集合
      * @return
      */
@@ -62,7 +62,7 @@ public class OrderRESTController {
 
     /**
      * 删除部分订单
-     * @param ids
+     * @param ids               相关订单id的集合
      * @return
      */
      @RequestMapping(value = "/deleteSomeOrder", method = RequestMethod.POST)

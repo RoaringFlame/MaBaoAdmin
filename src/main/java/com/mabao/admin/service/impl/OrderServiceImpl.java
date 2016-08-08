@@ -28,6 +28,14 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    /**
+     * 根据需求查询订单
+     * @param orderId               订单号
+     * @param orderStatus           订单状态
+     * @param page                  页数
+     * @param pageSize              每页大小
+     * @return
+     */
     @Override
     public PageVO<OrderOutVO> selectOrder(Long orderId, OrderStatus orderStatus, int page, int pageSize) {
         String JPQL = "select o from Order o ";
@@ -62,11 +70,23 @@ public class OrderServiceImpl implements OrderService {
         return pageVO;
     }
 
+    /**
+     * 高级查询
+     * @param page                  页数
+     * @param pageSize              每页大小
+     * @return
+     */
     @Override
     public PageVO<OrderOutVO> advancedQuery(int page, int pageSize) {
         return null;
     }
 
+    /**
+     * 根据给定ids相关相关订单状态
+     * @param ids               相关订单id的集合
+     * @param orderStatus
+     * @return
+     */
     @Override
     public JsonResultVO changeOrderState(String ids,OrderStatus orderStatus) {
         try{
@@ -85,6 +105,11 @@ public class OrderServiceImpl implements OrderService {
         return new JsonResultVO(JsonResultVO.SUCCESS,"成功修改！");
     }
 
+    /**
+     *  删除部分订单
+     * @param ids               相关订单id的集合
+     * @return
+     */
     @Override
     public JsonResultVO deleteSomeOrder(String ids) {
         try{
