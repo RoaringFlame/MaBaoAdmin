@@ -8,6 +8,7 @@ import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsBrand;
 import com.mabao.admin.repository.BaseDao;
 import com.mabao.admin.repository.GoodsRepository;
+import com.mabao.admin.service.GoodsBrandService;
 import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.UserService;
 import com.mabao.admin.util.PageVO;
@@ -25,6 +26,8 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsRepository goodsRepository;
+    @Autowired
+    private GoodsBrandService goodsBrandService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -44,23 +47,22 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public Goods saveGoods(GoodsInVO goodsInVO) {
-        Goods goods = new Goods();
-        goods.setTitle(goodsInVO.getTitle());                                      //商品名称
+        Goods goods = this.goodsRepository.findOne(goodsInVO.getId());
+        goods.setTitle(goodsInVO.getTitle());                                   //商品名称
         goods.setPrice(goodsInVO.getPrice());                                   //价格
         goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
-        goods.setUpTime(new Date());                           //上传时间呗设定为购买时间
+        goods.setUpTime(new Date());                                            //上传时间呗设定为购买时间
         goods.setId(goodsInVO.getId());
 
-        goods.setUser(this.userService.get(1L));            //userId
+        /*goods.setUser(this.userService.get(1L));            //userId
         goods.setOldPrice(new Double(20));                                      //旧的价格
         goods.setState(true);                                                   //设置状态为true
-        GoodsBrand brand = new GoodsBrand();                                    //设置假数据
-        brand.setBrandName("hhhh3");
+        GoodsBrand brand =this.goodsBrandService.get(8L);                                   //设置假数据
         goods.setBrand(brand);                                                  //设置商品品牌
         goods.setBrandName(brand.getBrandName());                             //设置品牌名称
-        goods.setBabyType(BabyType.MEN);                                        //设置适合宝宝为男
-        return this.goodsRepository.save(goods);
+        goods.setBabyType(BabyType.MEN);                                        //设置适合宝宝为男*/
+        return this.goodsRepository.saveAndFlush(goods);
     }
 
     /**
@@ -75,18 +77,17 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setPrice(goodsInVO.getPrice());                                   //价格
         goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
-        goods.setUpTime(new Date());                           //上传时间呗设定为购买时间
+        goods.setUpTime(new Date());                                            //上传时间呗设定为购买时间
 
-        goods.setUser(this.userService.get(1L));            //userId
+        goods.setUser(this.userService.get(1L));                                //userId
         goods.setOldPrice(new Double(20));                                      //旧的价格
         goods.setState(true);                                                   //设置状态为true
-        GoodsBrand brand = new GoodsBrand();                                    //设置假数据
-        brand.setId(new Long(1));
-        brand.setBrandName("hhh3");
+        GoodsBrand brand =this.goodsBrandService.get(8L);                       //设置假数据
+        brand.setBrandName(brand.getBrandName());
         goods.setBrand(brand);                                                  //设置商品品牌
-        goods.setBrandName(brand.getBrandName());                             //设置品牌名称
+        goods.setBrandName(brand.getBrandName());                               //设置品牌名称
         goods.setBabyType(BabyType.MEN);                                        //设置适合宝宝为男
-        return this.goodsRepository.saveAndFlush(goods);
+        return this.goodsRepository.save(goods);
     }
 
     /**
