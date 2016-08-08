@@ -12,22 +12,19 @@ $(function () {
     var currentPage = 0;                                                  //当前页数
     var totalPage = 1;                                                    //总页数
     var pageSize = 7;                                                     //页面记录个数
-    var typeName;                                                         //商品类别
+    var goodsTypeId;                                                         //商品类别
     var goodsPublish;                                                     //商品状态（是否上架）
     var goodsName;                                                        //商品名称
-    var goodsId;                                                          //商品货号
+    var goodsNum;                                                          //商品货号
     var state;                                                            //商品状态
     var goodsForm = $("#frmGoods");                                       //商品表单
 
     //获取搜索条件
     function getSearchItem() {
-        typeName = $("#goodsType option:selected").text();                      //获取选中的商品类别
+        goodsTypeId = $("#goodsType option:selected").key;                      //获取选中的商品类别
         goodsPublish = $("#goodsPublish option:selected").text();               //获取选中的商品状态（是否上架）
         goodsName = $("#goodsName").val();                                      //获取商品名称
-        goodsId = $("#goodsId").val();                                          //获取商品货号
-        if (typeName == "所有类别") {
-            typeName = "";                                                       //如果类型是所有类别商品类别的值设为空
-        }
+        goodsNum = $("#goodsId").val();                                          //获取商品货号
         if (goodsPublish == "上架") {
             state = true;                                                       //如果状态为上架，传给接口参数state值为true
         } else if (goodsPublish == "下架") {
@@ -75,13 +72,19 @@ $(function () {
 
     //商品列表初始化
     function initGoodsList(currentPage, pageSize) {
+        getSearchItem();
         var params = {
+            goodsTypeId:goodsTypeId,
+            state:state,
+            title:goodsName,
+            articleNumber:goodsNum,
             page: currentPage,                        //当前页数
             pageSize: pageSize,                       //每页记录条数
         };
         if (currentPage < totalPage) {
-            $.get("/goods/goodsList", params, function (data) {
+            $.get("/goods/searchGoods", params, function (data) {
                 var goodsList = data.items;                                     //获取所有商品信息
+                console.log(goodsList);
                 totalPage = data.totalPage;                                     //获取总页数
                 $(goodsList).each(function (index, goods) {
                     var goodsInfo = $("#goodsContainer").clone();               //克隆一条商品记录
@@ -110,6 +113,15 @@ $(function () {
         }
     }
 
+    //根据搜索条件查找商品
+    function searchGoods(){
+        getSearchItem();
+        var params = {
+            goodsTypeId:goodsTypeId,
+            page: currentPage,                        //当前页数
+            pageSize: pageSize                       //每页记录条数
+        };
+    }
 
     //商品详情表单取消按钮
     function cancelForm() {
@@ -174,10 +186,11 @@ $(function () {
                 data: JSON.stringify(params),
                 success: function () {
                     cancelForm();
-                    initGoodsList(totalPage-1,pageSize);
+                    $(".container").empty();
+                    initGoodsList(currentPage,pageSize);
                 },
                 error: function () {
-                    alert('Err...');
+                    alert("添加商品失败！");
                 }
             });
 
@@ -214,10 +227,12 @@ $(function () {
                 dataType: 'json',
                 data: JSON.stringify(params),
                 success: function () {
+                    cancelForm();
+                    $(".container").empty();
                     initGoodsList(currentPage,pageSize);
                 },
                 error: function () {
-                    alert('Err...');
+                    alert("修改商品失败！");
                 }
             });
         });
