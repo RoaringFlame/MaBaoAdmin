@@ -48,7 +48,7 @@ public class OrderRESTCont {
                                            @RequestParam(required = false) OrderStatus state,
                                            @RequestParam(required = false,defaultValue = "1") int page,
                                            @RequestParam(required = false,defaultValue = "8") int pageSize) {
-        return this.orderService.selectOrder(orderId,Consignee,state,page,pageSize);
+        return this.orderService.selectOrder(orderId,state,page,pageSize);
     }
 
     /**
