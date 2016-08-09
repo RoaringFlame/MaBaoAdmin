@@ -200,7 +200,7 @@
                         <input type="text" class="form-control" id="goodsId" placeholder="货号"
                                aria-describedby="basic-addon1">
                     </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default" id="search">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
@@ -236,6 +236,7 @@
                 </tr>
 
                 </thead>
+
                 <tr class="odd gradeX" id="goodsContainer" style="display: none;">
                     <td class="check">
                         <label>
@@ -263,6 +264,7 @@
                         编辑
                     </td>
 
+                    <td id="id" style="display: none">1</td>
                 </tr>
 
                 <tbody class="container">
