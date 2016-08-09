@@ -20,8 +20,9 @@ public class GoodsInVO {
     private Quality newDegree;                      //新旧程度，0表示全新，95，80分别表示95成8成新
     private String message;                         //卖家分享
     private Double price;                           //现价
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//存日期时使用
+    @DateTimeFormat(pattern = "yyyy-MM-dd")         //存日期时使用
     private Date purchaseTime;                      //购买时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseTime;                       //保质期时间
     private String  goodsIntroduction;              //商品介绍
 
@@ -32,7 +33,7 @@ public class GoodsInVO {
         vo.setUser_id(goods.getUser().getId());
         vo.setPurchaseTime(goods.getUpTime());
         vo.setReleaseTime(goods.getUpTime());
-        vo.setGoodsIntroduction("hhh3");
+        vo.setGoodsIntroduction("hhhdsfs3");
         return vo;
     }
     public static List<GoodsInVO> generateBy(List<Goods> goodsList){

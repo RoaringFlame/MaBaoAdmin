@@ -78,11 +78,11 @@ public class GoodsRESTController {
     }
 
     /**
-     * 修改商品信息
+     * 修改商品信息@RequestBody
      * @param goodsInVO             传入商品
      */
     @RequestMapping(value = "/updateGoods", method = RequestMethod.POST)
-    public JsonResultVO updateGoods(@RequestBody GoodsInVO goodsInVO) {
+    public JsonResultVO updateGoods( GoodsInVO goodsInVO) {
         try{
             this.goodsService.saveGoods(goodsInVO);
         }catch (Exception e){

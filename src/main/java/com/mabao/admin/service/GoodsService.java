@@ -24,15 +24,15 @@ public interface GoodsService {
 
     /**
      * 保存商品
-     * @param goodsInVO        商品对象，需包含用户ID
-     * @return                保存的商品对象
+     * @param goodsInVO         商品对象，需包含用户ID
+     * @return                  保存的商品对象
      */
     Goods saveGoods(GoodsInVO goodsInVO);
 
     /**
      * 新建商品
      * @param goodsInVO         商品对象，需包含用户ID
-     * @return              保存的商品对象
+     * @return                  保存的商品对象
      */
     Goods newGoods(GoodsInVO goodsInVO);
 
@@ -42,15 +42,9 @@ public interface GoodsService {
      */
     Page<Goods> getAllGoods(int page, int pageSize);
 
-    /**
-     * 根据商品ID查商品list
-     * @param goodsIdList           商品ID集合
-     * @return                      商品list
-     */
-    List<Goods> findGoodsByIdIn(String goodsIdList);
 
     /**
-     * 删除商品
+     * 删除商品（需求预留接口）
      * @param goodsId               删除商品的id
      */
     JsonResultVO deleteGoods(Long goodsId);
@@ -58,7 +52,7 @@ public interface GoodsService {
 
     /**
      * 根据需求查询商品
-     * @param goodsTypeId                     商品类别
+     * @param goodsTypeId                   商品类别
      * @param state                         商品状态
      * @param title                         商品名称
      * @param articleNumber                 商品货号
@@ -72,13 +66,13 @@ public interface GoodsService {
 
     /**
      * 删除选中的商品
-     * @param ids               多个商品id的字符串
+     * @param ids               多个商品id的字符串集合
      */
     JsonResultVO deleteSomeGoods(String ids);
 
     /**
-     * 根据穿额度状态改变一些商品的状态
-     * @param ids               需要改变状态商品的id集合字符串
+     * 根据ids改变一些商品的状态
+     * @param ids               需要改变状态商品的id字符串集合
      * @param state             需要改成的状态值
      */
     JsonResultVO changeGoodsState(String ids, Boolean state);

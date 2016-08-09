@@ -2,7 +2,6 @@ package com.mabao.admin.service;
 
 
 import com.mabao.admin.controller.vo.UserInVO;
-import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.pojo.User;
 import org.springframework.data.domain.Page;
 
@@ -14,12 +13,6 @@ public interface UserService {
      * @return                  用户对象
      */
     User get(Long userId);
-
-    /**
-     *得到所有用户信息
-     * @return
-     */
-    Page<User> getAllUser(int page,int pageSize);
 
     /**
      * 修改用户信息
@@ -35,7 +28,7 @@ public interface UserService {
      */
     User newUser(UserInVO userInVO);
     /**
-     * 删除用户信息
+     * 删除用户信息（需求更改预留接口）
      * @param userId            用户id
      * @return                  删除用户
      */
@@ -56,6 +49,5 @@ public interface UserService {
      * @return                         分页Page<User>
      */
     Page<User> searchUserName(String searchKey, int page, int pageSize);
-
 
 }
