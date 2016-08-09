@@ -1,7 +1,6 @@
 package com.mabao.admin.service.impl;
 
 import com.mabao.admin.controller.vo.UserInVO;
-import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.repository.UserRepository;
 import com.mabao.admin.service.UserService;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 
 @Service

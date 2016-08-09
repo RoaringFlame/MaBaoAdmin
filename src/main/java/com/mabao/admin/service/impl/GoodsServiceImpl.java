@@ -46,17 +46,17 @@ public class GoodsServiceImpl implements GoodsService {
     /**
      * 修改商品
      * @param goodsInVO        商品对象，需包含用户ID
-     * @return                保存的商品对象
+     * @return                  保存的商品对象
      */
     @Override
     public Goods saveGoods(GoodsInVO goodsInVO) {
-        Goods goods = this.goodsRepository.findOne(goodsInVO.getId());
+        Long id = goodsInVO.getId();
+        Goods goods = this.goodsRepository.findOne(id);
         goods.setTitle(goodsInVO.getTitle());                                   //商品名称
         goods.setPrice(goodsInVO.getPrice());                                   //价格
         goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
         goods.setUpTime(new Date());                                            //上传时间呗设定为购买时间
-        goods.setId(goodsInVO.getId());
 
         /*goods.setUser(this.userService.get(1L));            //userId
         goods.setOldPrice(new Double(20));                                      //旧的价格

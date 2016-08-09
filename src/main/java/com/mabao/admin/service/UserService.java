@@ -2,7 +2,6 @@ package com.mabao.admin.service;
 
 
 import com.mabao.admin.controller.vo.UserInVO;
-import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.pojo.User;
 import org.springframework.data.domain.Page;
 

@@ -1,13 +1,10 @@
 package com.mabao.admin.controller.vo;
 
 import com.mabao.admin.enums.OrderStatus;
-import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.pojo.Order;
 import com.mabao.admin.util.VoUtil;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by lies on 2016/8/8.
