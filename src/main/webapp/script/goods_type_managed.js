@@ -9,11 +9,11 @@ $(function () {
     //新建类别表单div的获取
     var createNewForm = $("#createNewForm");
     //当前页面
-    var page = 1;
+    var page=1;
     //每页展示的信息数目
     var pageSize = 7;
     //总页数
-    var totalPage = 1;
+    var totalPage=1;
     //列表格式隐藏
     var hideGoods = $("#hideGoods").find("tr");
     //商品类型列表
@@ -30,12 +30,11 @@ $(function () {
     function initCreateType() {
         //判断点击按钮为新建
         $("#createNew").find("a").click(function () {
-            //新建页面点击取消按钮的控制
-            $("#dismiss-btn").click(function () {
-                //取消事件清除输入的内容
-                $("#exampleModal").find("input,textarea").val("");
-            });
-            //新建页面点击提交按钮的控制
+            //$("#submit-btn1").attr("disable", "true")       //提交新建表单按钮隐藏且不可用
+            //    .hide();
+            //$("#submit-btn").attr("disable", "false")      //提交编辑表单按钮隐藏且不可用
+            //    .show();
+            ////新建页面点击提交按钮的控制
             $("#submit-btn").click(function () {
                 var typeNameList = createNewForm.find("input[name='typeName']").val();
                 //数量单位的获取
@@ -56,7 +55,6 @@ $(function () {
                         dataType: 'json',
                         data: JSON.stringify(params),
                         success: function (data) {
-                            $(tableListForm).empty();//表格内容清空
                             initGoodsTypeList();
                             window.location.reload();
                         },
@@ -67,8 +65,6 @@ $(function () {
                 } else {
                     alert('数据不完整！');
                 }
-                console.log("取消事件");
-                $("#submit-btn").attr('data-dismiss', 'modal');
                 alert(data.message);
                 typeNameList = createNewForm.find("input[name='typeName']").val();
                 //数量单位的获取
@@ -80,6 +76,13 @@ $(function () {
         });
     }
 
+    function initDismisbtn(){
+        //点击取消按钮的控制
+        $("#dismiss-btn").click(function () {
+            //取消事件清除输入的内容
+            $("#exampleModal").find("input,textarea").val("");
+        });
+    }
     //选中所有的实现
     function initCheckBoxAll() {
         $("#textSearch").click(function () {
@@ -103,10 +106,10 @@ $(function () {
                 $.get("/goodsType/deleteSomeGoodsType", {ids: goodsIds}, function (data) {
                     $(this).parents("tr").remove();//从页面删除选中内容
                 });
+                window.location.reload();
             } else {
                 alert("请至少选择一项才能进行删除操作！");//如果没有选中项提示没有选中不能删除
             }
-            window.location.reload();
         });
     }
 
@@ -114,8 +117,6 @@ $(function () {
     function initSearchKey() {
         //输入关键字，点击搜索按钮实现搜索，页面重新加载为搜索页面
         $("#searchByType").click(function () {
-            console.log("搜索开始");
-            console.log($("#goodsType").val());
             $(tableListForm).empty();//表格内容清空
             initGoodsTypeList();
         });
@@ -127,7 +128,7 @@ $(function () {
         //编辑是表单初始化
         $(".changeMsg1").click(function () {
             //获取编辑按钮点击的数据id
-            var tId = $(this).prevAll(".typeId").text();
+            var tId = $(this).prevAll(".typeId1").text();
             $.get("/goodsType/"+tId,function (data) {
                 //商品类别名称
                 $("#assortmentForm").val(data.typeName);
@@ -136,6 +137,10 @@ $(function () {
                 //分类描述的获取
                 $("#assortmentDetail").val(data.description);
             });
+            //$("#submit-btn").attr("disable", "true")       //提交新建表单按钮隐藏且不可用
+            //    .hide();
+            //$("#submit-btn1").attr("disable", "false")      //提交编辑表单按钮隐藏且不可用
+            //    .show();
             //提交按钮的点击事件
             $("#submit-btn").click(function () {
                 //商品类型的获取
@@ -148,7 +153,7 @@ $(function () {
                     id:tId,
                     typeName: typeNameList,//分类名称
                     units: num,//数量单位
-                    description: title//分类描述
+                    description: title //分类描述
                 };
                 $.ajax({
                     type: 'POST',
@@ -158,7 +163,6 @@ $(function () {
                     dataType: 'json',
                     data: JSON.stringify(params),
                     success: function (data) {
-                        $(tableListForm).empty();//表格内容清空
                         initGoodsTypeList();
                         window.location.reload();
                     },
@@ -166,8 +170,6 @@ $(function () {
                         console.log('修改失败！');
                     }
                 });
-                //清空新建的内容
-                //$("#exampleModal").find("input,textarea").val("");
             });
         });
     }
@@ -186,15 +188,18 @@ $(function () {
                 var typeList = hideGoods.clone();
                 typeList.find("input[name='allCheck']").attr('type', 'checkbox');
                 //编号数值展示
-                typeList.find("td:eq(1)").text(goodsType.id);
+                typeList.find("td:eq(1)").text(index+1);
                 //商品类别展示
                 typeList.find("td:eq(2)").text(goodsType.typeName);
                 //商品数量展示
                 typeList.find("td:eq(3)").text(goodsType.goodsNumber);
                 //数量单位展示
                 typeList.find("td:eq(4)").text(goodsType.units);
+                typeList.find("td:eq(5)").text(goodsType.id);
                 tableListForm.append(typeList);
+
             });
+            $("#pageShow").text(page);
             initChangeType();
         });
     }
@@ -267,6 +272,8 @@ $(function () {
         initSearchKey();
         //4，初始化编辑商品类型
         initChangeType();
+        //取消按钮的控制
+        initDismisbtn();
     }
 
     //8，初始化函数

@@ -180,6 +180,8 @@
 
                         <td class="tQua"></td>
 
+                        <td class="typeId1 hide"></td>
+
                         <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg1">编辑</td>
 
                     </tr>
@@ -229,6 +231,7 @@
         <input type=button id="btn2" value="上一页">
         <input type=button id="btn3" value="下一页" >
         <input type=button id="btn4" value="尾页" >
+        <span >当前页：</span><a id="pageShow"></a>
     </div>
     <!--分页end-->
 
@@ -269,6 +272,7 @@
             <div class="modal-footer">
                 <button id="dismiss-btn" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button id="submit-btn" data-dismiss="modal" type="button" class="btn btn-primary">提交</button>
+                <%--<button id="submit-btn1" data-dismiss="modal" type="button" class="btn btn-primary" style="display: none">提交</button>--%>
             </div>
         </div>
     </div>
