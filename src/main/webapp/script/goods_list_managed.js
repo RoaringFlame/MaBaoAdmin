@@ -104,7 +104,6 @@ $(function () {
                 //编辑商品按钮
                 $(".edit").click(function () {
                     var goodsId = $(this).next("td").text();            //获取当前商品的id
-                    alert(goodsId);
                     initUpdateGoodsForm(goodsId);                                 //初始化表单
                     $(".modal-footer button:eq(1)").attr("disable", "true")       //提交新建表单按钮隐藏且不可用
                         .hide();

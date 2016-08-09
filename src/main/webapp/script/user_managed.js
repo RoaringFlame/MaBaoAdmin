@@ -3,7 +3,7 @@
  */
 "user strict";
 $(function () {
-    var currentPage = 0;
+    var currentPage = 1;
     var totalPage = 1;
     var pageSize = 7;
     //角色名下拉框初始化
@@ -24,8 +24,8 @@ $(function () {
             page: currentPage,                        //当前页数
             pageSize: pageSize,                       //每页记录条数
         };
-        if (currentPage < totalPage) {
-            $.get("/user/list", params, function (data) {
+        if (currentPage <=totalPage) {
+            $.get("/user/searchUserName", params, function (data) {
                 var userList = data.items;                                     //获取所有商品信息
                 console.log(userList);
                 totalPage = data.totalPage;                                     //获取总页数
@@ -33,14 +33,14 @@ $(function () {
                     var userInfo = $("#userContainer").clone();               //克隆一条商品记录
                     userInfo.show();
                     userInfo.find("input[type='checkbox']").attr("name", "checkBox");
-                    userInfo.find("td:eq(1)").text(user.id);                   //给该条商品信息赋值商品id
-                    userInfo.find("td:eq(2)").text(user.name);               //给该条商品信息赋值商品时间
-                    userInfo.find("td:eq(3)").text(user.role);             //给该条商品信息赋值商品类别
-                    userInfo.find("td:eq(4)").text(user.createTime);                //给该条商品信息赋值商品名称
-                    userInfo.find("td:eq(5)").text(user.loginTime);        //给该条商品信息赋值商品货号
-                    userInfo.find("td:eq(6)").text(user.lastOptTime);                //给该条商品信息赋值商品价格
-                    userInfo.find("td:eq(7)").text(user.optContent);          //给该条商品信息赋值商品库存
-                    $("#container").append(userInfo);                           //在表单中添加商品记录
+                    userInfo.find("td:eq(1)").text(user.id);                   //给该条商品信息赋值工号
+                    userInfo.find("td:eq(2)").text(user.name);               //给该条商品信息赋值姓名
+                    userInfo.find("td:eq(3)").text(user.role);             //给该条商品信息赋值角色
+                    userInfo.find("td:eq(4)").text(user.createTime);                //给该条商品信息赋值创建时间
+                    userInfo.find("td:eq(5)").text(user.loginTime);        //给该条商品信息赋值登录次数
+                    userInfo.find("td:eq(6)").text(user.lastOptTime);                //给该条商品信息赋值最后操作时间
+                    userInfo.find("td:eq(7)").text(user.optContent);          //给该条商品信息赋值操作内容
+                    $("#container").append(userInfo);                           //在表单中添加用户记录
                 });
                 //编辑商品按钮
                 $(".edit").click(function () {
