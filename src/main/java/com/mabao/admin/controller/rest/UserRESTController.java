@@ -100,4 +100,13 @@ public class UserRESTController {
         return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
     }
 
+    /**
+     * 修改时用户信息回现
+     * @param userId            用户id
+     * @return
+     */
+    @RequestMapping(value = "/getUser", method = GET)
+    public UserVO getUser(@RequestParam Long userId) {
+        return UserVO.generateBy(this.userService.get(userId));
+    }
 }

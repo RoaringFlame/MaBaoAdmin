@@ -73,8 +73,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void deleteSomeUser(String userIds) {
-        String[] ids = userIds.split(",");
-        System.out.print(ids[0]);
+        String[] ids = userIds.trim().split(",");
         for(String id:ids) {
             this.userRepository.delete(Long.valueOf(id));
         }

@@ -24,6 +24,7 @@ public class UserVO {
     public static UserVO generateBy(User user){
         UserVO vo = VoUtil.copyBasic(UserVO.class, user);
         assert vo != null;
+        vo.setId(user.getId());
         vo.setRole(Role.USER);
         vo.setCreateTime(user.getCreateTime());
         vo.setLastOptTime(new Date());
