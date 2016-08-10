@@ -5,7 +5,9 @@
 $(function () {
     var currentPage = 1;
     var totalPage = 1;
-    var pageSize = 2;
+    var pageSize = 4;
+    var userRole = "";
+    var userName = "";
     //角色名下拉框初始化
     function initRoleDropDownList() {
         $.get("/user", {}, function (data) {
@@ -18,8 +20,23 @@ $(function () {
         });
     }
 
+    //获取用户搜索条件
+    function getSearchItem() {
+        userRole = $("#userType option:selected").val();                      //获取选中的商品类别
+        userName = $("#userName").val();                                      //获取商品名称
+    }
+
+    //根据搜索条件查找用户
+    function searchUser() {
+        $("#container").empty();
+        getSearchItem();
+        currentPage=1;
+        initUserList();
+    }
+
+    //时间格式化方法
     function getLocalTime(jsondate) {
-        jsondate = "" + jsondate + "";                                    //因为jsonDate是number型的indexOf会报错
+        jsondate = "" + jsondate + "";                    //因为jsonDate是number型的indexOf会报错
         if (jsondate.indexOf("+") > 0) {
             jsondate = jsondate.substring(0, jsondate.indexOf("+"));
         }
@@ -39,7 +56,8 @@ $(function () {
     function initUserList() {
         var params = {
             page: currentPage,                        //当前页数
-            pageSize: pageSize
+            pageSize: pageSize,                       //页面大小
+            searchKey:userName                        //用户名称
         };
         if (currentPage <= totalPage) {
             $.get("/user/searchUserName", params, function (data) {
@@ -76,19 +94,17 @@ $(function () {
     function initUpdateUserForm(userId) {
         $.get("user/getUser", {userId: userId}, function (data) {
             console.log(data);
-            $(this).parent().find("td:eq(1)").val(data.id);                      //在表单上显示当前商品的标题
-            $("#goodsPriceForm").val(data.price);                     //在表单上显示当前商品的价格
-            $("#goodsDateForm").val(data.purchaseTime);              //在表单上显示当前商品的购买日期
-            $("#goodsEndDateForm").val(data.releaseTime);            //在表单上显示当前商品的保质期
-            $("#goodsDegreeForm").val(data.newDegree);               //在表单上显示当前商品的新旧程度
-            $("#goodsInfoForm").val(data.goodsIntroduction);        //在表单上显示当前商品的商品介绍
-            $("#goodsDetailForm").val(data.message);                //在表单上显示当前商品的商品信息
-            $("#goodsIdForm").val(data.id);
+            $("#assortmentForm").val(data.id);                       //工号
+            $("#categoryParent").val();                              //密码
+            $("#assortmentDetail").val(data.name);                   //用户名
+            $("#userTel").val(data.phone);                           //电话
+            $("#userEmail").val(data.email);                         //邮箱
+
         });
     }
 
     //删除用户信息
-    function deleteGoods() {
+    function deleteUser() {
         var userIds = "";
         $("input[name='checkBox']:checked").each(function () {                    //遍历选中的checkbox
             var userId = $(this).parent().parent().parent().find("td:eq(1)").text();
@@ -116,7 +132,7 @@ $(function () {
         $("#btn1").click(function () {
             currentPage = 1;                               //点击首页时参数currentPage为0
             $("#container").empty();                       //清空表单数据
-            initUserList(currentPage, pageSize);          //传参并调用初始化表单方法
+            initUserList(currentPage, pageSize);           //传参并调用初始化表单方法
         });
 
         //点击上一页
@@ -151,7 +167,71 @@ $(function () {
         });
     }
 
+    //点击新增用户表单页面提交按钮
+    $(".modal-footer button:eq(1)").click(function () {
+        var password = $("#categoryParent").val();                  //密码
+        var name = $("#assortmentDetail").val();                    //用户名
+        var phone = $("#userTel").val();                            //电话
+        var email = $("#userEmail").val();                          //邮箱
+        var addParams = {
+            name: name,
+            password: password,
+            phone: phone,
+            email: email
+        };
+        if (newUserCheck(addParams) == 1) {
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/user/addUser',
+            processData: false,
+            dataType: 'json',
+            data: JSON.stringify(addParams),
+            success: function () {
+                $("#container").empty();
+                initUserList(currentPage, pageSize);
+            },
+            error: function () {
+                alert("添加用户失败！");
+            }
+        });
+    }
+    });
+
+    //新建用户校验
+    function newUserCheck(addParams) {
+        if(addParams.email !== "" && addParams.name !== "" && addParams.password !== "" && addParams.phone !== "") {
+            var confirmPassword = $("#assortmentNum").val();             //确认密码
+            if(confirmPassword !== addParams.password) {
+                alert("您输入前后密码不一致！");
+                return 0;
+            }
+            if(addParams.email.search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/) !== 0) {
+                alert("您的邮箱格式有问题！");
+                return 0;
+            }
+            return 1;
+        }   else {
+            alert("请完善您的信息后再提交！");
+        }
+    }
+
     function init() {
+        //点击第一行的复选框控制全选和全不选
+        $("#selectAll").click(function () {
+            $("input[name='checkBox']").prop("checked", $(this).prop("checked"));                 //所有的付款框的状态和第一行复选框状态一致
+        });
+        //点击搜索按钮事件
+        $("#search").click(function () {
+            searchUser();
+        });
+        //新建用户按钮
+        $(".btn-toolbar a").click(function () {
+            $(".modal-footer button:eq(2)").attr("disable", "true")        //点击新建按钮表单内第二个按钮隐藏且不可用
+                .hide();
+            $(".modal-footer button:eq(1)").attr("disable", "false")       //点击新建按钮表单内第一个按钮显示且可用
+                .show();
+        });
         //角色名下拉框初始化
         initRoleDropDownList();
         //初始化员工信息列表
@@ -160,7 +240,7 @@ $(function () {
         initPageBtn();
         //点击删除按钮实现删除
         $(".deleteUser").click(function () {
-            deleteGoods();
+            deleteUser();
         });
     }
 

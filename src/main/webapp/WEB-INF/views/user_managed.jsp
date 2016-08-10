@@ -166,7 +166,7 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default" id="search">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
@@ -176,7 +176,7 @@
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input  id="selectAll" type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </th>
                     <th>工号</th>
@@ -271,7 +271,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-group  ">
+                <form class="form-group ">
                     <label for="assortmentForm" class="control-label text-left label-half">工号:
                         <input type="text" class="form-control" id="assortmentForm">
                     </label>
@@ -297,7 +297,7 @@
                     </label>
                     <span class="red ">*</span>
 
-                    <label for="userEmail" class="control-label text-left label-half">邮件:
+                    <label for="userEmail" class="control-label text-left label-half">邮箱:
                         <input type="text" class="form-control" id="userEmail">
                     </label>
                     <span class="red ">*</span>
@@ -312,12 +312,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" style="display: none">提交</button>
             </div>
         </div>
     </div>
 </div>
-<!--用户表单END-->
+<!--用户表单ENDuser_managed.html-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../script/lib/jquery.1.10.2.js"></script>
