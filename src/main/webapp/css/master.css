@@ -29,10 +29,10 @@
     width:400px;
     margin: 200px auto;
     height: auto;
-    padding:40px 40px 40px 15px ;
+    padding:20px;
     border: 1px solid #ddd;
     border-radius: .4rem;
-    background-color: #e2f7fb;
+    /*background-color: #e2f7fb;*/
 }
 .second-level-menu {
     background-color: #fff;
