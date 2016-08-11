@@ -56,20 +56,6 @@ public class GoodsTypeRESTController {
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * 获取商品分类信息
-     * @param goodsTypeId
-     * @return
-     */
-    @RequestMapping(value = "/{goodsTypeId}",method = RequestMethod.GET)
-    public GoodsTypeVO findOneGoodsType(@PathVariable Long goodsTypeId) {
-        return this.goodsTypeService.findOneGoodsType(goodsTypeId);
-    }
-
-
-    /**
->>>>>>> dev
      * 修改商品类别
      * @param goodsTypeVO       商品类型信息
      * @return                  结果VO
