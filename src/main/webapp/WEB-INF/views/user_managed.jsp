@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -46,7 +47,7 @@
             <!-- 商标END  -->
 
         </div>
-        <!-- 导航切换END  -->
+        <!-- 导航切换END  goods_list_managed.html-->
 
         <!-- 导航链接-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -165,7 +166,7 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default" id="search">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
@@ -175,7 +176,7 @@
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input  id="selectAll" type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </th>
                     <th>工号</th>
@@ -235,17 +236,17 @@
             <nav>
                 <ul class="pagination">
                     <li>
-                        <a href="#" aria-label="Previous">
+                        <a  aria-label="Previous" id="btn2">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
+                    <li><a id="btn1">首页</a></li>
+                   <%-- <li class="active"><a  >1</a></li>
+                    <li><a >3</a></li>
+                    <li><a >4</a></li>--%>
+                    <li><a id="btn4">末页</a></li>
                     <li>
-                        <a href="#" aria-label="Next">
+                        <a aria-label="Next" id="btn3">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -270,7 +271,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-group  ">
+                <form class="form-group ">
                     <label for="assortmentForm" class="control-label text-left label-half">工号:
                         <input type="text" class="form-control" id="assortmentForm">
                     </label>
@@ -296,7 +297,7 @@
                     </label>
                     <span class="red ">*</span>
 
-                    <label for="userEmail" class="control-label text-left label-half">邮件:
+                    <label for="userEmail" class="control-label text-left label-half">邮箱:
                         <input type="text" class="form-control" id="userEmail">
                     </label>
                     <span class="red ">*</span>
@@ -311,12 +312,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" style="display: none">提交</button>
             </div>
         </div>
     </div>
 </div>
-<!--用户表单END-->
+<!--用户表单ENDuser_managed.html-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../script/lib/jquery.1.10.2.js"></script>

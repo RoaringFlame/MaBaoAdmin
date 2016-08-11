@@ -1,6 +1,7 @@
 package com.mabao.admin.controller.vo;
 
 import com.mabao.admin.enums.Role;
+import com.mabao.admin.pojo.User;
 
 /**
  * Created by lies on 2016/8/2.
@@ -12,6 +13,15 @@ public class UserInVO {
     private String phone;                           //手机号
     private String email;                           //邮箱
     private Role role;                              //角色信息
+
+    public static UserInVO generateBy(User user) {
+        UserInVO userInVO = new UserInVO();
+        userInVO.setId(user.getId());
+        userInVO.setName(user.getName());
+        userInVO.setEmail(user.getEmail());
+        userInVO.setPhone(user.getPhone());
+        return userInVO;
+    }
 
     public String getPhone() {
         return phone;

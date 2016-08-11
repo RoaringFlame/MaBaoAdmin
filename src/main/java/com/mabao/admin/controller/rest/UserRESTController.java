@@ -8,10 +8,7 @@ import com.mabao.admin.util.PageVO;
 import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,16 +27,18 @@ public class UserRESTController {
 
     /**
      * 模糊查询用户
-     * @param searchKey                 搜索关键字
-     * @param page                      页码
-     * @param pageSize                  每页数量
-     * @return                          分页GoodsTypeVO
+     * @param userRole                  用户角色
+     * @param searchKey                 用户名
+     * @param page                      当前页数
+     * @param pageSize                  页数大小
+     * @return
      */
     @RequestMapping(value = "/searchUserName",method = RequestMethod.GET)
-    public PageVO<UserVO> searchGoodsType(@RequestParam(required = false ,defaultValue = "") String searchKey,
-                                               @RequestParam(required = false ,defaultValue = "1") int page,
-                                               @RequestParam(required = false ,defaultValue = "8") int pageSize) {
-        Page<User> pageUser =this.userService.searchUserName(searchKey,page,pageSize);
+    public PageVO<UserVO> searchGoodsType(@RequestParam(required = false ,defaultValue = "") String userRole,
+                                          @RequestParam(required = false ,defaultValue = "") String searchKey,
+                                          @RequestParam(required = false ,defaultValue = "1") int page,
+                                          @RequestParam(required = false ,defaultValue = "8") int pageSize) {
+        Page<User> pageUser =this.userService.searchUserName(userRole,searchKey,page,pageSize);
         PageVO<UserVO> voPage = new PageVO<>();
         voPage.toPage(pageUser);
         voPage.setItems(UserVO.generateBy(pageUser.getContent()));
@@ -76,7 +75,7 @@ public class UserRESTController {
      * @return
      */
     @RequestMapping(value = "/addUser", method = POST)
-    public JsonResultVO addUser(UserInVO userInVO) {
+    public JsonResultVO addUser(@RequestBody UserInVO userInVO) {
         try{
             this.userService.newUser(userInVO);
         }catch (Exception e){
@@ -100,4 +99,13 @@ public class UserRESTController {
         return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
     }
 
+    /**
+     * 修改时用户信息回现
+     * @param userId            用户id
+     * @return
+     */
+    @RequestMapping(value = "/getUser", method = GET)
+    public UserInVO getUser(@RequestParam Long userId) {
+        return UserInVO.generateBy(this.userService.get(userId));
+    }
 }

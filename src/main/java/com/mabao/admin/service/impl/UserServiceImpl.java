@@ -73,23 +73,26 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void deleteSomeUser(String userIds) {
-        String[] ids = userIds.split(",");
-        System.out.print(ids[0]);
+        String[] ids = userIds.trim().split(",");
         for(String id:ids) {
             this.userRepository.delete(Long.valueOf(id));
         }
     }
 
     /**
-     * 模糊查找用户
-     * @param searchKey                 搜索关键字
-     * @param page                      页码
-     * @param pageSize                  每页数量
+     * 模糊查询用户
+     * @param userRole                  用户角色
+     * @param searchKey                 用户名
+     * @param page                      当前页数
+     * @param pageSize                  页数大小
      * @return
      */
     @Override
-    public Page<User> searchUserName(String searchKey, int page, int pageSize) {
-        return this.userRepository.findByNameLike("%"+searchKey+"%",new PageRequest(page-1, pageSize));
+    public Page<User> searchUserName(String userRole,String searchKey, int page, int pageSize) {
+        if("".equals(searchKey)) {
+            return this.userRepository.findByNameLike("%" + searchKey + "%", new PageRequest(page - 1, pageSize));
+        }
+        return this.userRepository.findByNameLike("%" + searchKey + "%", new PageRequest(page - 1, pageSize));
     }
 
 }

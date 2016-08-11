@@ -15,7 +15,7 @@ import java.util.List;
 public class UserVO {
     private long id;                                //用户编号
     private String name;                            //昵称
-    private Role role;                              //用户角色
+    private String role;                              //用户角色
     private int loginTime;                          //登陆次数
     private Date createTime;                        //创建时间
     private Date lastOptTime;                       //最后一次操作时间
@@ -24,7 +24,8 @@ public class UserVO {
     public static UserVO generateBy(User user){
         UserVO vo = VoUtil.copyBasic(UserVO.class, user);
         assert vo != null;
-        vo.setRole(Role.USER);
+        vo.setId(user.getId());
+        vo.setRole(Role.USER.getText());
         vo.setCreateTime(user.getCreateTime());
         vo.setLastOptTime(new Date());
         vo.setOptContent("查询用户信息");
@@ -87,7 +88,11 @@ public class UserVO {
         this.optContent = optContent;
     }
 
-    public Role getRole() {return role;}
+    public String getRole() {
+        return role;
+    }
 
-    public void setRole(Role role) {this.role = role;}
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
