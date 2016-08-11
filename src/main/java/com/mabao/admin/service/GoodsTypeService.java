@@ -16,6 +16,7 @@ public interface GoodsTypeService {
      * @param typeId            id
      * @return                  商品类型
      */
+<<<<<<< HEAD
     GoodsTypeVO get(Long typeId);
 
     /**
@@ -23,6 +24,10 @@ public interface GoodsTypeService {
      * @return                 商品类别的集合
      */
     Page<GoodsType> getAllGoodsType(int page, int pageSize);
+=======
+    GoodsTypeVO findOneGoodsType(Long typeId);
+
+>>>>>>> dev
 
     /**
      *获取商品的集合
