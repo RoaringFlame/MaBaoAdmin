@@ -38,18 +38,21 @@ $(function () {
         };
         if (currentPage <= totalPage) {
             $.get("/order/searchOrder", params, function (data) {
-                var order=data.items;
+                var orderList=data.items;
                 totalPage=data.totalPage;
-                console.log(order);
-                $(order).each(function (index, order) {
-                    var orderList = $("#orderContainer").clone();
-                    orderList.find("th:eq(0)").text(index + 1);
-                    orderList.find("th:eq(1)").text(order.id);
-                    orderList.find("th:eq(2)").text(order.createTime);
-                    orderList.find("th:eq(3)").text(order.Consignee);
-                    orderList.find("th:eq(4)").text(order.totalSum);
-                    orderList.find("th:eq(5)").text(order.state);
-                    $("#container").append(orderList);
+                console.log(orderList);
+                $(orderList).each(function (index, order) {
+                    var orderInfo = $("#orderContainer").clone();
+                    orderInfo.show();
+                    orderInfo.find("input[type='checkbox']").attr("name", "checkBox");
+                    orderInfo.find("th").text(index + 1);
+                    orderInfo.find("td:eq(1)").text(order.id);
+                    orderInfo.find("td:eq(2)").text(order.createTime);
+                    orderInfo.find("td:eq(3)").text(order.Consignee);
+                    orderInfo.find("td:eq(4)").text(order.totalSum);
+                    orderInfo.find("td:eq(5)").text(order.state);
+                    $("#container").append(orderInfo);
+                    alert(orderInfo.find("td:eq(3)").text());
                 });
             });
         }
@@ -63,17 +66,17 @@ $(function () {
             goodsIds += goodsId + ",";
         });
         if (goodsIds !== "") {
-            $.get("/goods/changeSomeGoods", {ids: goodsIds, state: true}, function (data) {
+            $.get("/goods/changeSomeOrder", {ids: goodsIds, state: "ToBeSend"}, function (data) {
                 if (data.status == "success") {
                     $("#selectAll").removeAttr("checked");
-                    $(".container").empty();                                                //清空商品列表
-                    initOrderList(currentPage, pageSize);                                   //重新加载页面
+                    $("#container").empty();                                                //清空商品列表
+                    initOrderList();                                   //重新加载页面
                 } else if (data.status == "failure") {
-                    alert("更改商品状态失败!");
+                    alert("更改订单状态失败!");
                 }
             });
         } else {
-            alert("您还未选择商品！");
+            alert("您还未选择订单！");
         }
     }
 
@@ -90,6 +93,7 @@ $(function () {
 
         //发货按钮
         $(".delivery").click(function(){
+            alert("11");
             delivery();
         });
     }
