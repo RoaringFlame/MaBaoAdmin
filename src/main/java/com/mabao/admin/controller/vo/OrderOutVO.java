@@ -12,7 +12,7 @@ import java.util.Date;
 public class OrderOutVO {
     private Long id;                                //订单的id
     private Date createTime;                        //订单创建时间
-    private OrderStatus state;                      //订单状态，0待支付（买家），1待发货（卖家），2待收货（买家），3已完成（卖家），4已取消（买家）
+    private String state;                           //订单状态，0待支付（买家），1待发货（卖家），2待收货（买家），3已完成（卖家），4已取消（买家）
     private Double totalSum;                        //总价
     private String Consignee;                       //收货人
 
@@ -20,7 +20,7 @@ public class OrderOutVO {
         OrderOutVO vo = VoUtil.copyBasic(OrderOutVO.class, order);
         assert vo != null;
         vo.setConsignee(Consignee);
-        vo.setState(order.getState());
+        vo.setState(order.getState().getText());
         return vo;
     }
 
@@ -56,11 +56,11 @@ public class OrderOutVO {
         this.totalSum = totalSum;
     }
 
-    public OrderStatus getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(OrderStatus state) {
+    public void setState(String state) {
         this.state = state;
     }
 }
