@@ -91,7 +91,7 @@ $(function () {
                     goodsInfo.show();
                     goodsInfo.find("input[type='checkbox']").attr("name", "checkBox");
                     goodsInfo.find("td:eq(1)").text(index+1);                      //给该条商品信息赋值商品id
-                    goodsInfo.find("td:eq(2)").text(goods.upTime);               //给该条商品信息赋值商品时间
+                    goodsInfo.find("td:eq(2)").text(getLocalTime(goods.uptime));               //给该条商品信息赋值商品时间
                     goodsInfo.find("td:eq(3)").text(goods.typeName);             //给该条商品信息赋值商品类别
                     goodsInfo.find("td:eq(4)").text(goods.title);                //给该条商品信息赋值商品名称
                     goodsInfo.find("td:eq(5)").text(goods.articleNumber);        //给该条商品信息赋值商品货号
@@ -128,6 +128,25 @@ $(function () {
         goodsForm.find("textarea").val("");
     }
 
+    //时间格式化方法
+    function getLocalTime(jsondate) {
+        jsondate = "" + jsondate + "";                    //因为jsonDate是number型的indexOf会报错
+        if (jsondate.indexOf("+") > 0) {
+            jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+        }
+        else if (jsondate.indexOf("-") > 0) {
+            jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+        }
+        var date = new Date(parseInt(jsondate, 10));
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
+    }
+
+
     //修改商品表单初始化，表单显示商品信息
     function initUpdateGoodsForm(goodsId) {
         $.get("goods/getGoods", {goodsId: goodsId}, function (data) {
@@ -135,8 +154,8 @@ $(function () {
             $("#goodsNameForm").val(data.title);                      //在表单上显示当前商品的标题
             $("#goodsPriceForm").val(data.price);                     //在表单上显示当前商品的价格
             //n$("#goodsAddForm").val(data.address);                 //在表单上显示当前商品的地址
-            $("#goodsDateForm").val(data.purchaseTime);              //在表单上显示当前商品的购买日期
-            $("#goodsEndDateForm").val(data.releaseTime);            //在表单上显示当前商品的保质期
+            $("#goodsDateForm").val(getLocalTime(data.purchaseTime));     //在表单上显示当前商品的购买日期
+            $("#goodsEndDateForm").val(getLocalTime(data.releaseTime));            //在表单上显示当前商品的保质期
             $("#goodsDegreeForm").val(data.newDegree);               //在表单上显示当前商品的新旧程度
             $("#goodsInfoForm").val(data.goodsIntroduction);        //在表单上显示当前商品的商品介绍
             $("#goodsDetailForm").val(data.message);                //在表单上显示当前商品的商品信息
@@ -186,7 +205,7 @@ $(function () {
                 success: function () {
                     cancelForm();
                     $(".container").empty();
-                    initGoodsList(currentPage, pageSize);
+                    initGoodsList();
                 },
                 error: function () {
                     alert("添加商品失败！");
@@ -251,7 +270,7 @@ $(function () {
                 if (data.status == "success") {
                     $("#selectAll").removeAttr("checked");
                     $(".container").empty();                                                //清空商品列表
-                    initGoodsList(currentPage, pageSize);                                   //重新加载页面
+                    initGoodsList();                                   //重新加载页面
                 } else if (data.status == "failure") {
                     alert("删除失败!");
                 }
@@ -265,7 +284,7 @@ $(function () {
     function onSell() {
         var goodsIds = "";
         $("input[name='checkBox']:checked").each(function () {                       //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();       //获取checkbox所在行的goodsId
+            var goodsId = $(this).parents("td.check").nextAll("#id").text();       //获取checkbox所在行的goodsId
             goodsIds += goodsId + ",";
         });
         if (goodsIds !== "") {
@@ -273,7 +292,7 @@ $(function () {
                 if (data.status == "success") {
                     $("#selectAll").removeAttr("checked");
                     $(".container").empty();                                                //清空商品列表
-                    initGoodsList(currentPage, pageSize);                                   //重新加载页面
+                    initGoodsList();                                   //重新加载页面
                 } else if (data.status == "failure") {
                     alert("更改商品状态失败!");
                 }
@@ -288,7 +307,7 @@ $(function () {
     function offSell() {
         var goodsIds = "";
         $("input[name='checkBox']:checked").each(function () {                     //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();
+            var goodsId = $(this).parents("td.check").nextAll("#id").text();
             $(this).parents("td.check").nextAll("td:eq(6)").text("下架");
             $(this).removeAttr("checked");
             $("#selectAll").removeAttr("checked");
@@ -299,7 +318,7 @@ $(function () {
                 if (data.status == "success") {
                     $("#selectAll").removeAttr("checked");
                     $(".container").empty();                                                //清空商品列表
-                    initGoodsList(currentPage, pageSize);                                   //重新加载页面
+                    initGoodsList();                                   //重新加载页面
                 } else if (data.status == "failure") {
                     alert("更改商品状态失败!");
                 }
