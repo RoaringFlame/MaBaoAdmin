@@ -179,7 +179,7 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="goodsType"></label>
-                        <select name="goodsType" class="form-control" id="goodsType">
+                        <select name="goodsType" class="form-control goodsType" id="goodsType">
                             <option value="" selected="selected">所有类别</option>
                         </select>
 
@@ -217,7 +217,7 @@
                     </th>
                     <th>编号</th>
 
-                    <th>时间</th>
+                    <th>上架时间</th>
 
                     <th>商品类别</th>
 
@@ -279,6 +279,7 @@
             <input type=button id="btn2" value="上一页">
             <input type=button id="btn3" value="下一页">
             <input type=button id="btn4" value="尾页">
+            <span>当前页：<span id="page"></span></span>
         </div>
         <!--分页end-->
     </div>
@@ -303,36 +304,44 @@
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsPriceForm" class="control-label  label-half">商品价格:
+                        <label for="goodsPriceForm" class="control-label  label-half">商品原价:
                             <input type="text" class="form-control" id="goodsPriceForm" name="price">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsAddForm" class="  control-label label-half ">所在地:
+                        <label for="goodsAddForm" class="  control-label label-half ">商品现价:
                             <input type="text" class="form-control" id="goodsAddForm" name="">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsDateForm" class="control-label  label-half ">购买日期:
-                            <input type="text" class="form-control" id="goodsDateForm" name="purchaseTime">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsEndDateForm" class="control-label  label-half">保质期至:
-                            <input type="text" class="form-control" id="goodsEndDateForm" name="releaseTime">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsDegreeForm" class="control-label  label-half">新旧程度:
-                            <select class="form-control" id="goodsDegreeForm" name="newDegree">
+                        <label for="goodsTypeForm" class="control-label  label-half ">商品类型:
+                            <select class="form-control goodsType" id="goodsTypeForm" name="newDegree">
                             </select>
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsInfoForm" class="control-label label-half ">商品介绍:
-                            <textarea class="form-control" id="goodsInfoForm" name="goodsIntroduction"></textarea>
+                        <label for="goodsBrandForm" class="control-label  label-half">商品品牌：
+                            <input type="text" class="form-control" id="goodsBrandForm" name="releaseTime">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="goodsUpTimeForm" class="control-label  label-half">上架时间:
+                            <input type="text" class="form-control" id="goodsUpTimeForm" name="releaseTime">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="goodsDegreeForm" class="control-label label-half ">新旧程度:
+                            <select class="form-control" id="goodsDegreeForm" name="newDegree">
+                            </select>
                         </label>
                         <span class="red ">*</span>
+
+                        <label for="goodsStockNumberForm" class="control-label label-half ">库存:
+                            <select class="form-control" id="goodsStockNumberForm" name="stockNumber">
+                            </select>
+                        </label>
+                        <span class="red ">*</span>
+
                         <label for="goodsDetailForm" class="control-label  label-half">妈咪说:
                             <textarea class="form-control" id="goodsDetailForm" name="message"></textarea>
                         </label>

@@ -174,7 +174,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default">搜索</button>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#searchForm"
                        data-whatever="@mdo">高级搜索
                     </a>

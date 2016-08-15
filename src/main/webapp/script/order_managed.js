@@ -52,22 +52,30 @@ $(function () {
                     orderInfo.find("td:eq(4)").text(order.totalSum);
                     orderInfo.find("td:eq(5)").text(order.state);
                     $("#container").append(orderInfo);
-                    alert(orderInfo.find("td:eq(3)").text());
+
                 });
             });
         }
     }
 
+    //根据条件搜索订单
+    function searchOrder(){
+        getSearchItem();
+        initOrderList();
+    }
+
     //发货按钮
     function delivery(){
-        var goodsIds="";
+        var orderIds="";
         $("input[name='checkBox']:checked").each(function () {                       //遍历选中的checkbox
-            var goodsId = $(this).parents("td.check").next("td:eq(0)").text();       //获取checkbox所在行的goodsId
-            goodsIds += goodsId + ",";
+            var orderId = $(this).parents("td").nextAll("td:eq(0)").text();       //获取checkbox所在行的goodsId
+            orderIds += orderId + ",";
+            alert(orderIds);
         });
-        if (goodsIds !== "") {
-            $.get("/goods/changeSomeOrder", {ids: goodsIds, state: "ToBeSend"}, function (data) {
+        if (orderIds !== "") {
+            $.post("/order/changeSomeOrder", {ids: orderIds, state: "ToBeSend"}, function (data) {
                 if (data.status == "success") {
+                    alert("11");
                     $("#selectAll").removeAttr("checked");
                     $("#container").empty();                                                //清空商品列表
                     initOrderList();                                   //重新加载页面
@@ -91,9 +99,15 @@ $(function () {
             $("input[name='checkBox']").prop("checked", $(this).prop("checked"));                 //所有的付款框的状态和第一行复选框状态一致
         });
 
+        //点击搜索查询商品
+        $(".form-group button").click(function(){
+            $("#container").empty();
+            currentPage=1;
+            searchOrder();
+        });
+
         //发货按钮
         $(".delivery").click(function(){
-            alert("11");
             delivery();
         });
     }

@@ -38,7 +38,7 @@ $(function () {
     function initGoodsTypeDropdown() {
         $.get("/goods", {}, function (data) {
             $(data.goodsTypeList).each(function (index, type) {                //为商品类别下拉框遍历赋值
-                $("#goodsType").append($("<option></option>")                   //为商品类别下拉框增加option节点
+                $(".goodsType").append($("<option></option>")                   //为商品类别下拉框增加option节点
                     .val(type.key)
                     .text(type.value)
                 );
@@ -345,11 +345,14 @@ $(function () {
 
     //初始化分页按钮
     function initPageBtn() {
+        //显示当前页数
+        $("#page").text(currentPage);
         //点击首页
         $("#btn1").click(function () {
             currentPage = 1;                               //点击首页时参数currentPage为0
             $(".container").empty();                       //清空表单数据
             initGoodsList();                               //传参并调用初始化表单方法
+            $("#page").text(currentPage);
         });
 
         //点击上一页
@@ -361,6 +364,7 @@ $(function () {
                 $(".container").empty();                    //如果不是首页，点击上一页时清空表单
                 currentPage--;                              //当前页数减1
                 initGoodsList();        //传参并调用初始化表单方法
+                $("#page").text(currentPage);
             }
         });
 
@@ -373,6 +377,7 @@ $(function () {
                 $(".container").empty();                      //如果不是最后一页，点击下一页时清空表单
                 currentPage++;                                //当前页数加1
                 initGoodsList();          //传参并调用初始化表单方法
+                $("#page").text(currentPage);
             }
         });
 
@@ -381,7 +386,9 @@ $(function () {
             currentPage = totalPage;                            //点击尾页时参数currentPage为0
             $(".container").empty();                            //清空表单数据
             initGoodsList();                //传参并调用初始化表单方法
+            $("#page").text(currentPage);
         });
+
     }
 
 
