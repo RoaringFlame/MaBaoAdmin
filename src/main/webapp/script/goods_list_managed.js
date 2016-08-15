@@ -69,6 +69,18 @@ $(function () {
         });
     }
 
+    //表单中宝宝类别下拉框初始化
+    function initBabyTypeDropdown() {
+        $.get("/goods", {}, function (data) {                                   //为新旧程度下拉框遍历赋值
+            $(data.babyTypeList).each(function (index, babyType) {                   //为新旧程度下拉框增加option节点
+                $("#babyTypeForm").append($("<option></option>")
+                    .val(babyType.key)
+                    .text(babyType.value)
+                );
+            });
+        });
+    }
+
     //商品列表初始化
     function initGoodsList() {
         getSearchItem();
@@ -154,12 +166,14 @@ $(function () {
             $("#goodsOldPriceForm").val(data.oldPrice);                   //在表单上显示当前商品的价格
             $("#goodsPriceForm").val(data.price);                         //在表单上显示当前商品的价格
             $("#babyTypeForm").val(data.babyType);                        //在表单上显示当前商品的宝宝类型
-            $("#goodsTypeForm").val(data.typeName);                       //在表单上显示当前商品的商品类型
+            $("#goodsTypeForm").val(data.typeId);                       //在表单上显示当前商品的商品类型
             $("#goodsBrandForm").val(data.brandName);                     //在表单上显示当前商品的品牌名称
             $("#goodsDateForm").val(getLocalTime(data.upTime));           //在表单上显示当前商品的上架时间
             $("#goodsDegreeForm").val(data.newDegree);                    //在表单上显示当前商品的新旧程度
+            $("#goodsStockNumberForm").val(data.stockNumber);
             $("#goodsDetailForm").val(data.message);                      //在表单上显示当前商品的商品信息
             $("#goodsIdForm").val(data.id);                               //获取当前商品的id
+            alert(data.typeId);
         });
     }
 
@@ -256,6 +270,9 @@ $(function () {
 
         //表单中新旧程度下拉框初始化
         initGoodsDegreeDropdown();
+
+        //表单中宝宝类型下拉框初始化
+        initBabyTypeDropdown();
     }
 
     //删除商品
