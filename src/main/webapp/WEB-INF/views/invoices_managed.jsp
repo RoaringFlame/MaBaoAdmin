@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>妈宝后台|订单</title>
+    <title>妈宝后台|发货单</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,6 @@
         <!-- 导航链接-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">订单管理 <span class="caret"></span></a>
@@ -79,6 +78,7 @@
     </div>
 </nav>
 <!-- 顶部导航END -->
+
 
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
@@ -124,7 +124,7 @@
         <div class="panel-heading" style="height: 5rem;">
             <ol class="breadcrumb panel-title pull-left">
                 <li>订单管理</li>
-                <li class="active">订单</li>
+                <li class="active">发货单</li>
             </ol>
 
             <div class="btn-toolbar ">
@@ -135,22 +135,21 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a>导入 Excel</a></li>
-                        <li><a>导出 Excel</a></li>
+                        <li><a href="#">打印</a></li>
+                        <li><a href="#">导出 Excel</a></li>
                     </ul>
                 </div>
 
                 <div class="btn-toolbar ">
                     <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-default dropdown-toggle delivery" type="button" data-toggle="dropdown"
+                        <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="true">
-                            发货
+                            删除
                         </a>
                     </div>
                 </div>
 
             </div>
-
         </div>
 
         <!--功能操作END-->
@@ -173,31 +172,31 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="goodsStatus">订单状态：</label>
-                        <select name="" class="form-control goodsStatus" id="goodsStatus">
+                        <label for="orderStatus">订单状态：</label>
+                        <select name="" class="form-control" id="orderStatus">
+                            <option selected="selected" value="">待确认</option>
+                            <option value="">待付款</option>
+                            <option value="">待发货</option>
+                            <option value="-">已确认</option>
                         </select>
                     </div>
 
-                    <button type="button" class="btn btn-default">搜索</button>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#searchForm"
-                       data-whatever="@mdo">高级搜索
-                    </a>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="submit" class="btn btn-default">高级搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
-
-
             <!--表格-->
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input id="selectAll" type="checkbox" class="group-checkable"
+                            <input type="checkbox" class="group-checkable"
                                    data-set="#sample_2 .checkboxes"/>
                         </label>
                     </th>
-                    <th>编号</th>
+                    <th>发货单流水号</th>
 
                     <th>订单号</th>
 
@@ -205,15 +204,19 @@
 
                     <th>收货人</th>
 
-                    <th>应付金额</th>
+                    <th>收货人</th>
 
-                    <th>订单状态</th>
+                    <th>发货时间</th>
+
+                    <th>操作人</th>
 
                 </tr>
 
                 </thead>
 
-                <tr class="odd gradeX" style="display: none;" id="orderContainer">
+                <tbody>
+
+                <tr class="odd gradeX">
 
                     <td>
                         <label>
@@ -221,7 +224,7 @@
                         </label>
                     </td>
 
-                    <th>1</th>
+                    <td>1</td>
 
                     <td>11102324</td>
 
@@ -229,120 +232,118 @@
 
                     <td>姜哲</td>
 
-                    <td>100</td>
+                    <td>10月11日</td>
 
                     <td>待确认</td>
 
+                    <td>方红</td>
+
                 </tr>
 
-                <tbody id="container">
+                <tr class="odd gradeX">
 
-                </tbody>
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>2</td>
+
+                    <td>11102325</td>
+
+                    <td>10月9日</td>
+
+                    <td>闫璇</td>
+
+                    <td>10月10日</td>
+
+                    <td>待付款</td>
+
+                    <td>方红</td>
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <th>3</th>
+
+                    <td>11102326</td>
+
+                    <td>10月8日</td>
+
+                    <td>张雅婷</td>
+
+                    <td>10月9日</td>
+
+                    <td>待发货</td>
+
+                    <td>方红</td>
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>4</td>
+
+                    <td>11102327</td>
+
+                    <td>10月7日</td>
+
+                    <td>林松</td>
+
+                    <td>10月8日</td>
+
+                    <td>已确认</td>
+
+                    <td>方红</td>
+
+                </tr>
 
             </table>
             <!--表格END-->
             <!--分页-->
-            <div style="text-align:center">
-                <input type=button id="btn1" value="首页">
-                <input type=button id="btn2" value="上一页">
-                <input type=button id="btn3" value="下一页">
-                <input type=button id="btn4" value="尾页">
-                <span>当前页：<span id="page"></span></span>
-            </div>
-            <!--分页end-->
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!--分页END-->
         </div>
 
     </div>
     <!--面板END-->
 </div>
 
-<!--表单高级搜索-->
-<div class="modal fade" id="searchForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">高级索搜</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group ">
-                        <label for="orderNumForm" class="control-label  label-half ">订单号:
-                            <input type="text" class="form-control" id="orderNumForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="consignerForm" class="control-label  label-half">购货人:
-                            <input type="text" class="form-control" id="consignerForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="addressForm" class="  control-label label-half ">地址:
-                            <input type="text" class="form-control" id="addressForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="receiverForm" class="control-label  label-half ">收货人:
-                            <input type="text" class="form-control" id="receiverForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="telForm" class="control-label  label-half">手机号:
-                            <input type="text" class="form-control" id="telForm">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="orderStatusForm" class="control-label  label-half">订单状态:
-                            <select class="form-control goodsStatus" name="goodsDegreeForm" id="orderStatusForm">
-
-                            </select>
-                        </label>
-                        <span class="red">*</span>
-
-                        <div class="form-group " style="padding-left: 10px;">
-                            <label class=" control-label clear " style="float: left;">所在地：</label>
-                            <label class=" control-label clear " style="width:80%;">
-                                <select class="form-control select-right  " name="province">
-                                    <option>ddd</option>
-                                </select>
-                                <select class="form-control select-right " name="city">
-                                    <option>ddd</option>
-                                </select>
-                                <select class="form-control select-right " name="urban">
-                                    <option>ddd</option>
-                                </select>
-                            </label>
-                        </div>
-
-                        <div class="form-group transfer-time clear">
-                            <label for="transferDateForm" class=" control-label  ">转让时间:</label>
-                            <input type="date" class="form-control " id="transferDateForm">
-
-                            <label for="transferNedDateForm" class=" control-label  ">至:</label>
-                            <input type="date" class="form-control " id="transferNedDateForm">
-
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer clear">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
-            </div>
-
-        </div>
-
-    </div>
-</div>
-<!--表单高级搜索END-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
-<script src="script/lib/bootstrap/collapse.js"></script>
-<script src="script/order_managed.js"></script>
 </body>
 </html>
-

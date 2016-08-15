@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>妈宝后台|订单</title>
+    <title>妈宝后台|转让订单</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,8 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index.html">
-                <img alt="Brand" src="#">
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="index.html">
             </a>
             <!-- 商标END  -->
 
@@ -51,7 +51,6 @@
         <!-- 导航链接-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">订单管理 <span class="caret"></span></a>
@@ -79,6 +78,7 @@
     </div>
 </nav>
 <!-- 顶部导航END -->
+
 
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
@@ -117,38 +117,40 @@
 </div>
 <!--侧导航END-->
 
+<!--面板-->
 <div class="col-xs-10">
-    <!--面板-->
+
     <div class="panel panel-default">
         <!--功能操作-->
         <div class="panel-heading" style="height: 5rem;">
             <ol class="breadcrumb panel-title pull-left">
                 <li>订单管理</li>
-                <li class="active">订单</li>
+                <li class="active">转让订单</li>
             </ol>
 
             <div class="btn-toolbar ">
-                <div class="dropdown btn-group navbar-nav pull-right ">
+                <div class="dropdown btn-group  pull-right ">
                     <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="true">
                         工具
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a>导入 Excel</a></li>
-                        <li><a>导出 Excel</a></li>
+                        <li><a href="#">打印</a></li>
+                        <li><a href="#">导出 Excel</a></li>
                     </ul>
                 </div>
-
-                <div class="btn-toolbar ">
-                    <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-default dropdown-toggle delivery" type="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="true">
-                            发货
-                        </a>
-                    </div>
+                <div class="dropdown btn-group  pull-right ">
+                    <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="true">
+                        操作
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <li><a href="#">确认收货</a></li>
+                        <li><a href="#">确认寄售</a></li>
+                    </ul>
                 </div>
-
             </div>
 
         </div>
@@ -174,11 +176,15 @@
 
                     <div class="form-group">
                         <label for="goodsStatus">订单状态：</label>
-                        <select name="" class="form-control goodsStatus" id="goodsStatus">
+                        <select name="" class="form-control" id="goodsStatus">
+                            <option selected="selected" value="">待确认</option>
+                            <option value="">待付款</option>
+                            <option value="">待发货</option>
+                            <option value="-">已确认</option>
                         </select>
                     </div>
 
-                    <button type="button" class="btn btn-default">搜索</button>
+                    <button type="submit" class="btn btn-default">搜索</button>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#searchForm"
                        data-whatever="@mdo">高级搜索
                     </a>
@@ -186,14 +192,13 @@
             </form>
             <!--条件查询表单END-->
 
-
             <!--表格-->
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input id="selectAll" type="checkbox" class="group-checkable"
+                            <input type="checkbox" class="group-checkable"
                                    data-set="#sample_2 .checkboxes"/>
                         </label>
                     </th>
@@ -203,7 +208,7 @@
 
                     <th>下单时间</th>
 
-                    <th>收货人</th>
+                    <th>寄货人</th>
 
                     <th>应付金额</th>
 
@@ -213,7 +218,9 @@
 
                 </thead>
 
-                <tr class="odd gradeX" style="display: none;" id="orderContainer">
+                <tbody>
+
+                <tr class="odd gradeX">
 
                     <td>
                         <label>
@@ -221,11 +228,19 @@
                         </label>
                     </td>
 
-                    <th>1</th>
+                    <td>1</td>
 
-                    <td>11102324</td>
+                    <td>
+                        <span data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            11102324
+                        </span>
+                    </td>
 
-                    <td>10月10日</td>
+                    <td>
+                         <span data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            10月10日
+                        </span>
+                    </td>
 
                     <td>姜哲</td>
 
@@ -235,26 +250,242 @@
 
                 </tr>
 
-                <tbody id="container">
+                <tr class="odd gradeX">
 
-                </tbody>
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>2</td>
+
+                    <td>
+                       <span data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            11102325
+                        </span>
+                    </td>
+
+                    <td>
+                         <span data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            10月9日
+                        </span>
+                    </td>
+
+                    <td>闫璇</td>
+
+                    <td>78</td>
+
+                    <td>待收货</td>
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>3</td>
+
+                    <td>
+                        <span data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            11102326
+                        </span>
+                    </td>
+
+                    <td>
+                          <span data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                            10月8日
+                        </span></td>
+
+                    <td>张雅婷</td>
+
+                    <td>120</td>
+
+                    <td>已确认</td>
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>4</td>
+
+                    <td>
+                        <span data-toggle="modal" data-target="#exampleModal"
+                              data-whatever="@mdo">
+                            11102327
+                        </span>
+                    </td>
+
+                    <td>
+                        <span data-toggle="modal" data-target="#exampleModal"
+                              data-whatever="@mdo">
+                            10月7日
+                        </span>
+                    </td>
+
+                    <td>林松</td>
+
+                    <td>200</td>
+
+                    <td>已确认</td>
+
+                </tr>
 
             </table>
             <!--表格END-->
             <!--分页-->
-            <div style="text-align:center">
-                <input type=button id="btn1" value="首页">
-                <input type=button id="btn2" value="上一页">
-                <input type=button id="btn3" value="下一页">
-                <input type=button id="btn4" value="尾页">
-                <span>当前页：<span id="page"></span></span>
-            </div>
-            <!--分页end-->
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!--分页END-->
         </div>
 
     </div>
-    <!--面板END-->
+
 </div>
+<!--面板END-->
+
+<!--商品表单-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">商品详情</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group ">
+
+                        <label for="kind" class="control-label label-half ">宝物类型:
+                            <select class="form-control text-left " name="kind" id="kind">
+                                <option value="童车">童车</option>
+                                <option value="安全座椅">安全座椅</option>
+                                <option value="玩具">玩具</option>
+                                <option value="家具">家具</option>
+                                <option value="电器">电器</option>
+                            </select>
+                        </label>
+
+                        <label for="brand" class="control-label label-half ">宝物品牌:
+                            <select class="form-control text-left " name="brand" id="brand">
+                                <option value="强生">强生</option>
+                                <option value="好孩子">好孩子</option>
+                                <option value="贝亲">贝亲</option>
+                            </select>
+                        </label>
+
+                        <label for="date" class="control-label label-half ">购物时间:
+                            <input class="form-control" type="date" name="date" id="date">
+                        </label>
+
+                        <label for="level" class="control-label label-half ">宝物品牌:
+                            <select class="form-control text-left " name="level" id="level">
+                                <option value="全新">全新</option>
+                                <option value="9成新">9成新</option>
+                                <option value="8成新">8成新</option>
+                                <option value="6-7成新">6-7成新</option>
+                                <option value="5成新以下">5成新以下</option>
+                            </select>
+                        </label>
+
+                        <label for="size" class="control-label label-half ">宝物尺码:
+                            <select class="form-control text-left " name="size" id="size">
+                                <option value="0—3m">0-3m</option>
+                                <option value="0—3m">3-6m</option>
+                                <option value="6—9m">6-9m</option>
+                                <option value="9—12m">9-12m</option>
+                                <option value="12—18m">12-18m</option>
+                                <option value="18—24m">18-24m</option>
+                                <option value="2T">2T</option>
+                                <option value="3T">3T</option>
+                                <option value="4T">4T</option>
+                                <option value="5T">5T</option>
+                                <option value="6T">6T</option>
+                            </select>
+                        </label>
+
+                        <label for="sex" class="control-label label-half ">适合宝宝:
+                            <select class="form-control text-left " name="sex" id="sex">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                                <option value="所有宝宝">所有宝宝</option>
+                            </select>
+                        </label>
+
+                        <label class="control-label label-half ">原装包装:
+                            <input type="radio" name="packet" id="packet-on">有
+                            <input type="radio" name="packet" id="packet-off">无
+                        </label>
+
+                        <label class="control-label label-half ">发票/小票:
+                            <input type="radio" name="packet" id="invoice-on">有
+                            <input type="radio" name="packet" id="invoice-off">无
+                        </label>
+
+                        <label for="oldPrice" class="control-label label-half ">购买原价:
+                            <input type="text" class="form-control" id="oldPrice">
+                        </label>
+
+                        <label for="newPrice" class="control-label label-half ">转让现价:
+                            <input type="text" class="form-control" id="newPrice">
+                        </label>
+
+
+                        <label for="message" class=" control-label label-half " style="width: 80%">
+                            卖家寄语:宝物详情/使用心得/瑕疵情况/等
+                            <textarea class=" form-control " name="" id="message"></textarea>
+                        </label>
+
+                        <!--上传照片-->
+                        <div class="clearfix"></div>
+                        <label class="label-half">
+                            <input type="file" accept="image/png,image/gif" id="uploadPhoto">
+                        </label>
+                        <!--<img src="../img/1.png" alt="">-->
+                        <!--<img src="../img/2.png" alt="">-->
+                        <!--<img src="../img/3.png" alt="">-->
+
+                        <!--上传照片END-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--商品表单END-->
+
 
 <!--表单高级搜索-->
 <div class="modal fade" id="searchForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -263,7 +494,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">高级索搜</h4>
+                <h4 class="modal-title">高级索搜</h4>
             </div>
             <div class="modal-body">
                 <form>
@@ -294,8 +525,9 @@
                         <span class="red">*</span>
 
                         <label for="orderStatusForm" class="control-label  label-half">订单状态:
-                            <select class="form-control goodsStatus" name="goodsDegreeForm" id="orderStatusForm">
-
+                            <select class="form-control" name="goodsDegreeForm" id="orderStatusForm">
+                                <option>ddd</option>
+                                <option>ddd</option>
                             </select>
                         </label>
                         <span class="red">*</span>
@@ -331,7 +563,6 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary">提交</button>
             </div>
-
         </div>
 
     </div>
@@ -341,8 +572,5 @@
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
-<script src="script/lib/bootstrap/collapse.js"></script>
-<script src="script/order_managed.js"></script>
 </body>
 </html>
-

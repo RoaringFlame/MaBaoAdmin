@@ -3,13 +3,6 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<%--
-  Created by IntelliJ IDEA.
-  User: maxu
-  Date: 2016/7/29
-  Time: 16:29
-  To change this template use File | Settings | File Templates.
---%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -18,11 +11,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>妈宝后台|商品列表</title>
+    <title>妈宝后台|商品分类</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -130,32 +124,16 @@
         <div class="panel-heading" style="height: 5rem;">
             <ol class="breadcrumb panel-title pull-left">
                 <li>商品管理</li>
-                <li class="active">商品列表</li>
+                <li class="active">商品分类</li>
             </ol>
 
+
             <div class="btn-toolbar ">
-                <div id="tool" class="dropdown btn-group  pull-right ">
-                    <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="true">
-                        工具
-                        <span class="caret"></span>
+                <div class="dropdown btn-group navbar-nav pull-right ">
+
+                    <a class="btn btn-default">
+                        删除
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a>导入 Excel</a></li>
-                        <li><a>导出 Excel</a></li>
-                    </ul>
-                </div>
-                <div id="operate" class="dropdown btn-group  pull-right ">
-                    <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="true">
-                        操作
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a>删除</a></li>
-                        <li><a>上架</a></li>
-                        <li><a>下架</a></li>
-                    </ul>
                 </div>
 
                 <div class="btn-toolbar ">
@@ -167,41 +145,27 @@
                 </div>
             </div>
 
+
         </div>
 
         <!--功能操作END-->
 
         <div class="panel-body">
             <!--条件查询表单-->
-            <form id="goodList" class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
+
                     <div class="form-group">
                         <label for="goodsType"></label>
-                        <select name="goodsType" class="form-control goodsType" id="goodsType">
-                            <option value="" selected="selected">所有类别</option>
-                        </select>
+                        <input type="text" class="form-control" id="goodsType" placeholder="商品类别"
+                               aria-describedby="basic-addon1">
+                    </div>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="goodsPublish"></label>
-                        <select name="" class="form-control" id="goodsPublish">
-                            <option selected="selected" value="">全部</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="goodsName"></label>
-                        <input type="text" class="form-control" id="goodsName" placeholder="商品名称"
-                               aria-describedby="basic-addon1">
-                    </div>
-                    <div class="form-group">
-                        <label for="goodsId"></label>
-                        <input type="text" class="form-control" id="goodsId" placeholder="货号"
-                               aria-describedby="basic-addon1">
-                    </div>
-                    <button type="button" class="btn btn-default" id="search">搜索</button>
+                    <button type="submit" class="btn btn-default">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
+
 
             <!--表格-->
             <table class="table table-bordered table-striped">
@@ -209,34 +173,168 @@
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input id="selectAll" type="checkbox" class="group-checkable"
+                            <input type="checkbox" class="group-checkable"
                                    data-set="#sample_2 .checkboxes"/>
                         </label>
                     </th>
-                    <th>编号</th>
 
-                    <th>上架时间</th>
+                    <th>编号</th>
 
                     <th>商品类别</th>
 
-                    <th>商品名称</th>
+                    <th>商品数量</th>
 
-                    <th>货号</th>
+                    <th>数量单位</th>
 
-                    <th>价格</th>
-
-                    <th>上架</th>
-
-                    <th>库存</th>
-
-                    <th>编辑</th>
+                    <th>
+                        编辑
+                    </th>
 
                 </tr>
 
                 </thead>
 
-                <tr class="odd gradeX" id="goodsContainer" style="display: none;">
-                    <td class="check">
+                <tbody>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>1</td>
+
+                    <td>玩具</td>
+
+                    <td>1</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>2</td>
+
+                    <td>婴儿车</td>
+
+                    <td>1</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>3</td>
+
+                    <td>安全座椅</td>
+
+                    <td>4</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
+
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>4</td>
+
+                    <td>服饰鞋帽</td>
+
+                    <td>10</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
+
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>5</td>
+
+                    <td>家具家电</td>
+
+                    <td>1</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
+
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td>6</td>
+
+                    <td>图书绘本</td>
+
+                    <td>2</td>
+
+                    <td>个</td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        编辑
+                    </td>
+
+
+                </tr>
+
+                <tr class="odd gradeX">
+
+                    <td>
                         <label>
                             <input type="checkbox" class="checkboxes" value="1"/>
                         </label>
@@ -244,48 +342,50 @@
 
                     <td>7</td>
 
-                    <td>2016/07/22 9：06</td>
+                    <td>其他产品</td>
 
-                    <td>婴儿车</td>
+                    <td>0</td>
 
-                    <td>高级扶手婴儿车</td>
+                    <td>个</td>
 
-                    <td>SK0001</td>
-
-                    <td>90.00</td>
-
-                    <td>等待</td>
-
-                    <td>78</td>
-
-                    <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                         编辑
                     </td>
 
-                    <td id="id" style="display: none">1</td>
+
                 </tr>
 
-                <tbody class="container">
-
-                </tbody>
             </table>
             <!--表格END-->
+            <!--分页-->
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!--分页END-->
         </div>
-        <!--分页-->
-        <div style="text-align:center">
-            <input type=button id="btn1" value="首页">
-            <input type=button id="btn2" value="上一页">
-            <input type=button id="btn3" value="下一页">
-            <input type=button id="btn4" value="尾页">
-            <span>当前页：<span id="page"></span></span>
-        </div>
-        <!--分页end-->
+
     </div>
 
 </div>
 <!--面板END-->
 
-<!--商品表单-->
+<!--商品类型表单-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -295,84 +395,49 @@
                 <h4 class="modal-title" id="exampleModalLabel">商品详情</h4>
             </div>
             <div class="modal-body">
-                <form id="frmGoods">
+                <form class="col-md-offset-4 form-label">
+                    <div class="form-group  ">
+                        <label for="assortmentForm" class="control-label text-left">分类名称:
+                            <input type="text" class="form-control" id="assortmentForm">
+                        </label>
+                        <span class="red ">*</span>
+                    </div>
                     <div class="form-group ">
-                        <label for="goodsNameForm" class="control-label  label-half ">商品名称:
-                            <input type="text" class="form-control" id="goodsNameForm" name="title">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsOldPriceForm" class="control-label  label-half">商品原价:
-                            <input type="text" class="form-control" id="goodsOldPriceForm" name="oldPrice">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsPriceForm" class="  control-label label-half ">商品现价:
-                            <input type="text" class="form-control" id="goodsPriceForm" name="price">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="babyTypeForm" class="control-label  label-half ">宝宝类型:
-                            <select class="form-control" id="babyTypeForm" name="babyType">
-                            </select>
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsTypeForm" class="control-label  label-half ">商品类型:
-                            <select class="form-control goodsType" id="goodsTypeForm" name="goodsType">
-                            </select>
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsBrandForm" class="control-label  label-half">商品品牌：
-                            <input type="text" class="form-control" id="goodsBrandForm" name="goodsBrand">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsUpTimeForm" class="control-label  label-half">上架时间:
-                            <input type="text" class="form-control" id="goodsUpTimeForm" name="upTime">
-                        </label>
-                        <span class="red">*</span>
-
-                        <label for="goodsDegreeForm" class="control-label label-half ">新旧程度:
-                            <select class="form-control" id="goodsDegreeForm" name="newDegree">
-                            </select>
+                        <label for="categoryParent" class="control-label text-left ">上级分类:
+                            <input type="text" class="form-control" id="categoryParent">
                         </label>
                         <span class="red ">*</span>
-
-                        <label for="goodsStockNumberForm" class="control-label label-half ">库存:
-                            <input class="form-control" id="goodsStockNumberForm" name="stockNumber">
+                    </div>
+                    <div class="form-group ">
+                        <label for="assortmentNum" class="  control-label text-left ">数量单位:
+                            <input type="text" class="form-control" id="assortmentNum">
                         </label>
                         <span class="red ">*</span>
-
-                        <label for="goodsDetailForm" class="control-label  label-half">妈咪说:
-                            <textarea class="form-control" id="goodsDetailForm" name="message"></textarea>
+                    </div>
+                    <div class="form-group ">
+                        <label for="assortmentDetail" class="control-label text-left ">分类描述:
+                            <textarea class="form-control" id="assortmentDetail"></textarea>
                         </label>
-
-                        <label class="label-half">上传图片：
-                            <input type="file" accept="image/png,image/gif" id="uploadPhoto">
-                        </label>
-                        <input type="text" id="goodsIdForm" style="display: none">
+                        <span class="red ">*</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
-                <button type="button" class="btn btn-primary" style="display: none" data-dismiss="modal">提交</button>
+                <button type="button" class="btn btn-primary">提交</button>
             </div>
+
         </div>
     </div>
 </div>
-<!--商品表单END-->
-
+<!--商品类型表单END-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
+
 <script src="script/lib/bootstrap/collapse.js"></script>
-<script src="script/goods_list_managed.js"></script>
+
 </body>
 </html>
-

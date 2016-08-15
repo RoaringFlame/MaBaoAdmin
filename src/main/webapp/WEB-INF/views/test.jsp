@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script src="../script/lib/jquery.1.10.2.js"></script>
+    <script src="script/lib/jquery.1.10.2.js"></script>
     <title>test</title>
     <script>
         function test() {

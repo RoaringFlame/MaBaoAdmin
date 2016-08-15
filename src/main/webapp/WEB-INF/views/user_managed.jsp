@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -15,8 +14,8 @@
     <title>妈宝后台|用户管理</title>
 
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/master.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/master.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -89,8 +88,8 @@
                aria-haspopup="true"
                aria-expanded="false">商品管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
-                <li><a href="goods_list_managed.html">商品列表</a></li>
-                <li><a href="goods_type_managed.html">商品分类</a></li>
+                <li><a href="admin/goods_list_managed">商品列表</a></li>
+                <li><a href="admin/goods_type_managed">商品分类</a></li>
             </ul>
         </li>
 
@@ -99,9 +98,9 @@
                aria-haspopup="true"
                aria-expanded="false">订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
-                <li><a href="order_managed.html">订单</a></li>
-                <li><a href="invoices_managed.html">发货单</a></li>
-                <li><a href="transfer_order_managed.html">转让订单</a></li>
+                <li><a href="admin/order_managed">订单</a></li>
+                <li><a href="admin/invoices_managed">发货单</a></li>
+                <li><a href="admin/transfer_order_managed">转让订单</a></li>
             </ul>
         </li>
         <li class="first-level-menu">
@@ -109,14 +108,12 @@
                aria-haspopup="true"
                aria-expanded="false">用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
-                <li><a href="user_managed.html">账号管理</a></li>
-                <li><a href="log_managed.html">查看日志</a></li>
+                <li><a href="admin/user_managed">账号管理</a></li>
+                <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
     </ul>
-
 </div>
-
 <!--侧导航END-->
 
 <div class="col-xs-10">
@@ -321,9 +318,9 @@
 <!--用户表单ENDuser_managed.html-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../script/lib/jquery.1.10.2.js"></script>
+<script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../script/lib/bootstrap/bootstrap.min.js"></script>
-<script src="../script/user_managed.js"></script>
+<script src="script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/user_managed.js"></script>
 </body>
 </html>
