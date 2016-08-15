@@ -12,7 +12,10 @@ import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -121,8 +124,6 @@ public class GoodsRESTController {
         return voPage;
     }
 
-
-
     /**
      * goods页面初始化下拉框
      * @return
@@ -140,5 +141,30 @@ public class GoodsRESTController {
         List<Selector>  stateList = GoodsState.toList();
         goodsInitVO.setStateList(stateList);
         return goodsInitVO;
+    }
+
+    /**
+     *批量导出商品数据
+     * @param goodsTypeId   商品类别id
+     * @param state         商品状态
+     * @param title         商品名称
+     * @param articleNumber 商品货号
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/bulkExport",method = GET)
+    public JsonResultVO importBrandSort(@RequestParam(required = false) Long goodsTypeId,
+                                        @RequestParam(required = false) Boolean state,
+                                        @RequestParam(required = false) String title,
+                                        @RequestParam(required = false) String articleNumber,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try{
+            this.goodsService.exportDataGoodsDetail(request,response,goodsTypeId,state,title,articleNumber);
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"导出成功！");
     }
 }

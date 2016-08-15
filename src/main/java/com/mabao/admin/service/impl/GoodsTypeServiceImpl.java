@@ -125,4 +125,9 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
     }
+
+    @Override
+    public GoodsType findOne(Long typeId) {
+        return this.goodsTypeRepository.findOne(typeId);
+    }
 }

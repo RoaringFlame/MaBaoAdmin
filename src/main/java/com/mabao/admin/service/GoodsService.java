@@ -7,6 +7,8 @@ import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.util.PageVO;
 import org.springframework.data.domain.Page;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -76,4 +78,16 @@ public interface GoodsService {
      * @param state             需要改成的状态值
      */
     JsonResultVO changeGoodsState(String ids, Boolean state);
+
+    /**
+     * 商品批量导出
+     * @param request
+     * @param response
+     * @param goodsTypeId                   商品类别
+     * @param state                         商品状态
+     * @param title                         商品名称
+     * @param articleNumber                 商品货号
+     * @return
+     */
+     void exportDataGoodsDetail(HttpServletRequest request, HttpServletResponse response, Long goodsTypeId, Boolean state, String title, String articleNumber);
 }

@@ -6,17 +6,27 @@ import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.enums.BabyType;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsBrand;
+import com.mabao.admin.pojo.GoodsType;
 import com.mabao.admin.repository.BaseDao;
 import com.mabao.admin.repository.GoodsRepository;
 import com.mabao.admin.service.GoodsBrandService;
 import com.mabao.admin.service.GoodsService;
+import com.mabao.admin.service.GoodsTypeService;
 import com.mabao.admin.service.UserService;
+import com.mabao.admin.util.ExcelUtil;
 import com.mabao.admin.util.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,9 +39,12 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsBrandService goodsBrandService;
     @Autowired
+    private GoodsTypeService goodsTypeService;
+    @Autowired
     private UserService userService;
     @Autowired
     private BaseDao baseDao;
+    public static final String FILE_SEPARATOR = System.getProperties().getProperty("file.separator");       //得到系统属性的文件分隔符
 
     /**
      * 查询商品信息
@@ -50,21 +63,22 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public Goods saveGoods(GoodsInVO goodsInVO) {
-        Long id = goodsInVO.getId();
-        Goods goods = this.goodsRepository.findOne(id);
+        Goods goods = this.goodsRepository.findOne(goodsInVO.getId());
         goods.setTitle(goodsInVO.getTitle());                                   //商品名称
-        goods.setPrice(goodsInVO.getPrice());                                   //价格
+        goods.setUser(this.userService.get(goodsInVO.getUser_id()));
         goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
+        goods.setOldPrice(goodsInVO.getOldPrice());
+        goods.setPrice(goodsInVO.getPrice());                                   //价格
+        GoodsType goodsType = this.goodsTypeService.findOne(goodsInVO.getTypeId());
+        goods.setType(goodsType);
+        goods.setTypeName(goodsType.getTypeName());
+        GoodsBrand goodsBrand = this.goodsBrandService.get(goodsInVO.getBrandId());
+        goods.setBrand(goodsBrand);
+        goods.setBrandName(goodsBrand.getBrandName());
+        goods.setUpTime(goodsInVO.getUpTime());                                            //上传时间呗设定为购买时间
+        goods.setStockNumber(goodsInVO.getStockNumber());
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
-        goods.setUpTime(new Date());                                            //上传时间呗设定为购买时间
-
-        /*goods.setUser(this.userService.get(1L));            //userId
-        goods.setOldPrice(new Double(20));                                      //旧的价格
-        goods.setState(true);                                                   //设置状态为true
-        GoodsBrand brand =this.goodsBrandService.get(8L);                                   //设置假数据
-        goods.setBrand(brand);                                                  //设置商品品牌
-        goods.setBrandName(brand.getBrandName());                             //设置品牌名称
-        goods.setBabyType(BabyType.MEN);                                        //设置适合宝宝为男*/
+        goods.setBabyType(goodsInVO.getBabyType());                                    //设置适合宝宝为男*/
         return this.goodsRepository.saveAndFlush(goods);
     }
 
@@ -77,19 +91,24 @@ public class GoodsServiceImpl implements GoodsService {
     public Goods newGoods(GoodsInVO goodsInVO) {
         Goods goods = new Goods();
         goods.setTitle(goodsInVO.getTitle());                                   //商品名称
-        goods.setPrice(goodsInVO.getPrice());                                   //价格
+        goods.setUser(this.userService.get(goodsInVO.getUser_id()));
         goods.setNewDegree(goodsInVO.getNewDegree());                           //新旧级别
+        goods.setOldPrice(goodsInVO.getOldPrice());
+        goods.setPrice(goodsInVO.getPrice());                                   //价格
+        GoodsType goodsType = this.goodsTypeService.findOne(goodsInVO.getTypeId());
+        goods.setType(goodsType);
+        goods.setTypeName(goodsType.getTypeName());
+        GoodsBrand goodsBrand = this.goodsBrandService.get(goodsInVO.getBrandId());
+        goods.setBrand(goodsBrand);
+        goods.setBrandName(goodsBrand.getBrandName());
+        goods.setUpTime(goodsInVO.getUpTime());                                            //上传时间呗设定为购买时间
+        goods.setStockNumber(goodsInVO.getStockNumber());
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
-        goods.setUpTime(new Date());                                            //上传时间呗设定为购买时间
+        goods.setBabyType(goodsInVO.getBabyType());            //设置适合宝宝为男
 
-        goods.setUser(this.userService.get(1L));                                //userId
-        goods.setOldPrice(new Double(20));                                      //旧的价格
-        goods.setState(true);                                                   //设置状态为true
-        GoodsBrand brand =this.goodsBrandService.get(8L);                       //设置假数据
-        brand.setBrandName(brand.getBrandName());
-        goods.setBrand(brand);                                                  //设置商品品牌
-        goods.setBrandName(brand.getBrandName());                               //设置品牌名称
-        goods.setBabyType(BabyType.MEN);                                        //设置适合宝宝为男
+        goods.setState(false);                                                   //设置状态为true
+
+
         return this.goodsRepository.save(goods);
     }
 
@@ -207,6 +226,70 @@ public class GoodsServiceImpl implements GoodsService {
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
        return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
+    }
+
+    /**
+     * 商品筛选批量导出
+     * @param request
+     * @param response
+     * @param goodsTypeId                   商品类别
+     * @param state                         商品状态
+     * @param title                         商品名称
+     * @param articleNumber                 商品货号
+     */
+    @Override
+    public void exportDataGoodsDetail(HttpServletRequest request, HttpServletResponse response, Long goodsTypeId, Boolean state, String title, String articleNumber) {
+        //设置路径
+        String docsPath = request.getSession().getServletContext()
+                .getRealPath("");                                //模板文件路径
+        docsPath = docsPath.substring(0, docsPath.indexOf("classes"));              //获得类似“temp.test.'”
+        docsPath = docsPath + "src\\main\\webapp\\uploadFile";
+        String fileName = "商品数据明细表" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".xls";           //导出Excel文件名
+        String filePath = docsPath + FILE_SEPARATOR + fileName;
+        //数据填充
+        ExcelUtil<GoodsVO> ex = new ExcelUtil<>();
+        String[] headers = {"编号", "时间", "商品类别", "商品名称", "货号", "价格", "上架", "库存"};
+        String[] columns = {"id", "upTime", "typeName", "title", "articleNumber", "price", "state", "stockNumber"};
+        //JPQL拼接
+        String JPQL = "select g from Goods g "+
+                "inner join fetch g.type gt " ;
+        StringBuilder str = new StringBuilder("where 1 = 1 ");
+        List<Object> args = new ArrayList<>();
+        if (goodsTypeId !=null) {
+            args.add(goodsTypeId);
+            str.append(" and g.type.id = ?");
+            str.append(args.size());
+        }
+        if (state != null ) {
+            args.add(state);
+            str.append(" and g.state = ?");
+            str.append(args.size());
+        }
+        if (title != null && !"".equals(title)) {
+            args.add("%"+title+"%");
+            str.append(" and g.title like ?");
+            str.append(args.size());
+        }
+        if (articleNumber != null && !"".equals(articleNumber)) {
+            args.add("%"+articleNumber+"%");
+            str.append(" and g.articleNumber like ?");
+            str.append(args.size());
+        }
+        String jpqlAll = JPQL + str.toString();
+        List<Goods> data = this.baseDao.findAll(jpqlAll,args);
+        List<GoodsVO> dataSet = GoodsVO.generateBy(data);
+        try {
+            OutputStream out = new FileOutputStream(filePath);
+            ex.exportExcel("商品数据明细表", headers, columns, dataSet, out, "yy-MM-dd HH:mm:ss");
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ExcelUtil.download(filePath, response);
     }
 
 

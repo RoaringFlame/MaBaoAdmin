@@ -20,12 +20,13 @@ public class GoodsInVO {
     private Quality newDegree;                      //新旧程度，0表示全新，95，80分别表示95成8成新
     private Double oldPrice;                        //原价
     private Double price;                           //现价
-    private String typeName;                        //二级类型名称
-    private String brandName;                       //商品品牌名称
+    private Long typeId;                        //二级类型名称
+    private Long brandId;                       //商品品牌名称
     @DateTimeFormat(pattern = "yyyy-MM-dd")         //存日期时使用
-    private Date upTime;                            //上架时间
+    private Date upTime;                             //上架时间
     private Integer stockNumber;                    //库存数量
     private String message;                         //卖家分享
+    private BabyType babyType;
     private String pictureName;                     //上传图片名
 
     public static GoodsInVO generateBy(Goods goods){
@@ -33,6 +34,8 @@ public class GoodsInVO {
         assert vo != null;
         vo.setUser_id(goods.getUser().getId());
         vo.setPictureName(goods.getPicture());
+        vo.setBabyType(goods.getBabyType());
+        vo.setNewDegree(goods.getNewDegree());
         return vo;
     }
     public static List<GoodsInVO> generateBy(List<Goods> goodsList){
@@ -49,6 +52,14 @@ public class GoodsInVO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BabyType getBabyType() {
+        return babyType;
+    }
+
+    public void setBabyType(BabyType babyType) {
+        this.babyType = babyType;
     }
 
     public String getTitle() {
@@ -91,20 +102,20 @@ public class GoodsInVO {
         this.price = price;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public Long getBrandId() {
+        return brandId;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
     }
 
     public Date getUpTime() {
