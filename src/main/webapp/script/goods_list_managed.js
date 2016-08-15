@@ -102,14 +102,13 @@ $(function () {
                     goodsInfo.show();
                     goodsInfo.find("input[type='checkbox']").attr("name", "checkBox");
                     goodsInfo.find("td:eq(1)").text(index + 1);                      //给该条商品信息赋值商品id
-                    goodsInfo.find("td:eq(2)").text(getLocalTime(goods.uptime));               //给该条商品信息赋值商品时间
-                    goodsInfo.find("td:eq(3)").text(goods.typeName);             //给该条商品信息赋值商品类别
-                    goodsInfo.find("td:eq(4)").text(goods.title);                //给该条商品信息赋值商品名称
-                    goodsInfo.find("td:eq(5)").text(goods.articleNumber);        //给该条商品信息赋值商品货号
-                    goodsInfo.find("td:eq(6)").text(goods.price);                //给该条商品信息赋值商品价格
-                    goodsInfo.find("td:eq(7)").text(goods.state);                //给该条商品信息赋值商品状态
-                    goodsInfo.find("td:eq(8)").text(goods.stockNumber);          //给该条商品信息赋值商品库存
-                    goodsInfo.find("td:eq(10)").text(goods.id);                   //给该条商品信息赋值商品id
+                    goodsInfo.find("td:eq(2)").text(goods.typeName);             //给该条商品信息赋值商品类别
+                    goodsInfo.find("td:eq(3)").text(goods.title);                //给该条商品信息赋值商品名称
+                    goodsInfo.find("td:eq(4)").text(goods.articleNumber);        //给该条商品信息赋值商品货号
+                    goodsInfo.find("td:eq(5)").text(goods.price);                //给该条商品信息赋值商品价格
+                    goodsInfo.find("td:eq(6)").text(goods.state);                //给该条商品信息赋值商品状态
+                    goodsInfo.find("td:eq(7)").text(goods.stockNumber);          //给该条商品信息赋值商品库存
+                    goodsInfo.find("td:eq(9)").text(goods.id);                   //给该条商品信息赋值商品id
                     $(".container").append(goodsInfo);                           //在表单中添加商品记录
                 });
                 //编辑商品按钮
@@ -139,24 +138,6 @@ $(function () {
         goodsForm.find("textarea").val("");
     }
 
-    //时间格式化方法
-    function getLocalTime(jsondate) {
-        jsondate = "" + jsondate + "";                    //因为jsonDate是number型的indexOf会报错
-        if (jsondate.indexOf("+") > 0) {
-            jsondate = jsondate.substring(0, jsondate.indexOf("+"));
-        }
-        else if (jsondate.indexOf("-") > 0) {
-            jsondate = jsondate.substring(0, jsondate.indexOf("-"));
-        }
-        var date = new Date(parseInt(jsondate, 10));
-        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-        return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
-    }
-
 
     //修改商品表单初始化，表单显示商品信息
     function initUpdateGoodsForm(goodsId) {
@@ -168,12 +149,11 @@ $(function () {
             $("#babyTypeForm").val(data.babyType);                        //在表单上显示当前商品的宝宝类型
             $("#goodsTypeForm").val(data.typeId);                       //在表单上显示当前商品的商品类型
             $("#goodsBrandForm").val(data.brandName);                     //在表单上显示当前商品的品牌名称
-            $("#goodsDateForm").val(getLocalTime(data.upTime));           //在表单上显示当前商品的上架时间
             $("#goodsDegreeForm").val(data.newDegree);                    //在表单上显示当前商品的新旧程度
             $("#goodsStockNumberForm").val(data.stockNumber);
             $("#goodsDetailForm").val(data.message);                      //在表单上显示当前商品的商品信息
             $("#goodsIdForm").val(data.id);                               //获取当前商品的id
-            alert(data.typeId);
+            $("#userIdForm").val(data.user_id);                               //获取当前商品的id
         });
     }
 
@@ -191,23 +171,31 @@ $(function () {
 
         //点击新增商品表单页面提交按钮
         $(".modal-footer button:eq(1)").click(function () {
+            var id = $("#goodsIdForm").val();
             var title = $("#goodsNameForm").val();
+            var oldPrice = $("#goodsOldPriceForm").val();
             var price = $("#goodsPriceForm").val();
-            var address = $("#goodsAddForm").val();
-            var purchaseTime = $("#goodsDateForm").val();
-            var releaseTime = $("#goodsEndDateForm").val();
-            var newDegree = $("#goodsDegreeForm").val();
-            var goodsIntroduction = $("#goodsInfoForm").val();
-            var message = $("#goodsDetailForm").val();
+            var babyType=$("#babyTypeForm").val();
+            var goodsType=$("#goodsTypeForm").val();
+            var goodsBrand=$("#goodsBrandForm").val();
+            var goodsDegree=$("#goodsDegreeForm").val();
+            var goodsStockNumber = $("#goodsStockNumberForm").val();
+            var goodsDetail = $("#goodsDetailForm").val();
+            var userId = $("#userIdForm").val();
             var params = {
+                id: id,
+                user_id:1,
                 title: title,
+                oldPrice:oldPrice,
                 price: price,
-                //address:address,
-                purchaseTime: purchaseTime,
-                releaseTime: releaseTime,
-                newDegree: newDegree,
-                goodsIntroduction: goodsIntroduction,
-                message: message
+                babyType: babyType,
+                typeId: goodsType,
+                brandId:1,
+                brandName:goodsBrand,
+                newDegree: goodsDegree,
+                stockNumber: goodsStockNumber,
+                upTime:"2016-08-15",
+                message: goodsDetail
             };
             $.ajax({
                 type: 'POST',
@@ -232,23 +220,29 @@ $(function () {
         $(".modal-footer button:eq(2)").click(function () {
             var id = $("#goodsIdForm").val();
             var title = $("#goodsNameForm").val();
+            var oldPrice = $("#goodsOldPriceForm").val();
             var price = $("#goodsPriceForm").val();
-            //var address=$("#goodsAddForm").val();
-            var purchaseTime = $("#goodsDateForm").val();
-            var releaseTime = $("#goodsEndDateForm").val();
-            var newDegree = $("#goodsDegreeForm").val();
-            var goodsIntroduction = $("#goodsInfoForm").val();
-            var message = $("#goodsDetailForm").val();
+            var babyType=$("#babyTypeForm").val();
+            var goodsType=$("#goodsTypeForm").val();
+            var goodsBrand=$("#goodsBrandForm").val();
+            var goodsDegree=$("#goodsDegreeForm").val();
+            var goodsStockNumber = $("#goodsStockNumberForm").val();
+            var goodsDetail = $("#goodsDetailForm").val();
+            var userId = $("#userIdForm").val();
             var params = {
                 id: id,
+                user_id:userId,
                 title: title,
+                oldPrice:oldPrice,
                 price: price,
-                //address:address,
-                purchaseTime: purchaseTime,
-                releaseTime: releaseTime,
-                newDegree: newDegree,
-                goodsIntroduction: goodsIntroduction,
-                message: message
+                babyType: babyType,
+                typeId: goodsType,
+                brandId:1,
+                brandName:goodsBrand,
+                newDegree: goodsDegree,
+                stockNumber: goodsStockNumber,
+                upTime:"2016-08-15",
+                message: goodsDetail
             };
             $.ajax({
                 type: 'POST',
@@ -258,6 +252,7 @@ $(function () {
                 dataType: 'json',
                 data: JSON.stringify(params),
                 success: function () {
+                    alert("11");
                     cancelForm();
                     $(".container").empty();
                     initGoodsList();
@@ -351,7 +346,7 @@ $(function () {
     //导出Excel按钮
     function exportExcel() {
         getSearchItem();
-        window.location = "/goodsManager/export/dataGoods?typeName=" + typeName + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsId;
+        window.location = "/goods/bulkExport?goodsTypeId=" + goodsTypeId + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsNum;
 
     }
 

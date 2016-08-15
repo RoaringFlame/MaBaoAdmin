@@ -135,7 +135,6 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a>导入 Excel</a></li>
                         <li><a>导出 Excel</a></li>
                     </ul>
                 </div>

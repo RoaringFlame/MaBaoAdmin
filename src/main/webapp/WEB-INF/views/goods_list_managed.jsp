@@ -215,8 +215,6 @@
                     </th>
                     <th>编号</th>
 
-                    <th>上架时间</th>
-
                     <th>商品类别</th>
 
                     <th>商品名称</th>
@@ -243,8 +241,6 @@
                     </td>
 
                     <td>7</td>
-
-                    <td>2016/07/22 9：06</td>
 
                     <td>婴儿车</td>
 
@@ -329,10 +325,6 @@
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsUpTimeForm" class="control-label  label-half">上架时间:
-                            <input type="date" class="form-control" id="goodsUpTimeForm" name="upTime">
-                        </label>
-                        <span class="red">*</span>
 
                         <label for="goodsDegreeForm" class="control-label label-half ">新旧程度:
                             <select class="form-control" id="goodsDegreeForm" name="newDegree">
@@ -353,6 +345,7 @@
                             <input type="file" accept="image/png,image/gif" id="uploadPhoto">
                         </label>
                         <input type="text" id="goodsIdForm" style="display: none">
+                        <input type="text" id="userIdForm" style="display: none">
                     </div>
                 </form>
             </div>
