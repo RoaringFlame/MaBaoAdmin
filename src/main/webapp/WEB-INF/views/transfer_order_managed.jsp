@@ -1,15 +1,19 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
+    <base href="<%=basePath%>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>妈宝后台|转让订单</title>
 
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/master.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/master.css" rel="stylesheet">
 
 </head>
 <body>
@@ -466,8 +470,8 @@
 </div>
 <!--表单高级搜索END-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../script/lib/jquery.1.10.2.js"></script>
+<script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/lib/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>
