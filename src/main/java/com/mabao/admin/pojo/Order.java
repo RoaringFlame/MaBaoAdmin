@@ -1,6 +1,7 @@
 package com.mabao.admin.pojo;
 
 import com.mabao.admin.enums.OrderStatus;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,14 +10,19 @@ import java.util.Date;
 @Table(name = "t_order")
 public class Order {
     private Long id;                    //id
-    private User buyer;                 //买家ID
-    private Long sellerId;              //买家ID
+    private User buyer;                 //买家
+    private Long operatorId;            //操作人员ID
     private Integer quantity;           //数量
     private Double totalSum;            //总价
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;            //订单创建时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date portTime;              //订单发货时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date payTime;               //订单支付时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dealTime;              //订单完成时间
+    private Express express;          //快递公司
     private String portNumber;          //运单号
     private Double freight;             //运费
     private String paymentNo;           //支付单号
@@ -42,6 +48,7 @@ public class Order {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     @Column(name = "port_time")
     public Date getPortTime() {
         return portTime;
@@ -50,6 +57,7 @@ public class Order {
     public void setPortTime(Date portTime) {
         this.portTime = portTime;
     }
+
     @Column(name = "pay_time")
     public Date getPayTime() {
         return payTime;
@@ -58,6 +66,7 @@ public class Order {
     public void setPayTime(Date payTime) {
         this.payTime = payTime;
     }
+
     @Column(name = "deal_time")
     public Date getDealTime() {
         return dealTime;
@@ -66,6 +75,17 @@ public class Order {
     public void setDealTime(Date dealTime) {
         this.dealTime = dealTime;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "express_id")
+    public Express getExpress() {
+        return express;
+    }
+
+    public void setExpress(Express express) {
+        this.express = express;
+    }
+
     @Column(name = "port_number")
     public String getPortNumber() {
         return portNumber;
@@ -112,13 +132,13 @@ public class Order {
         this.buyer = buyer;
     }
 
-    @Column(name = "seller_id")
-    public Long getSellerId() {
-        return sellerId;
+    @Column(name = "operator_id")
+    public Long getOperatorId() {
+        return operatorId;
     }
 
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
+    public void setOperatorId(Long operatorId) {
+        this.operatorId = operatorId;
     }
 
     @ManyToOne(cascade = CascadeType.REFRESH)
@@ -138,6 +158,7 @@ public class Order {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
     @Column(name = "total_sum")
     public Double getTotalSum() {
         return totalSum;
