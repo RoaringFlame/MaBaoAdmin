@@ -39,6 +39,7 @@ public class GoodsInVO {
         vo.setNewDegree(goods.getNewDegree());
         vo.setBabyType(goods.getBabyType());
         vo.setTypeName(goods.getTypeName());
+        vo.setTypeId(goods.getType().getId());
         return vo;
     }
     public static List<GoodsInVO> generateBy(List<Goods> goodsList){
