@@ -40,6 +40,18 @@
 
         <!-- 导航链接-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" id="nav_change">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">首页</a>
+                    <!--<span class="caret"></span>-->
+                    <ul class="dropdown-menu">
+                        <li><a></a></li>
+                        <li><a></a></li>
+                        <li ><a class="hide">转让订单</a></li>
+                    </ul>
+                </li>
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -63,7 +75,7 @@
 <div>
     <div class=" col-xs-2 " id="myScrollspy">
         <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-            <li class="first-level-menu">
+            <li class="first-level-menu" id="goods_manage">
                 <a href="#goodsManaged" data-toggle="collapse" role="button"
                    aria-haspopup="true"
                    aria-expanded="false">
@@ -74,7 +86,7 @@
                 </ul>
             </li>
 
-            <li class="first-level-menu">
+            <li class="first-level-menu" id="order_manage">
                 <a href="#orderManaged" data-toggle="collapse" role="button"
                    aria-haspopup="true"
                    aria-expanded="false">
@@ -85,20 +97,20 @@
                     <li><a href="#">转让订单</a></li>
                 </ul>
             </li>
-            <li class="first-level-menu">
+            <li class="first-level-menu" id="user_manage">
                 <a href="#userManaged" data-toggle="collapse" role="button"
                    aria-haspopup="true"
                    aria-expanded="false">
                     <span class="iconfont">&#xe60e</span>用户管理</a>
                 <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
-                    <li><a href="#">账号管理</a></li>
+                    <li><a href="#">账户管理</a></li>
                     <li><a href="#">查看日志</a></li>
                 </ul>
             </li>
         </ul>
     </div>
     <div class="col-xs-10">
-        <iframe src="index.html" frameborder="0" style="width: 100%;height: 600px;">
+        <iframe src="index.html" frameborder="0" style="width: 100%;height: 680px;">
         </iframe>
     </div>
 </div>
