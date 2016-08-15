@@ -57,4 +57,11 @@ public interface GoodsTypeService {
      * @return                  结果VO
      */
     JsonResultVO changeGoodsType(GoodsTypeVO goodsTypeVO);
+
+    /**
+     * 查找商品类别
+     * @param typeId
+     * @return
+     */
+     GoodsType findOne(Long typeId);
 }

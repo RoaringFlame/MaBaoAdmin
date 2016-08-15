@@ -18,22 +18,24 @@ public class GoodsInVO {
     private String title;                           //标题
     private Long user_id;                           //商品归属者编号，后台用户编号为0
     private Quality newDegree;                      //新旧程度，0表示全新，95，80分别表示95成8成新
-    private String message;                         //卖家分享
+    private Double oldPrice;                        //原价
     private Double price;                           //现价
+    private Long typeId;                        //二级类型名称
+    private Long brandId;                       //商品品牌名称
     @DateTimeFormat(pattern = "yyyy-MM-dd")         //存日期时使用
-    private Date purchaseTime;                      //购买时间
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date releaseTime;                       //保质期时间
-    private String  goodsIntroduction;              //商品介绍
+    private Date upTime;                             //上架时间
+    private Integer stockNumber;                    //库存数量
+    private String message;                         //卖家分享
+    private BabyType babyType;
+    private String pictureName;                     //上传图片名
 
     public static GoodsInVO generateBy(Goods goods){
         GoodsInVO vo = VoUtil.copyBasic(GoodsInVO.class, goods);
         assert vo != null;
-        vo.setNewDegree(goods.getNewDegree());
         vo.setUser_id(goods.getUser().getId());
-        vo.setPurchaseTime(goods.getUpTime());
-        vo.setReleaseTime(goods.getUpTime());
-        vo.setGoodsIntroduction("hhhdsfs3");
+        vo.setPictureName(goods.getPicture());
+        vo.setBabyType(goods.getBabyType());
+        vo.setNewDegree(goods.getNewDegree());
         return vo;
     }
     public static List<GoodsInVO> generateBy(List<Goods> goodsList){
@@ -44,20 +46,20 @@ public class GoodsInVO {
         return list;
     }
 
-    public Quality getNewDegree() {
-        return newDegree;
-    }
-
-    public void setNewDegree(Quality newDegree) {
-        this.newDegree = newDegree;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BabyType getBabyType() {
+        return babyType;
+    }
+
+    public void setBabyType(BabyType babyType) {
+        this.babyType = babyType;
     }
 
     public String getTitle() {
@@ -75,12 +77,21 @@ public class GoodsInVO {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
-    public String getMessage() {
-        return message;
+
+    public Quality getNewDegree() {
+        return newDegree;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setNewDegree(Quality newDegree) {
+        this.newDegree = newDegree;
+    }
+
+    public Double getOldPrice() {
+        return oldPrice;
+    }
+
+    public void setOldPrice(Double oldPrice) {
+        this.oldPrice = oldPrice;
     }
 
     public Double getPrice() {
@@ -91,28 +102,54 @@ public class GoodsInVO {
         this.price = price;
     }
 
-    public Date getPurchaseTime() {
-        return purchaseTime;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setPurchaseTime(Date purchaseTime) {
-        this.purchaseTime = purchaseTime;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
-    public Date getReleaseTime() {
-        return releaseTime;
+    public Long getBrandId() {
+        return brandId;
     }
 
-    public void setReleaseTime(Date releaseTime) {
-        this.releaseTime = releaseTime;
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
     }
 
-    public String getGoodsIntroduction() {
-        return goodsIntroduction;
+    public Date getUpTime() {
+        return upTime;
     }
 
-    public void setGoodsIntroduction(String goodsIntroduction) {
-        this.goodsIntroduction = goodsIntroduction;
+    public void setUpTime(Date upTime) {
+        this.upTime = upTime;
     }
+
+    public Integer getStockNumber() {
+        return stockNumber;
+    }
+
+    public void setStockNumber(Integer stockNumber) {
+        this.stockNumber = stockNumber;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+
+    public String getPictureName() {
+        return pictureName;
+    }
+
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
+    }
+
 }
 
