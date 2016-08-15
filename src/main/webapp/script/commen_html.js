@@ -12,7 +12,7 @@ $(function () {
             ['订单', 'order_managed'],
             ['发货单', 'invoices_managed'],
             ['转让订单', 'transfer_order_managed'],
-            ['账号管理', 'user_managed'],
+            ['账户管理', 'user_managed'],
             ['查看日志', 'log_managed'],
             ['登录', 'login'],
         ];
@@ -80,7 +80,7 @@ $(function () {
         $("#user_manage").find("a").click(function(){
             $("#nav_change").find("li:eq(0)>ul>li:eq(2)>a").removeClass("show");
             $("#nav_change").find("li:eq(0)>a").text("用户管理");
-            $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").text("账号管理");
+            $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").text("账户管理");
             $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").click(function () {
                 $('iframe').attr('src', function () {
                     return arr[6][1] + '.html';
