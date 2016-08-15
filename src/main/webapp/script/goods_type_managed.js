@@ -99,7 +99,7 @@ $(function () {
             checkedItems = $("input[name='allCheck']:checked");
             if (checkedItems.val()) {
                 $(checkedItems).each(function () {                     //遍历选中的checkbox
-                    goodsId = $(this).parents("tr").find("td:eq(1)").text();           //获取checkbox所在行顺序
+                    goodsId = $(this).parents("tr").find("td:eq(5)").text();           //获取checkbox所在行顺序
                     goodsIds += goodsId + ",";
                     console.log(goodsIds);
                 });
