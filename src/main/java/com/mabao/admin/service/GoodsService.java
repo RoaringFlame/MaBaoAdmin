@@ -1,6 +1,6 @@
 package com.mabao.admin.service;
 
-import com.mabao.admin.controller.vo.GoodsInVO_bak;
+import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.Goods;
@@ -25,14 +25,14 @@ public interface GoodsService {
      * @param goodsInVO         商品对象，需包含用户ID
      * @return                  保存的商品对象
      */
-    Goods saveGoods(GoodsInVO_bak goodsInVO);
+    Goods saveGoods(GoodsInVO goodsInVO);
 
     /**
      * 新建商品
      * @param goodsInVO         商品对象，需包含用户ID
      * @return                  保存的商品对象
      */
-    Goods newGoods(GoodsInVO_bak goodsInVO);
+    Goods newGoods(GoodsInVO goodsInVO);
 
     /**
      * 获取所有商品信息

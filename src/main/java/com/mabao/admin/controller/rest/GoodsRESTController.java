@@ -70,8 +70,8 @@ public class GoodsRESTController {
      * @return
      */
     @RequestMapping(value = "/getGoods", method = GET)
-    public GoodsInVO_bak getGoods(@RequestParam Long goodsId) {
-        return GoodsInVO_bak.generateBy(this.goodsService.get(goodsId));
+    public GoodsInVO getGoods(@RequestParam Long goodsId) {
+        return GoodsInVO.generateBy(this.goodsService.get(goodsId));
     }
 
     /**
@@ -79,7 +79,7 @@ public class GoodsRESTController {
      * @param goodsInVO             传入商品
      */
     @RequestMapping(value = "/updateGoods", method = RequestMethod.POST)
-    public JsonResultVO updateGoods(@RequestBody GoodsInVO_bak goodsInVO) {
+    public JsonResultVO updateGoods(@RequestBody GoodsInVO goodsInVO) {
         try{
             this.goodsService.saveGoods(goodsInVO);
         }catch (Exception e){
@@ -94,7 +94,7 @@ public class GoodsRESTController {
      * @return
      */
     @RequestMapping(value = "/addGoods",method = POST)
-    public JsonResultVO addGoods(@RequestBody GoodsInVO_bak goodsInVO) {
+    public JsonResultVO addGoods(@RequestBody GoodsInVO goodsInVO) {
         try{
             this.goodsService.newGoods(goodsInVO);
         }catch (Exception e){

@@ -88,11 +88,74 @@ $(function () {
         }
     }
 
+    //初始化分页按钮
+    function initPageBtn() {
+        //显示当前页数
+        $("#page").text(currentPage);
+        //点击首页
+        $("#btn1").click(function () {
+            currentPage = 1;                               //点击首页时参数currentPage为0
+            $(".container").empty();                       //清空表单数据
+            initOrderList();                               //传参并调用初始化表单方法
+            $("#page").text(currentPage);
+        });
+
+        //点击上一页
+        $("#btn2").click(function () {
+            if (currentPage == 1) {
+                alert("当前已经是首页了!");                 //如果当前页面是首页，点击上一页弹出提示框
+            }
+            else {
+                $(".container").empty();                    //如果不是首页，点击上一页时清空表单
+                currentPage--;                              //当前页数减1
+                initOrderList();        //传参并调用初始化表单方法
+                $("#page").text(currentPage);
+            }
+        });
+
+        //点击下一页
+        $("#btn3").click(function () {
+            if ((currentPage == totalPage) || (totalPage == 1)) {                //如果当前页面是最后一页时，点击下一页弹出提示框
+                alert("当前已经是最后一页了!");
+            }
+            else {
+                $(".container").empty();                      //如果不是最后一页，点击下一页时清空表单
+                currentPage++;                                //当前页数加1
+                initOrderList();          //传参并调用初始化表单方法
+                $("#page").text(currentPage);
+            }
+        });
+
+        //点击尾页
+        $("#btn4").click(function () {
+            currentPage = totalPage;                            //点击尾页时参数currentPage为0
+            $(".container").empty();                            //清空表单数据
+            initOrderList();                //传参并调用初始化表单方法
+            $("#page").text(currentPage);
+        });
+
+    }
+
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+
     function init() {
         //订单状态下拉框初始化
         initOrderState();
         //订单列表初始化
         initOrderList();
+        //初始化分页按钮
+        initPageBtn();
 
         //点击第一行的复选框控制全选和全不选
         $("#selectAll").click(function () {
@@ -110,7 +173,20 @@ $(function () {
         $(".delivery").click(function(){
             delivery();
         });
+
+        $("#uploadPhoto").change(function(){
+            var objUrl = getObjectURL(this.files[0]) ;
+            console.log("objUrl = "+objUrl) ;
+            if (objUrl) {
+                $("#uploadPhoto").parent().append($("<img>").attr("src", objUrl));
+            }
+        });
+        //$("#imgUpload").click(function(){
+        //    $("#fileUpload").trigger("click");
+        //});
     }
+
+
 
     init();
 });

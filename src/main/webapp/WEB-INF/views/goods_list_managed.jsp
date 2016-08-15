@@ -22,8 +22,8 @@
     <title>妈宝后台|商品列表</title>
 
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/master.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/master.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -314,6 +314,12 @@
                         </label>
                         <span class="red">*</span>
 
+                        <label for="babyTypeForm" class="control-label  label-half ">宝宝类型:
+                            <select class="form-control" id="babyTypeForm" name="babyType">
+                            </select>
+                        </label>
+                        <span class="red">*</span>
+
                         <label for="goodsTypeForm" class="control-label  label-half ">商品类型:
                             <select class="form-control goodsType" id="goodsTypeForm" name="goodsType">
                             </select>
@@ -345,7 +351,7 @@
                             <textarea class="form-control" id="goodsDetailForm" name="message"></textarea>
                         </label>
 
-                        <label class="label-half">
+                        <label class="label-half">上传图片：
                             <input type="file" accept="image/png,image/gif" id="uploadPhoto">
                         </label>
                         <input type="text" id="goodsIdForm" style="display: none">
