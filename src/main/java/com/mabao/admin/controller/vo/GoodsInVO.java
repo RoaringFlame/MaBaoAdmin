@@ -20,7 +20,9 @@ public class GoodsInVO {
     private Quality newDegree;                      //新旧程度，0表示全新，95，80分别表示95成8成新
     private Double oldPrice;                        //原价
     private Double price;                           //现价
+    private Long typeId;                            //类别id
     private String typeName;                        //二级类型名称
+    private Long brandId;                           //品牌id
     private String brandName;                       //商品品牌名称
     @DateTimeFormat(pattern = "yyyy-MM-dd")         //存日期时使用
     private Date upTime;                             //上架时间
@@ -79,6 +81,22 @@ public class GoodsInVO {
 
     public Quality getNewDegree() {
         return newDegree;
+    }
+
+    public Long getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
+
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
     }
 
     public void setNewDegree(Quality newDegree) {
