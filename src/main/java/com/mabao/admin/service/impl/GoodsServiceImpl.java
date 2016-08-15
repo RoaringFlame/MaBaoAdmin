@@ -244,7 +244,7 @@ public class GoodsServiceImpl implements GoodsService {
                 .getRealPath("");                                //模板文件路径
         docsPath = docsPath.substring(0, docsPath.indexOf("classes"));              //获得类似“temp.test.'”
         docsPath = docsPath + "src\\main\\webapp\\uploadFile";
-        String fileName = "商品数据明细表" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ".xls";           //导出Excel文件名
+        String fileName = "商品数据明细表" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".xls";           //导出Excel文件名
         String filePath = docsPath + FILE_SEPARATOR + fileName;
         //数据填充
         ExcelUtil<GoodsVO> ex = new ExcelUtil<>();
@@ -281,6 +281,7 @@ public class GoodsServiceImpl implements GoodsService {
         try {
             OutputStream out = new FileOutputStream(filePath);
             ex.exportExcel("商品数据明细表", headers, columns, dataSet, out, "yy-MM-dd HH:mm:ss");
+            ExcelUtil.download(filePath, response);
             out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -289,7 +290,7 @@ public class GoodsServiceImpl implements GoodsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ExcelUtil.download(filePath, response);
+
     }
 
 
