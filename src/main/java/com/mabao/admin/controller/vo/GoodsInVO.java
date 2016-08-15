@@ -37,6 +37,8 @@ public class GoodsInVO {
         vo.setUser_id(goods.getUser().getId());
         vo.setPictureName(goods.getPicture());
         vo.setNewDegree(goods.getNewDegree());
+        vo.setBabyType(goods.getBabyType());
+        vo.setTypeName(goods.getTypeName());
         return vo;
     }
     public static List<GoodsInVO> generateBy(List<Goods> goodsList){
