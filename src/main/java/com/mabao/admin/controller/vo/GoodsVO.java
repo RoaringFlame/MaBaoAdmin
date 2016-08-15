@@ -3,6 +3,7 @@ package com.mabao.admin.controller.vo;
 
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.util.VoUtil;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,11 +16,12 @@ import java.util.List;
 public class GoodsVO {
 
     private Long id;                           //宝物的id
-    private Date uptime;                         //宝物的描述
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date upTime;                         //宝物的描述
     private String title;                      //宝物新旧程度
     private String articleNumber;               //宝物货号
     private Double price;                       //宝物价格
-    private int stockNumber;                    //宝物库存
+    private Integer stockNumber;                    //宝物库存
     private String state;                       //宝物状态
     private String typeName;                     //一级类型编号
 
@@ -27,9 +29,6 @@ public class GoodsVO {
         GoodsVO vo = VoUtil.copyBasic(GoodsVO.class, goods);
         assert vo != null;
         vo.setState((goods.getState()==true)?"上架":"下架");
-        vo.setTypeName(goods.getType().getTypeName());
-        vo.setStockNumber(goods.getStockNumber());
-        vo.setUptime(goods.getUpTime());
         return vo;
     }
     public static List<GoodsVO> generateBy(List<Goods> goodsList){
@@ -56,12 +55,12 @@ public class GoodsVO {
         this.id = id;
     }
 
-    public Date getUptime() {
-        return uptime;
+    public Date getUpTime() {
+        return upTime;
     }
 
-    public void setUptime(Date uptime) {
-        this.uptime = uptime;
+    public void setUpTime(Date upTime) {
+        this.upTime = upTime;
     }
 
     public String getTitle() {
@@ -88,11 +87,11 @@ public class GoodsVO {
         this.price = price;
     }
 
-    public int getStockNumber() {
+    public Integer getStockNumber() {
         return stockNumber;
     }
 
-    public void setStockNumber(int stockNumber) {
+    public void setStockNumber(Integer stockNumber) {
         this.stockNumber = stockNumber;
     }
 
