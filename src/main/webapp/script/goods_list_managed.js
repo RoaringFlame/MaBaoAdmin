@@ -3,11 +3,10 @@
  */
 "use strict";
 $(function () {
-    var searchBtn = $("#search");        //获取搜索按钮
+    var searchBtn = $("#search");                                         //获取搜索按钮
     var deleteBtn = $("#operate li:eq(0)");                               //获取删除按钮
     var onSellBtn = $("#operate li:eq(1)");                               //获取上架按钮
     var offSellBtn = $("#operate li:eq(2)");                              //获取下架按钮
-    var printBtn = $("#tool li:eq(0)");                                   //获取打印按钮
     var exportExcelBtn = $("#tool li:eq(1)");                             //获取导出商品按钮
     var currentPage = 1;                                                  //当前页数
     var totalPage = 1;                                                    //总页数
@@ -90,7 +89,7 @@ $(function () {
                     var goodsInfo = $("#goodsContainer").clone();                //克隆一条商品记录
                     goodsInfo.show();
                     goodsInfo.find("input[type='checkbox']").attr("name", "checkBox");
-                    goodsInfo.find("td:eq(1)").text(index+1);                      //给该条商品信息赋值商品id
+                    goodsInfo.find("td:eq(1)").text(index + 1);                      //给该条商品信息赋值商品id
                     goodsInfo.find("td:eq(2)").text(getLocalTime(goods.uptime));               //给该条商品信息赋值商品时间
                     goodsInfo.find("td:eq(3)").text(goods.typeName);             //给该条商品信息赋值商品类别
                     goodsInfo.find("td:eq(4)").text(goods.title);                //给该条商品信息赋值商品名称
@@ -116,10 +115,10 @@ $(function () {
 
     //根据搜索条件查找商品
     function searchGoods() {
+        alert("11");
         $(".container").empty();
-        currentPage=1;
+        currentPage = 1;
         initGoodsList();
-
     }
 
     //商品详情表单取消按钮
@@ -151,15 +150,16 @@ $(function () {
     function initUpdateGoodsForm(goodsId) {
         $.get("goods/getGoods", {goodsId: goodsId}, function (data) {
             console.log(data);
-            $("#goodsNameForm").val(data.title);                      //在表单上显示当前商品的标题
-            $("#goodsPriceForm").val(data.price);                     //在表单上显示当前商品的价格
-            //n$("#goodsAddForm").val(data.address);                 //在表单上显示当前商品的地址
-            $("#goodsDateForm").val(getLocalTime(data.purchaseTime));     //在表单上显示当前商品的购买日期
-            $("#goodsEndDateForm").val(getLocalTime(data.releaseTime));            //在表单上显示当前商品的保质期
-            $("#goodsDegreeForm").val(data.newDegree);               //在表单上显示当前商品的新旧程度
-            $("#goodsInfoForm").val(data.goodsIntroduction);        //在表单上显示当前商品的商品介绍
-            $("#goodsDetailForm").val(data.message);                //在表单上显示当前商品的商品信息
-            $("#goodsIdForm").val(data.id);
+            $("#goodsNameForm").val(data.title);                          //在表单上显示当前商品的标题
+            $("#goodsOldPriceForm").val(data.oldPrice);                   //在表单上显示当前商品的价格
+            $("#goodsPriceForm").val(data.price);                         //在表单上显示当前商品的价格
+            $("#babyTypeForm").val(data.babyType);                        //在表单上显示当前商品的宝宝类型
+            $("#goodsTypeForm").val(data.typeName);                       //在表单上显示当前商品的商品类型
+            $("#goodsBrandForm").val(data.brandName);                     //在表单上显示当前商品的品牌名称
+            $("#goodsDateForm").val(getLocalTime(data.upTime));           //在表单上显示当前商品的上架时间
+            $("#goodsDegreeForm").val(data.newDegree);                    //在表单上显示当前商品的新旧程度
+            $("#goodsDetailForm").val(data.message);                      //在表单上显示当前商品的商品信息
+            $("#goodsIdForm").val(data.id);                               //获取当前商品的id
         });
     }
 
@@ -391,6 +391,19 @@ $(function () {
 
     }
 
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+
 
     function init() {
         //商品类型下拉框初始化
@@ -437,14 +450,23 @@ $(function () {
             offSell();                   //点击下架按钮商品状态变成下架
         });
 
-        //点击打印按钮
-        printBtn.click(function () {
-            alert("打印");
-        });
 
         //点击导出按钮事件
         exportExcelBtn.click(function () {
             exportExcel();                //点击导出按钮商品状态变成下架
+        });
+
+        //点击上传图片按钮
+        $("#uploadPhoto").change(function () {
+            var objUrl = getObjectURL(this.files[0]);
+            console.log("objUrl = " + objUrl);
+            if (objUrl) {
+                $("#uploadPhoto").parent().append($("<img>")
+                    .attr("src", objUrl)
+                    .css("width", "120px")
+                    .css("height", "120px")
+                );
+            }
         });
 
     }

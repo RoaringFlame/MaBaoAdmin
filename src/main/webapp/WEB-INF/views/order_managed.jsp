@@ -175,6 +175,7 @@
                     <div class="form-group">
                         <label for="goodsStatus">订单状态：</label>
                         <select name="" class="form-control goodsStatus" id="goodsStatus">
+                            <option value="所有状态">所有状态</option>
                         </select>
                     </div>
 

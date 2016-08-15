@@ -330,7 +330,7 @@
                         <span class="red">*</span>
 
                         <label for="goodsUpTimeForm" class="control-label  label-half">上架时间:
-                            <input type="text" class="form-control" id="goodsUpTimeForm" name="upTime">
+                            <input type="date" class="form-control" id="goodsUpTimeForm" name="upTime">
                         </label>
                         <span class="red">*</span>
 
@@ -349,7 +349,7 @@
                             <textarea class="form-control" id="goodsDetailForm" name="message"></textarea>
                         </label>
 
-                        <label class="label-half">上传图片：
+                        <label>上传图片：
                             <input type="file" accept="image/png,image/gif" id="uploadPhoto">
                         </label>
                         <input type="text" id="goodsIdForm" style="display: none">
