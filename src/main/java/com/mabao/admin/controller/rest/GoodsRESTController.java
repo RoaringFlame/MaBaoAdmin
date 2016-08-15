@@ -1,6 +1,7 @@
 package com.mabao.admin.controller.rest;
 
 import com.mabao.admin.controller.vo.*;
+import com.mabao.admin.enums.BabyType;
 import com.mabao.admin.enums.GoodsState;
 import com.mabao.admin.enums.Quality;
 import com.mabao.admin.enums.Role;
@@ -140,6 +141,9 @@ public class GoodsRESTController {
         //商品上下架状态
         List<Selector>  stateList = GoodsState.toList();
         goodsInitVO.setStateList(stateList);
+        //适合宝贝类别
+        List<Selector>  babyTypeList = BabyType.toList();
+        goodsInitVO.setBabyTypeList(babyTypeList);
         return goodsInitVO;
     }
 
@@ -155,7 +159,7 @@ public class GoodsRESTController {
      * @throws Exception
      */
     @RequestMapping(value = "/bulkExport",method = GET)
-    public JsonResultVO importBrandSort(@RequestParam(required = false) Long goodsTypeId,
+    public JsonResultVO bulkExportGoods(@RequestParam(required = false) Long goodsTypeId,
                                         @RequestParam(required = false) Boolean state,
                                         @RequestParam(required = false) String title,
                                         @RequestParam(required = false) String articleNumber,

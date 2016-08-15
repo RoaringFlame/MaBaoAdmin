@@ -15,7 +15,7 @@ import java.util.List;
 public class GoodsVO {
 
     private Long id;                           //宝物的id
-    private Date uptime;                         //宝物的描述
+    private Date upTime;                         //宝物的描述
     private String title;                      //宝物新旧程度
     private String articleNumber;               //宝物货号
     private Double price;                       //宝物价格
@@ -29,7 +29,7 @@ public class GoodsVO {
         vo.setState((goods.getState()==true)?"上架":"下架");
         vo.setTypeName(goods.getType().getTypeName());
         vo.setStockNumber(goods.getStockNumber());
-        vo.setUptime(goods.getUpTime());
+        vo.setUpTime(goods.getUpTime());
         return vo;
     }
     public static List<GoodsVO> generateBy(List<Goods> goodsList){
@@ -56,12 +56,12 @@ public class GoodsVO {
         this.id = id;
     }
 
-    public Date getUptime() {
-        return uptime;
+    public Date getUpTime() {
+        return upTime;
     }
 
-    public void setUptime(Date uptime) {
-        this.uptime = uptime;
+    public void setUpTime(Date upTime) {
+        this.upTime = upTime;
     }
 
     public String getTitle() {
