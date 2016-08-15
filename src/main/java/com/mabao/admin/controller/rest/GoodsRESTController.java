@@ -3,7 +3,6 @@ package com.mabao.admin.controller.rest;
 import com.mabao.admin.controller.vo.*;
 import com.mabao.admin.enums.GoodsState;
 import com.mabao.admin.enums.Quality;
-import com.mabao.admin.enums.Role;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.GoodsTypeService;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -73,8 +70,8 @@ public class GoodsRESTController {
      * @return
      */
     @RequestMapping(value = "/getGoods", method = GET)
-    public GoodsInVO getGoods(@RequestParam Long goodsId) {
-        return GoodsInVO.generateBy(this.goodsService.get(goodsId));
+    public GoodsInVO_bak getGoods(@RequestParam Long goodsId) {
+        return GoodsInVO_bak.generateBy(this.goodsService.get(goodsId));
     }
 
     /**
@@ -82,7 +79,7 @@ public class GoodsRESTController {
      * @param goodsInVO             传入商品
      */
     @RequestMapping(value = "/updateGoods", method = RequestMethod.POST)
-    public JsonResultVO updateGoods(@RequestBody GoodsInVO goodsInVO) {
+    public JsonResultVO updateGoods(@RequestBody GoodsInVO_bak goodsInVO) {
         try{
             this.goodsService.saveGoods(goodsInVO);
         }catch (Exception e){
@@ -97,7 +94,7 @@ public class GoodsRESTController {
      * @return
      */
     @RequestMapping(value = "/addGoods",method = POST)
-    public JsonResultVO addGoods(@RequestBody GoodsInVO goodsInVO) {
+    public JsonResultVO addGoods(@RequestBody GoodsInVO_bak goodsInVO) {
         try{
             this.goodsService.newGoods(goodsInVO);
         }catch (Exception e){

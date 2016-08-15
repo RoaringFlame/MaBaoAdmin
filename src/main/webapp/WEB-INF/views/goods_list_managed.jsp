@@ -143,7 +143,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="#">打印</a></li>
+                        <li><a>导入 Excel</a></li>
                         <li><a>导出 Excel</a></li>
                     </ul>
                 </div>
@@ -304,29 +304,29 @@
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsPriceForm" class="control-label  label-half">商品原价:
+                        <label for="goodsOldPriceForm" class="control-label  label-half">商品原价:
+                            <input type="text" class="form-control" id="goodsOldPriceForm" name="oldPrice">
+                        </label>
+                        <span class="red">*</span>
+
+                        <label for="goodsPriceForm" class="  control-label label-half ">商品现价:
                             <input type="text" class="form-control" id="goodsPriceForm" name="price">
                         </label>
                         <span class="red">*</span>
 
-                        <label for="goodsAddForm" class="  control-label label-half ">商品现价:
-                            <input type="text" class="form-control" id="goodsAddForm" name="">
-                        </label>
-                        <span class="red">*</span>
-
                         <label for="goodsTypeForm" class="control-label  label-half ">商品类型:
-                            <select class="form-control goodsType" id="goodsTypeForm" name="newDegree">
+                            <select class="form-control goodsType" id="goodsTypeForm" name="goodsType">
                             </select>
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsBrandForm" class="control-label  label-half">商品品牌：
-                            <input type="text" class="form-control" id="goodsBrandForm" name="releaseTime">
+                            <input type="text" class="form-control" id="goodsBrandForm" name="goodsBrand">
                         </label>
                         <span class="red">*</span>
 
                         <label for="goodsUpTimeForm" class="control-label  label-half">上架时间:
-                            <input type="text" class="form-control" id="goodsUpTimeForm" name="releaseTime">
+                            <input type="text" class="form-control" id="goodsUpTimeForm" name="upTime">
                         </label>
                         <span class="red">*</span>
 
@@ -337,8 +337,7 @@
                         <span class="red ">*</span>
 
                         <label for="goodsStockNumberForm" class="control-label label-half ">库存:
-                            <select class="form-control" id="goodsStockNumberForm" name="stockNumber">
-                            </select>
+                            <input class="form-control" id="goodsStockNumberForm" name="stockNumber">
                         </label>
                         <span class="red ">*</span>
 
