@@ -6,7 +6,6 @@
 $(function () {
     function initPage(){
         var arr = [
-            ['首页', 'index'],
             ['商品列表', 'goods_list_managed'],
             ['商品分类', 'goods_type_managed'],
             ['订单', 'order_managed'],
@@ -14,17 +13,11 @@ $(function () {
             ['转让订单', 'transfer_order_managed'],
             ['账户管理', 'user_managed'],
             ['查看日志', 'log_managed'],
-            ['登录', 'login'],
         ];
 
-        var html = $(this).html();
-        $('#myScrollspy').find('li').removeClass('active');
-        $(this).addClass('active');
 
         $('#myScrollspy').find('li>a').click(function () {
             var html = $(this).html();
-            $('#myScrollspy').find('li').removeClass('active');
-            $(this).addClass('active');
             $('iframe').attr('src', function () {
                 for (var i = 0; i < arr.length; i++) {
                     if (arr[i][0] == html) {
@@ -40,14 +33,14 @@ $(function () {
             $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").text("商品列表");
             $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").click(function () {
                 $('iframe').attr('src', function () {
-                    return arr[1][1] + '.html';
+                    return arr[0][1] + '.html';
                 })
             });
 
             $("#nav_change").find("li:eq(0)>ul>li:eq(1)>a").text("商品分类");
             $("#nav_change").find("li:eq(0)>ul>li:eq(1)>a").click(function () {
                 $('iframe').attr('src', function () {
-                    return arr[2][1] + '.html';
+                    return arr[1][1] + '.html';
                 })
             });
         });
@@ -57,21 +50,21 @@ $(function () {
             $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").text("订单");
             $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").click(function () {
                 $('iframe').attr('src', function () {
-                    return arr[3][1] + '.html';
+                    return arr[2][1] + '.html';
                 })
             });
 
             $("#nav_change").find("li:eq(0)>ul>li:eq(1)>a").text("发货单");
             $("#nav_change").find("li:eq(0)>ul>li:eq(1)>a").click(function () {
                 $('iframe').attr('src', function () {
-                    return arr[4][1] + '.html';
+                    return arr[3][1] + '.html';
                 })
             });
 
             $("#nav_change").find("li:eq(0)>ul>li:eq(2)>a").addClass("show");
             $("#nav_change").find("li:eq(0)>ul>li:eq(2)>a").click(function () {
                 $('iframe').attr('src', function () {
-                    return arr[5][1] + '.html';
+                    return arr[4][1] + '.html';
                 })
             });
 
@@ -83,14 +76,14 @@ $(function () {
             $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").text("账户管理");
             $("#nav_change").find("li:eq(0)>ul>li:eq(0)>a").click(function () {
                 $('iframe').attr('src', function () {
-                    return arr[6][1] + '.html';
+                    return arr[5][1] + '.html';
                 })
             });
 
             $("#nav_change").find("li:eq(0)>ul>li:eq(1)>a").text("查看日志");
             $("#nav_change").find("li:eq(0)>ul>li:eq(1)>a").click(function () {
                 $('iframe').attr('src', function () {
-                    return arr[7][1] + '.html';
+                    return arr[6][1] + '.html';
                 })
             });
         });
