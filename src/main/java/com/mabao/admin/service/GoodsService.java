@@ -6,10 +6,11 @@ import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.util.PageVO;
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -90,4 +91,12 @@ public interface GoodsService {
      * @return
      */
      void exportDataGoodsDetail(HttpServletRequest request, HttpServletResponse response, Long goodsTypeId, Boolean state, String title, String articleNumber);
+
+    /**
+     * 商品批量导入
+     * @param targetPath
+     * @param upFile
+     * @return
+     */
+    Map<String,Object> uploadBulkGoods(String targetPath, MultipartFile upFile);
 }
