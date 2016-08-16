@@ -4,15 +4,16 @@ import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.controller.vo.OrderOutVO;
 import com.mabao.admin.enums.OrderStatus;
+import com.mabao.admin.pojo.Area;
+import com.mabao.admin.repository.AreaRepository;
+import com.mabao.admin.service.AreaService;
 import com.mabao.admin.service.OrderService;
 import com.mabao.admin.util.PageVO;
 import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +25,40 @@ import java.util.List;
 public class OrderRESTController {
     @Autowired
     private OrderService orderService;
-
+    @Autowired
+    private AreaService areaService;
     /**
      * order页面初始化下拉框
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Selector> orderInit() {
+    @RequestMapping(value = "/OrderStatusSelector", method = RequestMethod.GET)
+    public List<Selector> orderStatusInit() {
         return OrderStatus.toList();
+    }
+
+    /**
+     * order高级搜索地址下拉框
+     * @return
+     */
+    @RequestMapping(value = "/OrderStatusSelector", method = RequestMethod.GET)
+    public List<Selector> orderLocationInit() {
+        return this.areaService.findProvinceForSelector();
+    }
+
+    /**
+     * 获取某省下的市
+     */
+    @RequestMapping(value = "/province/{provinceId}/allCity",method = RequestMethod.GET)
+    public List<Selector> findCityFromProvince(@PathVariable Long provinceId){
+        return this.areaService.findCityForSelector(provinceId);
+    }
+
+    /**
+     * 获取市下的区县
+     */
+    @RequestMapping(value = "/city/{cityId}/allCounty",method = RequestMethod.GET)
+    public List<Selector> findCountyFromCity(@PathVariable Long cityId){
+        return this.areaService.findCountyForSelector(cityId);
     }
 
     /**
