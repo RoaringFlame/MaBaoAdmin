@@ -19,17 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -101,12 +97,12 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsBrand goodsBrand = this.goodsBrandService.get(goodsInVO.getBrandId());
         goods.setBrand(goodsBrand);
         goods.setBrandName(goodsBrand.getBrandName());
-        goods.setUpTime(goodsInVO.getUpTime());                                            //上传时间呗设定为购买时间
+        goods.setUpTime(goodsInVO.getUpTime());                                  //上传时间呗设定为购买时间
         goods.setStockNumber(goodsInVO.getStockNumber());
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
-        goods.setBabyType(goodsInVO.getBabyType());            //设置适合宝宝为男
+        goods.setBabyType(goodsInVO.getBabyType());                             //设置适合宝宝为男
 
-        goods.setState(false);                                                   //设置状态为true
+        goods.setState(false);                                                  //设置状态为true
 
 
         return this.goodsRepository.save(goods);
@@ -241,7 +237,7 @@ public class GoodsServiceImpl implements GoodsService {
     public void exportDataGoodsDetail(HttpServletRequest request, HttpServletResponse response, Long goodsTypeId, Boolean state, String title, String articleNumber) {
         //设置路径
         String docsPath = request.getSession().getServletContext()
-                .getRealPath("");                                //模板文件路径
+                .getRealPath("");                                                   //模板文件路径
         docsPath = docsPath.substring(0, docsPath.indexOf("classes"));              //获得类似“temp.test.'”
         docsPath = docsPath + "src\\main\\webapp\\uploadFile";
         String fileName = "商品数据明细表" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".xls";           //导出Excel文件名
@@ -291,6 +287,43 @@ public class GoodsServiceImpl implements GoodsService {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * 商品批量导入
+     * @param targetPath
+     * @param upFile
+     * @return
+     */
+    @Override
+    public Map<String, Object> uploadBulkGoods(String targetPath, MultipartFile upFile) {
+        Map<String,Object> rm = new HashMap<String,Object>();
+         String flag ="failure";
+         String msg = "上传失败";
+         File f = new File(targetPath); //实例硬盘中文件夹（路径）对象
+        if(!f.exists()){//判断此路径/文件夹是否存在
+            f.mkdirs(); //如果不存在  则创建文件夹/目录
+        }
+         String originalName = upFile.getOriginalFilename();//获取文件对象原始文件名
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+         String tag = sdf.format(new Date());
+         String upFileName = targetPath + File.separator+tag+"_"+originalName;// 拼接出文件的要存储的位置（全路径）
+         File file = new File(upFileName);//创建 内存中的File对象
+         if(file.exists()){         //判断是否存在
+                file.delete();      //如果有重名文件存在  就删除文件
+                                    // 这个对象对应的硬盘必须删  不能存在  如果已经存在 则会抛出
+                                    // IOException异常
+             }
+
+        try {
+            upFile.transferTo(file);//转存文件  写入硬盘  //这个  本质还是一样的打开流传文件  需要注意 file对应的硬盘中的文件不能存在 需要删除  否则会抛出 文件已经存在且不能删除 异常
+            // 校验上传数据
+            /**  辅助方法一 **/
+            Map<String, Object> validData = validUpload(file);
+        } catch (IOException e){
+
+        }
+         return null;
     }
 
 

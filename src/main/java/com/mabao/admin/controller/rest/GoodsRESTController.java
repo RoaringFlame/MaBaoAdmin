@@ -13,13 +13,13 @@ import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -170,5 +170,29 @@ public class GoodsRESTController {
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
         return new JsonResultVO(JsonResultVO.SUCCESS,"导出成功！");
+    }
+
+    /**
+     * 批量导入商品数据
+     * @param request
+     * @return
+     */
+    @RequestMapping(value ="/uploadOrgUser",method = POST)
+    @ResponseBody
+    public Map<String, Object> uploadOrgUser(HttpServletRequest request){
+        Map<String, Object> map = new HashMap<String, Object>();
+        String flag = "failure";
+        String msg = "上传成功";
+        MultipartHttpServletRequest mtRequest = (MultipartHttpServletRequest) request;//多部分httpRquest对象    是HttpServletRequest类的一个子类接口   支持文件分段上传对象
+        MultipartFile upFile = mtRequest.getFile("uploadFile");                       // 直接获取文件对象
+        if(null == upFile || upFile.getSize()==0){                                    //文件不存在的情况
+            msg = "上传文件不存在或为空文件";
+            map.put("flag", flag);
+            map.put("msg", msg);
+            return map;                                                               //返回错误信息
+        }
+        String targetPath = request.getServletContext().getRealPath("/file/upload");  //获取服务器 中file/update 的 url地址
+        map = this.goodsService.uploadBulkGoods(targetPath,upFile); //调用实现类 返回 界面消息 对象
+        return map;
     }
 }
