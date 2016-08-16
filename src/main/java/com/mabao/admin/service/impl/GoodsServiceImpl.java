@@ -76,6 +76,8 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setBabyType(goodsInVO.getBabyType());//设置适合宝宝为男*/
         if(goodsInVO.getStockNumber() == 0) {
             goods.setSellEnd(true);
+        }   else {
+            goods.setSellEnd(false);
         }
         return this.goodsRepository.saveAndFlush(goods);
     }
@@ -105,6 +107,8 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setBabyType(goodsInVO.getBabyType());                               //设置适合宝宝为男
         if(goodsInVO.getStockNumber() == 0) {
             goods.setSellEnd(true);
+        }   else {
+            goods.setSellEnd(false);
         }
         goods.setState(false);                                                    //设置状态为true
         return this.goodsRepository.save(goods);
