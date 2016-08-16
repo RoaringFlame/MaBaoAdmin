@@ -11,15 +11,28 @@
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/master.css" rel="stylesheet">
-
+    <link href="../css/themes.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <!--<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+    <![endif]-->
 </head>
-<body>
+<body style="background: none">
+
+
+
+<!--侧导航END-->
+<div class="col-xs-12">
     <!--面板-->
+
     <div class="panel panel-default">
         <div class="panel-heading" style="height: 5rem;">
             <!--功能操作-->
             <ol class="breadcrumb panel-title pull-left">
-                <li>订单管理</li>
+                <li> <span class="iconfont">&#xe60e</span>用户管理</li>
                 <li class="active">查看日志</li>
             </ol>
         </div>
@@ -54,19 +67,19 @@
             </form>
             <!--条件查询表单END-->
             <!--表格-->
-            <table class="table table-bordered table-striped">
+            <table class="table text-center">
                 <thead>
                 <tr>
 
-                    <th>登录人员</th>
+                    <th class="text-center">登录人员</th>
 
-                    <th>操作时间</th>
+                    <th class="text-center">操作时间</th>
 
-                    <th>公众号</th>
+                    <th class="text-center">公众号</th>
 
-                    <th>IP地址</th>
+                    <th class="text-center">IP地址</th>
 
-                    <th>操作内容</th>
+                    <th class="text-center">操作内容</th>
 
                 </tr>
 
@@ -130,7 +143,7 @@
 
     </div>
     <!--面板END-->
-
+</div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../script/lib/jquery.1.10.2.js"></script>

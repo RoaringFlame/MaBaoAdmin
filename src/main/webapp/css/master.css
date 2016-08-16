@@ -25,17 +25,32 @@
 .first-level-menu {
     /*background-color: #f5f5f5;*/
 }
-.login{
-    width:400px;
-    margin: 200px auto;
+
+.login {
+    width: 350px;
+    margin: 0 auto;
     height: auto;
-    padding:40px 40px 40px 15px ;
-    border: 1px solid #ddd;
+    padding: 20px;
+    /*border: 1px solid #ddd;*/
+    border-radius: .4rem;
+    background: url("../images/bg-white-lock.png");
 }
+
+.checkbox input {
+    width: 15px;
+    height: 15px;
+
+}
+
 .second-level-menu {
     background-color: #fff;
 }
-.login h4{padding-left: 30px; margin: 45px auto }
+
+.login h4 {
+    padding-left: 30px;
+    margin: 45px auto
+}
+
 .label-half {
     width: 48%;
     position: relative;
@@ -71,4 +86,25 @@
 /*颜色*/
 .red {
     color: #d9534f;
+}
+
+/*登录背景*/
+.login-background {
+    background: url("../images/1.jpg") no-repeat 0 0;
+    background-size: cover;
+
+}
+
+/*logo*/
+
+.navbar-brand {
+
+    padding: 10px 15px 15px;
+
+}
+
+.bg-white{
+    padding: 15px;
+    background: #fff;
+    margin-bottom: 15px;
 }

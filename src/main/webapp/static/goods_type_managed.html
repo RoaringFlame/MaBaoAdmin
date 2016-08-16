@@ -10,18 +10,27 @@
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/master.css" rel="stylesheet">
-
+    <link href="../css/themes.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <!--<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+    <![endif]-->
 </head>
-<body>
+<body style="background: none">
+
+
 
 <!--面板-->
-
+<div class="col-xs-12">
 
     <div class="panel panel-default">
         <!--功能操作-->
         <div class="panel-heading" style="height: 5rem;">
             <ol class="breadcrumb panel-title pull-left">
-                <li>商品管理</li>
+                <li><span class="iconfont">&#xe610</span>商品管理</li>
                 <li class="active">商品分类</li>
             </ol>
 
@@ -30,14 +39,14 @@
                 <div class="dropdown btn-group navbar-nav pull-right ">
 
                     <a class="btn btn-default">
-                        删除
+                        <span class="iconfont">&#xe602</span>删除
                     </a>
                 </div>
 
                 <div class="btn-toolbar ">
                     <div class="btn-group navbar-nav pull-right ">
                         <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            新建
+                            <span class="iconfont">&#xe601</span> 新建
                         </a>
                     </div>
                 </div>
@@ -66,7 +75,7 @@
 
 
             <!--表格-->
-            <table class="table table-bordered table-striped">
+            <table class="table text-center">
                 <thead>
                 <tr>
                     <th style="width:8px;">
@@ -76,15 +85,15 @@
                         </label>
                     </th>
 
-                    <th>编号</th>
+                    <th class="text-center">编号</th>
 
-                    <th>商品类别</th>
+                    <th class="text-center">商品类别</th>
 
-                    <th>商品数量</th>
+                    <th class="text-center">商品数量</th>
 
-                    <th>数量单位</th>
+                    <th class="text-center">数量单位</th>
 
-                    <th>
+                    <th class="text-center">
                         编辑
                     </th>
 
@@ -111,7 +120,7 @@
                     <td>个</td>
 
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
                 </tr>
@@ -133,7 +142,7 @@
                     <td>个</td>
 
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
                 </tr>
@@ -155,7 +164,7 @@
                     <td>个</td>
 
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
 
@@ -178,7 +187,7 @@
                     <td>个</td>
 
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
 
@@ -201,7 +210,7 @@
                     <td>个</td>
 
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
 
@@ -224,7 +233,7 @@
                     <td>个</td>
 
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
 
@@ -247,7 +256,7 @@
                     <td>个</td>
 
                     <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
 
@@ -280,6 +289,7 @@
 
     </div>
 
+</div>
 <!--面板END-->
 
 <!--商品类型表单-->
@@ -326,7 +336,7 @@
 
         </div>
     </div>
-    </div>
+</div>
 <!--商品类型表单END-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

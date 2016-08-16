@@ -30,11 +30,20 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
      * @return                  商品类型
      */
     @Override
-    public GoodsTypeVO findOneGoodsType(Long typeId) {
+    public GoodsTypeVO get(Long typeId) {
         GoodsType goodsType = this.goodsTypeRepository.findOne(typeId);
         GoodsTypeVO goodsTypeVO = GoodsTypeVO.generateBy(goodsType);
         goodsTypeVO.setGoodsNumber(1000);
         return goodsTypeVO;
+    }
+
+    /**
+     * 获取商品的所有类别
+     * @return                 商品类别的集合
+     */
+    @Override
+    public Page<GoodsType> getAllGoodsType(int page, int pageSize) {
+        return this.goodsTypeRepository.findAll(new PageRequest(page-1, pageSize));
     }
 
     /**
