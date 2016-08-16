@@ -126,7 +126,6 @@ $(function () {
 
     //根据搜索条件查找商品
     function searchGoods() {
-        alert("11");
         $(".container").empty();
         currentPage = 1;
         initGoodsList();
@@ -252,7 +251,6 @@ $(function () {
                 dataType: 'json',
                 data: JSON.stringify(params),
                 success: function () {
-                    alert("11");
                     cancelForm();
                     $(".container").empty();
                     initGoodsList();
@@ -340,8 +338,6 @@ $(function () {
         }
     }
 
-
-    //打印按钮
 
     //导出Excel按钮
     function exportExcel() {
