@@ -4,7 +4,6 @@ import com.mabao.admin.controller.vo.*;
 import com.mabao.admin.enums.BabyType;
 import com.mabao.admin.enums.GoodsState;
 import com.mabao.admin.enums.Quality;
-import com.mabao.admin.enums.Role;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.GoodsTypeService;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

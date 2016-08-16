@@ -1,7 +1,6 @@
 package com.mabao.admin.controller.vo;
 
 import com.mabao.admin.enums.Role;
-import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.util.VoUtil;
 

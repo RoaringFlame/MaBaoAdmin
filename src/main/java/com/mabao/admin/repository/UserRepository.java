@@ -1,6 +1,5 @@
 package com.mabao.admin.repository;
 
-import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
