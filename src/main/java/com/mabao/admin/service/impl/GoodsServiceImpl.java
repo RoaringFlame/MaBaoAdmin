@@ -3,7 +3,6 @@ package com.mabao.admin.service.impl;
 import com.mabao.admin.controller.vo.GoodsInVO;
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
-import com.mabao.admin.enums.BabyType;
 import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.GoodsBrand;
 import com.mabao.admin.pojo.GoodsType;
@@ -74,7 +73,10 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setUpTime(goodsInVO.getUpTime());                                            //上传时间呗设定为购买时间
         goods.setStockNumber(goodsInVO.getStockNumber());
         goods.setMessage(goodsInVO.getMessage());                               //商品介绍
-        goods.setBabyType(goodsInVO.getBabyType());                                    //设置适合宝宝为男*/
+        goods.setBabyType(goodsInVO.getBabyType());//设置适合宝宝为男*/
+        if(goodsInVO.getStockNumber() == 0) {
+            goods.setSellEnd(true);
+        }
         return this.goodsRepository.saveAndFlush(goods);
     }
 
@@ -99,12 +101,12 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setBrandName(goodsBrand.getBrandName());
         goods.setUpTime(goodsInVO.getUpTime());                                  //上传时间呗设定为购买时间
         goods.setStockNumber(goodsInVO.getStockNumber());
-        goods.setMessage(goodsInVO.getMessage());                               //商品介绍
-        goods.setBabyType(goodsInVO.getBabyType());                             //设置适合宝宝为男
-
-        goods.setState(false);                                                  //设置状态为true
-
-
+        goods.setMessage(goodsInVO.getMessage());                                 //商品介绍
+        goods.setBabyType(goodsInVO.getBabyType());                               //设置适合宝宝为男
+        if(goodsInVO.getStockNumber() == 0) {
+            goods.setSellEnd(true);
+        }
+        goods.setState(false);                                                    //设置状态为true
         return this.goodsRepository.save(goods);
     }
 
@@ -319,7 +321,7 @@ public class GoodsServiceImpl implements GoodsService {
             upFile.transferTo(file);//转存文件  写入硬盘  //这个  本质还是一样的打开流传文件  需要注意 file对应的硬盘中的文件不能存在 需要删除  否则会抛出 文件已经存在且不能删除 异常
             // 校验上传数据
             /**  辅助方法一 **/
-            Map<String, Object> validData = validUpload(file);
+//            Map<String, Object> validData = validUpload(file);
         } catch (IOException e){
 
         }
