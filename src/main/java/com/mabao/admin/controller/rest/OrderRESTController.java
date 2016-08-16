@@ -77,6 +77,17 @@ public class OrderRESTController {
     }
 
     /**
+     * 待发货页面显示
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/toBeShipped", method = RequestMethod.GET)
+    public PageVO<OrderOutVO> toBeShippedOrder(@RequestParam(required = false,defaultValue = "0") int page,
+                                              @RequestParam(required = false,defaultValue = "8") int pageSize) {
+        return this.orderService.toBeShippedOrder(page,pageSize);
+    }
+    /**
      * 根据给定ids相关相关订单状态
      * @param ids               相关订单id的集合
      * @return
@@ -101,10 +112,13 @@ public class OrderRESTController {
      * @param orderInVO             传入信息orderVO
      * @return @RequestBody
      */
-    @RequestMapping(value = "/Order", method = RequestMethod.POST)
+    @RequestMapping(value = "/advancedQueryOrder", method = RequestMethod.POST)
     public PageVO<OrderOutVO> advancedQueryOrder( OrderInVO orderInVO,
                                          @RequestParam(required = false,defaultValue = "1") int page,
                                          @RequestParam(required = false,defaultValue = "8") int pageSize) {
        return this.orderService.advancedQueryOrder(orderInVO,page,pageSize);
     }
+
+
+
 }

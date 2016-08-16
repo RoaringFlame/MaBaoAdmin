@@ -13,6 +13,8 @@ import com.mabao.admin.repository.OrderRepository;
 import com.mabao.admin.service.OrderService;
 import com.mabao.admin.util.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -182,6 +184,24 @@ public class OrderServiceImpl implements OrderService {
         pageVO.setCurrentPage(pages.getCurrentPage()+1);
         pageVO.setTotalRow(pages.getTotalRow());
         pageVO.setPageSize(pages.getPageSize());
+        return pageVO;
+    }
+
+    @Override
+    public PageVO<OrderOutVO> toBeShippedOrder(int page,int pageSize) {
+        List<OrderStatus> list = new ArrayList();
+        list.add(OrderStatus.ToBePaid);
+        list.add(OrderStatus.Canceled);
+        Page<Order> pageOrder = this.orderRepository.findOrderByStateNotIn(list,new PageRequest(page, pageSize));
+        PageVO<OrderOutVO> pageVO = new PageVO<>();
+        List<OrderOutVO> orderOutVOList = new ArrayList();
+        for(Order o:pageOrder.getContent()) {
+            orderOutVOList.add(OrderOutVO.generateBy(o,this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
+        }
+        pageVO.setItems(orderOutVOList);
+        pageVO.setCurrentPage(pageOrder.getNumber()+1);
+        pageVO.setTotalRow(pageOrder.getTotalElements());
+        pageVO.setPageSize(pageOrder.getSize());
         return pageVO;
     }
 }

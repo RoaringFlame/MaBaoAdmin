@@ -46,4 +46,12 @@ public interface OrderService {
      * @return
      */
     PageVO<OrderOutVO> advancedQueryOrder(OrderInVO orderInVO, int page,int pageSize);
+
+    /**
+     * 待发货页面初始化
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PageVO<OrderOutVO> toBeShippedOrder(int page,int pageSize);
 }
