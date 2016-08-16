@@ -1,8 +1,6 @@
 package com.mabao.admin.controller.rest;
 
-import com.mabao.admin.controller.vo.GoodsVO;
-import com.mabao.admin.controller.vo.JsonResultVO;
-import com.mabao.admin.controller.vo.OrderOutVO;
+import com.mabao.admin.controller.vo.*;
 import com.mabao.admin.enums.OrderStatus;
 import com.mabao.admin.pojo.Area;
 import com.mabao.admin.repository.AreaRepository;
@@ -27,6 +25,7 @@ public class OrderRESTController {
     private OrderService orderService;
     @Autowired
     private AreaService areaService;
+
     /**
      * order页面初始化下拉框
      * @return
@@ -40,7 +39,7 @@ public class OrderRESTController {
      * order高级搜索地址下拉框
      * @return
      */
-    @RequestMapping(value = "/OrderStatusSelector", method = RequestMethod.GET)
+    @RequestMapping(value = "/areaSelector", method = RequestMethod.GET)
     public List<Selector> orderLocationInit() {
         return this.areaService.findProvinceForSelector();
     }
@@ -97,5 +96,15 @@ public class OrderRESTController {
          return this.orderService.deleteSomeOrder(ids);
      }
 
-
+    /**
+     * 高级查询订单
+     * @param orderInVO             传入信息orderVO
+     * @return @RequestBody
+     */
+    @RequestMapping(value = "/Order", method = RequestMethod.POST)
+    public PageVO<OrderOutVO> advancedQueryOrder( OrderInVO orderInVO,
+                                         @RequestParam(required = false,defaultValue = "1") int page,
+                                         @RequestParam(required = false,defaultValue = "8") int pageSize) {
+       return this.orderService.advancedQueryOrder(orderInVO,page,pageSize);
+    }
 }

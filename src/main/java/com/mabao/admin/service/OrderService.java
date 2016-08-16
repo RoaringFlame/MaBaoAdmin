@@ -2,6 +2,7 @@ package com.mabao.admin.service;
 
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
+import com.mabao.admin.controller.vo.OrderInVO;
 import com.mabao.admin.controller.vo.OrderOutVO;
 import com.mabao.admin.enums.OrderStatus;
 import com.mabao.admin.util.PageVO;
@@ -24,15 +25,6 @@ public interface OrderService {
                                 int page, int pageSize);
 
     /**
-     * 高级查询订单状况
-//     * @param orderQuery
-     * @param page                  页数
-     * @param pageSize              每页大小
-     * @return
-     */
-    PageVO<OrderOutVO> advancedQuery( /*OrderQuery orderQuery,*/int page, int pageSize);
-
-    /**
      * 根据id给相关订单发货
      * @param ids               相关订单id的集合
      * @return
@@ -45,4 +37,13 @@ public interface OrderService {
      * @return
      */
      JsonResultVO deleteSomeOrder(String ids);
+
+    /**
+     * 高级查询订单信息
+     * @param orderInVO             传入信息
+     * @param page                  页数
+     * @param pageSize              每页大小
+     * @return
+     */
+    PageVO<OrderOutVO> advancedQueryOrder(OrderInVO orderInVO, int page,int pageSize);
 }
