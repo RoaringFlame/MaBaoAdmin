@@ -17,17 +17,6 @@ $(function () {
     var goodsNum;                                                          //商品货号
     var state;                                                            //商品状态
     var goodsForm = $("#frmGoods");                                       //商品表单
-    var id;
-    var title;
-    var oldPrice;
-    var price;
-    var babyType;
-    var goodsType;
-    var goodsBrand;
-    var goodsDegree;
-    var goodsStockNumber;
-    var goodsDetail;
-    var userId;
 
     //获取搜索条件
     function getSearchItem() {
@@ -167,21 +156,6 @@ $(function () {
         });
     }
 
-    //获取表单数据
-    function getFormSearch() {
-        id = $("#goodsIdForm").val();
-        title = $("#goodsNameForm").val();
-        oldPrice = $("#goodsOldPriceForm").val();
-        price = $("#goodsPriceForm").val();
-        babyType = $("#babyTypeForm").val();
-        goodsType = $("#goodsTypeForm").val();
-        goodsBrand = $("#goodsBrandForm").val();
-        goodsDegree = $("#goodsDegreeForm").val();
-        goodsStockNumber = $("#goodsStockNumberForm").val();
-        goodsDetail = $("#goodsDetailForm").val();
-        userId = $("#userIdForm").val();
-    }
-
     //商品表单初始化
     function initGoodsForm() {
         //点击商品详情表单取消按钮
@@ -196,20 +170,30 @@ $(function () {
 
         //点击新增商品表单页面提交按钮
         $(".modal-footer button:eq(1)").click(function () {
-            getFormSearch();
+            var id = $("#goodsIdForm").val();
+            var title = $("#goodsNameForm").val();
+            var oldPrice = $("#goodsOldPriceForm").val();
+            var price = $("#goodsPriceForm").val();
+            var babyType=$("#babyTypeForm").val();
+            var goodsType=$("#goodsTypeForm").val();
+            var goodsBrand=$("#goodsBrandForm").val();
+            var goodsDegree=$("#goodsDegreeForm").val();
+            var goodsStockNumber = $("#goodsStockNumberForm").val();
+            var goodsDetail = $("#goodsDetailForm").val();
+            var userId = $("#userIdForm").val();
             var params = {
                 id: id,
-                user_id: 1,
+                user_id:1,
                 title: title,
-                oldPrice: oldPrice,
+                oldPrice:oldPrice,
                 price: price,
                 babyType: babyType,
                 typeId: goodsType,
-                brandId: 1,
-                brandName: goodsBrand,
+                brandId:1,
+                brandName:goodsBrand,
                 newDegree: goodsDegree,
                 stockNumber: goodsStockNumber,
-                upTime: "2016-08-15",
+                upTime:"2016-08-15",
                 message: goodsDetail
             };
             $.ajax({
@@ -233,20 +217,30 @@ $(function () {
 
         //点击修改商品详情表单页面提交按钮
         $(".modal-footer button:eq(2)").click(function () {
-           getFormSearch();
+            var id = $("#goodsIdForm").val();
+            var title = $("#goodsNameForm").val();
+            var oldPrice = $("#goodsOldPriceForm").val();
+            var price = $("#goodsPriceForm").val();
+            var babyType=$("#babyTypeForm").val();
+            var goodsType=$("#goodsTypeForm").val();
+            var goodsBrand=$("#goodsBrandForm").val();
+            var goodsDegree=$("#goodsDegreeForm").val();
+            var goodsStockNumber = $("#goodsStockNumberForm").val();
+            var goodsDetail = $("#goodsDetailForm").val();
+            var userId = $("#userIdForm").val();
             var params = {
                 id: id,
-                user_id: userId,
+                user_id:userId,
                 title: title,
-                oldPrice: oldPrice,
+                oldPrice:oldPrice,
                 price: price,
                 babyType: babyType,
                 typeId: goodsType,
-                brandId: 1,
-                brandName: goodsBrand,
+                brandId:1,
+                brandName:goodsBrand,
                 newDegree: goodsDegree,
                 stockNumber: goodsStockNumber,
-                upTime: "2016-08-15",
+                upTime:"2016-08-15",
                 message: goodsDetail
             };
             $.ajax({
