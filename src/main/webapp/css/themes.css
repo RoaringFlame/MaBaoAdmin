@@ -23,6 +23,18 @@
 /*蓝色  由浅到深
 #f6f9fd #ecfcfc  #e2f7fb #a7d1fc
      */
+
+.cadetblue {
+    color: cadetblue;
+}
+
+.orangered {
+    color: orangered;
+}
+
+.edit-btn{
+    margin: 0 10px;
+}
 .navbar-default {
     border: none;
     border-radius: 0;
@@ -325,4 +337,8 @@
     margin: 9px 0;
     overflow: hidden;
     background-color: #e2f7fb;
+}
+
+.warning {
+    color: red;
 }
