@@ -174,7 +174,7 @@
                     <div class="form-group">
                         <label for="goodsStatus">订单状态：</label>
                         <select name="" class="form-control goodsStatus" id="goodsStatus">
-                            <%--<option value="所有状态">所有状态</option>--%>
+                            <option value="all">所有状态</option>
                         </select>
                     </div>
 
@@ -263,7 +263,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">高级索搜</h4>
+                <h4 class="modal-title" id="exampleModalLabel">高级搜索</h4>
             </div>
             <div class="modal-body">
                 <form>
@@ -295,7 +295,7 @@
 
                         <label for="orderStatusForm" class="control-label  label-half">订单状态:
                             <select class="form-control goodsStatus" name="goodsDegreeForm" id="orderStatusForm">
-
+                                <option value="all">所有状态</option>
                             </select>
                         </label>
                         <span class="red">*</span>
@@ -304,13 +304,13 @@
                             <label class=" control-label clear " style="float: left;">所在地：</label>
                             <label class=" control-label clear " style="width:80%;">
                                 <select class="form-control select-right  " name="province">
-                                    <option>ddd</option>
+                                    <option value="请选择">请选择</option>
                                 </select>
                                 <select class="form-control select-right " name="city">
-                                    <option>ddd</option>
+                                    <option value="请选择">请选择</option>
                                 </select>
                                 <select class="form-control select-right " name="urban">
-                                    <option>ddd</option>
+                                    <option value="请选择">请选择</option>
                                 </select>
                             </label>
                         </div>
@@ -329,7 +329,7 @@
             </div>
             <div class="modal-footer clear">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="submit" class="btn btn-primary" >提交</button>
             </div>
 
         </div>

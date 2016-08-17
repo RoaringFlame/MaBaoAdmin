@@ -109,20 +109,25 @@ $(function () {
                 var goodsList = data.items;                                      //获取所有商品信息
                 console.log(goodsList);
                 totalPage = data.totalPage;                                      //获取总页数
-                $(goodsList).each(function (index, goods) {
-                    var goodsInfo = $("#goodsContainer").clone();                //克隆一条商品记录
-                    goodsInfo.show();
-                    goodsInfo.find("input[type='checkbox']").attr("name", "checkBox");
-                    goodsInfo.find("td:eq(1)").text(index + 1);                      //给该条商品信息赋值商品id
-                    goodsInfo.find("td:eq(2)").text(goods.typeName);             //给该条商品信息赋值商品类别
-                    goodsInfo.find("td:eq(3)").text(goods.title);                //给该条商品信息赋值商品名称
-                    goodsInfo.find("td:eq(4)").text(goods.articleNumber);        //给该条商品信息赋值商品货号
-                    goodsInfo.find("td:eq(5)").text(goods.price);                //给该条商品信息赋值商品价格
-                    goodsInfo.find("td:eq(6)").text(goods.state);                //给该条商品信息赋值商品状态
-                    goodsInfo.find("td:eq(7)").text(goods.stockNumber);          //给该条商品信息赋值商品库存
-                    goodsInfo.find("td:eq(9)").text(goods.id);                   //给该条商品信息赋值商品id
-                    $(".container").append(goodsInfo);                           //在表单中添加商品记录
-                });
+               if (goodsList.length>0) {
+                   $(goodsList).each(function (index, goods) {
+                       var goodsInfo = $("#goodsContainer").clone();                //克隆一条商品记录
+                       goodsInfo.show();
+                       goodsInfo.find("input[type='checkbox']").attr("name", "checkBox");
+                       goodsInfo.find("td:eq(1)").text(index + 1);                      //给该条商品信息赋值商品id
+                       goodsInfo.find("td:eq(2)").text(goods.typeName);             //给该条商品信息赋值商品类别
+                       goodsInfo.find("td:eq(3)").text(goods.title);                //给该条商品信息赋值商品名称
+                       goodsInfo.find("td:eq(4)").text(goods.articleNumber);        //给该条商品信息赋值商品货号
+                       goodsInfo.find("td:eq(5)").text(goods.price);                //给该条商品信息赋值商品价格
+                       goodsInfo.find("td:eq(6)").text(goods.state);                //给该条商品信息赋值商品状态
+                       goodsInfo.find("td:eq(7)").text(goods.stockNumber);          //给该条商品信息赋值商品库存
+                       goodsInfo.find("td:eq(9)").text(goods.id);                   //给该条商品信息赋值商品id
+                       $(".container").append(goodsInfo);                           //在表单中添加商品记录
+                   });
+               }else {
+                   totalPage = 1;
+                   alert("没有找到符合要求商品！");
+               }
                 //编辑商品按钮
                 $(".edit").click(function () {
                     var goodsId = $(this).next("td").text();            //获取当前商品的id
@@ -222,6 +227,7 @@ $(function () {
                     dataType: 'json',
                     data: JSON.stringify(params),
                     success: function () {            //如果请求成功
+                        $("#exampleModal").modal('hide'); //隐藏模态框
                         cancelForm();                  //清空表单数据
                         $(".container").empty();       //清空列表数据
                         initGoodsList();               //加载表单数据
@@ -261,6 +267,7 @@ $(function () {
                     dataType: 'json',
                     data: JSON.stringify(params),
                     success: function () {                  //如果请求成功
+                        $("#exampleModal").modal('hide');    //隐藏模态框
                         cancelForm();                        //清空表单数据
                         $(".container").empty();             //清空列表数据
                         initGoodsList();                     //加载表单数据
