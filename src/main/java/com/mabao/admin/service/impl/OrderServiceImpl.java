@@ -1,11 +1,9 @@
 package com.mabao.admin.service.impl;
 
-import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.controller.vo.OrderInVO;
 import com.mabao.admin.controller.vo.OrderOutVO;
 import com.mabao.admin.enums.OrderStatus;
-import com.mabao.admin.pojo.Goods;
 import com.mabao.admin.pojo.Order;
 import com.mabao.admin.repository.AddressRepository;
 import com.mabao.admin.repository.BaseDao;
@@ -17,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,19 +54,23 @@ public class OrderServiceImpl implements OrderService {
         String jpqlAll = JPQL + str.toString();
         String count = JPQLCount + str.toString();
         //分页时从第0页算起
-        PageVO<Order> pages = this.baseDao.findAll(jpqlAll,count,args.toArray(),page-1,pageSize);
-        PageVO<OrderOutVO> pageVO = new PageVO<>();
-        List<OrderOutVO> list = new ArrayList<>();
-        for(Order order:pages.getItems()) {
-           String recipients = this.addressRepository.findOne(order.getAddress().getId()).getRecipients();
-            OrderOutVO orderOutVO = OrderOutVO.generateBy(order,recipients);
-            list.add(orderOutVO);
+        try {
+            PageVO<Order> pages = this.baseDao.findAll(jpqlAll, count, args.toArray(), page - 1, pageSize);
+            PageVO<OrderOutVO> pageVO = new PageVO<>();
+            List<OrderOutVO> list = new ArrayList<>();
+            for (Order order : pages.getItems()) {
+                String recipients = this.addressRepository.findOne(order.getAddress().getId()).getRecipients();
+                OrderOutVO orderOutVO = OrderOutVO.generateBy(order, recipients);
+                list.add(orderOutVO);
+            }
+            pageVO.setItems(list);
+            pageVO.setCurrentPage(pages.getCurrentPage() + 1);
+            pageVO.setTotalRow(pages.getTotalRow());
+            pageVO.setPageSize(pages.getPageSize());
+            return pageVO;
+        } catch (Exception e) {
+            return null;
         }
-        pageVO.setItems(list);
-        pageVO.setCurrentPage(pages.getCurrentPage()+1);
-        pageVO.setTotalRow(pages.getTotalRow());
-        pageVO.setPageSize(pages.getPageSize());
-        return pageVO;
     }
 
     /**
@@ -117,6 +118,13 @@ public class OrderServiceImpl implements OrderService {
         return new JsonResultVO(JsonResultVO.SUCCESS,"删除修改！");
     }
 
+    /**
+     * 高级查询订单信息
+     * @param orderInVO             传入信息
+     * @param page                  页数
+     * @param pageSize              每页大小
+     * @return
+     */
     @Override
     public PageVO<OrderOutVO> advancedQueryOrder(OrderInVO orderInVO, int page, int pageSize) {
         String JPQL = "select o from Order o ";
@@ -173,35 +181,49 @@ public class OrderServiceImpl implements OrderService {
         }
         String jpqlAll = JPQL + str.toString();
         String count = JPQLCount + str.toString();
-        //分页时从第0页算起
-        PageVO<Order> pages = this.baseDao.findAll(jpqlAll,count,args.toArray(),page-1,pageSize);
-        PageVO<OrderOutVO> pageVO = new PageVO<>();
-        List<OrderOutVO> list = new ArrayList();
-        for(Order o:pages.getItems()) {
-            list.add(OrderOutVO.generateBy(o,this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
+        try {
+            //分页时从第0页算起
+            PageVO<Order> pages = this.baseDao.findAll(jpqlAll, count, args.toArray(), page - 1, pageSize);
+            PageVO<OrderOutVO> pageVO = new PageVO<>();
+            List<OrderOutVO> list = new ArrayList();
+            for (Order o : pages.getItems()) {
+                list.add(OrderOutVO.generateBy(o, this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
+            }
+            pageVO.setItems(list);
+            pageVO.setCurrentPage(pages.getCurrentPage() + 1);
+            pageVO.setTotalRow(pages.getTotalRow());
+            pageVO.setPageSize(pages.getPageSize());
+            return pageVO;
+        } catch (Exception e) {
+            return null;
         }
-        pageVO.setItems(list);
-        pageVO.setCurrentPage(pages.getCurrentPage()+1);
-        pageVO.setTotalRow(pages.getTotalRow());
-        pageVO.setPageSize(pages.getPageSize());
-        return pageVO;
     }
 
+    /**
+     * 待发货页面初始化
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @Override
     public PageVO<OrderOutVO> toBeShippedOrder(int page,int pageSize) {
         List<OrderStatus> list = new ArrayList();
         list.add(OrderStatus.ToBePaid);
         list.add(OrderStatus.Canceled);
-        Page<Order> pageOrder = this.orderRepository.findOrderByStateNotIn(list,new PageRequest(page, pageSize));
-        PageVO<OrderOutVO> pageVO = new PageVO<>();
-        List<OrderOutVO> orderOutVOList = new ArrayList();
-        for(Order o:pageOrder.getContent()) {
-            orderOutVOList.add(OrderOutVO.generateBy(o,this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
-        }
-        pageVO.setItems(orderOutVOList);
-        pageVO.setCurrentPage(pageOrder.getNumber()+1);
-        pageVO.setTotalRow(pageOrder.getTotalElements());
-        pageVO.setPageSize(pageOrder.getSize());
-        return pageVO;
+        try{
+            Page<Order> pageOrder = this.orderRepository.findOrderByStateNotIn(list,new PageRequest(page, pageSize));
+            PageVO<OrderOutVO> pageVO = new PageVO<>();
+            List<OrderOutVO> orderOutVOList = new ArrayList();
+            for(Order o:pageOrder.getContent()) {
+                orderOutVOList.add(OrderOutVO.generateBy(o,this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
+            }
+            pageVO.setItems(orderOutVOList);
+            pageVO.setCurrentPage(pageOrder.getNumber()+1);
+            pageVO.setTotalRow(pageOrder.getTotalElements());
+            pageVO.setPageSize(pageOrder.getSize());
+            return pageVO;
+    } catch (Exception e) {
+        return null;
+    }
     }
 }

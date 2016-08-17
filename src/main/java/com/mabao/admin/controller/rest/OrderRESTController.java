@@ -102,18 +102,18 @@ public class OrderRESTController {
      * @param ids               相关订单id的集合
      * @return
      */
-     @RequestMapping(value = "/deleteSomeOrder", method = RequestMethod.POST)
+     @RequestMapping(value = "/deleteSomeOrder", method = RequestMethod.GET)
      public JsonResultVO deleteSomeGoods(String ids) {
          return this.orderService.deleteSomeOrder(ids);
      }
 
     /**
      * 高级查询订单
-     * @param orderInVO             传入信息orderVO
-     * @return @RequestBody
+     * @param orderInVO             传入信息orderInVO
+     * @return
      */
-    @RequestMapping(value = "/advancedQueryOrder", method = RequestMethod.POST)
-    public PageVO<OrderOutVO> advancedQueryOrder( OrderInVO orderInVO,
+    @RequestMapping(value = "/advancedQueryOrder", method = RequestMethod.GET)
+    public PageVO<OrderOutVO> advancedQueryOrder(@RequestBody OrderInVO orderInVO,
                                          @RequestParam(required = false,defaultValue = "1") int page,
                                          @RequestParam(required = false,defaultValue = "8") int pageSize) {
        return this.orderService.advancedQueryOrder(orderInVO,page,pageSize);
