@@ -7,6 +7,9 @@ import com.mabao.admin.controller.vo.OrderOutVO;
 import com.mabao.admin.enums.OrderStatus;
 import com.mabao.admin.util.PageVO;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * 订单业务接口
  */
@@ -54,4 +57,6 @@ public interface OrderService {
      * @return
      */
     PageVO<OrderOutVO> toBeShippedOrder(int page,int pageSize);
+
+    void exportDataOrder(HttpServletRequest request, HttpServletResponse response, OrderInVO orderInVO);
 }

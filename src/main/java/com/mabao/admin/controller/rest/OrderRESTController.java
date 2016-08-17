@@ -11,8 +11,13 @@ import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by lies on 2016/8/8.
@@ -112,13 +117,31 @@ public class OrderRESTController {
      * @param orderInVO             传入信息orderInVO
      * @return
      */
-    @RequestMapping(value = "/advancedQueryOrder", method = RequestMethod.GET)
+    @RequestMapping(value = "/advancedQueryOrder", method = RequestMethod.POST)
     public PageVO<OrderOutVO> advancedQueryOrder(@RequestBody OrderInVO orderInVO,
                                          @RequestParam(required = false,defaultValue = "1") int page,
                                          @RequestParam(required = false,defaultValue = "8") int pageSize) {
        return this.orderService.advancedQueryOrder(orderInVO,page,pageSize);
     }
 
-
+    /**
+     * 订单批量导出
+     *
+     * @param orderInVO         传入请求对象
+     * @param request
+     * @param response@RequestBody
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/bulkExportOrder",method = POST)
+    public JsonResultVO bulkExportGoods(OrderInVO orderInVO,
+                                        HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try{
+            this.orderService.exportDataOrder(request,response,orderInVO);
+        }catch (Exception e){
+            return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS,"导出成功！");
+    }
 
 }
