@@ -9,14 +9,23 @@ import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.GoodsTypeService;
 import com.mabao.admin.util.PageVO;
 import com.mabao.admin.util.Selector;
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -32,26 +41,22 @@ public class GoodsRESTController {
 
     /**
      * 根据需求查询商品
-     * @param goodsTypeId   商品类别
-     * @param state         商品状态
-     * @param title         商品名称
-     * @param articleNumber 商品货号
-     * @param page          页数
-     * @param pageSize      每页大小
-     * @return              PageVO<GoodsVO>
+     *
+     * @param goodsSearchVO      商品搜索VO
+     * @param page               页数
+     * @param pageSize          每页大小
+     * @return                   PageVO<GoodsVO>
      */
-    @RequestMapping(value = "/searchGoods", method = RequestMethod.GET)
-    public PageVO<GoodsVO> showSelectGoods(@RequestParam(required = false) Long goodsTypeId,
-                                           @RequestParam(required = false) Boolean state,
-                                           @RequestParam(required = false) String title,
-                                           @RequestParam(required = false) String articleNumber,
+    @RequestMapping(value = "/searchGoods", method = RequestMethod.POST)
+    public PageVO<GoodsVO> showSelectGoods(@RequestBody GoodsSearchVO goodsSearchVO,
                                            @RequestParam(required = false,defaultValue = "1") int page,
                                            @RequestParam(required = false,defaultValue = "8") int pageSize) {
-        return this.goodsService.selectGoods(goodsTypeId, state, title, articleNumber, page, pageSize);
+        return this.goodsService.selectGoods(goodsSearchVO, page, pageSize);
     }
 
     /**
      * 通过传入商品id删除商品
+     *
      * @param ids 删除商品集合的字符串
      */
     @RequestMapping(value = "/deleteSomeGoods", method = RequestMethod.GET)
@@ -61,6 +66,7 @@ public class GoodsRESTController {
 
     /**
      * 改变选择商品状态
+     *
      * @param ids   选择商品id
      * @param state 需要改成的状态
      */
@@ -71,6 +77,7 @@ public class GoodsRESTController {
 
     /**
      * 获得商品信息
+     *
      * @param goodsId
      * @return
      */
@@ -81,6 +88,7 @@ public class GoodsRESTController {
 
     /**
      * 修改商品信息
+     *
      * @param goodsInVO             传入商品
      */
     @RequestMapping(value = "/updateGoods", method = RequestMethod.POST)
@@ -95,6 +103,7 @@ public class GoodsRESTController {
 
     /**
      * 添加商品
+     *
      * @param goodsInVO
      * @return
      */
@@ -125,6 +134,7 @@ public class GoodsRESTController {
 
     /**
      * goods页面初始化下拉框
+     *
      * @return
      */
     @RequestMapping(method = GET)
@@ -147,50 +157,41 @@ public class GoodsRESTController {
 
     /**
      *批量导出商品数据
-     * @param goodsTypeId   商品类别id
-     * @param state         商品状态
-     * @param title         商品名称
-     * @param articleNumber 商品货号
+     *
+     * @param goodsSearchVO   商品搜索VO
      * @param request
      * @param response
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/bulkExport",method = GET)
-    public JsonResultVO bulkExportGoods(@RequestParam(required = false) Long goodsTypeId,
-                                        @RequestParam(required = false) Boolean state,
-                                        @RequestParam(required = false) String title,
-                                        @RequestParam(required = false) String articleNumber,
+    @RequestMapping(value = "/bulkExport",method = POST)
+    public JsonResultVO bulkExportGoods(@RequestBody GoodsSearchVO goodsSearchVO,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         try{
-            this.goodsService.exportDataGoodsDetail(request,response,goodsTypeId,state,title,articleNumber);
+            this.goodsService.exportDataGoodsDetail(goodsSearchVO,request,response);
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }
         return new JsonResultVO(JsonResultVO.SUCCESS,"导出成功！");
     }
 
+
     /**
-     * 批量导入商品数据
+     * 商品excel批量导入
+     *
      * @param request
+     * @param response
      * @return
      */
-    @RequestMapping(value ="/uploadOrgUser",method = POST)
-    @ResponseBody
-    public Map<String, Object> uploadOrgUser(HttpServletRequest request){
-        Map<String, Object> map = new HashMap<String, Object>();
-        String flag = "failure";
-        String msg = "上传成功";
-        MultipartHttpServletRequest mtRequest = (MultipartHttpServletRequest) request;//多部分httpRquest对象    是HttpServletRequest类的一个子类接口   支持文件分段上传对象
-        MultipartFile upFile = mtRequest.getFile("uploadFile");                       // 直接获取文件对象
-        if(null == upFile || upFile.getSize()==0){                                    //文件不存在的情况
-            msg = "上传文件不存在或为空文件";
-            map.put("flag", flag);
-            map.put("msg", msg);
-            return map;                                                               //返回错误信息
+    @RequestMapping(value ="/uploadGoodsExcel",method = POST)
+    public JsonResultVO upload(HttpServletRequest request, HttpServletResponse response) {
+        //获取文件及文件名，并做相关判断
+        MultipartHttpServletRequest mulRequest = (MultipartHttpServletRequest) request;
+        MultipartFile file = mulRequest.getFile("excel");
+        String filename = file.getOriginalFilename();
+        if (filename == null || "".equals(filename)) {
+            return null;
         }
-        String targetPath = request.getServletContext().getRealPath("/file/upload");  //获取服务器 中file/update 的 url地址
-        map = this.goodsService.uploadBulkGoods(targetPath,upFile); //调用实现类 返回 界面消息 对象
-        return map;
+        return null;
     }
 }
