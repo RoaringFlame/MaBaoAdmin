@@ -139,14 +139,14 @@
                     </ul>
                 </div>
 
-                <div class="btn-toolbar ">
-                    <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-default dropdown-toggle delivery" type="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="true">
-                            发货
-                        </a>
-                    </div>
-                </div>
+                <%--<div class="btn-toolbar ">--%>
+                    <%--<div class="btn-group navbar-nav pull-right ">--%>
+                        <%--<a class="btn btn-default dropdown-toggle delivery" type="button" data-toggle="dropdown"--%>
+                           <%--aria-haspopup="true" aria-expanded="true">--%>
+                            <%--发货--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
             </div>
 

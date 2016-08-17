@@ -140,14 +140,23 @@
                     </ul>
                 </div>
 
-                <div class="btn-toolbar ">
-                    <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="true">
-                            删除
-                        </a>
-                    </div>
+                <%--<div class="btn-toolbar ">--%>
+                <div class="btn-group navbar-nav pull-right ">
+                    <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="true">
+                        删除
+                    </a>
                 </div>
+                <%--</div>--%>
+
+                <%--<div class="btn-toolbar ">--%>
+                <div class="btn-group navbar-nav pull-right">
+                    <a class="btn btn-default dropdown-toggle" type="button"
+                       aria-haspopup="true" aria-expanded="true">
+                        发货
+                    </a>
+                </div>
+                <%--</div>--%>
 
             </div>
         </div>
@@ -174,10 +183,8 @@
                     <div class="form-group">
                         <label for="orderStatus">订单状态：</label>
                         <select name="" class="form-control" id="orderStatus">
-                            <option selected="selected" value="">待确认</option>
-                            <option value="">待付款</option>
-                            <option value="">待发货</option>
-                            <option value="-">已确认</option>
+                            <option value="">等待出库</option>
+                            <option value="">已出库</option>
                         </select>
                     </div>
 
@@ -315,26 +322,15 @@
             </table>
             <!--表格END-->
             <!--分页-->
-            <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!--分页END-->
+            <!--分页-->
+            <div style="text-align:center">
+                <input type=button id="btn1" value="首页">
+                <input type=button id="btn2" value="上一页">
+                <input type=button id="btn3" value="下一页">
+                <input type=button id="btn4" value="尾页">
+                <span>当前页：<span id="page"></span></span>
+            </div>
+            <!--分页end-->
         </div>
 
     </div>

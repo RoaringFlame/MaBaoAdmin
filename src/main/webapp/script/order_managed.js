@@ -88,20 +88,18 @@ $(function () {
         $("input[name='checkBox']:checked").each(function () {                       //遍历选中的checkbox
             var orderId = $(this).parents("td").nextAll("td:eq(0)").text();       //获取checkbox所在行的goodsId
             orderIds += orderId + ",";
-            alert(orderIds);
         });
         if (orderIds !== "") {
-            $.post("/order/changeSomeOrder", {ids: orderIds, orderStatus: "ToBeSend"}, function (data) {
-                if (data.status == "success") {
-                    alert("11");
-                    $("#selectAll").removeAttr("checked");
-                    $("#container").empty();                                                //清空商品列表
+            $.post("/order/changeSomeOrder", {ids: orderIds, orderStatus: "ToBeReceipt"}, function (data) {
+                if (data.status == "success") {                        //如果请求成功
+                    $("#selectAll").removeAttr("checked");             //去除全选框的选中状态
+                    $("#container").empty();                           //清空商品列表
                     initOrderList();                                   //重新加载页面
-                } else if (data.status == "failure") {
+                } else if (data.status == "failure") {                //如果请求失败弹出警告框
                     alert("更改订单状态失败!");
                 }
             });
-        } else {
+        } else {                                                      //如果没有选中商品弹出警告框
             alert("您还未选择订单！");
         }
     }
