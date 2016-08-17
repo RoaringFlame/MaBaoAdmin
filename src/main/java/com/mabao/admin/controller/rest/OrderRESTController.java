@@ -129,12 +129,12 @@ public class OrderRESTController {
      *
      * @param orderInVO         传入请求对象
      * @param request
-     * @param response@RequestBody
+     * @param response
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/bulkExportOrder",method = POST)
-    public JsonResultVO bulkExportGoods(OrderInVO orderInVO,
+    public JsonResultVO bulkExportGoods(@RequestBody OrderInVO orderInVO,
                                         HttpServletRequest request, HttpServletResponse response) throws Exception {
         try{
             this.orderService.exportDataOrder(request,response,orderInVO);

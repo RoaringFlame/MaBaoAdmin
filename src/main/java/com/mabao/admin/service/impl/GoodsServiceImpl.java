@@ -160,7 +160,7 @@ public class GoodsServiceImpl implements GoodsService {
         StringBuilder str = new StringBuilder("where 1 = 1 ");
         List<Object> args = new ArrayList<>();
 
-        if (goodsSearchVO.getGoodsTypeId() !=null) {
+        if (goodsSearchVO.getGoodsTypeId() !=null && !"".equals(goodsSearchVO.getGoodsTypeId()) ) {
             args.add(goodsSearchVO.getGoodsTypeId());
             str.append(" and g.type.id = ?");
             str.append(args.size());
@@ -261,7 +261,7 @@ public class GoodsServiceImpl implements GoodsService {
                 "inner join fetch g.type gt " ;
         StringBuilder str = new StringBuilder("where 1 = 1 ");
         List<Object> args = new ArrayList<>();
-        if (goodsSearchVO.getGoodsTypeId() !=null) {
+        if (goodsSearchVO.getGoodsTypeId() !=null && !"".equals(goodsSearchVO.getGoodsTypeId())) {
             args.add(goodsSearchVO.getGoodsTypeId());
             str.append(" and g.type.id = ?");
             str.append(args.size());
@@ -335,5 +335,5 @@ public class GoodsServiceImpl implements GoodsService {
         }
          return null;
     }
-    
+
 }

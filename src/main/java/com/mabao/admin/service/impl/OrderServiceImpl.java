@@ -144,7 +144,7 @@ public class OrderServiceImpl implements OrderService {
         StringBuilder str = new StringBuilder("where 1 = 1 ");
         List<Object> args = new ArrayList<>();
         //订单号
-        if (orderInVO.getId() != null ) {
+        if (orderInVO.getId() != null && !"".equals(orderInVO.getId())) {
             args.add(orderInVO.getId());
             str.append(" and o.id = ?");
             str.append(args.size());
@@ -269,7 +269,7 @@ public class OrderServiceImpl implements OrderService {
         StringBuilder str = new StringBuilder("where 1 = 1 ");
         List<Object> args = new ArrayList<>();
         //订单号
-        if (orderInVO.getId() != null ) {
+        if (orderInVO.getId() != null && !"".equals(orderInVO.getId())) {
             args.add(orderInVO.getId());
             str.append(" and o.id = ?");
             str.append(args.size());
