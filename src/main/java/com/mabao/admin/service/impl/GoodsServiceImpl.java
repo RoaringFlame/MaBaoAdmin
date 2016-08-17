@@ -335,18 +335,5 @@ public class GoodsServiceImpl implements GoodsService {
         }
          return null;
     }
-
-    /**
-     * 商品批量导入
-     *
-     * @param hql                   查询hql语句
-     * @param titles                对应的字段
-     * @param outputStream
-     */
-    @Override
-    public void exportExcel(String hql, String[] titles, ServletOutputStream outputStream) {
-
-    }
-
-
+    
 }
