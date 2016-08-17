@@ -11,7 +11,7 @@ public interface AreaRepository extends BaseRepository<Area>  {
     /**
      * 获取省
      */
-    @Cacheable("MaBaoCache")
+    @Cacheable("MaBaoAdminCache")
     List<Area> findByLevelType(Integer levelType);
 
     /**
@@ -20,6 +20,6 @@ public interface AreaRepository extends BaseRepository<Area>  {
      * @param parentsId                    父级ID
      * @return
      */
-    @Cacheable("MaBaoCache")
+    @Cacheable("MaBaoAdminCache")
     List<Area> findByLevelTypeAndParentsAreaId(int i, Long parentsId);
 }

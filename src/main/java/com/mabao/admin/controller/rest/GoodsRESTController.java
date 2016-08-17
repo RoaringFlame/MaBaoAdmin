@@ -113,7 +113,7 @@ public class GoodsRESTController {
      * @param page
      * @param pageSize
      * @return
-     */
+     *//*
     @RequestMapping(value = "/goodsList",method = GET)
     public PageVO<GoodsVO> goodsList(int page, int pageSize) {
         Page<Goods> pageGoods = this.goodsService.getAllGoods(page,pageSize);
@@ -121,7 +121,7 @@ public class GoodsRESTController {
         voPage.toPage(pageGoods);
         voPage.setItems(GoodsVO.generateBy(pageGoods.getContent()));
         return voPage;
-    }
+    }*/
 
     /**
      * goods页面初始化下拉框

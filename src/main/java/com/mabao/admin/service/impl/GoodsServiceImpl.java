@@ -181,14 +181,18 @@ public class GoodsServiceImpl implements GoodsService {
 
         String jpqlAll = JPQL + str.toString();
         String count = JPQLCount + str.toString();
-        //分页时从第0页算起
-        PageVO<Goods> pages = this.baseDao.findAll(jpqlAll,count,args.toArray(),page-1,pageSize);
-        PageVO<GoodsVO> pageVO = new PageVO<>();
-        pageVO.setItems(GoodsVO.generateBy(pages.getItems()));
-        pageVO.setCurrentPage(pages.getCurrentPage()+1);
-        pageVO.setTotalRow(pages.getTotalRow());
-        pageVO.setPageSize(pages.getPageSize());
-        return pageVO;
+        try{
+            //分页时从第0页算起
+            PageVO<Goods> pages = this.baseDao.findAll(jpqlAll,count,args.toArray(),page-1,pageSize);
+            PageVO<GoodsVO> pageVO = new PageVO<>();
+            pageVO.setItems(GoodsVO.generateBy(pages.getItems()));
+            pageVO.setCurrentPage(pages.getCurrentPage()+1);
+            pageVO.setTotalRow(pages.getTotalRow());
+            pageVO.setPageSize(pages.getPageSize());
+            return pageVO;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
