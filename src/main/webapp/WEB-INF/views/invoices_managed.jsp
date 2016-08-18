@@ -189,7 +189,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-default">搜索</button>
-                    <button type="submit" class="btn btn-default">高级搜索</button>
+                    <button type="submit" class="btn btn-primary">高级搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
@@ -211,9 +211,9 @@
 
                     <th>收货人</th>
 
-                    <th>收货人</th>
-
                     <th>发货时间</th>
+
+                    <th>发货单状态</th>
 
                     <th>操作人</th>
 
@@ -221,9 +221,7 @@
 
                 </thead>
 
-                <tbody>
-
-                <tr class="odd gradeX">
+                <tr class="odd gradeX" id="orderContainer" style="display: none">
 
                     <td>
                         <label>
@@ -231,7 +229,7 @@
                         </label>
                     </td>
 
-                    <td>1</td>
+                    <th>1</th>
 
                     <td>11102324</td>
 
@@ -247,77 +245,8 @@
 
                 </tr>
 
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>2</td>
-
-                    <td>11102325</td>
-
-                    <td>10月9日</td>
-
-                    <td>闫璇</td>
-
-                    <td>10月10日</td>
-
-                    <td>待付款</td>
-
-                    <td>方红</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <th>3</th>
-
-                    <td>11102326</td>
-
-                    <td>10月8日</td>
-
-                    <td>张雅婷</td>
-
-                    <td>10月9日</td>
-
-                    <td>待发货</td>
-
-                    <td>方红</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>4</td>
-
-                    <td>11102327</td>
-
-                    <td>10月7日</td>
-
-                    <td>林松</td>
-
-                    <td>10月8日</td>
-
-                    <td>已确认</td>
-
-                    <td>方红</td>
-
-                </tr>
+                <tbody id="container">
+                </tbody>
 
             </table>
             <!--表格END-->

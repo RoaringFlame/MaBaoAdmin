@@ -116,6 +116,7 @@ $(function () {
                 city.append($("<option></option>")                         //增加请选择节点
                     .val("请选择")
                     .text("请选择")
+                    .attr("disabled", "true")
                 );
                 $(data).each(function (index, cities) {                                     //为下拉框增加节点
                     city.append($("<option></option>")
@@ -137,6 +138,7 @@ $(function () {
                 urban.append($("<option></option>")                         //增加请选择节点
                     .val("请选择")
                     .text("请选择")
+                    .attr("disabled", "true")
                 );
                 $(data).each(function (index, urbans) {
                     urban.append($("<option></option>")                          //为区下拉框增加节点
@@ -338,13 +340,23 @@ $(function () {
         //省下拉框初始化
         provinceSelector();
 
+        //省下拉框改变事件
         province.change(function () {
+            province.find("option:eq(0)").attr("disabled", "true");
             citySelector();             //省下拉框改变是调用市下拉框初始化事件
             countySelector();           //省下拉框改变是调用区下拉框初始化事件
         });
 
+        //市下拉框改变事件
         city.change(function () {
             countySelector();           //城市下拉框改变是调用区下拉框初始化事件
+        });
+
+        //批量导出
+        $(".btn-toolbar ul a").click(function () {
+            getSearchItem();
+            window.location = "/goods/bulkExportOrder?goodsTypeId=" + goodsTypeId + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsNum; //调用导出表接口
+
         });
     }
 

@@ -14,6 +14,9 @@ $(function(){
         goodsStatus = $("#goodsStatus").val();
     }
 
+    //订单状态
+
+
     //发货单列表初始化
     function initOrderList() {
         getSearchItem();
@@ -24,7 +27,7 @@ $(function(){
             pageSize: pageSize,
         };
         if (currentPage <= totalPage) {
-            $.get("/order/searchOrder", params, function (data) {
+            $.get("/order/toBeShipped", params, function (data) {
                 var orderList=data.items;
                 totalPage=data.totalPage;
                 console.log(orderList);
@@ -37,7 +40,7 @@ $(function(){
                     orderInfo.find("td:eq(2)").text(getLocalTime(order.createTime));
                     orderInfo.find("td:eq(3)").text(order.Consignee);
                     orderInfo.find("td:eq(4)").text(order.totalSum);
-                    orderInfo.find("td:eq(5)").text(order.state);
+                    orderInfo.find("td:eq(5)").text(order.Consignee);
                     $("#container").append(orderInfo);
 
                 });
@@ -46,7 +49,7 @@ $(function(){
     }
 
     function init(){
-
+        initOrderList();
     }
 
     init();

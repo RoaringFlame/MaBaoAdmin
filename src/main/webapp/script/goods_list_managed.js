@@ -154,7 +154,6 @@ $(function () {
         goodsForm.find("textarea").val("");
     }
 
-
     //修改商品表单初始化，表单显示商品信息
     function initUpdateGoodsForm(goodsId) {
         $.get("goods/getGoods", {goodsId: goodsId}, function (data) {

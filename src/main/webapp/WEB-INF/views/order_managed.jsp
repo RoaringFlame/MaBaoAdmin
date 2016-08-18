@@ -304,13 +304,13 @@
                             <label class=" control-label clear " style="float: left;">所在地：</label>
                             <label class=" control-label clear " style="width:80%;">
                                 <select class="form-control select-right  " name="province">
-                                    <option value="请选择">请选择</option>
+                                    <option value="请选择" >请选择</option>
                                 </select>
                                 <select class="form-control select-right " name="city">
-                                    <option value="请选择">请选择</option>
+                                    <option value="请选择" >请选择</option>
                                 </select>
                                 <select class="form-control select-right " name="urban">
-                                    <option value="请选择">请选择</option>
+                                    <option value="请选择" >请选择</option>
                                 </select>
                             </label>
                         </div>
@@ -329,7 +329,7 @@
             </div>
             <div class="modal-footer clear">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="submit" class="btn btn-primary" >提交</button>
+                <button type="button" class="btn btn-primary" >提交</button>
             </div>
 
         </div>
