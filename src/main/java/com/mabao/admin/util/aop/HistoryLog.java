@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 public class HistoryLog {
     @AfterReturning("execution(* com.mabao.admin.service.GoodsService.changeGoodsState(String,Boolean))" +
             "&& args(ids,state)")
-    public void changeGoodsState(String ids,Boolean state) {
-        System.out.println("---------------id="+ids+"-------------state="+state);
-    }}
+    public void changeGoodsState(String ids, Boolean state) {
+        System.out.println("---------------id=" + ids + "-------------state=" + state);
+    }
+}
