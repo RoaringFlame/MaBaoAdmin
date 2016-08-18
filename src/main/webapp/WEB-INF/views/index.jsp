@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -53,8 +54,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">admin <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                       aria-expanded="false"><sec:authentication property="name"/> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
                         <li><a href="logout">注销</a></li>
                     </ul>
                 </li>

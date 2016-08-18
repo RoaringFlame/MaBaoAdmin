@@ -1,6 +1,5 @@
 package com.mabao.admin.controller.vo;
 
-import com.mabao.admin.enums.Role;
 import com.mabao.admin.pojo.User;
 
 /**
@@ -12,7 +11,6 @@ public class UserInVO {
     private String password;                        //密码
     private String phone;                           //手机号
     private String email;                           //邮箱
-    private Role role;                              //角色信息
 
     public static UserInVO generateBy(User user) {
         UserInVO userInVO = new UserInVO();
@@ -61,13 +59,5 @@ public class UserInVO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

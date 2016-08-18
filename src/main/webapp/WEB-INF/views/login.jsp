@@ -29,18 +29,20 @@
     <div class=" form-group">
         <h4 class=" control-label">后台登陆</h4>
     </div>
-
-    <form class="form-horizontal">
+    <c:if test="${not empty error}">
+        <p class="warning">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+    </c:if>
+    <form class="form-horizontal" action="login" method="POST">
         <div class="form-group">
             <label for="userName" class="col-sm-3 control-label">用户名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="userName" placeholder="Email">
+                <input name="username" type="text" class="form-control" id="userName" placeholder="Email">
             </div>
         </div>
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-3 control-label">密码</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                <input name="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
             </div>
         </div>
         <div class="form-group">
@@ -53,12 +55,9 @@
             </div>
         </div>
         <div class="form-group">
-
-            <a href="index.html">
-                <button type="button" class="btn btn-default pull-right ">登陆</button>
-            </a>
+                <button type="submit" class="btn btn-default pull-right">登陆</button>
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
         </div>
-
     </form>
 
 </div>

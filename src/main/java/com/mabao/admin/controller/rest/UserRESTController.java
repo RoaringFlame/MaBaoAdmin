@@ -1,16 +1,14 @@
 package com.mabao.admin.controller.rest;
 
-import com.mabao.admin.controller.vo.*;
-import com.mabao.admin.enums.Role;
+import com.mabao.admin.controller.vo.JsonResultVO;
+import com.mabao.admin.controller.vo.UserInVO;
+import com.mabao.admin.controller.vo.UserVO;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.service.UserService;
 import com.mabao.admin.util.PageVO;
-import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -45,14 +43,6 @@ public class UserRESTController {
         return voPage;
     }
 
-    /**
-     * 显示页面下拉框
-     * @return              用户角色信息列表
-     */
-    @RequestMapping(method = GET)
-    public List<Selector> initUser() {
-        return Role.toList();
-    }
 
     /**
      * 选择用户并删除

@@ -1,6 +1,5 @@
 package com.mabao.admin.controller.vo;
 
-import com.mabao.admin.enums.Role;
 import com.mabao.admin.pojo.User;
 import com.mabao.admin.util.VoUtil;
 
@@ -8,13 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by lies on 2016/7/29.
- */
 public class UserVO {
     private long id;                                //用户编号
     private String name;                            //昵称
-    private String role;                              //用户角色
+    private String role;                            //用户角色
     private int loginTime;                          //登陆次数
     private Date createTime;                        //创建时间
     private Date lastOptTime;                       //最后一次操作时间
@@ -24,7 +20,6 @@ public class UserVO {
         UserVO vo = VoUtil.copyBasic(UserVO.class, user);
         assert vo != null;
         vo.setId(user.getId());
-        vo.setRole(Role.USER.getText());
         vo.setCreateTime(user.getCreateTime());
         vo.setLastOptTime(new Date());
         vo.setOptContent("查询用户信息");
