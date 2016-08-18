@@ -22,7 +22,7 @@ $(function () {
 
     //订单状态下拉框初始化
     function initOrderState() {
-        $.get("/order/OrderStatusSelector", {}, function (data) {
+        $.get("order/OrderStatusSelector", {}, function (data) {
             console.log(data);
             $(data).each(function (index, state) {
                 $(".goodsStatus").append($("<option></option>")
@@ -61,7 +61,7 @@ $(function () {
             pageSize: pageSize,
         };
         if (currentPage <= totalPage) {
-            $.get("/order/searchOrder", params, function (data) {
+            $.get("order/searchOrder", params, function (data) {
                 var orderList = data.items;
                 totalPage = data.totalPage;
                 console.log(orderList);
@@ -96,7 +96,7 @@ $(function () {
 
     //省下拉框初始化
     function provinceSelector() {
-        $.get("/order/areaSelector", {}, function (data) {
+        $.get("order/areaSelector", {}, function (data) {
             $(data).each(function (index, provinces) {
                 province.append($("<option></option>")            //为下拉框增加节点
                     .val(provinces.key)
@@ -111,7 +111,7 @@ $(function () {
     function citySelector() {
         var provinceId = province.val();
         if (provinceId !== "请选择") {
-            $.get("/order/province/" + provinceId + "/allCity", {}, function (data) {
+            $.get("order/province/" + provinceId + "/allCity", {}, function (data) {
                 city.empty();                                              //清空市下拉框
                 city.append($("<option></option>")                         //增加请选择节点
                     .val("请选择")
@@ -133,7 +133,7 @@ $(function () {
     function countySelector() {
         var cityId = city.val();
         if (cityId !== "请选择") {
-            $.get("/order/city/" + cityId + "/allCounty", {}, function (data) {
+            $.get("order/city/" + cityId + "/allCounty", {}, function (data) {
                 urban.empty();                                                    //清空区下拉框
                 urban.append($("<option></option>")                         //增加请选择节点
                     .val("请选择")
@@ -184,7 +184,7 @@ $(function () {
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
-                url: '/order/advancedQueryOrder',
+                url: 'order/advancedQueryOrder',
                 processData: false,
                 dataType: 'json',
                 data: JSON.stringify(params),
@@ -252,7 +252,7 @@ $(function () {
         //点击首页
         $("#btn1").click(function () {
             currentPage = 1;                               //点击首页时参数currentPage为0
-            $(".container").empty();                       //清空表单数据
+            $("#container").empty();                       //清空表单数据
             initOrderList();                               //传参并调用初始化表单方法
             $("#page").text(currentPage);
         });
@@ -263,7 +263,7 @@ $(function () {
                 alert("当前已经是首页了!");                 //如果当前页面是首页，点击上一页弹出提示框
             }
             else {
-                $(".container").empty();                    //如果不是首页，点击上一页时清空表单
+                $("#container").empty();                    //如果不是首页，点击上一页时清空表单
                 currentPage--;                              //当前页数减1
                 initOrderList();        //传参并调用初始化表单方法
                 $("#page").text(currentPage);
@@ -276,7 +276,7 @@ $(function () {
                 alert("当前已经是最后一页了!");
             }
             else {
-                $(".container").empty();                      //如果不是最后一页，点击下一页时清空表单
+                $("#container").empty();                      //如果不是最后一页，点击下一页时清空表单
                 currentPage++;                                //当前页数加1
                 initOrderList();          //传参并调用初始化表单方法
                 $("#page").text(currentPage);
@@ -286,7 +286,7 @@ $(function () {
         //点击尾页
         $("#btn4").click(function () {
             currentPage = totalPage;                            //点击尾页时参数currentPage为0
-            $(".container").empty();                            //清空表单数据
+            $("#container").empty();                            //清空表单数据
             initOrderList();                //传参并调用初始化表单方法
             $("#page").text(currentPage);
         });
@@ -355,7 +355,7 @@ $(function () {
         //批量导出
         $(".btn-toolbar ul a").click(function () {
             getSearchItem();
-            window.location = "/goods/bulkExportOrder?goodsTypeId=" + goodsTypeId + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsNum; //调用导出表接口
+            window.location = "goods/bulkExportOrder?goodsTypeId=" + goodsTypeId + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsNum; //调用导出表接口
 
         });
     }
