@@ -46,7 +46,7 @@ $(function () {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json',
-                        url: '/goodsType/addGoodsType',
+                        url: 'goodsType/addGoodsType',
                         processData: false,
                         dataType: 'json',
                         data: JSON.stringify(params),
@@ -99,7 +99,7 @@ $(function () {
                     goodsIds += goodsId + ",";
                     console.log(goodsIds);
                 });
-                $.get("/goodsType/deleteSomeGoodsType", {ids: goodsIds}, function (data) {
+                $.get("goodsType/deleteSomeGoodsType", {ids: goodsIds}, function (data) {
                     $(this).parents("tr").remove();//从页面删除选中内容
                 });
                 window.location.reload();
@@ -125,7 +125,7 @@ $(function () {
         $(".changeMsg1").click(function () {
             //获取编辑按钮点击的数据id
             var tId = $(this).prevAll(".typeId1").text();
-            $.get("/goodsType/"+tId,function (data) {
+            $.get("goodsType/"+tId,function (data) {
                 //商品类别名称
                 $("#assortmentForm").val(data.typeName);
                 //数量单位的获取
@@ -151,7 +151,7 @@ $(function () {
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/goodsType/changeGoodsType',
+                    url: 'goodsType/changeGoodsType',
                     processData: false,
                     dataType: 'json',
                     data: JSON.stringify(params),
@@ -174,7 +174,7 @@ $(function () {
             page: page,
             pageSize: pageSize
         };
-        $.get("/goodsType/searchGoodsType", params, function (data) {
+        $.get("goodsType/searchGoodsType", params, function (data) {
             //获取页面中需要的数据信息并展示
             $(data.items).each(function (index, goodsType) {
                 //克隆隐藏列表中的信息
@@ -199,7 +199,7 @@ $(function () {
 
     //6,分页功能的实现
     function initPage() {
-        $.get("/goodsType/searchGoodsType", params, function (data) {
+        $.get("goodsType/searchGoodsType", params, function (data) {
             var totalPage = data.totalPage;
             //首页
             if (page >= 1 && page <= totalPage) {
