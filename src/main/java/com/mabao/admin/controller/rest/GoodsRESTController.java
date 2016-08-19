@@ -164,7 +164,7 @@ public class GoodsRESTController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/bulkExport",method = POST)
+    @RequestMapping(value = "/bulkExport",method = GET)
     public JsonResultVO bulkExportGoods(Long goodsTypeId,Boolean state,String title,String articleNumber,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         try{

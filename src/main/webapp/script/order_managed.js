@@ -4,7 +4,7 @@ $(function () {
     var consigner;        //收货人
     var goodsStatus;      //订单状态
     var currentPage = 1;
-    var pageSize = 7;
+    var pageSize = 3;
     var totalPage = 1;
     var province = $("select[name='province']");  //省下拉框
     var city = $("select[name='city']");  //市下拉框
@@ -64,6 +64,7 @@ $(function () {
             $.get("order/searchOrder", params, function (data) {
                 var orderList = data.items;
                 totalPage = data.totalPage;
+                alert(totalPage);
                 console.log(orderList);
                 if (orderList.length > 0) {
                     $(orderList).each(function (index, order) {
@@ -215,26 +216,26 @@ $(function () {
     }
 
     //发货按钮
-    function delivery() {
-        var orderIds = "";
-        $("input[name='checkBox']:checked").each(function () {                       //遍历选中的checkbox
-            var orderId = $(this).parents("td").nextAll("td:eq(0)").text();       //获取checkbox所在行的goodsId
-            orderIds += orderId + ",";
-        });
-        if (orderIds !== "") {
-            $.post("/order/changeSomeOrder", {ids: orderIds, orderStatus: "ToBeReceipt"}, function (data) {
-                if (data.status == "success") {                        //如果请求成功
-                    $("#selectAll").removeAttr("checked");             //去除全选框的选中状态
-                    $("#container").empty();                           //清空商品列表
-                    initOrderList();                                   //重新加载页面
-                } else if (data.status == "failure") {                //如果请求失败弹出警告框
-                    alert("更改订单状态失败!");
-                }
-            });
-        } else {                                                      //如果没有选中商品弹出警告框
-            alert("您还未选择订单！");
-        }
-    }
+    //function delivery() {
+    //    var orderIds = "";
+    //    $("input[name='checkBox']:checked").each(function () {                       //遍历选中的checkbox
+    //        var orderId = $(this).parents("td").nextAll("td:eq(0)").text();       //获取checkbox所在行的goodsId
+    //        orderIds += orderId + ",";
+    //    });
+    //    if (orderIds !== "") {
+    //        $.post("/order/changeSomeOrder", {ids: orderIds, orderStatus: "ToBeReceipt"}, function (data) {
+    //            if (data.status == "success") {                        //如果请求成功
+    //                $("#selectAll").removeAttr("checked");             //去除全选框的选中状态
+    //                $("#container").empty();                           //清空商品列表
+    //                initOrderList();                                   //重新加载页面
+    //            } else if (data.status == "failure") {                //如果请求失败弹出警告框
+    //                alert("更改订单状态失败!");
+    //            }
+    //        });
+    //    } else {                                                      //如果没有选中商品弹出警告框
+    //        alert("您还未选择订单！");
+    //    }
+    //}
 
     //表单取消按钮
     function cancelForm() {
