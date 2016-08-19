@@ -17,7 +17,8 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
-
+    <link href="css/themes.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,7 +26,7 @@
     <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
 </head>
-<body>
+<body class="login-background">
 
 <!-- 顶部导航 -->
 <nav class="navbar navbar-default">
@@ -40,8 +41,8 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="">
-                <img alt="Brand" src="#">
+            <a class="navbar-brand" href="index">
+                <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
 
@@ -55,7 +56,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><sec:authentication property="name"/> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                    <ul class="dropdown-menu">
                         <li><a href="logout">注销</a></li>
                     </ul>
                 </li>
@@ -68,14 +69,17 @@
 </nav>
 <!-- 顶部导航END -->
 
+
+
+
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
     <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">商品管理</a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe610</span>商品管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
                 <li><a href="admin/goods_list_managed">商品列表</a></li>
                 <li><a href="admin/goods_type_managed">商品分类</a></li>
@@ -85,7 +89,8 @@
         <li class="first-level-menu">
             <a href="#orderManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">订单管理 </a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60f</span>订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
                 <li><a href="admin/order_managed">订单</a></li>
                 <li><a href="admin/invoices_managed">发货单</a></li>
@@ -95,14 +100,17 @@
         <li class="first-level-menu">
             <a href="#userManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">用户管理</a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
                 <li><a href="admin/user_managed">账号管理</a></li>
                 <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
     </ul>
+
 </div>
+
 <!--侧导航END-->
 
 <div class="col-xs-10">
@@ -111,7 +119,7 @@
         <!--功能操作-->
         <div class="panel-heading" style="height: 5rem;">
             <ol class="breadcrumb panel-title pull-left">
-                <li>首页</li>
+                <li><span class="iconfont">&#xe611</span>首页</li>
                 <li class="active">消息提醒</li>
             </ol>
         </div>
@@ -122,7 +130,7 @@
             <div>
 
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 10px;">
                     <li role="presentation" class="active">
                         <a href="#home" aria-controls="home" role="tab" data-toggle="tab">商品管理
                             <span class="badge ">9</span>
@@ -147,7 +155,7 @@
                     <div role="tabpanel" class="tab-pane fade in active" id="home">
                         <table class="table">
                             <!--<tr class="success">-->
-                            <!--<td>您已成功发布10件商品</td>-->
+                                <!--<td>您已成功发布10件商品</td>-->
                             <!--</tr>-->
                             <tr class="info">
                                 <td>您有商品等待上架<span class="badge pull-right">8</span></td>
