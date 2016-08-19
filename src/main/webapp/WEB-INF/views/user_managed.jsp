@@ -183,8 +183,27 @@
                 </div>
             </form>
             <!--条件查询表单END-->
+            <table class="table text-center" id="hideGoods" style="display:none">
+                <tr class="odd gradeX">
+                    <td>
+                        <label>
+                            <input class="checkboxes" value="1" name="allCheck"/>
+                        </label>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        <span class="iconfont">&#xe609</span>
+                    </td>
+                </tr>
+            </table>
             <!--表格-->
-            <table class="table text-center">
+            <table class="table text-center" id="userTable">
                 <thead>
                 <tr>
                     <th style="width:8px;">
@@ -214,86 +233,19 @@
 
                 <tbody>
 
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        <span class="iconfont">&#xe609</span>
-                    </td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        <span class="iconfont">&#xe609</span>
-                    </td>
-
-                </tr>
-
+                </tbody>
 
             </table>
             <!--表格END-->
             <!--分页-->
-            <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!--分页END-->
+            <div id="pageChange" class="pagination">
+                <input type=button id="btn1" value="首页">
+                <input type=button id="btn2" value="上一页">
+                <input type=button id="btn3" value="下一页">
+                <input type=button id="btn4" value="尾页">
+                <span>当前页：</span><a id="pageShow"></a>
+            </div>
+            <!--分页end-->
         </div>
 
     </div>
@@ -389,13 +341,15 @@
                             <td>admin</td>
                             <td>管理员</td>
 
-                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span class="iconfont edit-btn orangered">&#xe602</span></td>
+                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span
+                                    class="iconfont edit-btn orangered">&#xe602</span></td>
                         </tr>
                         <tr>
                             <td>guest</td>
                             <td>普通员工</td>
 
-                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span class="iconfont edit-btn orangered">&#xe602</span></td>
+                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span
+                                    class="iconfont edit-btn orangered">&#xe602</span></td>
                         </tr>
                     </table>
 
@@ -416,5 +370,7 @@
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
+
+<script src="script/user_managed.js"></script>
 </body>
 </html>
