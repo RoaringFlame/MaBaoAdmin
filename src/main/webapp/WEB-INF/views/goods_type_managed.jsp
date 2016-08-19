@@ -231,13 +231,13 @@
                 <input type=button id="btn4" value="尾页" >
                 <span >当前页：</span><a id="pageShow"></a>
             </div>
-            <!--分页end-
+            <!--分页end-->
 
                 </div>
 
             </div>
 
-            ->
+
         </div>
         <!--面板END-->
 
