@@ -1,8 +1,10 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -16,7 +18,8 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
-
+    <link href="css/themes.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -24,7 +27,7 @@
     <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
 </head>
-<body>
+<body class="login-background">
 
 <!-- 顶部导航 -->
 <nav class="navbar navbar-default">
@@ -40,13 +43,13 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index.html">
-                <img alt="Brand" src="#">
+            <a class="navbar-brand" href="index">
+                <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
 
         </div>
-        <!-- 导航切换END  goods_list_managed.html-->
+        <!-- 导航切换END  -->
 
         <!-- 导航链接-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -55,8 +58,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">用户管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="user_managed.html">账号管理</a></li>
-                        <li><a href="log_managed.html">查看日志</a></li>
+                        <li><a href="admin/user_managed">账号管理</a></li>
+                        <li><a href="admin/log_managed">查看日志</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,13 +67,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">admin <span class="caret"></span></a>
+                       aria-expanded="false"><sec:authentication property="name"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.html">注销</a></li>
+                        <li><a href="logout">注销</a></li>
                     </ul>
                 </li>
             </ul>
-
         </div>
         <!-- 导航链接END-->
 
@@ -82,11 +84,11 @@
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
     <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">商品管理</a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe610</span>商品管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
                 <li><a href="admin/goods_list_managed">商品列表</a></li>
                 <li><a href="admin/goods_type_managed">商品分类</a></li>
@@ -96,7 +98,8 @@
         <li class="first-level-menu">
             <a href="#orderManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">订单管理 </a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60f</span>订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
                 <li><a href="admin/order_managed">订单</a></li>
                 <li><a href="admin/invoices_managed">发货单</a></li>
@@ -106,14 +109,17 @@
         <li class="first-level-menu">
             <a href="#userManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">用户管理</a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
-                <li><a href="admin/user_managed">账号管理</a></li>
+                <li><a href="user_managed.jsp">账号管理</a></li>
                 <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
     </ul>
+
 </div>
+
 <!--侧导航END-->
 
 <div class="col-xs-10">
@@ -123,25 +129,33 @@
         <!--功能操作-->
         <div class="panel-heading" style="height: 5rem;">
             <ol class="breadcrumb panel-title pull-left">
-                <li>用户管理</li>
+                <li><span class="iconfont">&#xe60e</span>用户管理</li>
                 <li class="active">账户管理</li>
             </ol>
+
             <div class="btn-toolbar ">
+
+                <div class="btn-group navbar-nav pull-right ">
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#roleModalForm" data-whatever="@mdo">
+                        <span class="iconfont">&#xe601</span> 角色管理
+                    </a>
+                </div>
+
                 <div class="dropdown btn-group navbar-nav pull-right ">
-                    <a class="btn btn-default deleteUser" type="button">
-                        删除
+
+                    <a class="btn btn-default">
+                        <span class="iconfont">&#xe602</span>删除
                     </a>
                 </div>
 
                 <div class="btn-toolbar ">
                     <div class="btn-group navbar-nav pull-right ">
                         <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            新建
+                            <span class="iconfont">&#xe601</span> 新建
                         </a>
                     </div>
                 </div>
             </div>
-
 
         </div>
 
@@ -153,7 +167,9 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="userType">角色名：</label>
-                        <select name="" class="form-control userType" id="userType">
+                        <select name="" class="form-control" id="userType">
+                            <option selected="selected" value="">管理员</option>
+                            <option value="">普通员工</option>
                         </select>
                     </div>
 
@@ -163,40 +179,42 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <button type="button" class="btn btn-default" id="search">搜索</button>
+                    <button type="submit" class="btn btn-default">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
             <!--表格-->
-            <table class="table table-bordered table-striped">
+            <table class="table text-center">
                 <thead>
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input  id="selectAll" type="checkbox" class="checkboxes" value="1"/>
+                            <input type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </th>
-                    <th>工号</th>
+                    <th class="text-center">工号</th>
 
-                    <th>姓名</th>
+                    <th class="text-center">姓名</th>
 
-                    <th>角色</th>
+                    <th class="text-center">角色</th>
 
-                    <th>创建时间</th>
+                    <th class="text-center">创建时间</th>
 
-                    <th>登录次数</th>
+                    <th class="text-center">登录次数</th>
 
-                    <th>最后操作时间</th>
+                    <th class="text-center">最后操作时间</th>
 
-                    <th>操作内容</th>
+                    <th class="text-center">操作内容</th>
 
-                    <th>编辑</th>
+                    <th class="text-center">编辑</th>
 
                 </tr>
 
                 </thead>
 
-                <tr id="userContainer" class="odd gradeX" style="display: none">
+                <tbody>
+
+                <tr class="odd gradeX">
 
                     <td>
                         <label>
@@ -218,32 +236,58 @@
 
                     <td></td>
 
-                    <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
                 </tr>
 
-                <tbody id="container">
+                <tr class="odd gradeX">
 
-                </tbody>
+                    <td>
+                        <label>
+                            <input type="checkbox" class="checkboxes" value="1"/>
+                        </label>
+                    </td>
+
+                    <td></td>
+
+                    <td></td>
+
+                    <td></td>
+
+                    <td></td>
+
+                    <td></td>
+
+                    <td></td>
+
+                    <td></td>
+
+                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        <span class="iconfont">&#xe609</span>
+                    </td>
+
+                </tr>
+
+
             </table>
             <!--表格END-->
             <!--分页-->
             <nav>
                 <ul class="pagination">
                     <li>
-                        <a  aria-label="Previous" id="btn2">
+                        <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li><a id="btn1">首页</a></li>
-                   <%-- <li class="active"><a  >1</a></li>
-                    <li><a >3</a></li>
-                    <li><a >4</a></li>--%>
-                    <li><a id="btn4">末页</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
                     <li>
-                        <a aria-label="Next" id="btn3">
+                        <a href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -268,7 +312,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-group ">
+                <form class="form-group  ">
                     <label for="assortmentForm" class="control-label text-left label-half">工号:
                         <input type="text" class="form-control" id="assortmentForm">
                     </label>
@@ -294,13 +338,15 @@
                     </label>
                     <span class="red ">*</span>
 
-                    <label for="userEmail" class="control-label text-left label-half">邮箱:
+                    <label for="userEmail" class="control-label text-left label-half">邮件:
                         <input type="text" class="form-control" id="userEmail">
                     </label>
                     <span class="red ">*</span>
 
                     <label for="assortmentDetail" class="control-label text-left label-half">角色类型:
-                        <select class="form-control text-left userType" name="" id="">
+                        <select class="form-control text-left " name="" id="">
+                            <option value="管理员">管理员</option>
+                            <option value="普通员工">普通员工</option>
                         </select>
                     </label>
                 </form>
@@ -309,18 +355,66 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="display: none">提交</button>
+                <button type="button" class="btn btn-primary">提交</button>
             </div>
         </div>
     </div>
 </div>
-<!--用户表单ENDuser_managed.html-->
+<!--用户表单END-->
+
+<!--角色管理表单-->
+<div class="modal fade" id="roleModalForm" tabindex="-1" role="dialog" aria-labelledby="roleModalTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="roleModalTitle">管理角色</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-group  ">
+
+                    <label for="newRole" class="control-label text-left label-half">
+                        <input type="text" class="form-control" id="newRole" placeholder="请输入角色名">
+                    </label>
+                    <button type="button" class="btn btn-primary">确认添加</button>
+                    <table class="table text-center">
+                        <tr>
+                            <th class="text-center">代号</th>
+                            <th class="text-center">角色</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>管理员</td>
+
+                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span class="iconfont edit-btn orangered">&#xe602</span></td>
+                        </tr>
+                        <tr>
+                            <td>guest</td>
+                            <td>普通员工</td>
+
+                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span class="iconfont edit-btn orangered">&#xe602</span></td>
+                        </tr>
+                    </table>
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--角色管理表单END-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
-<script src="script/user_managed.js"></script>
 </body>
 </html>
