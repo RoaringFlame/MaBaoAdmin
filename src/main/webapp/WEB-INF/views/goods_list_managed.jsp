@@ -337,11 +337,12 @@
                         </label>
                         <span class="red ">*</span>
 
-                        <label for="goodsDetailForm" class="control-label  label-half">妈咪说:
-                            <textarea class="form-control" id="goodsDetailForm" name="message"></textarea>
-                        </label>
-
-                        <label>上传图片：
+                        <div class="form-group">
+                            <label for="goodsDetailForm" class="control-label  label-half">妈咪说:
+                                <textarea class="form-control" id="goodsDetailForm" name="message"></textarea>
+                            </label>
+                        </div>
+                        <label class="control-label label-half">上传图片：
                             <input type="file" accept="image/png,image/gif" id="uploadPhoto">
                         </label>
                         <input type="text" id="goodsIdForm" style="display: none">
@@ -351,8 +352,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" >提交</button>
-                <button type="button" class="btn btn-primary" style="display: none" >提交</button>
+                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-primary" style="display: none">提交</button>
             </div>
         </div>
     </div>
