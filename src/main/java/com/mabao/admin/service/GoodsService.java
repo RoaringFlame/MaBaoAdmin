@@ -63,12 +63,12 @@ public interface GoodsService {
     /**
      * 根据需求查询商品
      *
-     * @param goodsSearchVO                 商品搜索VO
+     * @param
      * @param page                          页数
      * @param pageSize                      每页大小
      * @return
      */
-    PageVO<GoodsVO> selectGoods(GoodsSearchVO goodsSearchVO,
+    PageVO<GoodsVO> selectGoods(Long goodsTypeId,Boolean state,String title,String articleNumber,
                                 int page, int pageSize);
 
     /**
@@ -89,12 +89,12 @@ public interface GoodsService {
     /**
      * 商品批量导出
      *
-     * @param goodsSearchVO                   商品搜索VO
+     * @param
      * @param request
      * @param response
      * @return
      */
-     void exportDataGoodsDetail(GoodsSearchVO goodsSearchVO,HttpServletRequest request, HttpServletResponse response);
+     void exportDataGoodsDetail(Long goodsTypeId,Boolean state,String title,String articleNumber,HttpServletRequest request, HttpServletResponse response);
 
     /**
      * 商品批量导入

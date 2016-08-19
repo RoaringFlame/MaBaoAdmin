@@ -42,16 +42,16 @@ public class GoodsRESTController {
     /**
      * 根据需求查询商品
      *
-     * @param goodsSearchVO      商品搜索VO
+     * @param
      * @param page               页数
      * @param pageSize          每页大小
      * @return                   PageVO<GoodsVO>
      */
-    @RequestMapping(value = "/searchGoods", method = RequestMethod.POST)
-    public PageVO<GoodsVO> showSelectGoods(@RequestBody GoodsSearchVO goodsSearchVO,
+    @RequestMapping(value = "/searchGoods", method = RequestMethod.GET)
+    public PageVO<GoodsVO> showSelectGoods(Long goodsTypeId,Boolean state,String title,String articleNumber,
                                            @RequestParam(required = false,defaultValue = "1") int page,
                                            @RequestParam(required = false,defaultValue = "8") int pageSize) {
-        return this.goodsService.selectGoods(goodsSearchVO, page, pageSize);
+        return this.goodsService.selectGoods(goodsTypeId,state,title,articleNumber, page, pageSize);
     }
 
     /**
@@ -158,17 +158,17 @@ public class GoodsRESTController {
     /**
      *批量导出商品数据
      *
-     * @param goodsSearchVO   商品搜索VO
+     * @param
      * @param request
      * @param response
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/bulkExport",method = POST)
-    public JsonResultVO bulkExportGoods(@RequestBody GoodsSearchVO goodsSearchVO,
+    public JsonResultVO bulkExportGoods(Long goodsTypeId,Boolean state,String title,String articleNumber,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         try{
-            this.goodsService.exportDataGoodsDetail(goodsSearchVO,request,response);
+            this.goodsService.exportDataGoodsDetail(goodsTypeId,state,title,articleNumber,request,response);
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
         }

@@ -147,36 +147,37 @@ public class GoodsServiceImpl implements GoodsService {
     /**
      * 查询商品
      *
-     * @param goodsSearchVO                 搜索商品VO
+     * @param
      * @param page                          页数
      * @param pageSize                      每页大小
      * @return
      */
     @Override
-    public PageVO<GoodsVO> selectGoods(GoodsSearchVO goodsSearchVO, int page, int pageSize) {
+    public PageVO<GoodsVO> selectGoods(Long goodsTypeId,Boolean state,String title,String articleNumber
+            , int page, int pageSize) {
         String JPQL = "select g from Goods g "+
                 "inner join fetch g.type gt " ;
         String JPQLCount = "select count(g) from Goods g ";
         StringBuilder str = new StringBuilder("where 1 = 1 ");
         List<Object> args = new ArrayList<>();
 
-        if (goodsSearchVO.getGoodsTypeId() !=null && !"".equals(goodsSearchVO.getGoodsTypeId()) ) {
-            args.add(goodsSearchVO.getGoodsTypeId());
+        if (goodsTypeId !=null && !"".equals(goodsTypeId) ) {
+            args.add(goodsTypeId);
             str.append(" and g.type.id = ?");
             str.append(args.size());
         }
-        if (goodsSearchVO.getState() != null && !"".equals(goodsSearchVO.getState())) {
-            args.add(goodsSearchVO.getState());
+        if (state != null && !"".equals(state)) {
+            args.add(state);
             str.append(" and g.state = ?");
             str.append(args.size());
         }
-        if (goodsSearchVO.getTitle() != null && !"".equals(goodsSearchVO.getTitle())) {
-            args.add("%"+goodsSearchVO.getTitle()+"%");
+        if (title != null && !"".equals(title)) {
+            args.add("%"+title+"%");
             str.append(" and g.title like ?");
             str.append(args.size());
         }
-        if (goodsSearchVO.getArticleNumber() != null && !"".equals(goodsSearchVO.getArticleNumber())) {
-            args.add("%"+goodsSearchVO.getArticleNumber()+"%");
+        if (articleNumber != null && !"".equals(articleNumber)) {
+            args.add("%"+articleNumber+"%");
             str.append(" and g.articleNumber like ?");
             str.append(args.size());
         }
@@ -239,12 +240,12 @@ public class GoodsServiceImpl implements GoodsService {
     /**
      * 商品筛选批量导出
      *
-     * @param goodsSearchVO                   商品搜索VO
+     * @param
      * @param request
      * @param response
      */
     @Override
-    public void exportDataGoodsDetail(GoodsSearchVO goodsSearchVO,HttpServletRequest request, HttpServletResponse response) {
+    public void exportDataGoodsDetail(Long goodsTypeId,Boolean state,String title,String articleNumber,HttpServletRequest request, HttpServletResponse response) {
         //设置路径
         String docsPath = request.getSession().getServletContext()
                 .getRealPath("");                                                   //模板文件路径
@@ -261,23 +262,23 @@ public class GoodsServiceImpl implements GoodsService {
                 "inner join fetch g.type gt " ;
         StringBuilder str = new StringBuilder("where 1 = 1 ");
         List<Object> args = new ArrayList<>();
-        if (goodsSearchVO.getGoodsTypeId() !=null && !"".equals(goodsSearchVO.getGoodsTypeId())) {
-            args.add(goodsSearchVO.getGoodsTypeId());
+        if (goodsTypeId !=null && !"".equals(goodsTypeId)) {
+            args.add(goodsTypeId);
             str.append(" and g.type.id = ?");
             str.append(args.size());
         }
-        if (goodsSearchVO.getState() != null && !"".equals(goodsSearchVO.getState())) {
-            args.add(goodsSearchVO.getState());
+        if (state != null && !"".equals(state)) {
+            args.add(state);
             str.append(" and g.state = ?");
             str.append(args.size());
         }
-        if (goodsSearchVO.getTitle() != null && !"".equals(goodsSearchVO.getTitle())) {
-            args.add("%"+goodsSearchVO.getTitle()+"%");
+        if (title != null && !"".equals(title)) {
+            args.add("%"+title+"%");
             str.append(" and g.title like ?");
             str.append(args.size());
         }
-        if (goodsSearchVO.getArticleNumber() != null && !"".equals(goodsSearchVO.getArticleNumber())) {
-            args.add("%"+goodsSearchVO.getArticleNumber()+"%");
+        if (articleNumber != null && !"".equals(articleNumber)) {
+            args.add("%"+articleNumber+"%");
             str.append(" and g.articleNumber like ?");
             str.append(args.size());
         }
