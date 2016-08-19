@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -40,7 +41,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index">
                 <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
@@ -56,9 +57,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">订单管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="order_managed.html">订单</a></li>
-                        <li><a href="invoices_managed.html">发货单</a></li>
-                        <li><a href="transfer_order_managed.html">转让订单</a></li>
+                        <li><a href="admin/order_managed">订单</a></li>
+                        <li><a href="admin/invoices_managed">发货单</a></li>
+                        <li><a href="admin/transfer_order_managed">转让订单</a></li>
                     </ul>
                 </li>
             </ul>
@@ -66,9 +67,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">admin <span class="caret"></span></a>
+                       aria-expanded="false"><sec:authentication property="name"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.html">注销</a></li>
+                        <li><a href="logout">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -89,8 +90,8 @@
                aria-expanded="false">
                 <span class="iconfont">&#xe610</span>商品管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
-                <li><a href="goods_list_managed.html">商品列表</a></li>
-                <li><a href="goods_type_managed.html">商品分类</a></li>
+                <li><a href="admin/goods_list_managed">商品列表</a></li>
+                <li><a href="admin/goods_type_managed">商品分类</a></li>
             </ul>
         </li>
 
@@ -100,9 +101,9 @@
                aria-expanded="false">
                 <span class="iconfont">&#xe60f</span>订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
-                <li><a href="order_managed.html">订单</a></li>
-                <li><a href="invoices_managed.html">发货单</a></li>
-                <li><a href="transfer_order_managed.html">转让订单</a></li>
+                <li><a href="admin/order_managed">订单</a></li>
+                <li><a href="invoices_managed">发货单</a></li>
+                <li><a href="transfer_order_managed">转让订单</a></li>
             </ul>
         </li>
         <li class="first-level-menu">
@@ -111,8 +112,8 @@
                aria-expanded="false">
                 <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
-                <li><a href="user_managed.html">账号管理</a></li>
-                <li><a href="log_managed.html">查看日志</a></li>
+                <li><a href="admin/user_managed">账号管理</a></li>
+                <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
     </ul>

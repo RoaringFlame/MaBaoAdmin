@@ -264,7 +264,7 @@
                     <td>78</td>
 
                     <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
+                        <span class="iconfont">&#xe609</span>
                     </td>
 
                     <td id="id" style="display: none">1</td>

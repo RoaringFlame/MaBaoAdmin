@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -17,7 +18,8 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
-
+    <link href="css/themes.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,7 +27,7 @@
     <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
 </head>
-<body>
+<body class="login-background">
 
 <!-- 顶部导航 -->
 <nav class="navbar navbar-default">
@@ -41,8 +43,8 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index.html">
-                <img alt="Brand" src="#">
+            <a class="navbar-brand" href="index">
+                <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
 
@@ -56,8 +58,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">用户管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="user_managed.html">账号管理</a></li>
-                        <li><a href="log_managed.html">查看日志</a></li>
+                        <li><a href="admin/user_managed">账号管理</a></li>
+                        <li><a href="admin/log_managed">查看日志</a></li>
                     </ul>
                 </li>
             </ul>
@@ -67,7 +69,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">admin <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.html">注销</a></li>
+                        <li><a href="login">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -83,11 +85,11 @@
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
     <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">商品管理</a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe610</span>商品管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
                 <li><a href="admin/goods_list_managed">商品列表</a></li>
                 <li><a href="admin/goods_type_managed">商品分类</a></li>
@@ -97,7 +99,8 @@
         <li class="first-level-menu">
             <a href="#orderManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">订单管理 </a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60f</span>订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
                 <li><a href="admin/order_managed">订单</a></li>
                 <li><a href="admin/invoices_managed">发货单</a></li>
@@ -107,16 +110,18 @@
         <li class="first-level-menu">
             <a href="#userManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">用户管理</a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
                 <li><a href="admin/user_managed">账号管理</a></li>
                 <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
     </ul>
-</div>
-<!--侧导航END-->
 
+</div>
+
+<!--侧导航END-->
 <div class="col-xs-10">
     <!--面板-->
 
@@ -124,7 +129,7 @@
         <div class="panel-heading" style="height: 5rem;">
             <!--功能操作-->
             <ol class="breadcrumb panel-title pull-left">
-                <li>订单管理</li>
+                <li> <span class="iconfont">&#xe60e</span>用户管理</li>
                 <li class="active">查看日志</li>
             </ol>
         </div>
@@ -159,19 +164,19 @@
             </form>
             <!--条件查询表单END-->
             <!--表格-->
-            <table class="table table-bordered table-striped">
+            <table class="table text-center">
                 <thead>
                 <tr>
 
-                    <th>登录人员</th>
+                    <th class="text-center">登录人员</th>
 
-                    <th>操作时间</th>
+                    <th class="text-center">操作时间</th>
 
-                    <th>公众号</th>
+                    <th class="text-center">公众号</th>
 
-                    <th>IP地址</th>
+                    <th class="text-center">IP地址</th>
 
-                    <th>操作内容</th>
+                    <th class="text-center">操作内容</th>
 
                 </tr>
 
