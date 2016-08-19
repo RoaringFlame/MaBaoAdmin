@@ -30,7 +30,7 @@
 <div style="padding-top: 10%;">
     <div class="login">
         <div class=" form-group">
-            <img src="images/mabao_logo.png" alt="brand">
+            <a href="description_app"><img src="images/mabao_logo.png" alt="brand"></a>
             <!--<h4 class=" control-label">妈宝后台登录</h4>-->
         </div>
 
