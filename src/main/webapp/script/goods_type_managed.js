@@ -30,11 +30,7 @@ $(function () {
     function initCreateType() {
         //判断点击按钮为新建
         $("#createNew").find("a").click(function () {
-            //$("#submit-btn1").attr("disable", "true")       //提交新建表单按钮隐藏且不可用
-            //    .hide();
-            //$("#submit-btn").attr("disable", "false")      //提交编辑表单按钮隐藏且不可用
-            //    .show();
-            ////新建页面点击提交按钮的控制
+            //新建页面点击提交按钮的控制
             $("#submit-btn").click(function () {
                 var typeNameList = createNewForm.find("input[name='typeName']").val();
                 //数量单位的获取
@@ -125,7 +121,7 @@ $(function () {
 
     //4，初始化编辑商品类型
     function initChangeType() {
-        //编辑是表单初始化
+        //编辑表单初始化
         $(".changeMsg1").click(function () {
             //获取编辑按钮点击的数据id
             var tId = $(this).prevAll(".typeId1").text();
@@ -137,10 +133,7 @@ $(function () {
                 //分类描述的获取
                 $("#assortmentDetail").val(data.description);
             });
-            //$("#submit-btn").attr("disable", "true")       //提交新建表单按钮隐藏且不可用
-            //    .hide();
-            //$("#submit-btn1").attr("disable", "false")      //提交编辑表单按钮隐藏且不可用
-            //    .show();
+
             //提交按钮的点击事件
             $("#submit-btn").click(function () {
                 //商品类型的获取

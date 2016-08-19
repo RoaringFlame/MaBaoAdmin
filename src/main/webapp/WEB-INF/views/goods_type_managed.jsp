@@ -15,12 +15,13 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
-    <![endif]-->
+    <link href="css/themes.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico"/>
 
     <script src="script/lib/jquery.1.10.2.js"></script>
     <script src="script/goods_type_managed.js"></script>
 </head>
-<body>
+<body class="login-background">
 
 <!-- 顶部导航 -->
 <nav class="navbar navbar-default">
@@ -36,11 +37,10 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index.html">
-                <img alt="Brand" src="#">
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
-
         </div>
         <!-- 导航切换END  -->
 
@@ -81,17 +81,19 @@
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">商品管理</a>
-            <ul class="collapse nav text-indent-1 second-level-menu " id="goodsManaged">
+               aria-expanded="false">
+                <span class="iconfont">&#xe610</span>商品管理</a>
+            <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
                 <li><a href="goods_list_managed.html">商品列表</a></li>
-                <li><a href="goods_type_managed.jsp">商品分类</a></li>
+                <li><a href="goods_type_managed.html">商品分类</a></li>
             </ul>
         </li>
 
         <li class="first-level-menu">
             <a href="#orderManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">订单管理 </a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60f</span>订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
                 <li><a href="order_managed.html">订单</a></li>
                 <li><a href="invoices_managed.html">发货单</a></li>
@@ -101,7 +103,8 @@
         <li class="first-level-menu">
             <a href="#userManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">用户管理 </a>
+               aria-expanded="false">
+                <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
                 <li><a href="user_managed.html">账号管理</a></li>
                 <li><a href="log_managed.html">查看日志</a></li>
@@ -113,6 +116,7 @@
 
 <!--侧导航END-->
 
+
 <!--面板-->
 <div class="col-xs-10">
 
@@ -120,7 +124,7 @@
         <!--功能操作-->
         <div class="panel-heading" style="height: 5rem;">
             <ol class="breadcrumb panel-title pull-left">
-                <li>商品管理</li>
+                <li><span class="iconfont">&#xe610</span>商品管理</li>
                 <li class="active">商品分类</li>
             </ol>
 
@@ -128,20 +132,17 @@
             <div class="btn-toolbar ">
                 <div class="dropdown btn-group navbar-nav pull-right ">
                     <a class="btn btn-default" id="delBtn">
-                        删除
+                        <span class="iconfont">&#xe602</span>删除
                     </a>
                 </div>
 
                 <div class="btn-toolbar " id="createNew">
                     <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新建</a>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><span class="iconfont">&#xe601</span>新建</a>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
         <!--功能操作END-->
 
         <div class="panel-body" id="searchInput">
@@ -161,7 +162,7 @@
             <!--条件查询表单END-->
 
                 <!--表格-->
-                <table class="table table-bordered table-striped" id="hideGoods" style="display: none">
+                <table class="table text-center" id="hideGoods" style="display: none">
 
                     <tr class="odd gradeX">
 
@@ -182,8 +183,7 @@
 
                         <td class="typeId1 hide"></td>
 
-                        <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg1">编辑</td>
-
+                        <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg1"><span class="iconfont">&#xe609</span></td>
                     </tr>
 
                 </table>
@@ -191,7 +191,7 @@
 
 
             <!--表格-->
-            <table class="table table-bordered table-striped" id="tableListForm">
+            <table class="table text-center" id="tableListForm">
                 <thead>
                 <tr>
                     <th style="width:8px;">
@@ -201,15 +201,15 @@
                         </label>
                     </th>
 
-                    <th>编号</th>
+                    <th class="text-center">编号</th>
 
-                    <th>商品类别</th>
+                    <th class="text-center">商品类别</th>
 
-                    <th>商品数量</th>
+                    <th class="text-center">商品数量</th>
 
-                    <th>数量单位</th>
+                    <th class="text-center">数量单位</th>
 
-                    <th>编辑</th>
+                    <th class="text-center">编辑</th>
 
                 </tr>
 
@@ -221,22 +221,26 @@
 
             </table>
             <!--表格END-->
+
+            <!--分页-->
+            <div id="pageChange" class="pagination">
+                <input type=button id="btn1" value="首页" >
+                <input type=button id="btn2" value="上一页">
+                <input type=button id="btn3" value="下一页" >
+                <input type=button id="btn4" value="尾页" >
+                <span >当前页：</span><a id="pageShow"></a>
+            </div>
+            <!--分页end-
+
+                </div>
+
+            </div>
+
+            ->
         </div>
+        <!--面板END-->
 
-    </div>
 
-    <!--分页-->
-    <div style="text-align:center" id="pageChange">
-        <input type=button id="btn1" value="首页" >
-        <input type=button id="btn2" value="上一页">
-        <input type=button id="btn3" value="下一页" >
-        <input type=button id="btn4" value="尾页" >
-        <span >当前页：</span><a id="pageShow"></a>
-    </div>
-    <!--分页end-->
-
-</div>
-<!--面板END-->
 
 <!--商品类型表单-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -278,7 +282,6 @@
     </div>
 </div>
 <!--商品类型表单END-->
-
 
 
 
