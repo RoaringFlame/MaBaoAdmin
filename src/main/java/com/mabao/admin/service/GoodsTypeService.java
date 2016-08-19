@@ -16,13 +16,8 @@ public interface GoodsTypeService {
      * @param typeId            id
      * @return                  商品类型
      */
-    GoodsTypeVO get(Long typeId);
+    GoodsTypeVO findOneGoodsType(Long typeId);
 
-    /**
-     * 获取商品的所有类别
-     * @return                 商品类别的集合
-     */
-    Page<GoodsType> getAllGoodsType(int page, int pageSize);
 
     /**
      *获取商品的集合
@@ -49,7 +44,7 @@ public interface GoodsTypeService {
      * @param pageSize                  每页数量
      * @return                          分页GoodsTypeVO
      */
-    Page<GoodsType> searchGoodsType(String searchKey,int page, int pageSize);
+    Page<GoodsType> searchGoodsType(String searchKey, int page, int pageSize);
 
     /**
      * 修改商品类别
@@ -58,10 +53,5 @@ public interface GoodsTypeService {
      */
     JsonResultVO changeGoodsType(GoodsTypeVO goodsTypeVO);
 
-    /**
-     * 查找商品类别
-     * @param typeId
-     * @return
-     */
-     GoodsType findOne(Long typeId);
+    GoodsType findOne(Long goodsTypeId);
 }

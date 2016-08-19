@@ -3,8 +3,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
@@ -16,13 +15,10 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <!--<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
-    <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
+
+    <script src="script/lib/jquery.1.10.2.js"></script>
+    <script src="script/goods_type_managed.js"></script>
 </head>
 <body>
 
@@ -66,7 +62,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">admin <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.html">注销</a></li>
+                        <li><a href="login.jsp">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -82,14 +78,13 @@
 <!--侧导航-->
 <div class=" col-xs-2 " id="myScrollspy">
     <ul class="nav sidebar-box nav-stacked  affix" data-spy="affix" data-offset-top="125">
-
         <li class="first-level-menu">
             <a href="#goodsManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
                aria-expanded="false">商品管理</a>
-            <ul class="collapse nav text-indent-1 second-level-menu" id="goodsManaged">
-                <li><a href="admin/goods_list_managed">商品列表</a></li>
-                <li><a href="admin/goods_type_managed">商品分类</a></li>
+            <ul class="collapse nav text-indent-1 second-level-menu " id="goodsManaged">
+                <li><a href="goods_list_managed.html">商品列表</a></li>
+                <li><a href="goods_type_managed.jsp">商品分类</a></li>
             </ul>
         </li>
 
@@ -98,22 +93,24 @@
                aria-haspopup="true"
                aria-expanded="false">订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
-                <li><a href="admin/order_managed">订单</a></li>
-                <li><a href="admin/invoices_managed">发货单</a></li>
-                <li><a href="admin/transfer_order_managed">转让订单</a></li>
+                <li><a href="order_managed.html">订单</a></li>
+                <li><a href="invoices_managed.html">发货单</a></li>
+                <li><a href="transfer_order_managed.html">转让订单</a></li>
             </ul>
         </li>
         <li class="first-level-menu">
             <a href="#userManaged" data-toggle="collapse" role="button"
                aria-haspopup="true"
-               aria-expanded="false">用户管理</a>
+               aria-expanded="false">用户管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
-                <li><a href="admin/user_managed">账号管理</a></li>
-                <li><a href="admin/log_managed">查看日志</a></li>
+                <li><a href="user_managed.html">账号管理</a></li>
+                <li><a href="log_managed.html">查看日志</a></li>
             </ul>
         </li>
     </ul>
+
 </div>
+
 <!--侧导航END-->
 
 <!--面板-->
@@ -130,17 +127,14 @@
 
             <div class="btn-toolbar ">
                 <div class="dropdown btn-group navbar-nav pull-right ">
-
-                    <a class="btn btn-default">
+                    <a class="btn btn-default" id="delBtn">
                         删除
                     </a>
                 </div>
 
-                <div class="btn-toolbar ">
+                <div class="btn-toolbar " id="createNew">
                     <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            新建
-                        </a>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新建</a>
                     </div>
                 </div>
             </div>
@@ -150,7 +144,7 @@
 
         <!--功能操作END-->
 
-        <div class="panel-body">
+        <div class="panel-body" id="searchInput">
             <!--条件查询表单-->
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -158,22 +152,51 @@
                     <div class="form-group">
                         <label for="goodsType"></label>
                         <input type="text" class="form-control" id="goodsType" placeholder="商品类别"
-                               aria-describedby="basic-addon1">
+                               aria-describedby="basic-addon1" name="goodsTypeName">
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button id="searchByType" type="button" class="btn btn-default">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
 
+                <!--表格-->
+                <table class="table table-bordered table-striped" id="hideGoods" style="display: none">
+
+                    <tr class="odd gradeX">
+
+                        <td>
+                            <label>
+                                <%--<input name="allCheck" type="checkbox" class="checkboxes" value="1"/>--%>
+                                <input name="allCheck" class="checkboxes" value="1"/>
+                            </label>
+                        </td>
+
+                        <td class="typeId"></td>
+
+                        <td class="tName"></td>
+
+                        <td class="tNum"></td>
+
+                        <td class="tQua"></td>
+
+                        <td class="typeId1 hide"></td>
+
+                        <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="changeMsg1">编辑</td>
+
+                    </tr>
+
+                </table>
+                <!--表格END-->
+
 
             <!--表格-->
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="tableListForm">
                 <thead>
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input type="checkbox" class="group-checkable"
+                            <input type="checkbox" id="textSearch" class="group-checkable"
                                    data-set="#sample_2 .checkboxes"/>
                         </label>
                     </th>
@@ -186,9 +209,7 @@
 
                     <th>数量单位</th>
 
-                    <th>
-                        编辑
-                    </th>
+                    <th>编辑</th>
 
                 </tr>
 
@@ -196,191 +217,23 @@
 
                 <tbody>
 
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>1</td>
-
-                    <td>玩具</td>
-
-                    <td>1</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>2</td>
-
-                    <td>婴儿车</td>
-
-                    <td>1</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>3</td>
-
-                    <td>安全座椅</td>
-
-                    <td>4</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
-
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>4</td>
-
-                    <td>服饰鞋帽</td>
-
-                    <td>10</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
-
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>5</td>
-
-                    <td>家具家电</td>
-
-                    <td>1</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
-
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>6</td>
-
-                    <td>图书绘本</td>
-
-                    <td>2</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
-
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>7</td>
-
-                    <td>其他产品</td>
-
-                    <td>0</td>
-
-                    <td>个</td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        编辑
-                    </td>
-
-
-                </tr>
+                </tbody>
 
             </table>
             <!--表格END-->
-            <!--分页-->
-            <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!--分页END-->
         </div>
 
     </div>
+
+    <!--分页-->
+    <div style="text-align:center" id="pageChange">
+        <input type=button id="btn1" value="首页" >
+        <input type=button id="btn2" value="上一页">
+        <input type=button id="btn3" value="下一页" >
+        <input type=button id="btn4" value="尾页" >
+        <span >当前页：</span><a id="pageShow"></a>
+    </div>
+    <!--分页end-->
 
 </div>
 <!--面板END-->
@@ -395,46 +248,42 @@
                 <h4 class="modal-title" id="exampleModalLabel">商品详情</h4>
             </div>
             <div class="modal-body">
-                <form class="col-md-offset-4 form-label">
+                <form id="createNewForm" class="col-md-offset-4 form-label" >
                     <div class="form-group  ">
                         <label for="assortmentForm" class="control-label text-left">分类名称:
-                            <input type="text" class="form-control" id="assortmentForm">
-                        </label>
-                        <span class="red ">*</span>
-                    </div>
-                    <div class="form-group ">
-                        <label for="categoryParent" class="control-label text-left ">上级分类:
-                            <input type="text" class="form-control" id="categoryParent">
+                            <input type="text" class="form-control" id="assortmentForm" name="typeName">
                         </label>
                         <span class="red ">*</span>
                     </div>
                     <div class="form-group ">
                         <label for="assortmentNum" class="  control-label text-left ">数量单位:
-                            <input type="text" class="form-control" id="assortmentNum">
+                            <input type="text" class="form-control" id="assortmentNum" name="goodsTypeIntroduction">
                         </label>
                         <span class="red ">*</span>
                     </div>
                     <div class="form-group ">
                         <label for="assortmentDetail" class="control-label text-left ">分类描述:
-                            <textarea class="form-control" id="assortmentDetail"></textarea>
+                            <textarea class="form-control" id="assortmentDetail" name="assortmentDetail"></textarea>
                         </label>
                         <span class="red ">*</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button id="dismiss-btn" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="submit-btn" data-dismiss="modal" type="button" class="btn btn-primary">提交</button>
+                <%--<button id="submit-btn1" data-dismiss="modal" type="button" class="btn btn-primary" style="display: none">提交</button>--%>
             </div>
-
         </div>
     </div>
 </div>
 <!--商品类型表单END-->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+
+
 <script src="script/lib/jquery.1.10.2.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
+
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
 
 <script src="script/lib/bootstrap/collapse.js"></script>
