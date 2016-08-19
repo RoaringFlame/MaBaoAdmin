@@ -47,7 +47,7 @@ $(function () {
 
     //商品类别下拉框初始化
     function initGoodsTypeDropdown() {
-        $.get("/goods", {}, function (data) {
+        $.get("goods", {}, function (data) {
             $(data.goodsTypeList).each(function (index, type) {                //为商品类别下拉框遍历赋值
                 $(".goodsType").append($("<option></option>")                   //为商品类别下拉框增加option节点
                     .val(type.key)
@@ -59,7 +59,7 @@ $(function () {
 
     //商品状态下拉框初始化
     function initGoodsStateDropdown() {
-        $.get("/goods", {}, function (data) {                                   //为商品状态下拉框遍历赋值
+        $.get("goods", {}, function (data) {                                   //为商品状态下拉框遍历赋值
             $(data.stateList).each(function (index, state) {                    //为商品状态下拉框增加option节点
                 $("#goodsPublish").append($("<option></option>")
                     .val(state.key)
@@ -71,7 +71,7 @@ $(function () {
 
     //表单中新旧程度下拉框初始化
     function initGoodsDegreeDropdown() {
-        $.get("/goods", {}, function (data) {                                   //为新旧程度下拉框遍历赋值
+        $.get("goods", {}, function (data) {                                   //为新旧程度下拉框遍历赋值
             $(data.newDegreeList).each(function (index, degree) {                   //为新旧程度下拉框增加option节点
                 $("#goodsDegreeForm").append($("<option></option>")
                     .val(degree.key)
@@ -83,7 +83,7 @@ $(function () {
 
     //表单中宝宝类别下拉框初始化
     function initBabyTypeDropdown() {
-        $.get("/goods", {}, function (data) {                                   //为宝宝类别下拉框遍历赋值
+        $.get("goods", {}, function (data) {                                   //为宝宝类别下拉框遍历赋值
             $(data.babyTypeList).each(function (index, babyType) {                   //为宝宝类别下拉框增加option节点
                 $("#babyTypeForm").append($("<option></option>")
                     .val(babyType.key)
@@ -105,7 +105,7 @@ $(function () {
             pageSize: pageSize,                       //每页记录条数
         };
         if (currentPage <= totalPage) {
-            $.get("/goods/searchGoods", params, function (data) {
+            $.get("goods/searchGoods", params, function (data) {
                 var goodsList = data.items;                                      //获取所有商品信息
                 console.log(goodsList);
                 totalPage = data.totalPage;                                      //获取总页数
@@ -221,7 +221,7 @@ $(function () {
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/goods/addGoods',
+                    url: 'goods/addGoods',
                     processData: false,
                     dataType: 'json',
                     data: JSON.stringify(params),
@@ -261,7 +261,7 @@ $(function () {
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/goods/updateGoods',
+                    url: 'goods/updateGoods',
                     processData: false,
                     dataType: 'json',
                     data: JSON.stringify(params),
@@ -312,7 +312,7 @@ $(function () {
             goodsIds += goodsId + ",";                                              //给string类型的goodsIds赋值
         });
         if (goodsIds !== "") {                                                        //如果选中商品
-            $.get("/goods/deleteSomeGoods", {ids: goodsIds}, function (data) {       //调用删除商品接口
+            $.get("goods/deleteSomeGoods", {ids: goodsIds}, function (data) {       //调用删除商品接口
                 if (data.status == "success") {                                       //如果请求成功
                     $("#selectAll").removeAttr("checked");                            //去除全选框的选中状态
                     $(".container").empty();                                          //清空商品列表
@@ -334,7 +334,7 @@ $(function () {
             goodsIds += goodsId + ",";                                              //给string类型的goodsIds赋值
         });
         if (goodsIds !== "") {                                         //如果选中商品
-            $.get("/goods/changeSomeGoods", {ids: goodsIds, state: true}, function (data) {   //调用更改商品状态接口
+            $.get("goods/changeSomeGoods", {ids: goodsIds, state: true}, function (data) {   //调用更改商品状态接口
                 if (data.status == "success") {                        //如果请求成功
                     $("#selectAll").removeAttr("checked");             //去除全选框的选中状态
                     $(".container").empty();                           //清空商品列表
@@ -357,7 +357,7 @@ $(function () {
             goodsIds += goodsId + ",";                                              //给string类型的goodsIds赋值
         });
         if (goodsIds !== "") {                                         //如果选中商品
-            $.get("/goods/changeSomeGoods", {ids: goodsIds, state: false}, function (data) {    //调用更改商品状态接口
+            $.get("goods/changeSomeGoods", {ids: goodsIds, state: false}, function (data) {    //调用更改商品状态接口
                 if (data.status == "success") {                        //如果请求成功
                     $("#selectAll").removeAttr("checked");             //去除全选框的选中状态
                     $(".container").empty();                           //清空商品列表
@@ -375,7 +375,7 @@ $(function () {
     //导出Excel按钮
     function exportExcel() {
         getSearchItem();                  //获取搜索条件
-        window.location = "/goods/bulkExport?goodsTypeId=" + goodsTypeId + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsNum; //调用导出表接口
+        window.location = "goods/bulkExport?goodsTypeId=" + goodsTypeId + "&state=" + state + "&title=" + goodsName + "&articleNumber=" + goodsNum; //调用导出表接口
 
     }
 
