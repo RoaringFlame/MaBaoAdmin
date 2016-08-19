@@ -4,7 +4,7 @@ $(function () {
     var consigner;        //收货人
     var goodsStatus;      //订单状态
     var currentPage = 1;
-    var pageSize = 3;
+    var pageSize = 7;
     var totalPage = 1;
     var province = $("select[name='province']");  //省下拉框
     var city = $("select[name='city']");  //市下拉框
@@ -64,8 +64,7 @@ $(function () {
             $.get("order/searchOrder", params, function (data) {
                 var orderList = data.items;
                 totalPage = data.totalPage;
-                alert(totalPage);
-                console.log(orderList);
+                //console.log(orderList);
                 if (orderList.length > 0) {
                     $(orderList).each(function (index, order) {
                         var orderInfo = $("#orderContainer").clone();
@@ -127,6 +126,19 @@ $(function () {
                 });
                 countySelector();
             });
+        }else {
+            city.empty();
+            urban.empty();
+            city.append($("<option></option>")
+                .val("请选择")
+                .text("请选择")
+            );
+            urban.append($("<option></option>")
+                .val("请选择")
+                .text("请选择")
+            );
+            city.val("请选择");
+            urban.val("请选择");
         }
     }
 
@@ -343,7 +355,6 @@ $(function () {
 
         //省下拉框改变事件
         province.change(function () {
-            province.find("option:eq(0)").attr("disabled", "true");
             citySelector();             //省下拉框改变是调用市下拉框初始化事件
             countySelector();           //省下拉框改变是调用区下拉框初始化事件
         });
