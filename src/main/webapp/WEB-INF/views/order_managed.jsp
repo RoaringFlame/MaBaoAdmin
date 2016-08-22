@@ -180,10 +180,6 @@
                     <div class="form-group">
                         <label for="goodsStatus">订单状态：</label>
                         <select name="" class="form-control" id="goodsStatus">
-                            <option selected="selected" value="">待确认</option>
-                            <option value="">待付款</option>
-                            <option value="">待发货</option>
-                            <option value="-">已确认</option>
                         </select>
                     </div>
 
@@ -232,15 +228,6 @@
 
                     <th>1</th>
 
-                    <td>11102324</td>
-
-                    <td>10月10日</td>
-
-                    <td>姜哲</td>
-
-                    <td>100</td>
-
-                    <td>待确认</td>
 
                 </tr>
 

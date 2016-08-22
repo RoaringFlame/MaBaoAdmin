@@ -22,10 +22,10 @@ $(function () {
 
     //订单状态下拉框初始化
     function initOrderState() {
-        $.get("order/OrderStatusSelector", {}, function (data) {
+        $.get("order/orderStatusSelector", {}, function (data) {
             console.log(data);
             $(data).each(function (index, state) {
-                $(".goodsStatus").append($("<option></option>")
+                $("#goodsStatus").append($("<option></option>")
                     .val(state.key)
                     .text(state.value)
                 );
@@ -58,13 +58,12 @@ $(function () {
             orderId: orderNum,
             state: goodsStatus,
             page: currentPage,
-            pageSize: pageSize,
+            pageSize: pageSize
         };
         if (currentPage <= totalPage) {
             $.get("order/searchOrder", params, function (data) {
                 var orderList = data.items;
                 totalPage = data.totalPage;
-                //console.log(orderList);
                 if (orderList.length > 0) {
                     $(orderList).each(function (index, order) {
                         var orderInfo = $("#orderContainer").clone();
