@@ -53,7 +53,6 @@ public interface GoodsRepository extends BaseRepository<Goods> {
      * @param state                         商品状态
      * @param title                         商品名称
      * @param articleNumber                 商品货号
-     * @param pageable                          页数
      * @return
      */
     Page<Goods> findByTypeIdAndStateAndTitleAndArticleNumber(Long TypeId, Boolean state, String title, String articleNumber,Pageable pageable);

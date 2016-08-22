@@ -1,6 +1,6 @@
 package com.mabao.admin.service.impl;
 
-import com.mabao.admin.pojo.Brand;
+import com.mabao.admin.pojo.GoodsBrand;
 import com.mabao.admin.repository.BrandRepository;
 import com.mabao.admin.service.BrandService;
 import com.mabao.admin.util.Selector;
@@ -25,7 +25,7 @@ public class BrandServiceImpl implements BrandService{
      * @return                  品牌list
      */
     @Override
-    public List<Brand> findByStatus(Boolean status) {
+    public List<GoodsBrand> findByStatus(Boolean status) {
         return this.brandRepository.findByStatus(status);
     }
     /**
@@ -35,11 +35,16 @@ public class BrandServiceImpl implements BrandService{
     @Override
     public List<Selector> findBrandForSelector() {
         List<Selector> brandSelector = new ArrayList<>();
-        List<Brand> brandList = this.brandRepository.findByStatus(Boolean.TRUE);
-        for (Brand b : brandList){
+        List<GoodsBrand> brandList = this.brandRepository.findByStatus(Boolean.TRUE);
+        for (GoodsBrand b : brandList){
             Selector selector = new Selector(b.getId().toString(),b.getBrandName());
             brandSelector.add(selector);
         }
         return brandSelector;
+    }
+
+    @Override
+    public GoodsBrand get(Long id) {
+        return this.brandRepository.findOne(id);
     }
 }

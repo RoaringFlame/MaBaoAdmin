@@ -18,21 +18,28 @@ public class GoodsInVO {
     private String title;                           //标题
     private Long user_id;                           //商品归属者编号，后台用户编号为0
     private Quality newDegree;                      //新旧程度，0表示全新，95，80分别表示95成8成新
-    private String message;                         //卖家分享
+    private Double oldPrice;                        //原价
     private Double price;                           //现价
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//存日期时使用
-    private Date purchaseTime;                      //购买时间
-    private Date releaseTime;                       //保质期时间
-    private String  goodsIntroduction;              //商品介绍
+    private Long typeId;                            //类别id
+    private String typeName;                        //二级类型名称
+    private Long brandId;                           //品牌id
+    private String brandName;                       //商品品牌名称
+    @DateTimeFormat(pattern = "yyyy-MM-dd")         //存日期时使用
+    private Date upTime;                             //上架时间
+    private Integer stockNumber;                    //库存数量
+    private String message;                         //卖家分享
+    private BabyType babyType;
+    private String pictureName;                     //上传图片名
 
     public static GoodsInVO generateBy(Goods goods){
         GoodsInVO vo = VoUtil.copyBasic(GoodsInVO.class, goods);
         assert vo != null;
-        vo.setNewDegree(goods.getNewDegree());
         vo.setUser_id(goods.getUser().getId());
-        vo.setPurchaseTime(goods.getUpTime());
-        vo.setReleaseTime(goods.getUpTime());
-        vo.setGoodsIntroduction("hhh3");
+        vo.setPictureName(goods.getPicture());
+        vo.setNewDegree(goods.getNewDegree());
+        vo.setBabyType(goods.getBabyType());
+        vo.setTypeName(goods.getTypeName());
+        vo.setTypeId(goods.getType().getId());
         return vo;
     }
     public static List<GoodsInVO> generateBy(List<Goods> goodsList){
@@ -43,20 +50,20 @@ public class GoodsInVO {
         return list;
     }
 
-    public Quality getNewDegree() {
-        return newDegree;
-    }
-
-    public void setNewDegree(Quality newDegree) {
-        this.newDegree = newDegree;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BabyType getBabyType() {
+        return babyType;
+    }
+
+    public void setBabyType(BabyType babyType) {
+        this.babyType = babyType;
     }
 
     public String getTitle() {
@@ -74,12 +81,37 @@ public class GoodsInVO {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
-    public String getMessage() {
-        return message;
+
+    public Quality getNewDegree() {
+        return newDegree;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public Long getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
+
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    public void setNewDegree(Quality newDegree) {
+        this.newDegree = newDegree;
+    }
+
+    public Double getOldPrice() {
+        return oldPrice;
+    }
+
+    public void setOldPrice(Double oldPrice) {
+        this.oldPrice = oldPrice;
     }
 
     public Double getPrice() {
@@ -90,28 +122,54 @@ public class GoodsInVO {
         this.price = price;
     }
 
-    public Date getPurchaseTime() {
-        return purchaseTime;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setPurchaseTime(Date purchaseTime) {
-        this.purchaseTime = purchaseTime;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
-    public Date getReleaseTime() {
-        return releaseTime;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setReleaseTime(Date releaseTime) {
-        this.releaseTime = releaseTime;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
-    public String getGoodsIntroduction() {
-        return goodsIntroduction;
+    public Date getUpTime() {
+        return upTime;
     }
 
-    public void setGoodsIntroduction(String goodsIntroduction) {
-        this.goodsIntroduction = goodsIntroduction;
+    public void setUpTime(Date upTime) {
+        this.upTime = upTime;
     }
+
+    public Integer getStockNumber() {
+        return stockNumber;
+    }
+
+    public void setStockNumber(Integer stockNumber) {
+        this.stockNumber = stockNumber;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+
+    public String getPictureName() {
+        return pictureName;
+    }
+
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
+    }
+
 }
 

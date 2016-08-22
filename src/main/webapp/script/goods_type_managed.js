@@ -30,11 +30,7 @@ $(function () {
     function initCreateType() {
         //判断点击按钮为新建
         $("#createNew").find("a").click(function () {
-            //$("#submit-btn1").attr("disable", "true")       //提交新建表单按钮隐藏且不可用
-            //    .hide();
-            //$("#submit-btn").attr("disable", "false")      //提交编辑表单按钮隐藏且不可用
-            //    .show();
-            ////新建页面点击提交按钮的控制
+            //新建页面点击提交按钮的控制
             $("#submit-btn").click(function () {
                 var typeNameList = createNewForm.find("input[name='typeName']").val();
                 //数量单位的获取
@@ -50,7 +46,7 @@ $(function () {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json',
-                        url: '/goodsType/addGoodsType',
+                        url: 'goodsType/addGoodsType',
                         processData: false,
                         dataType: 'json',
                         data: JSON.stringify(params),
@@ -103,7 +99,7 @@ $(function () {
                     goodsIds += goodsId + ",";
                     console.log(goodsIds);
                 });
-                $.get("/goodsType/deleteSomeGoodsType", {ids: goodsIds}, function (data) {
+                $.get("goodsType/deleteSomeGoodsType", {ids: goodsIds}, function (data) {
                     $(this).parents("tr").remove();//从页面删除选中内容
                 });
                 window.location.reload();
@@ -125,11 +121,11 @@ $(function () {
 
     //4，初始化编辑商品类型
     function initChangeType() {
-        //编辑是表单初始化
+        //编辑表单初始化
         $(".changeMsg1").click(function () {
             //获取编辑按钮点击的数据id
             var tId = $(this).prevAll(".typeId1").text();
-            $.get("/goodsType/"+tId,function (data) {
+            $.get("goodsType/"+tId,function (data) {
                 //商品类别名称
                 $("#assortmentForm").val(data.typeName);
                 //数量单位的获取
@@ -137,10 +133,7 @@ $(function () {
                 //分类描述的获取
                 $("#assortmentDetail").val(data.description);
             });
-            //$("#submit-btn").attr("disable", "true")       //提交新建表单按钮隐藏且不可用
-            //    .hide();
-            //$("#submit-btn1").attr("disable", "false")      //提交编辑表单按钮隐藏且不可用
-            //    .show();
+
             //提交按钮的点击事件
             $("#submit-btn").click(function () {
                 //商品类型的获取
@@ -158,7 +151,7 @@ $(function () {
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/goodsType/changeGoodsType',
+                    url: 'goodsType/changeGoodsType',
                     processData: false,
                     dataType: 'json',
                     data: JSON.stringify(params),
@@ -181,7 +174,7 @@ $(function () {
             page: page,
             pageSize: pageSize
         };
-        $.get("/goodsType/searchGoodsType", params, function (data) {
+        $.get("goodsType/searchGoodsType", params, function (data) {
             //获取页面中需要的数据信息并展示
             $(data.items).each(function (index, goodsType) {
                 //克隆隐藏列表中的信息
@@ -206,7 +199,7 @@ $(function () {
 
     //6,分页功能的实现
     function initPage() {
-        $.get("/goodsType/searchGoodsType", params, function (data) {
+        $.get("goodsType/searchGoodsType", params, function (data) {
             var totalPage = data.totalPage;
             //首页
             if (page >= 1 && page <= totalPage) {
