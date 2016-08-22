@@ -35,7 +35,7 @@ public class OrderRESTController {
      * order页面初始化下拉框
      * @return
      */
-    @RequestMapping(value = "/OrderStatusSelector", method = RequestMethod.GET)
+    @RequestMapping(value = "/orderStatusSelector", method = RequestMethod.GET)
     public List<Selector> orderStatusInit() {
         return OrderStatus.toList();
     }

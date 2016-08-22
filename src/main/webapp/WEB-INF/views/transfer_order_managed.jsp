@@ -182,10 +182,7 @@
                     <div class="form-group">
                         <label for="goodsStatus">订单状态：</label>
                         <select name="" class="form-control" id="goodsStatus">
-                            <option selected="selected" value="">待确认</option>
-                            <option value="">待付款</option>
-                            <option value="">待发货</option>
-                            <option value="-">已确认</option>
+                                <option value="all">请选择</option>
                         </select>
                     </div>
 
@@ -224,36 +221,6 @@
                 </thead>
 
                 <tbody>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>1</td>
-
-                    <td>
-                        <span class="cursor" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            11102324
-                        </span>
-                    </td>
-
-                    <td>
-                         <span class="cursor" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                            10月10日
-                        </span>
-                    </td>
-
-                    <td>姜哲</td>
-
-                    <td>100</td>
-
-                    <td>待确认</td>
-
-                </tr>
 
                 <tr class="odd gradeX">
 
@@ -577,5 +544,7 @@
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/lib/bootstrap/collapse.js"></script>
+<script src="script/transfer_order_managed.js"></script>
 </body>
 </html>
