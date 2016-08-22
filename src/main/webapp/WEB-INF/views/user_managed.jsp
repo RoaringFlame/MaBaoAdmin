@@ -142,10 +142,7 @@
                 </div>
 
                 <div class="dropdown btn-group navbar-nav pull-right ">
-
-                    <a class="btn btn-default">
-                        <span class="iconfont">&#xe602</span>删除
-                    </a>
+                    <a id="delBtn" class="btn btn-default"><span class="iconfont">&#xe602</span>删除</a>
                 </div>
 
                 <div class="btn-toolbar ">
@@ -179,17 +176,19 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="submit" id="searchBtn" class="btn btn-default">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
+            <!--表格克隆-->
             <table class="table text-center" id="hideGoods" style="display:none">
                 <tr class="odd gradeX">
                     <td>
                         <label>
-                            <input class="checkboxes" value="1" name="allCheck"/>
+                            <input class="checkboxes"  value="1" name="checkOne"/>
                         </label>
                     </td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -202,15 +201,18 @@
                     </td>
                 </tr>
             </table>
+            <!--表格克隆结束-->
             <!--表格-->
             <table class="table text-center" id="userTable">
                 <thead>
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input type="checkbox" id="checkAll" class="checkboxes" value="1" name="allCheck"/>
                         </label>
                     </th>
+                    <th class="text-center">序号</th>
+
                     <th class="text-center">工号</th>
 
                     <th class="text-center">姓名</th>
