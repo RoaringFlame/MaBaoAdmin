@@ -29,6 +29,10 @@ $(function () {
                     .val(state.key)
                     .text(state.value)
                 );
+                $("#orderStatusForm").append($("<option></option>")
+                    .val(state.key)
+                    .text(state.value)
+                );
             });
         });
     }
@@ -61,6 +65,7 @@ $(function () {
             pageSize: pageSize
         };
         if (currentPage <= totalPage) {
+            //alert("hi");
             $.get("order/searchOrder", params, function (data) {
                 var orderList = data.items;
                 totalPage = data.totalPage;
@@ -72,7 +77,7 @@ $(function () {
                         orderInfo.find("th").text(index + 1);
                         orderInfo.find("td:eq(1)").text(order.id);
                         orderInfo.find("td:eq(2)").text(getLocalTime(order.createTime));
-                        orderInfo.find("td:eq(3)").text(order.Consignee);
+                        orderInfo.find("td:eq(3)").text(order.consignee);
                         orderInfo.find("td:eq(4)").text(order.totalSum);
                         orderInfo.find("td:eq(5)").text(order.state);
                         $("#container").append(orderInfo);
@@ -189,7 +194,7 @@ $(function () {
             orderStatus: orderStatus,
             areaId: area,
             startDate: transferDate,
-            endDate: transferNedDate,
+            endDate: transferNedDate
         };
 
         if (currentPage <= totalPage) {
@@ -198,8 +203,9 @@ $(function () {
                 contentType: 'application/json',
                 url: 'order/advancedQueryOrder',
                 processData: false,
-                dataType: 'json',
+                //dataType: 'json',
                 data: JSON.stringify(params),
+                //data: params,
                 success: function (data) {
                     var orderList = data.items;
                     totalPage = data.totalPage;

@@ -14,12 +14,12 @@ public class OrderOutVO {
     private Date createTime;                        //订单创建时间
     private String state;                           //订单状态，0待支付（买家），1待发货（卖家），2待收货（买家），3已完成（卖家），4已取消（买家）
     private Double totalSum;                        //总价
-    private String Consignee;                       //收货人
+    private String consignee;                       //收货人
 
-    public static OrderOutVO generateBy(Order order,String Consignee){
+    public static OrderOutVO generateBy(Order order,String consignee){
         OrderOutVO vo = VoUtil.copyBasic(OrderOutVO.class, order);
         assert vo != null;
-        vo.setConsignee(Consignee);
+        vo.setConsignee(consignee);
         vo.setState(order.getState().getText());
         return vo;
     }
@@ -41,11 +41,11 @@ public class OrderOutVO {
     }
 
     public String getConsignee() {
-        return Consignee;
+        return consignee;
     }
 
     public void setConsignee(String consignee) {
-        Consignee = consignee;
+        this.consignee = consignee;
     }
 
     public Double getTotalSum() {

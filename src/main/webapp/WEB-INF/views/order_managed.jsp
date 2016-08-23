@@ -171,15 +171,16 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label for="consigner"></label>
                         <input type="text" class="form-control" id="consigner" placeholder="收货人"
                                aria-describedby="basic-addon1">
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                         <label for="goodsStatus">订单状态：</label>
                         <select name="" class="form-control" id="goodsStatus">
+                            <option value="">所有状态</option>
                         </select>
                     </div>
 
@@ -225,10 +226,12 @@
                             <input type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
-
                     <th>1</th>
-
-
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
 
                 <tbody id="container">
