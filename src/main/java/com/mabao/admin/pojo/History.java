@@ -1,7 +1,5 @@
 package com.mabao.admin.pojo;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,8 +8,7 @@ import java.util.Date;
 public class History {
     private Long id;                            //日志编号
     private Admin admin;                        //管理员
-    private String ipAddress;                   //ip地址v
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String ipAddress;                   //ip地址
     private Date operationTime;                 //操作时间
     private String operation;                   //操作内容
 

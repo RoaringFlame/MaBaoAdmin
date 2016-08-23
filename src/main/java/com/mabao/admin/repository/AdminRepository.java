@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface AdminRepository extends BaseRepository<Admin>{
 
+    Admin findByUsername(String username);
     /**
      * 分页查询所有后台管理员
      * @param pageable 分页
