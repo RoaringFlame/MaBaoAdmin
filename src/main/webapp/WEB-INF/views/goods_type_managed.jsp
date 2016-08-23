@@ -38,7 +38,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="">
                 <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->

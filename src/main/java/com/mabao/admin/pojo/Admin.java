@@ -9,6 +9,7 @@ import java.util.Date;
 @Table(name = "t_admin", schema = "mabao", catalog = "")
 public class Admin {
     private Long id;                            //后台用户编号
+    private String empno;                       //工号
     private String username;                    //用户名
     private String password;                    //密码
     private Boolean enable;                     //账户有效性
@@ -32,6 +33,15 @@ public class Admin {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "empno")
+    public String getEmpno() {
+        return empno;
+    }
+    public void setEmpno(String empno) {
+        this.empno = empno;
     }
 
     @Basic

@@ -2,16 +2,18 @@ package com.mabao.admin.service.impl;
 
 import com.mabao.admin.controller.vo.AdminInVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
-import com.mabao.admin.controller.vo.RoleVO;
 import com.mabao.admin.pojo.Admin;
 import com.mabao.admin.pojo.Role;
 import com.mabao.admin.repository.AdminRepository;
 import com.mabao.admin.repository.RoleRepository;
 import com.mabao.admin.service.AdminService;
+import com.mabao.admin.util.VoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -34,7 +36,16 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public Admin newAdmin(AdminInVO adminInVO) {
-        Admin admin = AdminInVO.generateBy(adminInVO);
+        Admin admin = VoUtil.copyBasic(Admin.class, adminInVO);
+        assert admin != null;
+        admin.setCount(0);
+        admin.setEnable(true);
+        Date date = new Date();
+        admin.setCreateTime(date);
+        admin.setWechart("");
+        admin.setOperation("");
+        admin.setOperationTime(date);
+        admin.setRole(this.roleRepository.findOne(adminInVO.getRoleId()));
         return this.adminRepository.saveAndFlush(admin);
     }
 
@@ -46,8 +57,9 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = this.adminRepository.findOne(adminInVO.getId());
         assert admin != null;
         admin.setId(adminInVO.getId());
+        admin.setEmpno(adminInVO.getEmpno());
         admin.setUsername(adminInVO.getUsername());
-        admin.setRole(RoleVO.generateBy(adminInVO.getRoleVO()));
+        admin.setRole(this.roleRepository.findOne(adminInVO.getRoleId()));
         admin.setTel(adminInVO.getTel());
         admin.setEmail(adminInVO.getEmail());
         return this.adminRepository.saveAndFlush(admin);

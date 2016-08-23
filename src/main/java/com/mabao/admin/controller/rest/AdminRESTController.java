@@ -29,9 +29,9 @@ public class AdminRESTController {
     @RequestMapping(value = "/searchAdmin", method = RequestMethod.GET)
     public PageVO<AdminVO> showSelectGoods(@RequestParam(defaultValue = "0") Long roleId,
                                            @RequestParam(defaultValue = "") String username,
-                                           @RequestParam(required = false,defaultValue = "0") int page,
-                                           @RequestParam(required = false,defaultValue = "8") int pageSize) {
-        Page<Admin> list = this.adminService.searchAdmins(roleId, username, page, pageSize);
+                                           @RequestParam(required = false,defaultValue = "1") int page,
+                                           @RequestParam(required = false,defaultValue = "7") int pageSize) {
+        Page<Admin> list = this.adminService.searchAdmins(roleId, username, page - 1, pageSize);
         PageVO<AdminVO> voPage = new PageVO<>();
         voPage.toPage(list);
         voPage.setItems(AdminVO.generateBy(list.getContent()));
@@ -57,7 +57,7 @@ public class AdminRESTController {
     }
 
     @RequestMapping(value = "/deleteSomeAdmin", method = RequestMethod.GET)
-    public JsonResultVO deleteSomeGoods(@RequestParam String ids) {
+    public JsonResultVO deleteSomeAdmin(@RequestParam String ids) {
         return this.adminService.deleteSomeAdmins(ids);
     }
 

@@ -1,6 +1,8 @@
 package com.mabao.admin.controller.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mabao.admin.pojo.Admin;
+import com.mabao.admin.util.CustomDateSerializer;
 import com.mabao.admin.util.VoUtil;
 
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.List;
 
 public class AdminVO {
     private long id;                                //用户编号
+    private String empno;                           //工号
     private String username;                        //用户名
     private RoleVO roleVO;                          //角色
     private Integer count;                          //登录次数
@@ -19,6 +22,7 @@ public class AdminVO {
     public static AdminVO generateBy(Admin admin) {
         AdminVO vo = VoUtil.copyBasic(AdminVO.class, admin);
         assert vo != null;
+        vo.setId(admin.getId());
         vo.setCreateTime(admin.getCreateTime());
         vo.setOperationTime(admin.getOperationTime());
         vo.setRoleVO(RoleVO.generateBy(admin.getRole()));
@@ -39,6 +43,14 @@ public class AdminVO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getEmpno() {
+        return empno;
+    }
+
+    public void setEmpno(String empno) {
+        this.empno = empno;
     }
 
     public String getUsername() {
@@ -65,6 +77,7 @@ public class AdminVO {
         this.count = count;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
@@ -73,6 +86,7 @@ public class AdminVO {
         this.createTime = createTime;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getOperationTime() {
         return operationTime;
     }

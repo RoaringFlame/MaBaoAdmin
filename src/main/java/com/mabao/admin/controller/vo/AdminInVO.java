@@ -3,35 +3,23 @@ package com.mabao.admin.controller.vo;
 import com.mabao.admin.pojo.Admin;
 import com.mabao.admin.util.VoUtil;
 
-import java.util.Date;
 import java.util.List;
 
 public class AdminInVO {
-    private Long id;                                //工号
-    private String username;                            //姓名
+    private Long id;                                //编号
+    private String empno;                           //工号
+    private String username;                        //姓名
     private String password;                        //密码
     private String tel;                           //手机号
     private String email;                           //邮箱
-    private RoleVO roleVO;                          //角色
+    private Long roleId;                           //角色编号
     private List<RoleVO> roleVOList;                //角色列表
 
     public static AdminInVO generateBy(Admin admin) {
         AdminInVO vo = VoUtil.copyBasic(AdminInVO.class, admin);
         assert vo != null;
-        vo.setRoleVO(RoleVO.generateBy(admin.getRole()));
+        vo.setRoleId(admin.getRole().getId());
         return vo;
-    }
-
-    //新建管理员
-    public static Admin generateBy(AdminInVO adminInVO) {
-        Admin admin = VoUtil.copyBasic(Admin.class, adminInVO);
-        assert admin != null;
-        admin.setRole(RoleVO.generateBy(adminInVO.getRoleVO()));
-        admin.setCount(0);
-        admin.setEnable(true);
-        admin.setCreateTime(new Date());
-        admin.setWechart("");
-        return admin;
     }
 
     public Long getId() {
@@ -40,6 +28,14 @@ public class AdminInVO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmpno() {
+        return empno;
+    }
+
+    public void setEmpno(String empno) {
+        this.empno = empno;
     }
 
     public String getUsername() {
@@ -74,12 +70,12 @@ public class AdminInVO {
         this.email = email;
     }
 
-    public RoleVO getRoleVO() {
-        return roleVO;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRoleVO(RoleVO roleVO) {
-        this.roleVO = roleVO;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public List<RoleVO> getRoleVOList() {

@@ -41,7 +41,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index">
+            <a class="navbar-brand" href="">
                 <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
@@ -102,8 +102,8 @@
                 <span class="iconfont">&#xe60f</span>订单管理 </a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
                 <li><a href="admin/order_managed">订单</a></li>
-                <li><a href="invoices_managed">发货单</a></li>
-                <li><a href="transfer_order_managed">转让订单</a></li>
+                <li><a href="admin/invoices_managed">发货单</a></li>
+                <li><a href="admin/transfer_order_managed">转让订单</a></li>
             </ul>
         </li>
         <li class="first-level-menu">

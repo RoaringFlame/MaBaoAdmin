@@ -43,7 +43,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index">
+            <a class="navbar-brand" href="">
                 <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
@@ -112,7 +112,7 @@
                aria-expanded="false">
                 <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
-                <li><a href="user_managed.jsp">账号管理</a></li>
+                <li><a href="admin/user_managed">账号管理</a></li>
                 <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
@@ -136,21 +136,21 @@
             <div class="btn-toolbar ">
 
                 <div class="btn-group navbar-nav pull-right ">
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#roleModalForm" data-whatever="@mdo">
+                    <a id="roleManage" class="btn btn-primary" data-toggle="modal" data-target="#roleModalForm" data-whatever="@mdo">
                         <span class="iconfont">&#xe601</span> 角色管理
                     </a>
                 </div>
 
                 <div class="dropdown btn-group navbar-nav pull-right ">
 
-                    <a class="btn btn-default">
+                    <a id="deleteAdmin" class="btn btn-default">
                         <span class="iconfont">&#xe602</span>删除
                     </a>
                 </div>
 
                 <div class="btn-toolbar ">
                     <div class="btn-group navbar-nav pull-right ">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                        <a id="newAdmin" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                             <span class="iconfont">&#xe601</span> 新建
                         </a>
                     </div>
@@ -168,8 +168,6 @@
                     <div class="form-group">
                         <label for="userType">角色名：</label>
                         <select name="" class="form-control" id="userType">
-                            <option selected="selected" value="">管理员</option>
-                            <option value="">普通员工</option>
                         </select>
                     </div>
 
@@ -179,7 +177,7 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default" id="search">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
@@ -189,7 +187,7 @@
                 <tr>
                     <th style="width:8px;">
                         <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
+                            <input id="selectAll" type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </th>
                     <th class="text-center">工号</th>
@@ -212,11 +210,10 @@
 
                 </thead>
 
-                <tbody>
 
-                <tr class="odd gradeX">
+                <tr class="odd gradeX" id="adminContainer" style="display: none;">
 
-                    <td>
+                    <td class="check">
                         <label>
                             <input type="checkbox" class="checkboxes" value="1"/>
                         </label>
@@ -236,63 +233,24 @@
 
                     <td></td>
 
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                    <td class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                         <span class="iconfont">&#xe609</span>
                     </td>
-
+                    <td id="id" style="display: none"></td>
                 </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                        <span class="iconfont">&#xe609</span>
-                    </td>
-
-                </tr>
-
+                <tbody id="container">
+                </tbody>
 
             </table>
             <!--表格END-->
             <!--分页-->
-            <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="pagination" >
+                <input type=button id="btn1" value="首页">
+                <input type=button id="btn2" value="上一页">
+                <input type=button id="btn3" value="下一页">
+                <input type=button id="btn4" value="尾页">
+                <span>当前页：<span id="page"></span></span>
+            </div>
             <!--分页END-->
         </div>
 
@@ -312,19 +270,19 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-group  ">
+                <form class="form-group" id="AdminInfoForm">
                     <label for="assortmentForm" class="control-label text-left label-half">工号:
                         <input type="text" class="form-control" id="assortmentForm">
                     </label>
                     <span class="red ">*</span>
 
                     <label for="categoryParent" class="control-label text-left label-half">密码:
-                        <input type="text" class="form-control" id="categoryParent">
+                        <input type="password" class="form-control" id="categoryParent">
                     </label>
                     <span class="red ">*</span>
 
                     <label for="assortmentNum" class="  control-label text-left label-half">确认密码:
-                        <input type="text" class="form-control" id="assortmentNum">
+                        <input type="password" class="form-control" id="assortmentNum">
                     </label>
                     <span class="red ">*</span>
 
@@ -344,11 +302,10 @@
                     <span class="red ">*</span>
 
                     <label for="assortmentDetail" class="control-label text-left label-half">角色类型:
-                        <select class="form-control text-left " name="" id="">
-                            <option value="管理员">管理员</option>
-                            <option value="普通员工">普通员工</option>
+                        <select class="form-control text-left " name="" id="selection">
                         </select>
                     </label>
+                    <input type="text" id="adminIdForm" style="display: none">
                 </form>
 
 
@@ -356,6 +313,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-primary" style="display: none">提交</button>
             </div>
         </div>
     </div>
@@ -374,9 +332,11 @@
             <div class="modal-body">
 
                 <form class="form-group  ">
-
-                    <label for="newRole" class="control-label text-left label-half">
-                        <input type="text" class="form-control" id="newRole" placeholder="请输入角色名">
+                    <label for="newRolePic" class="control-label text-left label-half">
+                        <input type="text" class="form-control" id="newRolePic" placeholder="请输入代号">
+                    </label>
+                    <label for="newRoleName" class="control-label text-left label-half">
+                        <input type="text" class="form-control" id="newRoleName" placeholder="请输入角色名">
                     </label>
                     <button type="button" class="btn btn-primary">确认添加</button>
                     <table class="table text-center">
@@ -403,10 +363,10 @@
 
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">保存</button>
-            </div>
+            <%--<div class="modal-footer">--%>
+                <%--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+                <%--<button type="button" class="btn btn-primary">保存</button>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>
@@ -416,5 +376,6 @@
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/user_managed.js"></script>
 </body>
 </html>

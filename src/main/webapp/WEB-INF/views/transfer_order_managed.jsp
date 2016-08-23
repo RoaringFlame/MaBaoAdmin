@@ -43,7 +43,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- 商标 -->
-            <a class="navbar-brand" href="index">
+            <a class="navbar-brand" href="">
                 <img alt="Brand" src="images/mabao_logo_min.png">
             </a>
             <!-- 商标END  -->
@@ -114,8 +114,8 @@
                aria-expanded="false">
                 <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
-                <li><a href="user_managed">账号管理</a></li>
-                <li><a href="log_managed">查看日志</a></li>
+                <li><a href="admin/user_managed">账号管理</a></li>
+                <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
     </ul>

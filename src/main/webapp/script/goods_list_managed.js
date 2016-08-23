@@ -102,7 +102,7 @@ $(function () {
             title: goodsName,
             articleNumber: goodsNum,
             page: currentPage,                        //当前页数
-            pageSize: pageSize,                       //每页记录条数
+            pageSize: pageSize                       //每页记录条数
         };
         if (currentPage <= totalPage) {
             $.get("goods/searchGoods", params, function (data) {
