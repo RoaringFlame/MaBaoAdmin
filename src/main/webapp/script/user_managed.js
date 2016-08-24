@@ -47,14 +47,14 @@ $(function () {
                     $("#container").append(adminInfo);
                 });
 
-                //编辑商品按事件
+                //编辑管理员按钮初始化
                 $(".edit").click(function () {
-                    var adminId = $(this).next("td").text();            //获取当前商品的id
+                    var adminId = $(this).next("td").text();            //获取当前用户的id
                     initUpdateAdminForm(adminId);
                     $("#exampleModalLabel").text("编辑用户");
-                    $(".modal-footer button:eq(1)").attr("disable", "true")       //
+                    $("#adminNewSubmit").attr("disable", "true")       //
                         .hide();
-                    $(".modal-footer button:eq(2)").attr("disable", "false")
+                    $("#adminEditSubmit").attr("disable", "false")
                         .show();
                 });
             });
@@ -110,7 +110,7 @@ $(function () {
 
         //点击下一页
         $("#btn3").click(function () {
-            if ((currentPage == totalPage) || (totalPage == 1)) {                //如果当前页面是最后一页时，点击下一页弹出提示框
+            if ((currentPage == totalPage) || (totalPage <= 1)) {                //如果当前页面是最后一页时，点击下一页弹出提示框
                 alert("当前已经是最后一页了!");
             }
             else {
@@ -123,34 +123,55 @@ $(function () {
 
         //点击尾页
         $("#btn4").click(function () {
-            currentPage = totalPage;                            //点击尾页时参数currentPage为0
-            $("#container").empty();                            //清空表单数据
-            initAdminList();                                    //调用初始化表单方法
-            $("#page").text(currentPage);                       //更新当前页数
+            if (totalPage > 0) {
+                currentPage = totalPage;                            //点击尾页时参数currentPage为0
+                $("#container").empty();                            //清空表单数据
+                initAdminList();                                    //调用初始化表单方法
+                $("#page").text(currentPage);                       //更新当前页数
+            }
         });
     }
 
     //表单功能初始化
-    function initSubitForm() {
-        //点击取消按钮
-        $(".modal-footer .btn.btn-default").click(function () {
-            cancelForm();                                                 //点击取消按钮清空表单
-        });
+    function initSubmitFormBtn() {
+        //用户表单功能初始化
+        initAdminFormFunc();
 
+        //角色管理表单功能初始化
+        initRoleFormFunc();
+    }
+
+    //用户表单功能初始化
+    function initAdminFormFunc() {
         //点击右上角叉按钮
-        $(".modal-header button").click(function () {
+        $("#adminFormCancel").click(function () {
             cancelForm();                                                  //点击右上角叉按钮清空表单
         });
 
+        //点击取消按钮
+        $("#adminCancel").click(function () {
+            cancelForm();                                                 //点击取消按钮清空表单
+        });
+
+
         //点击新增用户表单提交按钮
-        $(".modal-footer button:eq(1)").click(function () {
+        $("#adminNewSubmit").click(function () {
             sendSubmit("admin/addAdmin");
+            cancelForm();
         });
 
         //点击修改用户信息表单提交按钮
-        $(".modal-footer button:eq(2)").click(function () {
+        $("#adminEditSubmit").click(function () {
             sendSubmit("admin/updateAdmin");
+            cancelForm();
         });
+    }
+
+    //用户管理表单结束或取消
+    function cancelForm() {
+        var infoForm = $("#adminInfoForm");
+        infoForm.find("input").val("");
+        infoForm.find("select").val("");
     }
 
     function sendSubmit(url) {
@@ -173,11 +194,19 @@ $(function () {
             email: email,
             roleId: roleId
         };
-        sendAjax(url, params)
+        //发送成功方法
+        function adminSendSuc() {
+            $("#exampleModal").modal('hide');   //隐藏模态框
+            cancelForm();                       //清空表单数据
+            $("#container").empty();            //清空列表数据
+            initAdminList();                    //加载表单数据
+        }
+
+        sendJsonAjax(url, params, adminSendSuc())
     }
 
     //发送ajax请求
-    function sendAjax(url, params) {
+    function sendJsonAjax(url, params, successFunc) {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
@@ -188,20 +217,8 @@ $(function () {
             error: function () {
                 alert("服务器连接错误！");
             },
-            success: function () {                  //如果请求成功
-                $("#exampleModal").modal('hide');   //隐藏模态框
-                cancelForm();                       //清空表单数据
-                $("#container").empty();            //清空列表数据
-                initAdminList();                    //加载表单数据
-            }
+            success: successFunc
         });
-    }
-
-    //表单结束或取消
-    function cancelForm() {
-        var infoForm = $("#AdminInfoForm");
-        infoForm.find("input").val("");
-        infoForm.find("select").val("");
     }
 
     //根据搜索条件查找用户
@@ -209,11 +226,12 @@ $(function () {
         roleId = $("#userType option:selected").val();          //获取选中的角色id
         adminName = $("#userName").val();                       //管理员姓名模糊搜索字段
         $("#container").empty();
+        totalPage = 1;
         initAdminList();
     }
 
     //初始化新建管理员按钮
-    function initNewAdmin(){
+    function initNewAdmin() {
         $.get("role/getRoleSelector", {}, function (data) {
             $("#selection").empty();                       //清空之前的下拉框数据
             $(data).each(function (index, roleVO) {       //为角色下拉框增加option节点
@@ -224,9 +242,9 @@ $(function () {
                 }
             });
         });
-        $(".modal-footer button:eq(2)").attr("disable", "true")        //点击新建按钮表单内第二个按钮隐藏且不可用
+        $("#adminEditSubmit").attr("disable", "true")        //点击新建按钮表单内第二个按钮隐藏且不可用
             .hide();
-        $(".modal-footer button:eq(1)").attr("disable", "false")       //点击新建按钮表单内第一个按钮显示且可用
+        $("#adminNewSubmit").attr("disable", "false")       //点击新建按钮表单内第一个按钮显示且可用
             .show();
     }
 
@@ -237,7 +255,8 @@ $(function () {
             var adminId = $(this).parents("td.check").nextAll("#id").text();       //获取checkbox所在行的adminId
             adminIds += adminId + ",";                                              //给string类型的adminIds赋值
         });
-        if (adminIds !== "") {                                                        //如果选中商品
+        if (adminIds !== "") {
+            //如果选中商品
             $.get("admin/deleteSomeAdmin", {ids: adminIds}, function (data) {       //调用删除商品接口
                 if (data.status == "success") {                                       //如果请求成功
                     $("#selectAll").removeAttr("checked");                            //去除全选框的选中状态
@@ -252,28 +271,129 @@ $(function () {
         }
     }
 
-    function initRoleManage(){
-
+    //角色列表信息初始化
+    function initRoleList() {
+        $("#roleContainer").empty();
+        $.get("role/getRoleSelector", {}, function (data) {
+            $(data).each(function (index, roleVO) {
+                if (index > 0) {
+                    var roleInfo = $("#roleTable").clone();
+                    roleInfo.show();
+                    roleInfo.find("td:eq(0)").text(roleVO.name);
+                    roleInfo.find("td:eq(1)").text(roleVO.roleName);
+                    roleInfo.find("td:eq(2)").find("input").val(roleVO.name);
+                    roleInfo.find("td:eq(3)").find("input").val(roleVO.roleName);
+                    roleInfo.find("td:eq(4)").find("span:eq(0)").click(function () {
+                        var name = roleInfo.find("td:eq(2)").find("input").val();
+                        var roleName = roleInfo.find("td:eq(3)").find("input").val();
+                        editRole(roleVO.id, name, roleName)
+                    });
+                    roleInfo.find("td:eq(4)").find("span:eq(1)").click(function () {
+                        roleInfo.find("td:eq(0)").hide();
+                        roleInfo.find("td:eq(1)").hide();
+                        roleInfo.find("td:eq(4)").find("span:eq(1)").hide();
+                        roleInfo.find("td:eq(2)").show();
+                        roleInfo.find("td:eq(3)").show();
+                        roleInfo.find("td:eq(4)").find("span:eq(0)").show();
+                    });
+                    roleInfo.find("td:eq(4)").find("span:eq(2)").click(function () {
+                        deleteRole(roleVO.id);
+                    });
+                    $("#roleContainer").append(roleInfo);
+                }
+            });
+        });
     }
 
-    function init() {
-        //角色名下拉框初始化
-        initRoleDropDownList();
-        //员工信息初始化
-        initAdminList();
-        //分页初始化
-        initPageBtn();
-        //初始化表单按钮
-        initSubitForm();
+    //添加角色
+    function addRole() {
+        var name = $("#newRolePic").val();
+        var roleName = $("#newRoleName").val();
+        var flag = false;                   //校验标记
+        if (name != "" && roleName != "") {
+            flag = true;
+        } else {
+            flag = false;
+            alert("请完善信息")
+        }
+        var params = {name: name, roleName: roleName};
+        if (flag) {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                url: 'role/addRole',
+                processData: false,
+                dataType: 'json',
+                data: JSON.stringify(params),
+                error: function () {
+                    alert("服务器连接错误！");
+                },
+                success: function () {
+                    $("#newRolePic").val("");
+                    $("#newRoleName").val("");
+                    initRoleList();
+                }
+            });
+        }
+    }
 
-        //点击搜索按钮事件
-        $("#search").click(function () {
-            searchAdmin();
+    //修改角色
+    function editRole(roleId, name, roleName) {
+        var flag = false;                   //校验标记
+        if (name != "" && roleName != "") {
+            flag = true;
+        } else {
+            flag = false;
+            alert("请完善信息")
+        }
+        var params = {id: roleId, name: name, roleName: roleName};
+        if (flag) {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                url: 'role/updateRole',
+                processData: false,
+                dataType: 'json',
+                data: JSON.stringify(params),
+                error: function () {
+                    alert("服务器连接错误！");
+                },
+                success: function () {
+                    initRoleList();
+                }
+            });
+        }
+    }
+
+    //删除角色
+    function deleteRole(roleId) {
+        $.get("role/deleteRole", {roleId: roleId}, function (data) {
+            if (data.status == "success") {                                       //如果请求成功
+                initRoleList();                                                  //重新加载页面
+            } else if (data.status == "failure") {                               //如果请求失败弹出警告框
+                alert("删除失败!");
+            }
+        });
+    }
+
+    //角色表单功能初始化
+    function initRoleFormFunc() {
+        //点击确认添加按钮
+        $("#roleSubmit").click(function () {
+            addRole();
         });
 
+        //点击确认按钮
+        $("#roleConfirm").click(function () {
+            $("#roleModalForm").modal('hide');                      //隐藏模态框
+        });
+    }
+
+    //初始化页面按钮
+    function initPageButton() {
         //新建用户按钮初始化
         $("#newAdmin").click(function () {
-           initNewAdmin();
+            initNewAdmin();
         });
 
         //删除用户按钮初始化
@@ -283,14 +403,33 @@ $(function () {
 
         //角色管理按钮初始化
         $("#roleManage").click(function () {
-            initRoleManage();
+            initRoleList();
         });
+
+        //点击搜索按钮初始化
+        $("#search").click(function () {
+            searchAdmin();
+        });
+        //分页按钮初始化
+        initPageBtn();
 
         //点击第一行的复选框控制全选和全不选
         $("#selectAll").click(function () {
             //所有的复选框的状态和第一行复选框状态一致
             $("input[name='checkBox']").prop("checked", $(this).prop("checked"));
         });
+
+        //表单按钮初始化
+        initSubmitFormBtn();
+    }
+
+    function init() {
+        //角色名下拉框初始化
+        initRoleDropDownList();
+        //员工信息初始化
+        initAdminList();
+        //页面按钮初始化
+        initPageButton();
     }
 
     init();

@@ -2,8 +2,10 @@ package com.mabao.admin.util.aop;
 
 import com.mabao.admin.pojo.Admin;
 import com.mabao.admin.pojo.History;
+import com.mabao.admin.pojo.Role;
 import com.mabao.admin.repository.AdminRepository;
 import com.mabao.admin.repository.HistoryRepository;
+import com.mabao.admin.repository.RoleRepository;
 import com.mabao.admin.util.security.AdminInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,8 @@ public class WriteInLogServiceImpl implements WriteInLogService {
     private AdminRepository adminRepository;
     @Autowired
     private AdminInfoService adminInfoService;
+    @Autowired
+    private RoleRepository roleRepository;
 
     private Admin getNowAdmin() {
         return this.adminRepository.findByUsername(this.adminInfoService.getAdminUsername());
@@ -47,7 +51,14 @@ public class WriteInLogServiceImpl implements WriteInLogService {
         for (String adminId : strs) {
             opt += this.adminRepository.findOne(Long.decode(adminId)).getUsername();
         }
-        opt.substring(0,opt.length()-1);
+        opt.substring(0, opt.length() - 1);
         this.writeOperation(opt);
+    }
+
+    @Override
+    public void deleteRole(Long roleId) {
+        String opt = "删除角色";
+        Role role = this.roleRepository.findOne(roleId);
+        this.writeOperation(opt + role.getRoleName());
     }
 }

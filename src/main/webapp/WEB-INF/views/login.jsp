@@ -76,8 +76,8 @@
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../script/lib/jquery.1.10.2.js"></script>
+<script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/lib/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>

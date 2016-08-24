@@ -5,4 +5,6 @@ public interface WriteInLogService {
     void writeOperation(String operation);
 
     void deleteSomeAdmins(String ids);
+
+    void deleteRole(Long roleId);
 }

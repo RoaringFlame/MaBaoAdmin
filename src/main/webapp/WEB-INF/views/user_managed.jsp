@@ -264,13 +264,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button id="adminFormCancel" type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">新建用户</h4>
             </div>
             <div class="modal-body">
 
-                <form class="form-group" id="AdminInfoForm">
+                <form class="form-group" id="adminInfoForm">
                     <label for="assortmentForm" class="control-label text-left label-half">工号:
                         <input type="text" class="form-control" id="assortmentForm">
                     </label>
@@ -311,9 +311,9 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
-                <button type="button" class="btn btn-primary" style="display: none">提交</button>
+                <button id="adminCancel" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="adminNewSubmit" type="button" class="btn btn-primary">提交</button>
+                <button id="adminEditSubmit" type="button" class="btn btn-primary" style="display: none">提交</button>
             </div>
         </div>
     </div>
@@ -325,38 +325,39 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button id="roleFormCancel" type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="roleModalTitle">管理角色</h4>
             </div>
             <div class="modal-body">
 
-                <form class="form-group  ">
+                <form class="form-group" id="roleInfoForm">
                     <label for="newRolePic" class="control-label text-left label-half">
                         <input type="text" class="form-control" id="newRolePic" placeholder="请输入代号">
                     </label>
                     <label for="newRoleName" class="control-label text-left label-half">
                         <input type="text" class="form-control" id="newRoleName" placeholder="请输入角色名">
                     </label>
-                    <button type="button" class="btn btn-primary">确认添加</button>
+                    <button id="roleSubmit" type="button" class="btn btn-primary">确认添加</button>
                     <table class="table text-center">
                         <tr>
                             <th class="text-center">代号</th>
                             <th class="text-center">角色</th>
                             <th class="text-center">操作</th>
                         </tr>
-                        <tr>
+
+                        <tr id="roleTable" style="display: none">
                             <td>admin</td>
                             <td>管理员</td>
-
-                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span class="iconfont edit-btn orangered">&#xe602</span></td>
+                            <td style="display: none;"><input type="text"></td>
+                            <td style="display: none;"><input type="text"></td>
+                            <td><span class="iconfont edit-btn cadetblue" style="display: none;">&#xe604</span>
+                                <span class="iconfont edit-btn cadetblue">&#xe609</span>
+                                <span class="iconfont edit-btn orangered">&#xe602</span></td>
                         </tr>
-                        <tr>
-                            <td>guest</td>
-                            <td>普通员工</td>
 
-                            <td><span class="iconfont edit-btn cadetblue">&#xe609</span><span class="iconfont edit-btn orangered">&#xe602</span></td>
-                        </tr>
+                        <tbody id="roleContainer">
+                        </tbody>
                     </table>
 
                 </form>
@@ -364,8 +365,8 @@
 
             </div>
             <%--<div class="modal-footer">--%>
-                <%--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
-                <%--<button type="button" class="btn btn-primary">保存</button>--%>
+                <%--<button id="roleCancel" type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+                <%--<button id="roleConfirm" type="button" class="btn btn-primary">确认</button>--%>
             <%--</div>--%>
         </div>
     </div>

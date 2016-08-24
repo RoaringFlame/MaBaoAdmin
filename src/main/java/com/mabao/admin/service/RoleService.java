@@ -10,7 +10,9 @@ public interface RoleService {
 
     Role get(Long roleId);
 
-    Role save(Role role);
+    Role addRole(Role role);
+
+    Role updateRole(Role role);
 
     JsonResultVO deleteRole(Long roleId);
 }

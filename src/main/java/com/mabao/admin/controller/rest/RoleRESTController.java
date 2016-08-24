@@ -31,7 +31,6 @@ public class RoleRESTController {
         list.add(0, role);
         return RoleVO.generateBy(list);
     }
-
     @RequestMapping(value = "/getRole", method = GET)
     public RoleVO getRole(@RequestParam Long roleId) {
         return RoleVO.generateBy(this.roleService.get(roleId));
@@ -42,10 +41,20 @@ public class RoleRESTController {
         return this.roleService.deleteRole(roleId);
     }
 
-    @RequestMapping(value = "/saveRole", method = POST)
-    public JsonResultVO saveRole(@RequestBody RoleVO roleVO) {
+    @RequestMapping(value = "/addRole", method = POST)
+    public JsonResultVO addRole(@RequestBody RoleVO roleVO) {
         try {
-            this.roleService.save(RoleVO.generateBy(roleVO));
+            this.roleService.addRole(RoleVO.generateBy(roleVO));
+        } catch (Exception e) {
+            return new JsonResultVO(JsonResultVO.FAILURE, e.getMessage());
+        }
+        return new JsonResultVO(JsonResultVO.SUCCESS, "添加成功！");
+    }
+
+    @RequestMapping(value = "/updateRole", method = POST)
+    public JsonResultVO updateRole(@RequestBody RoleVO roleVO) {
+        try {
+            this.roleService.updateRole(RoleVO.generateBy(roleVO));
         } catch (Exception e) {
             return new JsonResultVO(JsonResultVO.FAILURE, e.getMessage());
         }
