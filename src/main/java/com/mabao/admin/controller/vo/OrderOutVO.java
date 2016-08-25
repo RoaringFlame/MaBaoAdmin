@@ -12,15 +12,18 @@ import java.util.Date;
 public class OrderOutVO {
     private Long id;                                //订单的id
     private Date createTime;                        //订单创建时间
+    private Date portTime;                          //发货时间
     private String state;                           //订单状态，0待支付（买家），1待发货（卖家），2待收货（买家），3已完成（卖家），4已取消（买家）
     private Double totalSum;                        //总价
     private String consignee;                       //收货人
+    private String operator;                        //操作人
 
-    public static OrderOutVO generateBy(Order order,String consignee){
+    public static OrderOutVO generateBy(Order order,String consignee,String operator){
         OrderOutVO vo = VoUtil.copyBasic(OrderOutVO.class, order);
         assert vo != null;
         vo.setConsignee(consignee);
         vo.setState(order.getState().getText());
+        vo.setOperator(operator);
         return vo;
     }
 
@@ -62,5 +65,21 @@ public class OrderOutVO {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Date getPortTime() {
+        return portTime;
+    }
+
+    public void setPortTime(Date portTime) {
+        this.portTime = portTime;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 }

@@ -179,10 +179,6 @@
                     <div class="form-group">
                         <label for="orderStatus">订单状态：</label>
                         <select name="" class="form-control" id="orderStatus">
-                            <option selected="selected" value="">待确认</option>
-                            <option value="">待付款</option>
-                            <option value="">待发货</option>
-                            <option value="-">已确认</option>
                         </select>
                     </div>
 
@@ -209,114 +205,34 @@
 
                     <th class="text-center">收货人</th>
 
-                    <th class="text-center">收货人</th>
-
                     <th class="text-center">发货时间</th>
+
+                    <th class="text-center">订单状态</th>
 
                     <th class="text-center">操作人</th>
 
                 </tr>
 
                 </thead>
-
-                <tbody>
-
-                <tr class="odd gradeX">
+                <tr class="odd gradeX" style="display: none;" id="orderContainer">
 
                     <td>
                         <label>
                             <input type="checkbox" class="checkboxes" value="1"/>
                         </label>
                     </td>
-
-                    <td>1</td>
-
-                    <td>11102324</td>
-
-                    <td>10月10日</td>
-
-                    <td>姜哲</td>
-
-                    <td>10月11日</td>
-
-                    <td>待确认</td>
-
-                    <td>方红</td>
-
+                    <th>1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
 
-                <tr class="odd gradeX">
+                <tbody id="container">
 
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>2</td>
-
-                    <td>11102325</td>
-
-                    <td>10月9日</td>
-
-                    <td>闫璇</td>
-
-                    <td>10月10日</td>
-
-                    <td>待付款</td>
-
-                    <td>方红</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>3</td>
-
-                    <td>11102326</td>
-
-                    <td>10月8日</td>
-
-                    <td>张雅婷</td>
-
-                    <td>10月9日</td>
-
-                    <td>待发货</td>
-
-                    <td>方红</td>
-
-                </tr>
-
-                <tr class="odd gradeX">
-
-                    <td>
-                        <label>
-                            <input type="checkbox" class="checkboxes" value="1"/>
-                        </label>
-                    </td>
-
-                    <td>4</td>
-
-                    <td>11102327</td>
-
-                    <td>10月7日</td>
-
-                    <td>林松</td>
-
-                    <td>10月8日</td>
-
-                    <td>已确认</td>
-
-                    <td>方红</td>
-
-                </tr>
-
+                </tbody>
             </table>
             <!--表格END-->
             <!--分页-->
@@ -350,5 +266,6 @@
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/invoices_managed.js"></script>
 </body>
 </html>

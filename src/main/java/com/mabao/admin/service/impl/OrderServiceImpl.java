@@ -10,7 +10,10 @@ import com.mabao.admin.pojo.Order;
 import com.mabao.admin.repository.AddressRepository;
 import com.mabao.admin.repository.BaseDao;
 import com.mabao.admin.repository.OrderRepository;
+import com.mabao.admin.service.AddressService;
+import com.mabao.admin.service.AdminService;
 import com.mabao.admin.service.OrderService;
+import com.mabao.admin.service.UserService;
 import com.mabao.admin.util.ExcelUtil;
 import com.mabao.admin.util.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +35,13 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
-    private AddressRepository addressRepository;
+    private AddressService addressService;
     @Autowired
     private BaseDao baseDao;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private AdminService adminService;
     public static final String FILE_SEPARATOR = System.getProperties().getProperty("file.separator");
 
     /**
@@ -71,9 +76,9 @@ public class OrderServiceImpl implements OrderService {
             PageVO<OrderOutVO> pageVO = new PageVO<>();
             List<OrderOutVO> list = new ArrayList<>();
             for (Order order : pages.getItems()) {
-                String recipients = this.addressRepository.findOne(order.getAddress().getId()).getRecipients();
-                OrderOutVO orderOutVO = OrderOutVO.generateBy(order, recipients);
-                list.add(orderOutVO);
+                list.add(OrderOutVO.generateBy(order,
+                        order.getAddress().getRecipients(),
+                        this.adminService.get(order.getOperatorId()).getUsername()));
             }
             pageVO.setItems(list);
             pageVO.setCurrentPage(pages.getCurrentPage() + 1);
@@ -179,7 +184,7 @@ public class OrderServiceImpl implements OrderService {
             str.append(" and o.address.area.id = ?");
             str.append(args.size());
         }
-        if (orderInVO.getOrderStatus() != null && !"".equals(orderInVO.getOrderStatus())) {
+        if (OrderStatus.AllState != orderInVO.getOrderStatus() && orderInVO.getOrderStatus() != null && !"".equals(orderInVO.getOrderStatus())) {
             args.add(orderInVO.getOrderStatus());
             str.append(" and o.state = ?");
             str.append(args.size());
@@ -202,11 +207,14 @@ public class OrderServiceImpl implements OrderService {
             //分页时从第0页算起
             PageVO<Order> pages = this.baseDao.findAll(jpqlAll, count, args.toArray(), page - 1, pageSize);
             PageVO<OrderOutVO> pageVO = new PageVO<>();
-            List<OrderOutVO> list = new ArrayList();
+            List<OrderOutVO> orderOutVOList = new ArrayList();
+            String strs = null;
             for (Order o : pages.getItems()) {
-                list.add(OrderOutVO.generateBy(o, this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
+                orderOutVOList.add(OrderOutVO.generateBy(o,
+                        o.getAddress().getRecipients(),
+                        this.adminService.get(o.getOperatorId()).getUsername()));
             }
-            pageVO.setItems(list);
+            pageVO.setItems(orderOutVOList);
             pageVO.setCurrentPage(pages.getCurrentPage() + 1);
             pageVO.setTotalRow(pages.getTotalRow());
             pageVO.setPageSize(pages.getPageSize());
@@ -232,9 +240,13 @@ public class OrderServiceImpl implements OrderService {
             PageVO<OrderOutVO> pageVO = new PageVO<>();
             List<OrderOutVO> orderOutVOList = new ArrayList();
             for(Order o:pageOrder.getContent()) {
-                orderOutVOList.add(OrderOutVO.generateBy(o,this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
+                orderOutVOList.add(OrderOutVO.generateBy(o,
+                        o.getAddress().getRecipients(),
+                        this.adminService.get(o.getOperatorId()).getUsername()));
             }
-            pageVO.setItems(orderOutVOList);
+            pageVO.setItems(
+
+                    orderOutVOList);
             pageVO.setCurrentPage(pageOrder.getNumber()+1);
             pageVO.setTotalRow(pageOrder.getTotalElements());
             pageVO.setPageSize(pageOrder.getSize());
@@ -325,7 +337,9 @@ public class OrderServiceImpl implements OrderService {
         List<Order> data = this.baseDao.findAll(jpqlAll,args.toArray());
         List<OrderOutVO> list = new ArrayList();
         for (Order o : data) {
-            list.add(OrderOutVO.generateBy(o, this.addressRepository.findOne(o.getAddress().getId()).getRecipients()));
+            list.add(OrderOutVO.generateBy(o,
+                    o.getAddress().getRecipients(),
+                    this.adminService.get(o.getOperatorId()).getUsername()));
         }
         try {
             OutputStream out = new FileOutputStream(filePath);

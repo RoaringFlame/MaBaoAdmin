@@ -14,7 +14,8 @@ public enum OrderStatus {
     ToBeSend("等待出库"),
     ToBeReceipt("已出库"),
     Completed("交易完成"),
-    Canceled("已取消") ;
+    Canceled("已取消") ,
+    AllState("所有状态");
 
     private String text;
     OrderStatus(String text){

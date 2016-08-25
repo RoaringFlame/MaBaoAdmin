@@ -29,6 +29,9 @@ public class GoodsVO {
         GoodsVO vo = VoUtil.copyBasic(GoodsVO.class, goods);
         assert vo != null;
         vo.setState((goods.getState()==true)?"上架":"下架");
+        if(goods.getArticleNumber() == null) {
+            vo.setArticleNumber("");
+        }
         return vo;
     }
     public static List<GoodsVO> generateBy(List<Goods> goodsList){

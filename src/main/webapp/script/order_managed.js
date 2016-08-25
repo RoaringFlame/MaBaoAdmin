@@ -183,7 +183,7 @@ $(function () {
             area = "";
         }
         if (orderStatus == "all") {
-            orderStatus = "";
+            orderStatus = "AllState";
         }
         var params = {
             id: orderId,
@@ -196,16 +196,14 @@ $(function () {
             startDate: transferDate,
             endDate: transferNedDate
         };
-
         if (currentPage <= totalPage) {
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
                 url: 'order/advancedQueryOrder',
                 processData: false,
-                //dataType: 'json',
+                dataType: 'json',
                 data: JSON.stringify(params),
-                //data: params,
                 success: function (data) {
                     var orderList = data.items;
                     totalPage = data.totalPage;
@@ -218,7 +216,7 @@ $(function () {
                             orderInfo.find("th").text(index + 1);
                             orderInfo.find("td:eq(1)").text(order.id);
                             orderInfo.find("td:eq(2)").text(getLocalTime(order.createTime));
-                            orderInfo.find("td:eq(3)").text(order.Consignee);
+                            orderInfo.find("td:eq(3)").text(order.consignee);
                             orderInfo.find("td:eq(4)").text(order.totalSum);
                             orderInfo.find("td:eq(5)").text(order.state);
                             $("#container").append(orderInfo);
