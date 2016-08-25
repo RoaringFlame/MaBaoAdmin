@@ -182,8 +182,8 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-default">搜索</button>
-                    <button type="submit" class="btn btn-primary">高级搜索</button>
+                    <button type="button" class="btn btn-default" id="searchButton">搜索</button>
+                    <button type="button" class="btn btn-primary">高级搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->

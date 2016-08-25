@@ -65,7 +65,6 @@ $(function () {
             pageSize: pageSize
         };
         if (currentPage <= totalPage) {
-            //alert("hi");
             $.get("order/searchOrder", params, function (data) {
                 var orderList = data.items;
                 totalPage = data.totalPage;
