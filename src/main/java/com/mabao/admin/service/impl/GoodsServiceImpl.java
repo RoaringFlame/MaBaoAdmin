@@ -1,7 +1,6 @@
 package com.mabao.admin.service.impl;
 
 import com.mabao.admin.controller.vo.GoodsInVO;
-import com.mabao.admin.controller.vo.GoodsSearchVO;
 import com.mabao.admin.controller.vo.GoodsVO;
 import com.mabao.admin.controller.vo.JsonResultVO;
 import com.mabao.admin.pojo.Goods;
@@ -14,16 +13,13 @@ import com.mabao.admin.service.GoodsService;
 import com.mabao.admin.service.GoodsTypeService;
 import com.mabao.admin.service.UserService;
 import com.mabao.admin.util.ExcelUtil;
-import com.mabao.admin.util.ExportUtil;
 import com.mabao.admin.util.PageVO;
-import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -249,8 +245,10 @@ public class GoodsServiceImpl implements GoodsService {
         //设置路径
         String docsPath = request.getSession().getServletContext()
                 .getRealPath("");                                                   //模板文件路径
-        docsPath = docsPath.substring(0, docsPath.indexOf("classes"));              //获得类似“temp.test.'”
-        docsPath = docsPath + "src\\main\\webapp\\uploadFile";
+        String contentPath = request.getContextPath();
+        String content = contentPath.replace("/","\\");                         //得到容器
+        docsPath = docsPath.substring(0, docsPath.indexOf(content));
+        docsPath = docsPath+content+"\\src\\main\\webapp\\uploadFile";
         String fileName = "商品数据明细表" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".xls";           //导出Excel文件名
         String filePath = docsPath + FILE_SEPARATOR + fileName;
         //数据填充
