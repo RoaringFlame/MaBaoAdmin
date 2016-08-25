@@ -112,7 +112,7 @@
                 <span class="iconfont">&#xe60e</span>用户管理</a>
             <ul class="collapse nav text-indent-1 second-level-menu" id="userManaged">
                 <li><a href="admin/user_managed">账号管理</a></li>
-                <li><a href="adminlog_managed">查看日志</a></li>
+                <li><a href="admin/log_managed">查看日志</a></li>
             </ul>
         </li>
     </ul>

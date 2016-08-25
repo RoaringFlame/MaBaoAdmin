@@ -12,7 +12,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
     <title>妈宝后台|查看日志</title>
 
     <!-- Bootstrap -->
@@ -129,7 +128,7 @@
         <div class="panel-heading" style="height: 5rem;">
             <!--功能操作-->
             <ol class="breadcrumb panel-title pull-left">
-                <li> <span class="iconfont">&#xe60e</span>用户管理</li>
+                <li><span class="iconfont">&#xe60e</span>用户管理</li>
                 <li class="active">查看日志</li>
             </ol>
         </div>
@@ -141,12 +140,9 @@
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="officialAccounts">公众号：</label>
-                        <select name="" class="form-control" id="officialAccounts">
-                            <option selected="selected" value="">嘀嘀嘀的哒</option>
-                            <option value="">噜噜噜</option>
-                        </select>
-
+                        <label for="operator">登录人员：</label>
+                        <input type="text" class="form-control" id="operator"
+                               aria-describedby="basic-addon1">
                     </div>
 
                     <div class="form-group">
@@ -159,7 +155,7 @@
                         <input type="date" class="form-control" id="endDate"
                                aria-describedby="basic-addon1">
                     </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default" id="search">搜索</button>
                 </div>
             </form>
             <!--条件查询表单END-->
@@ -184,57 +180,24 @@
 
                 <tbody>
 
-                <tr class="odd gradeX">
-
+                <tr class="odd gradeX" id="historyContainer">
                     <td></td>
-
                     <td></td>
-
                     <td></td>
-
                     <td></td>
-
                     <td></td>
-
                 </tr>
-
-                <tr class="odd gradeX">
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                    <td></td>
-
-                </tr>
-
-
+                <tbody id="container"></tbody>
             </table>
             <!--表格END-->
             <!--分页-->
-            <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="pagination">
+                <input type=button id="btn1" value="首页">
+                <input type=button id="btn2" value="上一页">
+                <input type=button id="btn3" value="下一页">
+                <input type=button id="btn4" value="尾页">
+                <span>当前页：<span id="page"></span></span>
+            </div>
             <!--分页END-->
         </div>
 
@@ -246,5 +209,6 @@
 <script src="script/lib/jquery.1.10.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="script/lib/bootstrap/bootstrap.min.js"></script>
+<script src="script/log_managed.js"></script>
 </body>
 </html>

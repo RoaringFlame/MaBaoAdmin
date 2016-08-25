@@ -66,7 +66,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
-     *返回所有管理员
+     * 返回所有管理员
      */
     @Override
     public Page<Admin> getAllAdmin(int page, int pageSize) {
@@ -74,28 +74,28 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
-     *删除所选管理员
+     * 删除所选管理员
      */
     @Override
     public JsonResultVO deleteSomeAdmins(String ids) {
         try {
             String[] strs = ids.split(",");
-            for (String adminId: strs) {
+            for (String adminId : strs) {
                 this.adminRepository.delete(Long.decode(adminId));
             }
         } catch (Exception e) {
             return new JsonResultVO(JsonResultVO.FAILURE, e.getMessage());
         }
-        return new JsonResultVO(JsonResultVO.SUCCESS,"成功删除！");
+        return new JsonResultVO(JsonResultVO.SUCCESS, "成功删除！");
     }
 
     @Override
     public Page<Admin> searchAdmins(Long roleId, String username, int page, int pageSize) {
-        if(0 == roleId){
-            return this.adminRepository.findLikeUsername(username,new PageRequest(page,pageSize));
-        }else{
+        if (0 == roleId) {
+            return this.adminRepository.findByUsernameLike("%" + username + "%", new PageRequest(page, pageSize));
+        } else {
             Role role = this.roleRepository.findOne(roleId);
-            return this.adminRepository.findByRoleAndLikeUsername(role,username,new PageRequest(page,pageSize));
+            return this.adminRepository.findByRoleAndUsernameLike(role, "%" + username + "%", new PageRequest(page, pageSize));
         }
     }
 }

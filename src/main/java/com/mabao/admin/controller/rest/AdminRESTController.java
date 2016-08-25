@@ -27,7 +27,7 @@ public class AdminRESTController {
     private RoleService roleService;
 
     @RequestMapping(value = "/searchAdmin", method = RequestMethod.GET)
-    public PageVO<AdminVO> showSelectGoods(@RequestParam(defaultValue = "0") Long roleId,
+    public PageVO<AdminVO> showAdmin(@RequestParam(defaultValue = "0") Long roleId,
                                            @RequestParam(defaultValue = "") String username,
                                            @RequestParam(required = false,defaultValue = "1") int page,
                                            @RequestParam(required = false,defaultValue = "7") int pageSize) {

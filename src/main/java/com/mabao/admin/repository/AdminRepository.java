@@ -4,7 +4,6 @@ import com.mabao.admin.pojo.Admin;
 import com.mabao.admin.pojo.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 
 public interface AdminRepository extends BaseRepository<Admin>{
 
@@ -15,10 +14,8 @@ public interface AdminRepository extends BaseRepository<Admin>{
      */
     Page<Admin> findAll(Pageable pageable);
 
-    @Query(value = "from Admin a where a.username like %?1%")
-    Page<Admin> findLikeUsername(String username,Pageable pageable);
+    Page<Admin> findByUsernameLike(String username,Pageable pageable);
 
-    @Query(value = "from Admin a where a.role=?1 and a.username like %?2%")
-    Page<Admin> findByRoleAndLikeUsername(Role role, String username, Pageable pageable);
+    Page<Admin> findByRoleAndUsernameLike(Role role, String username, Pageable pageable);
 
 }
