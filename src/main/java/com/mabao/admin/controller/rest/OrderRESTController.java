@@ -88,9 +88,12 @@ public class OrderRESTController {
      * @return
      */
     @RequestMapping(value = "/toBeShipped", method = RequestMethod.GET)
-    public PageVO<OrderOutVO> toBeShippedOrder(@RequestParam(required = false,defaultValue = "0") int page,
+    public PageVO<OrderOutVO> toBeShippedOrder(int flag,
+                                                @RequestParam(required = false) Long orderId,
+                                               @RequestParam(required = false) OrderStatus state,
+                                               @RequestParam(required = false,defaultValue = "0") int page,
                                               @RequestParam(required = false,defaultValue = "8") int pageSize) {
-        return this.orderService.toBeShippedOrder(page,pageSize);
+        return this.orderService.toBeShippedOrder(flag,orderId,state,page,pageSize);
     }
     /**
      * 根据给定ids相关相关订单状态

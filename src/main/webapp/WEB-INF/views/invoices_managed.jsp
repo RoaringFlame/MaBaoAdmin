@@ -170,15 +170,16 @@
                                aria-describedby="basic-addon1">
                     </div>
 
-                    <div class="form-group">
+                   <%-- <div class="form-group">
                         <label for="consigner"></label>
                         <input type="text" class="form-control" id="consigner" placeholder="收货人"
                                aria-describedby="basic-addon1">
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                         <label for="orderStatus">订单状态：</label>
                         <select name="" class="form-control" id="orderStatus">
+                            <option value="">所有状态</option>
                         </select>
                     </div>
 
@@ -236,25 +237,13 @@
             </table>
             <!--表格END-->
             <!--分页-->
-            <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="pagination">
+                <input type=button id="btn1" value="首页">
+                <input type=button id="btn2" value="上一页">
+                <input type=button id="btn3" value="下一页">
+                <input type=button id="btn4" value="尾页">
+                <span>当前页：<span id="page"></span></span>
+            </div>
             <!--分页END-->
         </div>
 

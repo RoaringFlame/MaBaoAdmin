@@ -3,8 +3,9 @@ $(function(){
     var orderNum;         //订单号
     var consigner;        //收货人
     var goodsStatus;      //订单状态
+    var flag = 0 ;               //查询标识符
     var currentPage = 0;
-    var pageSize = 7;
+    var pageSize = 2;
     var totalPage=1;
     var province = $("select[name='province']");  //省下拉框
     var city = $("select[name='city']");  //市下拉框
@@ -34,8 +35,7 @@ $(function(){
     //获取搜索条件
     function getSearchItem() {
         orderNum = $("#orderNum").val();
-        consigner = $("#consigner").val();
-        goodsStatus = $("#goodsStatus").val();
+        goodsStatus = $("#orderStatus").val();
     }
 
     //订单状态下拉框初始化
@@ -58,11 +58,12 @@ $(function(){
 
 
     //发货单列表初始化
-    function initOrderList() {
+    function searchOrderList() {
         getSearchItem();
         var params = {
-           /* orderId: orderNum,
-            state: goodsStatus,*/
+            flag: flag,
+            orderId: orderNum,
+            state: goodsStatus,
             page: currentPage,
             pageSize: pageSize
         };
@@ -88,12 +89,12 @@ $(function(){
         }
     }
 
-    //订单列表初始化
+    /*//订单列表初始化
     function searchOrderList() {
         getSearchItem();
         var params = {
             orderId: orderNum,
-            //state: goodsStatus,
+            state: goodsStatus,
             page: currentPage,
             pageSize: pageSize
         };
@@ -119,12 +120,14 @@ $(function(){
                 }
             });
         }
-    }
+    }*/
 
     //根据条件搜索订单
     function searchOrder() {
         getSearchItem();
         $("#container").empty();
+        flag = 1;
+        currentPage = 0;
         searchOrderList();
     }
 
@@ -272,52 +275,52 @@ $(function(){
     //初始化分页按钮
     function initPageBtn() {
         //显示当前页数
-        $("#page").text(currentPage);
+        $("#page").text(currentPage+1);
         //点击首页
         $("#btn1").click(function () {
-            currentPage = 1;                               //点击首页时参数currentPage为0
+            currentPage = 0;                               //点击首页时参数currentPage为0
             $("#container").empty();                       //清空表单数据
-            initOrderList();                               //传参并调用初始化表单方法
+            searchOrderList();                               //传参并调用初始化表单方法
             $("#page").text(currentPage);
         });
         //点击上一页
         $("#btn2").click(function () {
-            if (currentPage == 1) {
+            if (currentPage == 0) {
                 alert("当前已经是首页了!");                 //如果当前页面是首页，点击上一页弹出提示框
             }
             else {
                 $("#container").empty();                    //如果不是首页，点击上一页时清空表单
                 currentPage--;                              //当前页数减1
-                initOrderList();        //传参并调用初始化表单方法
-                $("#page").text(currentPage);
+                searchOrderList();        //传参并调用初始化表单方法
+                $("#page").text(currentPage+1);
             }
         });
 
         //点击下一页
         $("#btn3").click(function () {
-            if ((currentPage == totalPage) || (totalPage == 1)) {                //如果当前页面是最后一页时，点击下一页弹出提示框
+            if (((currentPage+1) == totalPage) || (totalPage == 1)) {                //如果当前页面是最后一页时，点击下一页弹出提示框
                 alert("当前已经是最后一页了!");
             }
             else {
                 $("#container").empty();                      //如果不是最后一页，点击下一页时清空表单
                 currentPage++;                                //当前页数加1
-                initOrderList();          //传参并调用初始化表单方法
-                $("#page").text(currentPage);
+                searchOrderList();          //传参并调用初始化表单方法
+                $("#page").text(currentPage+1);
             }
         });
 
         //点击尾页
         $("#btn4").click(function () {
-            currentPage = totalPage;                            //点击尾页时参数currentPage为0
+            currentPage = totalPage-1;                            //点击尾页时参数currentPage为0
             $("#container").empty();                            //清空表单数据
-            initOrderList();                //传参并调用初始化表单方法
-            $("#page").text(currentPage);
+            searchOrderList();                //传参并调用初始化表单方法
+            $("#page").text(currentPage+1);
         });
 
     }
     function init(){
         getOrderState();
-        initOrderList();
+        searchOrderList();
         initPageBtn();
         //点击第一行的复选框控制全选和全不选
         $("#selectAll").click(function () {

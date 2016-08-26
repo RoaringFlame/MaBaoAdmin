@@ -63,7 +63,7 @@ public class OrderServiceImpl implements OrderService {
             str.append(" and o.id = ?");
             str.append(args.size());
         }
-        if (orderStatus != null && !"".equals(orderStatus)) {
+        if ( orderStatus != null && !"".equals(orderStatus)) {
             args.add(orderStatus);
             str.append(" and o.state = ?");
             str.append(args.size());
@@ -89,6 +89,41 @@ public class OrderServiceImpl implements OrderService {
             return null;
         }
     }
+
+    /**
+     * 待发货页面初始化
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageVO<OrderOutVO> toBeShippedOrder(int flag,Long orderId,OrderStatus state,int page,int pageSize) {
+        try {
+            if (flag == 0) {
+                List<OrderStatus> list = new ArrayList();
+                list.add(OrderStatus.ToBePaid);
+                list.add(OrderStatus.Canceled);
+                Page<Order> pageOrder = this.orderRepository.findOrderByStateNotIn(list, new PageRequest(page, pageSize));
+                PageVO<OrderOutVO> pageVO = new PageVO<>();
+                List<OrderOutVO> orderOutVOList = new ArrayList();
+                for (Order o : pageOrder.getContent()) {
+                    orderOutVOList.add(OrderOutVO.generateBy(o,
+                            o.getAddress().getRecipients(),
+                            this.adminService.get(o.getOperatorId()).getUsername()));
+                }
+                pageVO.setItems(orderOutVOList);
+                pageVO.setCurrentPage(pageOrder.getNumber() + 1);
+                pageVO.setTotalRow(pageOrder.getTotalElements());
+                pageVO.setPageSize(pageOrder.getSize());
+                return pageVO;
+            } else {
+                return selectOrder(orderId, state, page+1, pageSize);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     /**
      * 根据给定ids相关相关订单状态
@@ -184,7 +219,7 @@ public class OrderServiceImpl implements OrderService {
             str.append(" and o.address.area.id = ?");
             str.append(args.size());
         }
-        if (OrderStatus.AllState != orderInVO.getOrderStatus() && orderInVO.getOrderStatus() != null && !"".equals(orderInVO.getOrderStatus())) {
+        if ( orderInVO.getOrderStatus() != null && !"".equals(orderInVO.getOrderStatus())) {
             args.add(orderInVO.getOrderStatus());
             str.append(" and o.state = ?");
             str.append(args.size());
@@ -224,36 +259,10 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    /**
-     * 待发货页面初始化
-     * @param page
-     * @param pageSize
-     * @return
-     */
-    @Override
-    public PageVO<OrderOutVO> toBeShippedOrder(int page,int pageSize) {
-        List<OrderStatus> list = new ArrayList();
-        list.add(OrderStatus.ToBePaid);
-        list.add(OrderStatus.Canceled);
-        try{
-            Page<Order> pageOrder = this.orderRepository.findOrderByStateNotIn(list,new PageRequest(page, pageSize));
-            PageVO<OrderOutVO> pageVO = new PageVO<>();
-            List<OrderOutVO> orderOutVOList = new ArrayList();
-            for(Order o:pageOrder.getContent()) {
-                orderOutVOList.add(OrderOutVO.generateBy(o,
-                        o.getAddress().getRecipients(),
-                        this.adminService.get(o.getOperatorId()).getUsername()));
-            }
-            pageVO.setItems(
 
-                    orderOutVOList);
-            pageVO.setCurrentPage(pageOrder.getNumber()+1);
-            pageVO.setTotalRow(pageOrder.getTotalElements());
-            pageVO.setPageSize(pageOrder.getSize());
-            return pageVO;
-    } catch (Exception e) {
-        return null;
-    }
+    @Override
+    public void exportDataOrder(HttpServletRequest request, HttpServletResponse response, OrderInVO orderInVO) {
+
     }
 
     /**
@@ -262,7 +271,7 @@ public class OrderServiceImpl implements OrderService {
      * @param request
      * @param response
      * @param orderInVO
-     */
+     *//*
     @Override
     public void exportDataOrder(HttpServletRequest request, HttpServletResponse response, OrderInVO orderInVO) {
         //设置路径
@@ -353,5 +362,6 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
+
 }

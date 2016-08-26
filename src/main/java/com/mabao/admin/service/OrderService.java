@@ -56,7 +56,7 @@ public interface OrderService {
      * @param pageSize
      * @return
      */
-    PageVO<OrderOutVO> toBeShippedOrder(int page,int pageSize);
+    PageVO<OrderOutVO> toBeShippedOrder(int flag,Long orderId,OrderStatus state,int page,int pageSize);
 
     void exportDataOrder(HttpServletRequest request, HttpServletResponse response, OrderInVO orderInVO);
 }

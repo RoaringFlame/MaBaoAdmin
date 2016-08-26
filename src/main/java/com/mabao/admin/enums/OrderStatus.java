@@ -7,15 +7,14 @@ import java.util.List;
 
 /**
  * 订单状态
- * 0待支付，1待发货，2待收货，3已完成，4已取消
+ * 0所有状态,1待支付，2待发货，3待收货，4已完成，5已取消
  */
 public enum OrderStatus {
     ToBePaid("等待付款"),
     ToBeSend("等待出库"),
     ToBeReceipt("已出库"),
     Completed("交易完成"),
-    Canceled("已取消") ,
-    AllState("所有状态");
+    Canceled("已取消");
 
     private String text;
     OrderStatus(String text){
