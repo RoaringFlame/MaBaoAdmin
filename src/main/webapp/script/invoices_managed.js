@@ -335,7 +335,7 @@ $(function(){
         });
 
         //高级搜索表单提交按钮
-        $(".modal-footer button:eq(1)").click(function () {
+        $("#heightSearch").click(function () {
             $("#container").empty();
             currentPage = 1;
             advancedSearch();

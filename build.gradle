@@ -21,7 +21,6 @@ dependencies {
     compile "javax.inject:javax.inject:1"
     compile "mysql:mysql-connector-java:5.1.34"
     compile "c3p0:c3p0:0.9.1.2"
-    compile "org.modelmapper:modelmapper:0.7.1"
 
     compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
     compile "org.apache.commons:commons-lang3:$commonsLangVersion"

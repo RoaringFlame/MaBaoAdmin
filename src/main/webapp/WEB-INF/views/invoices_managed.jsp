@@ -185,7 +185,7 @@
 
                     <button type="button" class="btn btn-default" id="searchButton">搜索</button>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#searchForm"
-                       data-whatever="@mdo">高级搜索
+                       data-whatever="@mdo" id="heightSearch">高级搜索
                     </a>
                 </div>
             </form>
