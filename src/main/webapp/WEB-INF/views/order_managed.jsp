@@ -200,7 +200,7 @@
                     <th style="width:8px;">
                         <label>
                             <input type="checkbox" class="group-checkable"
-                                   data-set="#sample_2 .checkboxes"/>
+                                   data-set="#sample_2 .checkboxes" id="selectAll"/>
                         </label>
                     </th>
                     <th class="text-center">编号</th>

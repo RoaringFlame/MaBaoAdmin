@@ -256,7 +256,7 @@ $(function () {
                 stockNumber: goodsStockNumber,
                 upTime: "2016-08-15",
                 message: goodsDetail
-            };               //请求参数
+            };                                            //请求参数
             if (goodsFormCheck(params) == 1) {            //表单校验
                 $.ajax({
                     type: 'POST',
@@ -315,7 +315,7 @@ $(function () {
             $.get("goods/deleteSomeGoods", {ids: goodsIds}, function (data) {       //调用删除商品接口
                 if (data.status == "success") {                                       //如果请求成功
                     $("#selectAll").removeAttr("checked");                            //去除全选框的选中状态
-                    $(".container").empty();                                          //清空商品列表
+                    $(".container").empty();//清空商品列表
                     initGoodsList();                                                  //重新加载页面
                 } else if (data.status == "failure") {                               //如果请求失败弹出警告框
                     alert("删除失败!");

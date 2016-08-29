@@ -33,11 +33,13 @@ public class OrderRESTController {
 
     /**
      * order页面初始化下拉框
+     *
+     * @param flag          默认值0则表示显示所有订单状态，为1则为待发货订单状态
      * @return
      */
     @RequestMapping(value = "/orderStatusSelector", method = RequestMethod.GET)
-    public List<Selector> orderStatusInit() {
-        return OrderStatus.toList();
+    public List<Selector> orderStatusInit(@RequestParam(required = false,defaultValue = "0") int flag) {
+        return this.orderService.orderStateSelector(flag);
     }
 
     /**
@@ -74,27 +76,14 @@ public class OrderRESTController {
      * @return                      GoodsVO的PageVO
      */
     @RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
-    public PageVO<OrderOutVO> showSelectGoods(@RequestParam(required = false) Long orderId,
+    public PageVO<OrderOutVO> showSelectGoods(@RequestParam int flag,
+                                              @RequestParam(required = false) Long orderId,
                                               @RequestParam(required = false) OrderStatus state,        
                                               @RequestParam(required = false,defaultValue = "1") int page,
                                               @RequestParam(required = false,defaultValue = "8") int pageSize) {
-        return this.orderService.selectOrder(orderId,state,page,pageSize);
+        return this.orderService.selectOrder(flag,orderId,state,page+1,pageSize);
     }
 
-    /**
-     * 待发货页面显示
-     * @param page
-     * @param pageSize
-     * @return
-     */
-    @RequestMapping(value = "/toBeShipped", method = RequestMethod.GET)
-    public PageVO<OrderOutVO> toBeShippedOrder(int flag,
-                                                @RequestParam(required = false) Long orderId,
-                                               @RequestParam(required = false) OrderStatus state,
-                                               @RequestParam(required = false,defaultValue = "0") int page,
-                                              @RequestParam(required = false,defaultValue = "8") int pageSize) {
-        return this.orderService.toBeShippedOrder(flag,orderId,state,page,pageSize);
-    }
     /**
      * 根据给定ids相关相关订单状态
      * @param ids               相关订单id的集合
@@ -112,7 +101,12 @@ public class OrderRESTController {
      */
      @RequestMapping(value = "/deleteSomeOrder", method = RequestMethod.GET)
      public JsonResultVO deleteSomeGoods(String ids) {
-         return this.orderService.deleteSomeOrder(ids);
+         try{
+              this.orderService.deleteSomeOrder(ids);
+         }catch (Exception e){
+             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
+         }
+         return new JsonResultVO(JsonResultVO.SUCCESS,"修改成功！");
      }
 
     /**

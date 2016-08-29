@@ -10,12 +10,10 @@ import com.mabao.admin.pojo.Order;
 import com.mabao.admin.repository.AddressRepository;
 import com.mabao.admin.repository.BaseDao;
 import com.mabao.admin.repository.OrderRepository;
-import com.mabao.admin.service.AddressService;
-import com.mabao.admin.service.AdminService;
-import com.mabao.admin.service.OrderService;
-import com.mabao.admin.service.UserService;
+import com.mabao.admin.service.*;
 import com.mabao.admin.util.ExcelUtil;
 import com.mabao.admin.util.PageVO;
+import com.mabao.admin.util.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,7 +33,7 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
-    private AddressService addressService;
+    private OrderDetailService orderDetailService;
     @Autowired
     private BaseDao baseDao;
     @Autowired
@@ -53,17 +51,21 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public PageVO<OrderOutVO> selectOrder(Long orderId, OrderStatus orderStatus, int page, int pageSize) {
+    public PageVO<OrderOutVO> selectOrder(int flag,Long orderId, OrderStatus orderStatus, int page, int pageSize) {
         String JPQL = "select o from Order o ";
         String JPQLCount = "select count(o) from Order o ";
-        StringBuilder str = new StringBuilder("where 1 = 1 ");
+        String flagString = "where 1 = 1 ";
+        if(flag == 1) {
+            flagString = "where 1 = 1 and o.state in (1,2,3) ";
+        }
+        StringBuilder str = new StringBuilder(flagString);
         List<Object> args = new ArrayList<>();
         if (orderId != null ) {
             args.add(orderId);
             str.append(" and o.id = ?");
             str.append(args.size());
         }
-        if ( orderStatus != null && !"".equals(orderStatus)) {
+        if ( orderStatus != null && !"".equals(orderStatus.getText())) {
             args.add(orderStatus);
             str.append(" and o.state = ?");
             str.append(args.size());
@@ -89,41 +91,6 @@ public class OrderServiceImpl implements OrderService {
             return null;
         }
     }
-
-    /**
-     * 待发货页面初始化
-     * @param page
-     * @param pageSize
-     * @return
-     */
-    @Override
-    public PageVO<OrderOutVO> toBeShippedOrder(int flag,Long orderId,OrderStatus state,int page,int pageSize) {
-        try {
-            if (flag == 0) {
-                List<OrderStatus> list = new ArrayList();
-                list.add(OrderStatus.ToBePaid);
-                list.add(OrderStatus.Canceled);
-                Page<Order> pageOrder = this.orderRepository.findOrderByStateNotIn(list, new PageRequest(page, pageSize));
-                PageVO<OrderOutVO> pageVO = new PageVO<>();
-                List<OrderOutVO> orderOutVOList = new ArrayList();
-                for (Order o : pageOrder.getContent()) {
-                    orderOutVOList.add(OrderOutVO.generateBy(o,
-                            o.getAddress().getRecipients(),
-                            this.adminService.get(o.getOperatorId()).getUsername()));
-                }
-                pageVO.setItems(orderOutVOList);
-                pageVO.setCurrentPage(pageOrder.getNumber() + 1);
-                pageVO.setTotalRow(pageOrder.getTotalElements());
-                pageVO.setPageSize(pageOrder.getSize());
-                return pageVO;
-            } else {
-                return selectOrder(orderId, state, page+1, pageSize);
-            }
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
 
     /**
      * 根据给定ids相关相关订单状态
@@ -163,6 +130,7 @@ public class OrderServiceImpl implements OrderService {
             for(String id:strs) {
                 orderId = Long.valueOf(id);
                this.orderRepository.delete(orderId);
+                this.orderDetailService.detele(orderId);
             }
         }catch (Exception e){
             return new JsonResultVO(JsonResultVO.FAILURE,e.getMessage());
@@ -257,6 +225,18 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Selector> orderStateSelector(int flag) {
+        if(flag == 1) {
+            List<Selector>  list = new ArrayList<>();
+                list.add(new Selector(OrderStatus.ToBeReceipt.name(), OrderStatus.ToBeReceipt.getText()));
+                list.add(new Selector(OrderStatus.ToBeSend.name(), OrderStatus.ToBeSend.getText()));
+                list.add(new Selector(OrderStatus.Completed.name(), OrderStatus.Completed.getText()));
+            return list;
+        }
+        return OrderStatus.toList();
     }
 
 

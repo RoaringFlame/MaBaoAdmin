@@ -3,7 +3,7 @@ $(function () {
     var orderNum;         //订单号
     var consigner;        //收货人
     var goodsStatus;      //订单状态
-    var currentPage = 1;
+    var currentPage = 0;
     var pageSize = 7;
     var totalPage = 1;
     var province = $("select[name='province']");  //省下拉框
@@ -22,7 +22,7 @@ $(function () {
 
     //订单状态下拉框初始化
     function initOrderState() {
-        $.get("order/orderStatusSelector", {}, function (data) {
+        $.get("order/orderStatusSelector", {flag:0}, function (data) {
             console.log(data);
             $(data).each(function (index, state) {
                 $("#goodsStatus").append($("<option></option>")
@@ -59,6 +59,7 @@ $(function () {
     function initOrderList() {
         getSearchItem();
         var params = {
+            flag: 0,
             orderId: orderNum,
             state: goodsStatus,
             page: currentPage,
@@ -94,6 +95,7 @@ $(function () {
     function searchOrder() {
         getSearchItem();
         $("#container").empty();
+        currentPage = 0;
         initOrderList();
     }
 
@@ -182,7 +184,7 @@ $(function () {
             area = "";
         }
         if (orderStatus == "all") {
-            orderStatus = "AllState";
+            orderStatus = null;
         }
         var params = {
             id: orderId,
@@ -263,18 +265,18 @@ $(function () {
     //初始化分页按钮
     function initPageBtn() {
         //显示当前页数
-        $("#page").text(currentPage);
+        $("#page").text(currentPage+1);
         //点击首页
         $("#btn1").click(function () {
-            currentPage = 1;                               //点击首页时参数currentPage为0
+            currentPage = 0;                               //点击首页时参数currentPage为0
             $("#container").empty();                       //清空表单数据
             initOrderList();                               //传参并调用初始化表单方法
-            $("#page").text(currentPage);
+            $("#page").text(currentPage+1);
         });
 
         //点击上一页
         $("#btn2").click(function () {
-            if (currentPage == 1) {
+            if (currentPage == 0) {
                 alert("当前已经是首页了!");                 //如果当前页面是首页，点击上一页弹出提示框
             }
             else {
@@ -300,10 +302,10 @@ $(function () {
 
         //点击尾页
         $("#btn4").click(function () {
-            currentPage = totalPage;                            //点击尾页时参数currentPage为0
+            currentPage = totalPage-1;                            //点击尾页时参数currentPage为0
             $("#container").empty();                            //清空表单数据
             initOrderList();                //传参并调用初始化表单方法
-            $("#page").text(currentPage);
+            $("#page").text(currentPage+1);
         });
 
     }

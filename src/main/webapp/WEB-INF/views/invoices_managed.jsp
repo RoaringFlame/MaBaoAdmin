@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="btn-toolbar ">
-                    <div class="btn-group navbar-nav pull-right ">
+                    <div class="btn-group navbar-nav pull-right " id="deleteOrder">
                         <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="true">
                             <span class="iconfont">&#xe602</span>删除
@@ -184,7 +184,9 @@
                     </div>
 
                     <button type="button" class="btn btn-default" id="searchButton">搜索</button>
-                    <button type="button" class="btn btn-primary">高级搜索</button>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#searchForm"
+                       data-whatever="@mdo">高级搜索
+                    </a>
                 </div>
             </form>
             <!--条件查询表单END-->
@@ -192,10 +194,10 @@
             <table class="table text-center">
                 <thead>
                 <tr>
-                    <th  style="width:8px;">
+                    <th  style="width:8px;" >
                         <label>
                             <input type="checkbox" class="group-checkable"
-                                   data-set="#sample_2 .checkboxes"/>
+                                   data-set="#sample_2 .checkboxes" id="selectAll"/>
                         </label>
                     </th>
                     <th class="text-center">发货单流水号</th>
