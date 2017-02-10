@@ -102,7 +102,7 @@
             <ul class="collapse nav text-indent-1 second-level-menu" id="orderManaged">
                 <li><a href="admin/order_managed">订单</a></li>
                 <li><a href="admin/invoices_managed">发货单</a></li>
-                <li><a href="admin/ransfer_order_managed">转让订单</a></li>
+                <li><a href="admin/transfer_order_managed">转让订单</a></li>
             </ul>
         </li>
         <li class="first-level-menu">
